@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.test.migration.dao.ApiBasicDao">
+<mapper namespace="com.test.migration.dao.ApiMappingDao">
     <resultMap id="apiBasicMap" type="com.test.migration.entity.po.ApiBasic">
     </resultMap>
 
@@ -57,5 +57,11 @@
             )
         ]]>
     </insert>
+
+
+    <select id="selectByTaskIdAndType" resultMap="apiBasicMap">
+        <include refid="select"/>
+        where task_id = #{taskId} and `type` = #{type}
+    </select>
 
 </mapper>

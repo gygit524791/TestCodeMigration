@@ -15,9 +15,21 @@ import utils.ResourceReader;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class ApiMappingService {
+
+    public List<ApiMapping> selectByTaskIdAndType(Integer taskId, Integer type) {
+        List<ApiMapping> list = null;
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiMappingDao mapper = session.getMapper(ApiMappingDao.class);
+            list = mapper.selectByTaskIdAndType(taskId, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 
     public void batchSave(List<ApiMapping> apiMappings) {
         if (apiMappings == null || apiMappings.size() == 0) {
@@ -31,6 +43,7 @@ public class ApiMappingService {
             e.printStackTrace();
         }
     }
+
 
     public void calculateApiMappings() {
         System.out.println("开始执行mapping计算");
@@ -75,7 +88,7 @@ public class ApiMappingService {
                 continue;
             }
 
-            apiMappings.addAll(buildApiMappings(resultLine));
+            apiMappings.addAll(buildApiMappings(taskParameter.getTaskId(), resultLine));
         }
 
         batchSave(apiMappings);
@@ -83,7 +96,7 @@ public class ApiMappingService {
         System.out.println("执行mapping计算完毕，耗时（秒）：" + (endTime - startTime) / 1000);
     }
 
-    private List<ApiMapping> buildApiMappings(String resultLine) {
+    private List<ApiMapping> buildApiMappings(Integer taskId, String resultLine) {
         if (StringUtils.isBlank(resultLine)) {
             return Lists.newArrayList();
         }
@@ -94,7 +107,15 @@ public class ApiMappingService {
         for (String mapping : mappingStr) {
             String[] mappingIds = mapping.split(",");
             Integer harmonyApiId = Integer.parseInt(mappingIds[0]);
-            Integer androidApiSId = Integer.parseInt(mappingIds[1]);
+            Integer androidApiId = Integer.parseInt(mappingIds[1]);
+
+            ApiMapping apiMapping = ApiMapping.builder()
+                    .taskId(taskId)
+                    .sourceApiId(harmonyApiId)
+                    .targetApiId(androidApiId)
+                    .build();
+
+            apiMappings.add(apiMapping);
         }
 
         return apiMappings;

@@ -40,6 +40,20 @@ public class ApiBasicService {
         return list;
     }
 
+    public List<ApiBasic> selectByIds(List<Integer> ids) {
+        List<ApiBasic> list = null;
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
+            list = mapper.selectByIds(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
     public void batchSave(List<ApiBasic> apiBasics) {
         if (apiBasics == null || apiBasics.size() == 0) {
             return;

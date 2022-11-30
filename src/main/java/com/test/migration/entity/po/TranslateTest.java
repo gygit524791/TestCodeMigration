@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 public class TranslateTest {
     private Integer id;
     private Integer taskId;
-    private Integer apiId;
     private String testFilepath;
-    private String testClassName;
-    private String testMethodName;
-    private String translateTestMethod;
+    private String targetApiIds;
+    private String translateCode;
 }

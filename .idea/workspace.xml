@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiBasicDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiBasicDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiMappingDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiMappingDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/po/ApiBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/ApiBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/po/ApiMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/ApiMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/po/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/TranslateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/TranslateTestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/TranslateTestDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/ApiMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/ApiMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/TranslateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/extract/APIExtractorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/extract/APIExtractorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/JsonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/JsonUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiBasicDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiBasicDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiMappingDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiMappingDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/translateTestDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/translateTestDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +62,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.test.migration.service.invocation" />
       <recent name="com.test.migration.service.preprocess" />
       <recent name="com.test.migration.service.extract" />
       <recent name="com.test.migration.dao" />
@@ -132,7 +125,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669714475191</updated>
-      <workItem from="1669714478050" duration="23764000" />
+      <workItem from="1669714478050" duration="32937000" />
     </task>
     <servers />
   </component>

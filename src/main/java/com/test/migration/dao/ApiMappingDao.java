@@ -10,4 +10,6 @@ public interface ApiMappingDao {
 
     void createTable();
     void batchInsert(List<ApiMapping> apiMappings);
+
+    List<ApiMapping> selectByTaskIdAndType(Integer taskId, Integer type);
 }

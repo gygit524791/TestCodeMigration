@@ -14,5 +14,4 @@ public class ApiMapping {
     private Integer taskId;
     private Integer sourceApiId;
     private Integer targetApiId;
-    private String targetApiTestIds;
 }
