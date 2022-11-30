@@ -2,6 +2,7 @@ package com.test.migration;
 
 import com.test.migration.service.ApiBasicService;
 import com.test.migration.service.ApiMappingService;
+import com.test.migration.service.TranslateTestService;
 import utils.MyBatisUtil;
 
 public class Main {
@@ -17,7 +18,9 @@ public class Main {
         ApiMappingService apiMappingService = new ApiMappingService();
         apiMappingService.calculateApiMappings();
 
-        // test代码转换
+        // 生成api关联test信息
+        TranslateTestService translateTestService = new TranslateTestService();
+        translateTestService.generateTargetApiTest();
 
     }
 

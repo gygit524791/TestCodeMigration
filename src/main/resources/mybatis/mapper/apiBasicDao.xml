@@ -102,8 +102,6 @@
         ]]>
     </update>
 
-
-
     <select id="getById" resultType="com.test.migration.entity.po.ApiBasic">
         <include refid="select"/>
         where id = #{id}

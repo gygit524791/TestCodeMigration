@@ -1,65 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.migration.dao.ApiMappingDao">
-    <resultMap id="apiBasicMap" type="com.test.migration.entity.po.ApiBasic">
+    <resultMap id="apiMappingMap" type="com.test.migration.entity.po.ApiMapping">
     </resultMap>
 
     <sql id="select">
         select
             id,
             task_id,
-            type,
-            filepath,
-            class_name,
-            api_name,
-        from api_basic
+            source_api_id,
+            target_api_id
+        from api_mapping
     </sql>
 
     <update id="dropTable">
-        drop table if exists api_basic;
+        drop table if exists api_mapping;
     </update>
 
     <update id="createTable">
-        CREATE TABLE `api_basic` (
+        CREATE TABLE `api_mapping` (
              `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
              `task_id` INTEGER DEFAULT NULL,
-             `filepath` TEXT DEFAULT NULL,
-             `class_name` TEXT DEFAULT NULL,
-             `api_name` TEXT DEFAULT NULL,
-             `type` INTEGER DEFAULT NULL,
-             `method_word_sequence` TEXT DEFAULT NULL,
-             `token_sequence` TEXT DEFAULT NULL,
-             `token_vector` TEXT DEFAULT NULL
+             `source_api_id` INTEGER DEFAULT NULL,
+             `target_api_id` INTEGER DEFAULT NULL
         )
     </update>
 
-    <insert id="insert"
-            parameterType="com.test.migration.entity.po.ApiBasic">
+    <insert id="batchInsert"
+            parameterType="com.test.migration.entity.po.ApiMapping">
         <![CDATA[
-            insert into api_basic (
-                task_id,
-                filepath,
-                class_name,
-                api_name,
-                type,
-                method_word_sequence,
-                token_sequence,
-                token_vector
-            ) values (
-                #{taskId},
-                #{filepath},
-                #{className},
-                #{apiName},
-                #{type},
-                #{methodWordSequence},
-                #{tokenSequence},
-                #{tokenVector}
-            )
+        insert into api_mapping (
+            task_id,
+            source_api_id,
+            target_api_id
+        )
         ]]>
+        values
+        <foreach collection="list" item="item" separator="," >
+        (
+            #{item.taskId},
+            #{item.sourceApiId},
+            #{item.targetApiId}
+        )
+        </foreach>
     </insert>
 
-
-    <select id="selectByTaskIdAndType" resultMap="apiBasicMap">
+    <select id="selectByTaskIdAndType" resultMap="apiMappingMap">
         <include refid="select"/>
         where task_id = #{taskId} and `type` = #{type}
     </select>

@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.test.migration.antlr.Java8Lexer;
 import com.test.migration.antlr.Java8Parser;
-import com.test.migration.dao.ApiBasicDao;
-import com.test.migration.dao.ApiMappingDao;
 import com.test.migration.dao.TranslateTestDao;
 import com.test.migration.entity.TaskParameter;
 import com.test.migration.entity.po.ApiBasic;
@@ -67,7 +65,7 @@ public class TranslateTestService {
                 translateTests.add(TranslateTest.builder()
                         .taskId(taskParameter.getTaskId())
                         .testFilepath(filepath)
-                        .targetApiIds(JsonUtil.objectToJson(testMethodInvokeApiMap))
+                        .testMethodApiInvocation(JsonUtil.objectToJson(testMethodInvokeApiMap))
                         .build());
             });
 

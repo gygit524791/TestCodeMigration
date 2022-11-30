@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface ApiMappingDao {
     void dropTable();
-
     void createTable();
     void batchInsert(List<ApiMapping> apiMappings);
 

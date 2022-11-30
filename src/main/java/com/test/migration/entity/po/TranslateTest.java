@@ -13,6 +13,6 @@ public class TranslateTest {
     private Integer id;
     private Integer taskId;
     private String testFilepath;
-    private String targetApiIds;
+    private String testMethodApiInvocation;
     private String translateCode;
 }
