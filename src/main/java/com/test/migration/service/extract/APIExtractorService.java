@@ -2,10 +2,12 @@ package com.test.migration.service.extract;
 
 
 
+import com.google.common.base.Joiner;
 import com.test.migration.antlr.Java8BaseVisitor;
 import com.test.migration.antlr.Java8Lexer;
 import com.test.migration.antlr.Java8Parser;
-import com.test.migration.po.ApiBasic;
+import com.test.migration.entity.po.ApiBasic;
+import com.test.migration.service.preprocess.Preprocess;
 import lombok.Getter;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -117,6 +119,8 @@ public class APIExtractorService extends Java8BaseVisitor<RuleNode> {
                 .className(fetchClassNameWithFilePath(filePath))
                 .apiName(apiName)
                 .type(0)
+                .methodWordSequence(Joiner.on(",").join(Preprocess.generateWordSequence(apiName)))
+                .tokenSequence(Joiner.on(",").join(Preprocess.preprocess(apiName)))
                 .build();
         apiBasics.add(apiBasic);
     }

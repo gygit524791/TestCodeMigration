@@ -1,0 +1,45 @@
+package com.test.migration.service.preprocess;
+
+import com.google.common.collect.Lists;
+import utils.LuceneUtil;
+import utils.TokenUtil;
+
+import java.util.List;
+
+/**
+ * todo stopwords的设计
+ */
+public class Preprocess {
+
+    /**
+     * 预处理过程
+     * -切分为词序列 eg：equalsIgnoreCase => equals ignore case
+     * -删除stop words eg:删除数字
+     * -替换为词干（Lancaster） eg: representing => repres
+     *
+     * @param name 类名，方法名，变量名等
+     */
+    public static List<String> preprocess(String name) {
+        List<String> terms = Lists.newArrayList();
+        try {
+            String camelize = TokenUtil.camelize(name);
+            // 切分为词序列
+            List<String> tokens = TokenUtil.decamelizeToList(camelize);
+
+            // 删除stop words, 提取词干并做替换
+            terms = LuceneUtil.term(tokens);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // terms
+        return terms;
+    }
+
+    public static List<String> generateWordSequence(String name){
+        String camelize = TokenUtil.camelize(name);
+        // 切分为词序列
+        return TokenUtil.decamelizeToList(camelize);
+    }
+
+
+}

@@ -1,6 +1,6 @@
 package com.test.migration.dao;
 
-import com.test.migration.po.ApiBasic;
+import com.test.migration.entity.po.ApiBasic;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ public interface ApiBasicDao {
     void insert(ApiBasic apiBasic);
 
     void batchInsert(List<ApiBasic> apiBasics);
+
+    void update(ApiBasic apiBasic);
 
     ApiBasic getById(Integer id);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.migration.dao.ApiBasicDao">
-    <resultMap id="apiBasicMap" type="com.test.migration.po.ApiBasic">
+    <resultMap id="apiBasicMap" type="com.test.migration.entity.po.ApiBasic">
     </resultMap>
 
     <sql id="select">
@@ -34,7 +34,7 @@
     </update>
 
     <insert id="insert"
-            parameterType="com.test.migration.po.ApiBasic">
+            parameterType="com.test.migration.entity.po.ApiBasic">
         <![CDATA[
             insert into api_basic (
                 task_id,
@@ -59,7 +59,7 @@
     </insert>
 
     <insert id="batchInsert"
-            parameterType="com.test.migration.po.ApiBasic">
+            parameterType="com.test.migration.entity.po.ApiBasic">
         <![CDATA[
         insert into api_basic (
             task_id,
@@ -87,8 +87,24 @@
         </foreach>
     </insert>
 
+    <update id="update"
+            parameterType="com.test.migration.entity.po.ApiBasic">
+        <![CDATA[
+            update api_basic
+        ]]>
+        <set>
+            <if test="tokenVector != null">
+                token_vector = #{tokenVector},
+            </if>
+        </set>
+        <![CDATA[
+            where id = #{id}
+        ]]>
+    </update>
 
-    <select id="getById" resultType="com.test.migration.po.ApiBasic">
+
+
+    <select id="getById" resultType="com.test.migration.entity.po.ApiBasic">
         <include refid="select"/>
         where id = #{id}
     </select>

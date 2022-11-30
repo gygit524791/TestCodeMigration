@@ -1,4 +1,4 @@
-package com.test.migration.po;
+package com.test.migration.entity.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
