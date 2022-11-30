@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.migration.dao.ApiBasicDao">
+    <resultMap id="apiBasicMap" type="com.test.migration.po.ApiBasic">
+    </resultMap>
+
+    <sql id="select">
+        select
+            id,
+            task_id,
+            type,
+            filepath,
+            class_name,
+            api_name,
+        from api_basic
+    </sql>
+
+    <update id="dropTable">
+        drop table if exists api_basic;
+    </update>
+
+    <update id="createTable">
+        CREATE TABLE `api_basic` (
+             `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+             `task_id` INTEGER DEFAULT NULL,
+             `filepath` TEXT DEFAULT NULL,
+             `class_name` TEXT DEFAULT NULL,
+             `api_name` TEXT DEFAULT NULL,
+             `type` INTEGER DEFAULT NULL,
+             `method_word_sequence` TEXT DEFAULT NULL,
+             `token_sequence` TEXT DEFAULT NULL,
+             `token_vector` TEXT DEFAULT NULL
+        )
+    </update>
+
+    <insert id="insert"
+            parameterType="com.test.migration.po.ApiBasic">
+        <![CDATA[
+            insert into api_basic (
+                task_id,
+                filepath,
+                class_name,
+                api_name,
+                type,
+                method_word_sequence,
+                token_sequence,
+                token_vector
+            ) values (
+                #{taskId},
+                #{filepath},
+                #{className},
+                #{apiName},
+                #{type},
+                #{methodWordSequence},
+                #{tokenSequence},
+                #{tokenVector}
+            )
+        ]]>
+    </insert>
+
+</mapper>
