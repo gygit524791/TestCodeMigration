@@ -33,7 +33,6 @@ public class TaskParameter {
      * 执行的py文件路径
      */
     private String pythonScriptPath;
-    private PythonScriptPath pythonScriptPathJson;
 
     /**
      * token序列语料库文件路径
@@ -44,21 +43,20 @@ public class TaskParameter {
      */
     private String wordVecModelFilepath;
 
-    private Double similarityThreshold;
+//    private Double similarityThreshold;
 
     /**
      * sqllite db文件的路径地址
      */
     private String dbFilepath;
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class PythonScriptPath {
-        private String cppExtractor;
-        private String wordVec;
-        private String calcTokenVec;
-        private String calcSimilarity;
-    }
+
+    /**
+     * python
+     */
+    private String pythonCppExtractor;
+    private String pythonWordVec;
+    private String pythonCalcTokenVec;
+    private String pythonCalcSimilarity;
+
 }

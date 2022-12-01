@@ -11,19 +11,33 @@ public class ResourceReader {
 
     private static TaskParameter taskParameter;
 
-    @SneakyThrows
     public static TaskParameter getTaskParameter() {
-        if (taskParameter == null) {
-            InputStream in = ClassLoader.getSystemResourceAsStream("task.properties");
-            Properties p = new Properties();
-            p.load(in);
-            return TaskParameter.builder()
-                    .taskId(Integer.parseInt(p.getProperty("taskId")))
-                    .pythonBinPath("")
-                    .build();
+        if (taskParameter != null) {
+            return taskParameter;
+        }
+        InputStream in = ClassLoader.getSystemResourceAsStream("task.properties");
+        Properties properties = new Properties();
+        try {
+            properties.load(in);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
-        return taskParameter;
+        return TaskParameter.builder()
+                .taskId(Integer.parseInt(properties.getProperty("taskId")))
+                .sourceFilepath(properties.getProperty("sourceFilepath"))
+                .targetFilepath(properties.getProperty("targetFilepath"))
+                .targetSourceCodeFilepath(properties.getProperty("targetSourceCodeFilepath"))
+                .pythonBinPath(properties.getProperty("pythonBinPath"))
+                .corpusFilepath(properties.getProperty("corpusFilepath"))
+                .wordVecModelFilepath(properties.getProperty("wordVecModelFilepath"))
+                .pythonCppExtractor(properties.getProperty("pythonCppExtractor"))
+                .pythonWordVec(properties.getProperty("pythonWordVec"))
+                .pythonCalcTokenVec(properties.getProperty("pythonCalcTokenVec"))
+                .pythonCalcSimilarity(properties.getProperty("pythonCalcSimilarity"))
+                .dbFilepath(properties.getProperty("dbFilepath"))
+                .build();
     }
+
 
 }

@@ -5,37 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MethodVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ArgumentListTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/AssignmentTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ClassDeclarationTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ExpressionNameTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/MethodDeclarationTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/PrimaryTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/CommonExpressionTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/ConditionalExpressionTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/ExpressionTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/MethodInvocationTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/PostfixExpressionTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/PrimaryNoNewArrayLfNoPrimaryTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/StatementExpressionTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/BlockTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/BreakStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/DoStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/ExpressionStatement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/LocalVariableDeclarationStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/ReturnStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/StatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/StatementWithoutTrailingSubStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/WhileStatementTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/android/Animator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/android/test/ValueAnimatorTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiBasicDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiBasicDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/TranslateTestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/TranslateTestDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/TranslateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/translateTestDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/translateTestDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/ResourceReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/ResourceReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,21 +50,21 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/src/main/java/com/test/migration/service/translate",
+    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/android/test",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode"
+    "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/demo/android/test" />
+      <recent name="$PROJECT_DIR$/demo/android" />
       <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate" />
       <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/service" />
       <recent name="$PROJECT_DIR$/src/main/java/utils" />
-      <recent name="$PROJECT_DIR$/src/main/java/com/test/migration" />
-      <recent name="$PROJECT_DIR$/src/main/resources/mybatis/mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.test.migration.service.invocation" />
@@ -151,7 +131,7 @@
       <option name="presentableId" value="Default" />
       <updated>1669714475191</updated>
       <workItem from="1669714478050" duration="35950000" />
-      <workItem from="1669862101488" duration="1887000" />
+      <workItem from="1669862101488" duration="3666000" />
     </task>
     <servers />
   </component>

@@ -22,11 +22,6 @@ public class ApiMappingService {
         System.out.println("开始执行mapping计算");
         long startTime = System.currentTimeMillis();
         TaskParameter taskParameter = ResourceReader.getTaskParameter();
-        TaskParameter.PythonScriptPath pythonScriptPath = JsonUtil.jsonToPojo(taskParameter.getPythonScriptPath(), TaskParameter.PythonScriptPath.class);
-        if (pythonScriptPath == null) {
-            return;
-        }
-
         ApiBasicService apiBasicService = new ApiBasicService();
         List<ApiBasic> apiBasics = apiBasicService.selectByTaskId(taskParameter.getTaskId());
 
@@ -45,8 +40,9 @@ public class ApiMappingService {
                     + "，进度：" + index + "/" + totalHarmonyApiSize);
 
             // 调用python相似度计算脚本
-            String[] tokenArgs = new String[]{taskParameter.getPythonBinPath(),
-                    pythonScriptPath.getCalcSimilarity(),
+            String[] tokenArgs = new String[]{
+                    taskParameter.getPythonBinPath(),
+                    taskParameter.getPythonCalcSimilarity(),
                     String.valueOf(harmonyApi.getId()),
                     // 在python代码中用taskId从数据库查所有android api
                     String.valueOf(taskParameter.getTaskId()),

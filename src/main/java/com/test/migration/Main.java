@@ -21,6 +21,7 @@ public class Main {
         // 生成api关联test信息
         TranslateTestService translateTestService = new TranslateTestService();
         translateTestService.generateTargetApiTest();
+        translateTestService.translateCode();
 
     }
 

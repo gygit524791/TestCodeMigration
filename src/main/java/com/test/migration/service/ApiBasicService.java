@@ -97,13 +97,7 @@ public class ApiBasicService {
 
 
     private List<ApiBasic> parseHarmonyApiBasic(String filepath, TaskParameter taskParameter) {
-        TaskParameter.PythonScriptPath pythonScriptPath = JsonUtil.jsonToPojo(taskParameter.getPythonScriptPath(),
-                TaskParameter.PythonScriptPath.class);
-        if (pythonScriptPath == null) {
-            return Lists.newArrayList();
-        }
-
-        String[] args = new String[]{taskParameter.getPythonBinPath(), pythonScriptPath.getCppExtractor(), filepath};
+        String[] args = new String[]{taskParameter.getPythonBinPath(), taskParameter.getPythonCppExtractor(), filepath};
 
         List<String> resultLines = CallPythonUtil.call(args);
 
@@ -133,12 +127,6 @@ public class ApiBasicService {
      * 根据api序列生成文本语料库，用于生成vec
      */
     private void generateTokenCorpus(List<ApiBasic> apiBasics, TaskParameter taskParameter) {
-        TaskParameter.PythonScriptPath pythonScriptPath = JsonUtil.jsonToPojo(taskParameter.getPythonScriptPath(),
-                TaskParameter.PythonScriptPath.class);
-        if (pythonScriptPath == null) {
-            return;
-        }
-
         // 取出所有token序列
         List<String> tokens = apiBasics.stream()
                 .map(api -> api.getTokenSequence().replace(",", " "))
@@ -150,7 +138,7 @@ public class ApiBasicService {
         // 调用python生成词向量文件
         String[] args = new String[]{
                 taskParameter.getPythonBinPath(),
-                pythonScriptPath.getWordVec(),
+                taskParameter.getPythonWordVec(),
                 taskParameter.getCorpusFilepath(),
                 taskParameter.getWordVecModelFilepath()
         };
@@ -158,15 +146,9 @@ public class ApiBasicService {
     }
 
     private String generateTokenVec(String tokenSequence, TaskParameter taskParameter) {
-        TaskParameter.PythonScriptPath pythonScriptPath = JsonUtil.jsonToPojo(taskParameter.getPythonScriptPath(),
-                TaskParameter.PythonScriptPath.class);
-        if (pythonScriptPath == null) {
-            return "";
-        }
-
         String[] tokenArgs = new String[]{
                 taskParameter.getPythonBinPath(),
-                pythonScriptPath.getCalcTokenVec(),
+                taskParameter.getPythonCalcTokenVec(),
                 tokenSequence,
                 taskParameter.getWordVecModelFilepath()
         };
