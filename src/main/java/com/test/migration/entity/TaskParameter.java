@@ -29,10 +29,6 @@ public class TaskParameter {
      * python 命令路径配置
      */
     private String pythonBinPath;
-    /**
-     * 执行的py文件路径
-     */
-    private String pythonScriptPath;
 
     /**
      * token序列语料库文件路径

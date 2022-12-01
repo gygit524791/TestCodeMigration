@@ -92,12 +92,12 @@ public class ApiMappingService {
 
 
     /** CRUD **/
-    public List<ApiMapping> selectByTaskIdAndType(Integer taskId, Integer type) {
-        List<ApiMapping> list = null;
+    public List<ApiMapping> selectByTaskIdAndType(Integer taskId) {
+        List<ApiMapping> list = Lists.newArrayList();
 
         try (SqlSession session = MyBatisUtil.getSqlSession()) {
             ApiMappingDao mapper = session.getMapper(ApiMappingDao.class);
-            list = mapper.selectByTaskIdAndType(taskId, type);
+            list = mapper.selectByTaskId(taskId);
         } catch (Exception e) {
             e.printStackTrace();
         }

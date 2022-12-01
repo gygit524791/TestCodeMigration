@@ -29,7 +29,8 @@ public class MyBatisUtil {
     }
 
     public static SqlSession getSqlSession() throws IOException {
-        return factory.openSession();
+        // true ：自动提交事务
+        return factory.openSession(true);
     }
 
     public static void initTable() {

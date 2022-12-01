@@ -8,10 +8,13 @@
         select
             id,
             task_id,
-            type,
             filepath,
             class_name,
             api_name,
+            type,
+            method_word_sequence,
+            token_sequence,
+            token_vector
         from api_basic
     </sql>
 
@@ -119,7 +122,7 @@
     <select id="selectByIds" parameterType="java.util.List" resultMap="apiBasicMap">
         <include refid="select"/>
         where id in
-        <foreach collection="list" item="id" separator="," open="(" close=")">
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </select>

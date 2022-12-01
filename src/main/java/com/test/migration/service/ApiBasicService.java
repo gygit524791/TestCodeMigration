@@ -65,11 +65,34 @@ public class ApiBasicService {
         TaskParameter taskParameter = ResourceReader.getTaskParameter();
         List<String> moduleApiFilepath = GetFoldFileNames.readfileWithType(taskParameter.getTargetFilepath(), "java");
         // 过滤掉测试相关的类文件
-//        moduleApiFilepath = filterTestFile(moduleApiFilepath);
+        moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
                 .flatMap(filepath -> parseAndroidApiBasic(filepath, taskParameter).stream())
                 .collect(Collectors.toList());
         batchSave(apiBasics);
+    }
+
+    private static List<String> filterTestFile(List<String> moduleApiFilepath) {
+
+        return moduleApiFilepath.stream()
+                .filter(filepath -> {
+                    String className = getClassNameByFilepath(filepath);
+                    return !className.toLowerCase().startsWith("test")
+                            && !className.toLowerCase().endsWith("test")
+                            && !className.toLowerCase().startsWith("tests")
+                            && !className.toLowerCase().endsWith("tests");
+                }).collect(Collectors.toList());
+    }
+
+    private static String getClassNameByFilepath(String filepath) {
+        if (StringUtils.isBlank(filepath)) {
+            return StringUtils.EMPTY;
+        }
+        //todo 需要优化路径解析，用system
+        String[] split = filepath.split("/");
+        String classFile = split[split.length - 1];
+        String[] split1 = classFile.split("\\.");
+        return split1[0];
     }
 
     private void extractHarmonyApiBasic() throws IOException {
@@ -184,9 +207,11 @@ public class ApiBasicService {
         }
     }
 
-    /** CRUD **/
+    /**
+     * CRUD
+     **/
     public List<ApiBasic> selectByTaskId(Integer taskId) {
-        List<ApiBasic> list = null;
+        List<ApiBasic> list = Lists.newArrayList();
 
         try (SqlSession session = MyBatisUtil.getSqlSession()) {
             ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
@@ -199,7 +224,7 @@ public class ApiBasicService {
     }
 
     public List<ApiBasic> selectByIds(List<Integer> ids) {
-        List<ApiBasic> list = null;
+        List<ApiBasic> list = Lists.newArrayList();
 
         try (SqlSession session = MyBatisUtil.getSqlSession()) {
             ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
@@ -220,6 +245,7 @@ public class ApiBasicService {
         try (SqlSession session = MyBatisUtil.getSqlSession()) {
             ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
             mapper.batchInsert(apiBasics);
+            session.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

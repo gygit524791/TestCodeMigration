@@ -39,9 +39,14 @@ public class TranslateTestService {
 
     public void generateTargetApiTest() {
         TaskParameter taskParameter = ResourceReader.getTaskParameter();
-        List<ApiMapping> apiMappings = apiMappingService.selectByTaskIdAndType(taskParameter.getTaskId(), 1);
-        List<Integer> targetApiIds = apiMappings.stream().map(ApiMapping::getId)
+        List<ApiMapping> apiMappings = apiMappingService.selectByTaskIdAndType(taskParameter.getTaskId());
+        List<Integer> targetApiIds = apiMappings.stream()
+                .map(ApiMapping::getTargetApiId)
                 .collect(Collectors.toList());
+        if (targetApiIds.size() == 0) {
+            return;
+        }
+
         List<ApiBasic> apiBasics = apiBasicService.selectByIds(targetApiIds);
 
         try {
@@ -142,7 +147,6 @@ public class TranslateTestService {
                 .findFirst().orElse(StringUtils.EMPTY);
     }
 
-
     private String getClassNameByFilepath(String filepath) {
         if (StringUtils.isBlank(filepath)) {
             return StringUtils.EMPTY;
@@ -175,7 +179,9 @@ public class TranslateTestService {
     }
 
 
-    /** CRUD **/
+    /**
+     * CRUD
+     **/
     public void batchSave(List<TranslateTest> translateTests) {
         if (translateTests == null || translateTests.size() == 0) {
             return;
@@ -203,7 +209,7 @@ public class TranslateTestService {
     }
 
     public List<TranslateTest> selectByTaskId(Integer taskId) {
-        List<TranslateTest> list = null;
+        List<TranslateTest> list = Lists.newArrayList();
 
         try (SqlSession session = MyBatisUtil.getSqlSession()) {
             TranslateTestDao mapper = session.getMapper(TranslateTestDao.class);

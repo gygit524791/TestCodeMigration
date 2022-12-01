@@ -45,9 +45,9 @@
         </foreach>
     </insert>
 
-    <select id="selectByTaskIdAndType" resultMap="apiMappingMap">
+    <select id="selectByTaskId" resultMap="apiMappingMap">
         <include refid="select"/>
-        where task_id = #{taskId} and `type` = #{type}
+        where task_id = #{taskId}
     </select>
 
 </mapper>

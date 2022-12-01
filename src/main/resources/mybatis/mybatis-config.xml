@@ -41,8 +41,10 @@
             </dataSource>
         </environment>
     </environments>
-    <!-- 映射文件 -->
+    <!-- 映射文件 通配符是spring-mybatis提供的功能，mybatis自身不支持通配符。阿西吧 -->
     <mappers>
         <mapper resource="mybatis/mapper/apiBasicDao.xml"/>
+        <mapper resource="mybatis/mapper/apiMappingDao.xml"/>
+        <mapper resource="mybatis/mapper/translateTestDao.xml"/>
     </mappers>
 </configuration>

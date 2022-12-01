@@ -1,0 +1,148 @@
+start
+cancel
+end
+paus
+resum
+is paus
+get total durat
+get interpol
+is start
+add listen
+remov listen
+get listen
+add paus listen
+remov paus listen
+remov all listen
+get chang configur
+set chang configur
+append chang configur
+creat constant state
+clone
+setup start valu
+setup end valu
+set target
+can revers
+revers
+puls anim frame
+start without puls
+skip end valu
+is initi
+anim base on plai time
+set allow run asynchron
+get chang configur
+new instanc
+set durat scale
+anim
+anim
+anim
+attach schedul
+ha schedul
+add interpol
+remov interpol
+clear interpol
+add proxi control
+remov proxi control
+clear proxi control
+get statu
+is stop
+is run
+is pend
+set durat
+get durat
+set start delai
+set iter
+set fill mode
+set tempo
+appli option
+set anim direct
+set allow run asynchron
+get allow run asynchron
+updat plai time
+get plai time
+trigger frame
+plai motion
+plai
+revers
+forward
+backward
+paus
+resum
+stop
+finish
+cancel
+get id
+get anim scale
+start
+cancel
+end
+paus
+resum
+is paus
+get total durat
+get interpol
+is start
+add listen
+remov listen
+get listen
+add paus listen
+remov paus listen
+remov all listen
+get chang configur
+set chang configur
+append chang configur
+creat constant state
+clone
+setup start valu
+setup end valu
+set target
+can revers
+revers
+puls anim frame
+start without puls
+skip end valu
+is initi
+anim base on plai time
+set allow run asynchron
+get chang configur
+new instanc
+set durat scale
+anim
+anim
+anim
+attach schedul
+ha schedul
+add interpol
+remov interpol
+clear interpol
+add proxi control
+remov proxi control
+clear proxi control
+get statu
+is stop
+is run
+is pend
+set durat
+get durat
+set start delai
+set iter
+set fill mode
+set tempo
+appli option
+set anim direct
+set allow run asynchron
+get allow run asynchron
+updat plai time
+get plai time
+trigger frame
+plai motion
+plai
+revers
+forward
+backward
+paus
+resum
+stop
+finish
+cancel
+get id
+get anim scale

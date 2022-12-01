@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/android/Animator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/android/test/ValueAnimatorTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/harmony/animator.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiMappingDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiMappingDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/ResourceReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/ResourceReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/preprocess/Preprocess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/preprocess/Preprocess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/MyBatisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/MyBatisUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiBasicDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiBasicDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiMappingDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiMappingDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +53,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/android/test",
+    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/harmony",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -60,11 +63,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/demo/harmony" />
       <recent name="$PROJECT_DIR$/demo/android/test" />
       <recent name="$PROJECT_DIR$/demo/android" />
       <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate" />
       <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/service" />
-      <recent name="$PROJECT_DIR$/src/main/java/utils" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.test.migration.service.invocation" />
@@ -74,7 +77,7 @@
       <recent name="com.test.migration.po" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ResourceReader">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.test.migration.Main" />
       <module name="TestMigrationV2" />
@@ -116,8 +119,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ResourceReader" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ResourceReader" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -131,7 +134,7 @@
       <option name="presentableId" value="Default" />
       <updated>1669714475191</updated>
       <workItem from="1669714478050" duration="35950000" />
-      <workItem from="1669862101488" duration="3666000" />
+      <workItem from="1669862101488" duration="11079000" />
     </task>
     <servers />
   </component>
@@ -148,6 +151,27 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

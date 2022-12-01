@@ -1,10 +1,12 @@
 package com.test.migration.service.preprocess;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import utils.LuceneUtil;
 import utils.TokenUtil;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * todo stopwords的设计
@@ -22,9 +24,8 @@ public class Preprocess {
     public static List<String> preprocess(String name) {
         List<String> terms = Lists.newArrayList();
         try {
-            String camelize = TokenUtil.camelize(name);
             // 切分为词序列
-            List<String> tokens = TokenUtil.decamelizeToList(camelize);
+            List<String> tokens = generateWordSequence(name);
 
             // 删除stop words, 提取词干并做替换
             terms = LuceneUtil.term(tokens);
@@ -38,7 +39,9 @@ public class Preprocess {
     public static List<String> generateWordSequence(String name){
         String camelize = TokenUtil.camelize(name);
         // 切分为词序列
-        return TokenUtil.decamelizeToList(camelize);
+        return TokenUtil.decamelizeToList(camelize).stream()
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.toList());
     }
 
 
