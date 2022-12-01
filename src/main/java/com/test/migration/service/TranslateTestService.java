@@ -4,15 +4,19 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.test.migration.antlr.Java8Lexer;
 import com.test.migration.antlr.Java8Parser;
+import com.test.migration.dao.ApiBasicDao;
 import com.test.migration.dao.TranslateTestDao;
 import com.test.migration.entity.TaskParameter;
 import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.entity.po.ApiMapping;
 import com.test.migration.entity.po.TranslateTest;
 import com.test.migration.service.invocation.ApiInvocationVisitor;
+import com.test.migration.service.translate.MethodVisitor;
+import com.test.migration.service.translate.common.MethodDeclarationTranslate;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -30,25 +34,11 @@ import java.util.stream.Collectors;
 
 public class TranslateTestService {
 
-    private ApiBasicService apiBasicService = new ApiBasicService();
-    private ApiMappingService apiMappingService = new ApiMappingService();
-
-    public void batchSave(List<TranslateTest> translateTests) {
-        if (translateTests == null || translateTests.size() == 0) {
-            return;
-        }
-
-        try (SqlSession session = MyBatisUtil.getSqlSession()) {
-            TranslateTestDao mapper = session.getMapper(TranslateTestDao.class);
-            mapper.batchInsert(translateTests);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private final ApiBasicService apiBasicService = new ApiBasicService();
+    private final ApiMappingService apiMappingService = new ApiMappingService();
 
     public void generateTargetApiTest() {
         TaskParameter taskParameter = ResourceReader.getTaskParameter();
-        //todo 从ApiMappingService中查询
         List<ApiMapping> apiMappings = apiMappingService.selectByTaskIdAndType(taskParameter.getTaskId(), 1);
         List<Integer> targetApiIds = apiMappings.stream().map(ApiMapping::getId)
                 .collect(Collectors.toList());
@@ -73,6 +63,47 @@ public class TranslateTestService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 代码转换：
+     * 候选ut文件，按照ut中需要做迁移的test method，以文件为单位进行转换
+     */
+    public void translateCode() {
+        TaskParameter taskParameter = ResourceReader.getTaskParameter();
+        List<TranslateTest> translateTests = selectByTaskId(taskParameter.getTaskId());
+        translateTests.forEach(translateTest -> {
+            String translateCode = translateFile(translateTest);
+            translateTest.setTranslateCode(translateCode);
+            update(translateTest);
+        });
+    }
+
+    private String translateFile(TranslateTest translateTest) {
+        CharStream inputStream = null;
+        try {
+            inputStream = CharStreams.fromFileName(translateTest.getTestFilepath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, List<String>> testMethodApiInvocationMap = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
+        Map<String, ParserRuleContext> parserRuleContextMap = Maps.newHashMap();
+        for (String testMethodName : testMethodApiInvocationMap.keySet()) {
+            parserRuleContextMap.put(testMethodName, null);
+        }
+        Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
+        ParseTree parseTree = parser.compilationUnit();
+        MethodVisitor methodVisitor = new MethodVisitor();
+        methodVisitor.methodBlockMap = parserRuleContextMap;
+        methodVisitor.visit(parseTree);
+        MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
+
+        List<String> translateCodes = Lists.newArrayList();
+        methodVisitor.methodBlockMap.forEach((k, v) -> {
+            translateCodes.add(translate.translateMethodDeclaration(v));
+        });
+
+        return JsonUtil.objectToJson(translateCodes);
     }
 
     @NotNull
@@ -141,6 +172,47 @@ public class TranslateTestService {
         return androidMethodVisitor.getInvocationList().stream()
                 .collect(Collectors.toMap(ApiInvocationVisitor.MethodInvocation::getCaller,
                         ApiInvocationVisitor.MethodInvocation::getCallee));
+    }
+
+
+    /** CRUD **/
+    public void batchSave(List<TranslateTest> translateTests) {
+        if (translateTests == null || translateTests.size() == 0) {
+            return;
+        }
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            TranslateTestDao mapper = session.getMapper(TranslateTestDao.class);
+            mapper.batchInsert(translateTests);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void update(TranslateTest translateTest) {
+        if (translateTest == null) {
+            return;
+        }
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            TranslateTestDao mapper = session.getMapper(TranslateTestDao.class);
+            mapper.update(translateTest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<TranslateTest> selectByTaskId(Integer taskId) {
+        List<TranslateTest> list = null;
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            TranslateTestDao mapper = session.getMapper(TranslateTestDao.class);
+            list = mapper.selectByTaskId(taskId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 

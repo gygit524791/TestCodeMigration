@@ -6,20 +6,12 @@ import java.util.List;
 
 public interface ApiBasicDao {
     void dropTable();
-
     void createTable();
-
     void insert(ApiBasic apiBasic);
-
     void batchInsert(List<ApiBasic> apiBasics);
-
     void update(ApiBasic apiBasic);
-
     ApiBasic getById(Integer id);
-
     List<ApiBasic> selectAll();
-
     List<ApiBasic> selectByTaskId(Integer taskId);
-
     List<ApiBasic> selectByIds(List<Integer> ids);
 }

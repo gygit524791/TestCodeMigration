@@ -13,6 +13,13 @@ public class TranslateTest {
     private Integer id;
     private Integer taskId;
     private String testFilepath;
+
+    /**
+     * json:
+     * Map<String, List<Integer>>
+     *     key: test_method_name
+     *     value: api_ids
+     */
     private String testMethodApiInvocation;
     private String translateCode;
 }

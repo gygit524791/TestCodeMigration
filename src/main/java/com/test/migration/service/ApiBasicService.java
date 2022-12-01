@@ -27,59 +27,6 @@ import java.util.stream.Collectors;
 
 public class ApiBasicService {
 
-    public List<ApiBasic> selectByTaskId(Integer taskId) {
-        List<ApiBasic> list = null;
-
-        try (SqlSession session = MyBatisUtil.getSqlSession()) {
-            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
-            list = mapper.selectByTaskId(taskId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
-
-    public List<ApiBasic> selectByIds(List<Integer> ids) {
-        List<ApiBasic> list = null;
-
-        try (SqlSession session = MyBatisUtil.getSqlSession()) {
-            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
-            list = mapper.selectByIds(ids);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
-
-
-    public void batchSave(List<ApiBasic> apiBasics) {
-        if (apiBasics == null || apiBasics.size() == 0) {
-            return;
-        }
-
-        try (SqlSession session = MyBatisUtil.getSqlSession()) {
-            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
-            mapper.batchInsert(apiBasics);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void update(ApiBasic apiBasic) {
-        if (apiBasic == null) {
-            return;
-        }
-
-        try (SqlSession session = MyBatisUtil.getSqlSession()) {
-            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
-            mapper.update(apiBasic);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * 提取api基础信息
      */
@@ -254,5 +201,60 @@ public class ApiBasicService {
             e.printStackTrace();
         }
     }
+
+    /** CRUD **/
+    public List<ApiBasic> selectByTaskId(Integer taskId) {
+        List<ApiBasic> list = null;
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
+            list = mapper.selectByTaskId(taskId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<ApiBasic> selectByIds(List<Integer> ids) {
+        List<ApiBasic> list = null;
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
+            list = mapper.selectByIds(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
+    public void batchSave(List<ApiBasic> apiBasics) {
+        if (apiBasics == null || apiBasics.size() == 0) {
+            return;
+        }
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
+            mapper.batchInsert(apiBasics);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void update(ApiBasic apiBasic) {
+        if (apiBasic == null) {
+            return;
+        }
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiBasicDao mapper = session.getMapper(ApiBasicDao.class);
+            mapper.update(apiBasic);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

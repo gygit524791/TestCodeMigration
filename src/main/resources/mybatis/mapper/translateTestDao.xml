@@ -49,4 +49,24 @@
         </foreach>
     </insert>
 
+    <update id="update"
+            parameterType="com.test.migration.entity.po.TranslateTest">
+        <![CDATA[
+            update translate_test
+        ]]>
+        <set>
+            <if test="translateCode != null">
+                translate_code = #{translateCode},
+            </if>
+        </set>
+        <![CDATA[
+            where id = #{id}
+        ]]>
+    </update>
+
+    <select id="selectByTaskId" resultMap="translateTestMap">
+        <include refid="select"/>
+        where task_id = #{taskId}
+    </select>
+
 </mapper>

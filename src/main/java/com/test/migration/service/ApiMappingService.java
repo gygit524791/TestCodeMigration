@@ -18,33 +18,6 @@ import java.util.Objects;
 
 public class ApiMappingService {
 
-    public List<ApiMapping> selectByTaskIdAndType(Integer taskId, Integer type) {
-        List<ApiMapping> list = null;
-
-        try (SqlSession session = MyBatisUtil.getSqlSession()) {
-            ApiMappingDao mapper = session.getMapper(ApiMappingDao.class);
-            list = mapper.selectByTaskIdAndType(taskId, type);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return list;
-    }
-
-    public void batchSave(List<ApiMapping> apiMappings) {
-        if (apiMappings == null || apiMappings.size() == 0) {
-            return;
-        }
-
-        try (SqlSession session = MyBatisUtil.getSqlSession()) {
-            ApiMappingDao mapper = session.getMapper(ApiMappingDao.class);
-            mapper.batchInsert(apiMappings);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public void calculateApiMappings() {
         System.out.println("开始执行mapping计算");
         long startTime = System.currentTimeMillis();
@@ -121,6 +94,33 @@ public class ApiMappingService {
         return apiMappings;
     }
 
+
+    /** CRUD **/
+    public List<ApiMapping> selectByTaskIdAndType(Integer taskId, Integer type) {
+        List<ApiMapping> list = null;
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiMappingDao mapper = session.getMapper(ApiMappingDao.class);
+            list = mapper.selectByTaskIdAndType(taskId, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public void batchSave(List<ApiMapping> apiMappings) {
+        if (apiMappings == null || apiMappings.size() == 0) {
+            return;
+        }
+
+        try (SqlSession session = MyBatisUtil.getSqlSession()) {
+            ApiMappingDao mapper = session.getMapper(ApiMappingDao.class);
+            mapper.batchInsert(apiMappings);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
