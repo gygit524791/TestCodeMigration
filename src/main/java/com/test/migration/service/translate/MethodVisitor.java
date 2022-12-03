@@ -61,6 +61,12 @@ public class MethodVisitor extends Java8BaseVisitor<RuleNode> {
 
             // 过滤掉非public的方法
             if (node.getRuleIndex() == Java8Parser.RULE_methodModifier) {
+                // 存在注解的方法
+                boolean existAnnotation = isExistAnnotation(node);
+                if (existAnnotation) {
+                    continue;
+                }
+
                 if (!StringUtils.equalsAnyIgnoreCase(node.getText(), "public")) {
                     return StringUtils.EMPTY;
                 }
@@ -94,6 +100,21 @@ public class MethodVisitor extends Java8BaseVisitor<RuleNode> {
             }
         }
         return StringUtils.EMPTY;
+    }
+
+    private static boolean isExistAnnotation(RuleContext node) {
+        boolean existAnnotation = false;
+        for (int j = 0; j < node.getChildCount(); j++) {
+            boolean isChildRuleContext = node.getChild(j) instanceof RuleContext;
+            if (!isChildRuleContext) {
+                continue;
+            }
+            RuleContext methodModifierNode = (RuleContext) node.getChild(j);
+            if (methodModifierNode.getRuleIndex() == Java8Parser.RULE_annotation) {
+                existAnnotation = true;
+            }
+        }
+        return existAnnotation;
     }
 
 }

@@ -39,6 +39,15 @@ public class TaskParameter {
      */
     private String wordVecModelFilepath;
 
+    /**
+     * api name和对应生成的向量字典文件路径
+     */
+    private String apiVectorDictFilepath;
+    /**
+     * word list用于近义词+KM算法找api mapping
+     */
+    private String apiWordListFilepath;
+
 //    private Double similarityThreshold;
 
     /**

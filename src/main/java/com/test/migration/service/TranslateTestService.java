@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.test.migration.antlr.Java8Lexer;
 import com.test.migration.antlr.Java8Parser;
-import com.test.migration.dao.ApiBasicDao;
 import com.test.migration.dao.TranslateTestDao;
 import com.test.migration.entity.TaskParameter;
 import com.test.migration.entity.po.ApiBasic;
@@ -39,7 +38,7 @@ public class TranslateTestService {
 
     public void generateTargetApiTest() {
         TaskParameter taskParameter = ResourceReader.getTaskParameter();
-        List<ApiMapping> apiMappings = apiMappingService.selectByTaskIdAndType(taskParameter.getTaskId());
+        List<ApiMapping> apiMappings = apiMappingService.selectByTaskId(taskParameter.getTaskId());
         List<Integer> targetApiIds = apiMappings.stream()
                 .map(ApiMapping::getTargetApiId)
                 .collect(Collectors.toList());
@@ -56,10 +55,11 @@ public class TranslateTestService {
             List<TranslateTest> translateTests = Lists.newArrayList();
             // 所有的api，以所在文件为单位（key）进行处理，避免文件多次解析
             fileApiBasicMap.forEach((filepath, fileApis) -> {
-                Map<String, List<Integer>> testMethodInvokeApiMap = getTestMethodInvocationMap(allTargetSourceCodeFilepathList, filepath, fileApis);
+                String testFilepath = getTestFilepath(allTargetSourceCodeFilepathList, filepath);
+                Map<String, List<Integer>> testMethodInvokeApiMap = getTestMethodInvocationMap(testFilepath, fileApis);
                 translateTests.add(TranslateTest.builder()
                         .taskId(taskParameter.getTaskId())
-                        .testFilepath(filepath)
+                        .testFilepath(testFilepath)
                         .testMethodApiInvocation(JsonUtil.objectToJson(testMethodInvokeApiMap))
                         .build());
             });
@@ -77,6 +77,8 @@ public class TranslateTestService {
     public void translateCode() {
         TaskParameter taskParameter = ResourceReader.getTaskParameter();
         List<TranslateTest> translateTests = selectByTaskId(taskParameter.getTaskId());
+
+        // 以文件为代码进行转换
         translateTests.forEach(translateTest -> {
             String translateCode = translateFile(translateTest);
             translateTest.setTranslateCode(translateCode);
@@ -91,18 +93,20 @@ public class TranslateTestService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         Map<String, List<String>> testMethodApiInvocationMap = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
         Map<String, ParserRuleContext> parserRuleContextMap = Maps.newHashMap();
         for (String testMethodName : testMethodApiInvocationMap.keySet()) {
             parserRuleContextMap.put(testMethodName, null);
         }
+
         Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
         ParseTree parseTree = parser.compilationUnit();
         MethodVisitor methodVisitor = new MethodVisitor();
-        methodVisitor.methodBlockMap = parserRuleContextMap;
+        methodVisitor.setMethodBlockMap(parserRuleContextMap);
         methodVisitor.visit(parseTree);
-        MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
 
+        MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
         List<String> translateCodes = Lists.newArrayList();
         methodVisitor.methodBlockMap.forEach((k, v) -> {
             translateCodes.add(translate.translateMethodDeclaration(v));
@@ -112,9 +116,8 @@ public class TranslateTestService {
     }
 
     @NotNull
-    private Map<String, List<Integer>> getTestMethodInvocationMap(List<String> allTargetSourceCodeFilepathList, String filepath,
-                                                                  List<ApiBasic> fileApis) {
-        String testFilepath = getTestFilepath(allTargetSourceCodeFilepathList, filepath);
+    private Map<String, List<Integer>> getTestMethodInvocationMap(String testFilepath, List<ApiBasic> fileApis) {
+
         // antlr解析每个testFile，获取所有testMethod还有对应每个testMethod调用的方法列表（map结构）
         // caller：test方法，callee：test方法中调用的其它方法
         // 解析文件中的test方法，获取每个test方法和该test方法中调用了哪些方法
@@ -174,10 +177,10 @@ public class TranslateTestService {
         androidMethodVisitor.visit(parseTree);
 
         return androidMethodVisitor.getInvocationList().stream()
+                .filter(x -> x.getCallee() != null && x.getCallee().size() > 0)
                 .collect(Collectors.toMap(ApiInvocationVisitor.MethodInvocation::getCaller,
                         ApiInvocationVisitor.MethodInvocation::getCallee));
     }
-
 
     /**
      * CRUD

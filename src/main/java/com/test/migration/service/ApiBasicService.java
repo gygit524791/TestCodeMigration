@@ -53,11 +53,25 @@ public class ApiBasicService {
         // 生成token文本语料库
         generateTokenCorpus(apiBasics, taskParameter);
 
-        apiBasics.forEach(api -> {
-            String tokenVec = generateTokenVec(api.getTokenSequence(), taskParameter);
-            api.setTokenVector(tokenVec);
-            update(api);
-        });
+        generateTokenVecDict(taskParameter);
+
+//        apiBasics.forEach(api -> {
+//            String tokenVec = generateTokenVec(api.getTokenSequence(), taskParameter);
+//            api.setTokenVector(tokenVec);
+//            update(api);
+//        });
+    }
+
+    private void generateTokenVecDict(TaskParameter taskParameter) {
+        String[] tokenArgs = new String[]{
+                taskParameter.getPythonBinPath(),
+                taskParameter.getPythonCalcTokenVec(),
+                String.valueOf(taskParameter.getTaskId()),
+                taskParameter.getDbFilepath(),
+                taskParameter.getWordVecModelFilepath(),
+                taskParameter.getApiVectorDictFilepath()
+        };
+        CallPythonUtil.call(tokenArgs);
     }
 
 
@@ -138,7 +152,7 @@ public class ApiBasicService {
                     .filepath(filepath)
                     .className(split[0])
                     .apiName(split[1])
-                    .type(1)
+                    .type(0)
                     .methodWordSequence(Joiner.on(",").join(Preprocess.generateWordSequence(split[1])))
                     .tokenSequence(Joiner.on(",").join(Preprocess.preprocess(split[1])))
                     .build();
@@ -166,36 +180,6 @@ public class ApiBasicService {
                 taskParameter.getWordVecModelFilepath()
         };
         CallPythonUtil.call(args);
-    }
-
-    private String generateTokenVec(String tokenSequence, TaskParameter taskParameter) {
-        String[] tokenArgs = new String[]{
-                taskParameter.getPythonBinPath(),
-                taskParameter.getPythonCalcTokenVec(),
-                tokenSequence,
-                taskParameter.getWordVecModelFilepath()
-        };
-        List<String> resultLines = CallPythonUtil.call(tokenArgs);
-        return normalizeTokenVector(resultLines);
-    }
-
-    @NotNull
-    private static String normalizeTokenVector(List<String> resultLines) {
-        StringBuilder vecLine = new StringBuilder();
-        for (String line : resultLines) {
-            vecLine.append(" ").append(line);
-        }
-        String[] vecLineStr = vecLine.toString().trim().split(" ");
-        StringBuilder normalVecLine = new StringBuilder();
-        Arrays.stream(vecLineStr)
-                .filter(StringUtils::isNotBlank)
-                .forEach(lineStr -> normalVecLine.append(lineStr.trim()).append(","));
-
-        // todo lowB实现 后续优化 1771,1236
-        if (normalVecLine.length() == 0) {
-            return StringUtils.EMPTY;
-        }
-        return normalVecLine.substring(0, normalVecLine.length() - 1).replace("[,", "[");
     }
 
     private void fillCorpus(TaskParameter taskParameter, List<String> tokens) {

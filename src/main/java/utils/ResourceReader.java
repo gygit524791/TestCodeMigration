@@ -36,6 +36,8 @@ public class ResourceReader {
                 .pythonCalcTokenVec(properties.getProperty("pythonCalcTokenVec"))
                 .pythonCalcSimilarity(properties.getProperty("pythonCalcSimilarity"))
                 .dbFilepath(properties.getProperty("dbFilepath"))
+                .apiVectorDictFilepath(properties.getProperty("apiVectorDictFilepath"))
+                .apiWordListFilepath(properties.getProperty("apiWordListFilepath"))
                 .build();
     }
 

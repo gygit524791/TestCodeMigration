@@ -5,24 +5,33 @@ import com.test.migration.service.ApiMappingService;
 import com.test.migration.service.TranslateTestService;
 import utils.MyBatisUtil;
 
-public class Main {
+public class ApiMappingMain {
     public static void main(String[] args) {
+        // 启动redis服务， redis用于存储一部分中间结果 避免重复计算 优化性能
+        //brew services start redis
         // 初始化（删除，新建）api，mapping，translate表
         MyBatisUtil.initTable();
 
         // 获取api基础信息
         ApiBasicService apiBasicService = new ApiBasicService();
+        long s1 = System.currentTimeMillis();
         apiBasicService.extractApiBasic();
+        long e1 = System.currentTimeMillis();
+        System.out.println("获取api基础信息完成，耗时（秒）：" + (e1 - s1) / 1000);
 
         // 生成mapping关系
         ApiMappingService apiMappingService = new ApiMappingService();
+        long s2 = System.currentTimeMillis();
         apiMappingService.calculateApiMappings();
+        long e2 = System.currentTimeMillis();
+        System.out.println("生成mapping关系完成，耗时（秒）：" + (e2 - s2) / 1000);
 
         // 生成api关联test信息
         TranslateTestService translateTestService = new TranslateTestService();
+        long s3 = System.currentTimeMillis();
         translateTestService.generateTargetApiTest();
-        translateTestService.translateCode();
-
+        long e3 = System.currentTimeMillis();
+        System.out.println("生成api关联test信息完成，耗时（秒）：" + (e3 - s3) / 1000);
     }
 
 }

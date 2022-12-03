@@ -36,5 +36,9 @@ public class ApiBasic {
      */
     private String tokenSequence;
 
+    /**
+     * 没必要存数据库，用不着而且会降低运行效率
+     */
+    @Deprecated
     private String tokenVector;
 }

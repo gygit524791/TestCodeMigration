@@ -122,7 +122,7 @@
     <select id="selectByIds" parameterType="java.util.List" resultMap="apiBasicMap">
         <include refid="select"/>
         where id in
-        <foreach collection="ids" item="id" separator="," open="(" close=")">
+        <foreach collection="list" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </select>
