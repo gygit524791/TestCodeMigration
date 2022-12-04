@@ -1,10 +1,8 @@
 package com.test.migration.service.translate;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.test.migration.antlr.Java8BaseVisitor;
-import com.test.migration.antlr.Java8Lexer;
-import com.test.migration.antlr.Java8Parser;
+import com.test.migration.antlr.java.Java8BaseVisitor;
+import com.test.migration.antlr.java.Java8Lexer;
+import com.test.migration.antlr.java.Java8Parser;
 import lombok.Data;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
@@ -13,7 +11,6 @@ import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
 import java.util.Map;
 
 @Data

@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.common;
 
-import com.test.migration.antlr.Java8Lexer;
-import com.test.migration.antlr.Java8Parser;
+import com.test.migration.antlr.java.Java8Lexer;
+import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.statement.BlockTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;

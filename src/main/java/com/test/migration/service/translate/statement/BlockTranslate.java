@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.statement;
 
 import com.google.common.collect.Lists;
-import com.test.migration.antlr.Java8Parser;
+import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.common.ClassDeclarationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;

@@ -1,5 +1,5 @@
 // Generated from F:/IDEA_ws/Tccd/src/java8\Java8.g4 by ANTLR 4.7
-package com.test.migration.antlr;
+package com.test.migration.antlr.java;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.ATN;

@@ -2,8 +2,8 @@ package com.test.migration.service;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.test.migration.antlr.Java8Lexer;
-import com.test.migration.antlr.Java8Parser;
+import com.test.migration.antlr.java.Java8Lexer;
+import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.dao.ApiBasicDao;
 import com.test.migration.entity.TaskParameter;
 import com.test.migration.entity.po.ApiBasic;

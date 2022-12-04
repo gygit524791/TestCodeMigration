@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.expression;
 
-import com.test.migration.antlr.Java8Lexer;
-import com.test.migration.antlr.Java8Parser;
+import com.test.migration.antlr.java.Java8Lexer;
+import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.ReplaceRule;
 import com.test.migration.service.translate.common.ArgumentListTranslate;
 import com.test.migration.service.translate.common.ExpressionNameTranslate;

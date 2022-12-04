@@ -3,9 +3,9 @@ package com.test.migration.service.extract;
 
 
 import com.google.common.base.Joiner;
-import com.test.migration.antlr.Java8BaseVisitor;
-import com.test.migration.antlr.Java8Lexer;
-import com.test.migration.antlr.Java8Parser;
+import com.test.migration.antlr.java.Java8BaseVisitor;
+import com.test.migration.antlr.java.Java8Lexer;
+import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.service.preprocess.Preprocess;
 import lombok.Getter;
