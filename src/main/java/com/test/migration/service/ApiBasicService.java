@@ -15,13 +15,9 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.lucene.util.CollectionUtil;
-import org.jetbrains.annotations.NotNull;
 import utils.*;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +42,7 @@ public class ApiBasicService {
     }
 
     private void generateTokenVector() {
-        TaskParameter taskParameter = ResourceReader.getTaskParameter();
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         // 根据任务id查所有token序列
         List<ApiBasic> apiBasics = selectByTaskId(taskParameter.getTaskId());
 
@@ -74,19 +70,30 @@ public class ApiBasicService {
         CallPythonUtil.call(tokenArgs);
     }
 
-
     private void extractAndroidApiBasic() throws IOException {
-        TaskParameter taskParameter = ResourceReader.getTaskParameter();
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<String> moduleApiFilepath = GetFoldFileNames.readfileWithType(taskParameter.getTargetFilepath(), "java");
         // 过滤掉测试相关的类文件
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
                 .flatMap(filepath -> parseAndroidApiBasic(filepath, taskParameter).stream())
+                .filter(this::filterUselessApi)
+                .collect(Collectors.toList());
+
+        batchSave(apiBasics);
+    }
+
+    private void extractHarmonyApiBasic() throws IOException {
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
+        List<String> moduleApiFilepath = GetFoldFileNames.readfileWithType(taskParameter.getSourceFilepath(), "h");
+        List<ApiBasic> apiBasics = moduleApiFilepath.stream()
+                .flatMap(filepath -> parseHarmonyApiBasic(filepath, taskParameter).stream())
+                .filter(this::filterUselessApi)
                 .collect(Collectors.toList());
         batchSave(apiBasics);
     }
 
-    private static List<String> filterTestFile(List<String> moduleApiFilepath) {
+    private List<String> filterTestFile(List<String> moduleApiFilepath) {
 
         return moduleApiFilepath.stream()
                 .filter(filepath -> {
@@ -98,7 +105,31 @@ public class ApiBasicService {
                 }).collect(Collectors.toList());
     }
 
-    private static String getClassNameByFilepath(String filepath) {
+    /**
+     * 过滤掉构造函数
+     * 过滤掉get/set/toString  (会存在一点误伤，比如一些功能性api命名就是setxxx。更合理的方式是考虑代码实现情况)
+     *
+     * @param apiBasic
+     * @return false表示要过滤掉
+     */
+    private boolean filterUselessApi(ApiBasic apiBasic) {
+        // 过滤掉构造函数
+        String apiName = apiBasic.getApiName().toLowerCase();
+        boolean isConstructApi = StringUtils.equals(apiName, apiBasic.getClassName().toLowerCase());
+        if (isConstructApi) {
+            return false;
+        }
+
+        // 过滤掉get/set/toString
+        if (apiName.startsWith("get") || apiName.startsWith("set") || apiName.startsWith("tostring")) {
+            return false;
+        }
+
+        //log
+        return true;
+    }
+
+    private String getClassNameByFilepath(String filepath) {
         if (StringUtils.isBlank(filepath)) {
             return StringUtils.EMPTY;
         }
@@ -109,14 +140,7 @@ public class ApiBasicService {
         return split1[0];
     }
 
-    private void extractHarmonyApiBasic() throws IOException {
-        TaskParameter taskParameter = ResourceReader.getTaskParameter();
-        List<String> moduleApiFilepath = GetFoldFileNames.readfileWithType(taskParameter.getSourceFilepath(), "h");
-        List<ApiBasic> apiBasics = moduleApiFilepath.stream()
-                .flatMap(filepath -> parseHarmonyApiBasic(filepath, taskParameter).stream())
-                .collect(Collectors.toList());
-        batchSave(apiBasics);
-    }
+
 
     private List<ApiBasic> parseAndroidApiBasic(String filePath, TaskParameter taskParameter) {
         CharStream inputStream = null;

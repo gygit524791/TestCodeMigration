@@ -1,7 +1,6 @@
 import com.test.migration.entity.TaskParameter;
-import redis.clients.jedis.Jedis;
 import utils.CallPythonUtil;
-import utils.ResourceReader;
+import utils.TaskParameterReader;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class MainTest {
     }
 
     private static void extracted() {
-        TaskParameter taskParameter = ResourceReader.getTaskParameter();
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         String[] pyArgs = new String[]{
                 taskParameter.getPythonBinPath(),
                 taskParameter.getPythonWordVec(),

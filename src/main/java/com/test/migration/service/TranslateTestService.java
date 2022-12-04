@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import utils.GetFoldFileNames;
 import utils.JsonUtil;
 import utils.MyBatisUtil;
-import utils.ResourceReader;
+import utils.TaskParameterReader;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,8 +36,11 @@ public class TranslateTestService {
     private final ApiBasicService apiBasicService = new ApiBasicService();
     private final ApiMappingService apiMappingService = new ApiMappingService();
 
+    /**
+     *
+     */
     public void generateTargetApiTest() {
-        TaskParameter taskParameter = ResourceReader.getTaskParameter();
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<ApiMapping> apiMappings = apiMappingService.selectByTaskId(taskParameter.getTaskId());
         List<Integer> targetApiIds = apiMappings.stream()
                 .map(ApiMapping::getTargetApiId)
@@ -75,7 +78,7 @@ public class TranslateTestService {
      * 候选ut文件，按照ut中需要做迁移的test method，以文件为单位进行转换
      */
     public void translateCode() {
-        TaskParameter taskParameter = ResourceReader.getTaskParameter();
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<TranslateTest> translateTests = selectByTaskId(taskParameter.getTaskId());
 
         // 以文件为代码进行转换
@@ -138,6 +141,16 @@ public class TranslateTestService {
     }
 
 
+    /**
+     * 通过常规Test命名规则来获取test类：
+     * AClass对应的测试类为：TestAClass 或者 AClassTest
+     *
+     * 但是这个规则不一定找出所有的test，比如AClass对应的测试类命名是其它风格
+     *
+     * @param allTargetSourceCodeFilepathList
+     * @param filepath
+     * @return
+     */
     @NotNull
     private String getTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {
         String className = getClassNameByFilepath(filepath);

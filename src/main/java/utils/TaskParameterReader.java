@@ -1,13 +1,12 @@
 package utils;
 
 import com.test.migration.entity.TaskParameter;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ResourceReader {
+public class TaskParameterReader {
 
     private static TaskParameter taskParameter;
 

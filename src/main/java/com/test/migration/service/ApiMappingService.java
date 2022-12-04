@@ -5,23 +5,22 @@ import com.test.migration.dao.ApiMappingDao;
 import com.test.migration.entity.TaskParameter;
 import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.entity.po.ApiMapping;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
-import utils.CallPythonUtil;
-import utils.JsonUtil;
-import utils.MyBatisUtil;
-import utils.ResourceReader;
+import utils.*;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ApiMappingService {
 
+    ApiBasicService apiBasicService = new ApiBasicService();
+
     public void calculateApiMappings() {
         System.out.println("开始执行mapping计算");
         long startTime = System.currentTimeMillis();
-        TaskParameter taskParameter = ResourceReader.getTaskParameter();
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         // 调用python相似度计算脚本
         String[] tokenArgs = new String[]{
                 taskParameter.getPythonBinPath(),
@@ -36,15 +35,34 @@ public class ApiMappingService {
         StringBuilder resultLine = new StringBuilder();
         resultLines.forEach(resultLine::append);
         List<String> apiMappings = JsonUtil.jsonToList(resultLine.toString(), String.class);
+        List<ApiMapping> mappings = buildApiMappings(apiMappings);
+        batchSave(mappings);
 
-        batchSave(buildApiMappings(apiMappings));
+        // 保存到mapping规则中
+        saveMappingRule(mappings);
 
         long endTime = System.currentTimeMillis();
         System.out.println("执行mapping计算完毕，耗时（秒）：" + (endTime - startTime) / 1000);
     }
 
+    private void saveMappingRule(List<ApiMapping> mappings) {
+        List<Integer> apiBasicIds = Lists.newArrayList();
+        apiBasicIds.addAll(mappings.stream().map(ApiMapping::getSourceApiId).toList());
+        apiBasicIds.addAll(mappings.stream().map(ApiMapping::getTargetApiId).toList());
+
+        List<ApiBasic> apiBasics = apiBasicService.selectByIds(apiBasicIds);
+        Map<Integer, ApiBasic> apiBasicMap = apiBasics.stream().collect(Collectors.toMap(ApiBasic::getId, Function.identity()));
+        mappings.forEach(mapping -> {
+            ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
+            ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
+            String key = sourceApi.getClassName() + "->" + sourceApi.getApiName();
+            String value = targetApi.getClassName() + "->" + targetApi.getApiName();
+            MappingRuleWriter.writeApiMappingProperties(key, value);
+        });
+    }
+
     private List<ApiMapping> buildApiMappings(List<String> apiMappings) {
-        Integer taskId = ResourceReader.getTaskParameter().getTaskId();
+        Integer taskId = TaskParameterReader.getTaskParameter().getTaskId();
         if (apiMappings == null || apiMappings.size() == 0) {
             return Lists.newArrayList();
         }
