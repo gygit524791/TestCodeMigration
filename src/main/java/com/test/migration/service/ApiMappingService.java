@@ -50,13 +50,20 @@ public class ApiMappingService {
         apiBasicIds.addAll(mappings.stream().map(ApiMapping::getSourceApiId).toList());
         apiBasicIds.addAll(mappings.stream().map(ApiMapping::getTargetApiId).toList());
 
+        if (apiBasicIds.size() == 0) {
+            return;
+        }
+
         List<ApiBasic> apiBasics = apiBasicService.selectByIds(apiBasicIds);
         Map<Integer, ApiBasic> apiBasicMap = apiBasics.stream().collect(Collectors.toMap(ApiBasic::getId, Function.identity()));
         mappings.forEach(mapping -> {
             ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
             ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
-            String key = sourceApi.getClassName() + "->" + sourceApi.getApiName();
-            String value = targetApi.getClassName() + "->" + targetApi.getApiName();
+            // 安卓的api
+            String key = targetApi.getClassName() + "->" + targetApi.getApiName();
+            // 鸿蒙的api
+            String value = sourceApi.getClassName() + "->" + sourceApi.getApiName();
+
             MappingRuleWriter.writeApiMappingProperties(key, value);
         });
     }

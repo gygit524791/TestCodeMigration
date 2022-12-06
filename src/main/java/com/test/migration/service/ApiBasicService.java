@@ -1,6 +1,7 @@
 package com.test.migration.service;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
@@ -51,11 +52,6 @@ public class ApiBasicService {
 
         generateTokenVecDict(taskParameter);
 
-//        apiBasics.forEach(api -> {
-//            String tokenVec = generateTokenVec(api.getTokenSequence(), taskParameter);
-//            api.setTokenVector(tokenVec);
-//            update(api);
-//        });
     }
 
     private void generateTokenVecDict(TaskParameter taskParameter) {
@@ -72,7 +68,18 @@ public class ApiBasicService {
 
     private void extractAndroidApiBasic() throws IOException {
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
-        List<String> moduleApiFilepath = GetFoldFileNames.readfileWithType(taskParameter.getTargetFilepath(), "java");
+        List<String> targetFilepathList = Splitter.on(",").splitToList(taskParameter.getTargetFilepath());
+        List<String> moduleApiFilepath = targetFilepathList.stream()
+                .flatMap(targetFilepath -> {
+                    try {
+                        return GetFoldFileNames.readfileWithType(targetFilepath, "java").stream();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .distinct()
+                .toList();
+
         // 过滤掉测试相关的类文件
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
@@ -85,7 +92,18 @@ public class ApiBasicService {
 
     private void extractHarmonyApiBasic() throws IOException {
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
-        List<String> moduleApiFilepath = GetFoldFileNames.readfileWithType(taskParameter.getSourceFilepath(), "h");
+        List<String> sourceFilepathList = Splitter.on(",").splitToList(taskParameter.getSourceFilepath());
+        List<String> moduleApiFilepath = sourceFilepathList.stream()
+                .flatMap(sourceFilepath -> {
+                    try {
+                        return GetFoldFileNames.readfileWithType(sourceFilepath, "h").stream();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .distinct()
+                .toList();
+        moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
                 .flatMap(filepath -> parseHarmonyApiBasic(filepath, taskParameter).stream())
                 .filter(this::filterUselessApi)
@@ -139,7 +157,6 @@ public class ApiBasicService {
         String[] split1 = classFile.split("\\.");
         return split1[0];
     }
-
 
 
     private List<ApiBasic> parseAndroidApiBasic(String filePath, TaskParameter taskParameter) {

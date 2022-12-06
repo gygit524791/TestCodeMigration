@@ -4377,3 +4377,4377 @@ resum
 stop
 finish
 cancel
+captur start valu
+on transit end
+on appear
+on disappear
+on anim start
+on anim end
+creat anim
+is valid target
+on anim start
+on anim end
+add target
+add target
+add target
+remov target
+remov target
+exclud target
+exclud target
+exclud children
+exclud target
+exclud children
+exclud target
+exclud children
+add target
+remov target
+remov target
+captur valu
+clear valu
+paus
+resum
+plai transit
+is transit requir
+on anim end
+forc end
+add listen
+remov listen
+captur propag valu
+can remov view
+clone
+add transit
+add target
+add target
+add target
+add target
+add listen
+remov target
+remov target
+remov target
+remov target
+exclud target
+exclud target
+exclud target
+exclud target
+remov listen
+remov transit
+on transit start
+on transit end
+on transit end
+captur start valu
+captur end valu
+captur propag valu
+paus
+resum
+forc end
+clone
+captur start valu
+captur end valu
+creat anim
+on anim cancel
+on anim end
+on anim paus
+on anim resum
+restor
+equal
+on transit end
+on transit paus
+on transit resum
+captur start valu
+captur end valu
+creat anim
+on anim end
+on anim updat
+on anim end
+on anim updat
+on anim cancel
+on transit paus
+on transit resum
+on transit end
+on anim cancel
+on anim end
+on anim paus
+on anim resum
+on transit start
+on transit end
+on transit cancel
+on transit paus
+on transit resum
+inflat transit
+inflat transit manag
+captur start valu
+captur end valu
+creat anim
+on anim end
+captur start valu
+captur end valu
+is visibl
+creat anim
+on appear
+on appear
+on disappear
+on transit paus
+on transit resum
+on transit end
+is transit requir
+on disappear
+on anim paus
+on anim resum
+on anim cancel
+on anim repeat
+on anim start
+on anim end
+on transit end
+on transit paus
+on transit resum
+captur start valu
+captur end valu
+on appear
+on disappear
+captur valu
+exit
+enter
+is creat from layout resourc
+captur start valu
+captur end valu
+creat anim
+on view attach window
+on view detach from window
+on pre draw
+on transit end
+transit
+creat anim
+on anim updat
+on anim end
+captur start valu
+captur end valu
+captur start valu
+captur end valu
+creat anim
+equal
+hash code
+evalu
+on transit start
+on transit end
+on transit cancel
+on transit paus
+on transit resum
+captur start valu
+captur end valu
+creat anim
+captur start valu
+captur end valu
+creat anim
+on transit cancel
+on transit end
+on transit paus
+on transit resum
+on anim cancel
+on anim end
+on anim end
+captur start valu
+captur end valu
+on appear
+on disappear
+evalu
+captur start valu
+captur end valu
+creat anim
+captur start valu
+captur end valu
+on appear
+on disappear
+on anim end
+evalu
+creat element
+mark option chang
+is option chang
+alloc transit compon id
+is first frame show
+updat
+perform build
+add pre flush
+skip post flush
+switch transit option
+reset page transit anim
+captur start valu
+on transit end
+on appear
+on disappear
+on anim start
+on anim end
+creat anim
+is valid target
+on anim start
+on anim end
+add target
+add target
+add target
+remov target
+remov target
+exclud target
+exclud target
+exclud children
+exclud target
+exclud children
+exclud target
+exclud children
+add target
+remov target
+remov target
+captur valu
+clear valu
+paus
+resum
+plai transit
+is transit requir
+on anim end
+forc end
+add listen
+remov listen
+captur propag valu
+can remov view
+clone
+add transit
+add target
+add target
+add target
+add target
+add listen
+remov target
+remov target
+remov target
+remov target
+exclud target
+exclud target
+exclud target
+exclud target
+remov listen
+remov transit
+on transit start
+on transit end
+on transit end
+captur start valu
+captur end valu
+captur propag valu
+paus
+resum
+forc end
+clone
+captur start valu
+captur end valu
+creat anim
+on anim cancel
+on anim end
+on anim paus
+on anim resum
+restor
+equal
+on transit end
+on transit paus
+on transit resum
+captur start valu
+captur end valu
+creat anim
+on anim end
+on anim updat
+on anim end
+on anim updat
+on anim cancel
+on transit paus
+on transit resum
+on transit end
+on anim cancel
+on anim end
+on anim paus
+on anim resum
+on transit start
+on transit end
+on transit cancel
+on transit paus
+on transit resum
+inflat transit
+inflat transit manag
+captur start valu
+captur end valu
+creat anim
+on anim end
+captur start valu
+captur end valu
+is visibl
+creat anim
+on appear
+on appear
+on disappear
+on transit paus
+on transit resum
+on transit end
+is transit requir
+on disappear
+on anim paus
+on anim resum
+on anim cancel
+on anim repeat
+on anim start
+on anim end
+on transit end
+on transit paus
+on transit resum
+captur start valu
+captur end valu
+on appear
+on disappear
+captur valu
+exit
+enter
+is creat from layout resourc
+captur start valu
+captur end valu
+creat anim
+on view attach window
+on view detach from window
+on pre draw
+on transit end
+transit
+creat anim
+on anim updat
+on anim end
+captur start valu
+captur end valu
+captur start valu
+captur end valu
+creat anim
+equal
+hash code
+evalu
+on transit start
+on transit end
+on transit cancel
+on transit paus
+on transit resum
+captur start valu
+captur end valu
+creat anim
+captur start valu
+captur end valu
+creat anim
+on transit cancel
+on transit end
+on transit paus
+on transit resum
+on anim cancel
+on anim end
+on anim end
+captur start valu
+captur end valu
+on appear
+on disappear
+evalu
+captur start valu
+captur end valu
+creat anim
+captur start valu
+captur end valu
+on appear
+on disappear
+on anim end
+evalu
+creat element
+mark option chang
+is option chang
+alloc transit compon id
+is first frame show
+updat
+perform build
+add pre flush
+skip post flush
+switch transit option
+reset page transit anim
+run
+run
+is bound
+run
+on creat
+on destroi
+on bind
+creat
+updat
+perform layout
+proxi compon
+proxi compon
+proxi compon
+creat render node
+creat element
+creat
+is repaint boundari
+invok callback
+show dialog
+on cancel
+on click
+on click
+build
+add categori
+add categori
+add categori
+clear
+allow
+clear all
+confirm
+run
+is trace tag enabl
+can invok draw gl functor
+invok draw gl functor
+call draw gl function
+call draw gl function
+draw web view functor
+detach draw gl functor
+add web view asset path
+is multi process enabl
+on creat view
+on paus
+on resum
+on destroi view
+on destroi
+run
+sync
+reset sync
+start sync
+stop sync
+creat from parcel
+new arrai
+describ content
+write parcel
+delet origin
+delet all data
+sync
+reset sync
+start sync
+stop sync
+dispatch click event
+handl click event
+on click
+overlai horizont scrollbar
+overlai vertic scrollbar
+save password
+destroi
+save state
+save pictur
+restor pictur
+restor state
+load url
+load url
+post url
+load data
+load data base u r l
+evalu javascript
+save web archiv
+save web archiv
+stop load
+reload
+can go back
+go back
+can go forward
+go forward
+can go back forward
+go back forward
+is privat brows enabl
+page up
+page down
+post visual state callback
+clear view
+captur pictur
+creat print document adapt
+creat print document adapt
+invok zoom picker
+request focu node href
+request imag ref
+paus timer
+resum timer
+on paus
+on resum
+is paus
+free memori
+clear cach
+clear form data
+clear histori
+clear ssl prefer
+copi back forward list
+find next
+find all
+find all async
+show find dialog
+clear match
+document ha imag
+add javascript interfac
+remov javascript interfac
+creat web messag channel
+post web messag
+refresh plugin
+emul shift held
+on child view ad
+on child view remov
+on global focu chang
+fling scroll
+can zoom
+can zoom out
+zoom
+zoom
+zoom out
+debug dump
+dump view hierarchi properti
+find hierarchi view
+super get scroll bar style
+super scroll
+super comput scroll
+super on hover event
+super perform access action
+super perform long click
+super set frame
+super dispatch kei event
+super on gener motion event
+super request focu
+super set layout param
+super start activ result
+over scroll
+awaken scroll bar
+awaken scroll bar
+on scroll chang
+super on draw vertic scroll bar
+notifi find dialog dismiss
+on find result receiv
+on move displai
+comput scroll
+on hover event
+on touch event
+on gener motion event
+on trackbal event
+on kei down
+on kei up
+on kei multipl
+should delai child press state
+on provid virtual structur
+on provid autofil virtual structur
+on provid content captur structur
+autofil
+is visibl user autofil
+on initi access node info intern
+on initi access event intern
+perform access action intern
+perform long click
+on creat input connect
+on drag event
+on window focu chang
+dispatch kei event
+request focu
+request child rectangl on screen
+on start temporari detach
+on finish temporari detach
+find focu
+on activ result
+on check is text editor
+ha mime type
+ha extens
+remap gener mime type
+messag level
+messag
+sourc id
+line number
+proce
+cancel
+on messag
+should intercept request
+creat from parcel
+new arrai
+describ content
+write parcel
+on progress chang
+on receiv titl
+on receiv icon
+on receiv touch icon url
+on show custom view
+on show custom view
+on hide custom view
+on creat window
+on request focu
+on close window
+on js alert
+on js confirm
+on js prompt
+on js befor unload
+on exceed databas quota
+on reach max app cach size
+on geoloc permiss show prompt
+on geoloc permiss hide prompt
+on permiss request
+on permiss request cancel
+on js timeout
+on consol messag
+on consol messag
+on show file chooser
+open file chooser
+should overrid url load
+should overrid url load
+on page start
+on page finish
+on load resourc
+on page commit visibl
+should intercept request
+should intercept request
+on too mani redirect
+on receiv error
+on receiv error
+on receiv http error
+on form resubmiss
+do updat visit histori
+on receiv ssl error
+on receiv client cert request
+on receiv http auth request
+should overrid kei event
+on unhandl kei event
+on unhandl input event
+on scale chang
+on receiv login request
+on render process gone
+on safe brows hit
+match
+finish
+on find result receiv
+find all
+show soft input
+updat match count
+on click
+on creat action mode
+on destroi action mode
+on prepar action mode
+on action item click
+befor text chang
+on text chang
+after text chang
+on creat action mode
+on prepar action mode
+on action item click
+on destroi action mode
+us http auth usernam password
+cancel
+proce
+is enabl packag
+is instal packag
+run
+on start
+on receiv
+prepar web view system server
+on shell command
+notifi relro creation complet
+wait and get provid
+chang provid and set
+is multi process enabl
+enabl multi process
+on web view provid chang
+updat user set
+kill packag depend
+is fallback logic enabl
+enabl fallback logic
+enabl packag all user
+system is debugg
+notifi zygot
+ensur zygot start
+is multi process default enabl
+on command
+help set web view implement
+on help
+packag state chang
+prepar web view system server
+chang provid and set
+updat current web view packag
+notifi relro creation complet
+wait and get provid
+is valid provid
+dump state
+packag state chang
+prepar web view system server
+start zygot when readi
+handl new user
+handl user remov
+notifi relro creation complet
+wait and get provid
+chang provid and set
+is multi process enabl
+enabl multi process
+dump state
+creat
+updat
+perform layout
+on attach context
+on mous event
+handl mous event
+send doubl click event
+handl doubl click event
+handl kei event
+on app show
+on app hide
+on posit chang
+on size chang
+handl touch down
+handl touch up
+handl touch move
+handl touch cancel
+run quick menu
+on quick menu dismiss
+on touch select chang
+text overlai menu should show
+handl axi event
+is axi scrollabl
+check axi node
+pan on action start
+pan on action updat
+pan on action end
+pan on action cancel
+gener drag item info
+dump tree
+on paint finish
+web compon
+web compon
+web compon
+creat render node
+creat element
+on progress chang
+on common dialog
+on http auth request
+on ssl error request
+on ssl select cert request
+request focu
+on consol
+on file selector show
+on context menu show
+on url load intercept
+on intercept request
+is empti on intercept request
+is media plai gestur access
+close
+post messag
+delet entir cooki
+save cooki sync
+load url
+access step
+back forward
+access backward
+access forward
+backward
+forward
+clear histori
+clear ssl cach
+clear client authent cach
+execut type script
+load data base url
+load init javascript interfac
+on inact
+on activ
+zoom
+zoom
+zoom out
+refresh
+stop load
+creat msg port
+post web messag
+delet entir cooki
+save cooki sync
+add javascript interfac
+remov javascript interfac
+request focu
+search all async
+clear match
+search next
+reload
+on download start
+on find result receiv
+on proxi di
+on router push
+on consol log
+on messag
+on page load begin
+on page load end
+on load progress
+on page titl
+on geoloc hide
+on geoloc show
+on alert dialog j s
+on befor unload j s
+on confirm dialog j s
+on prompt dialog j s
+on file selector show
+on focu
+on resourc load error
+on http error
+on render exit
+on refresh access histori
+on handl intercept request
+on handl intercept url load
+on resourc
+on scale chang
+on scroll
+on http auth request j s
+on ssl error request j s
+on ssl select cert request j s
+on permiss request
+run context menu
+run quick menu
+on quick menu dismiss
+on touch select chang
+on drag and drop data
+releas
+call re regist method
+on receiv valu
+function void
+dump tree
+updat
+on attach context
+paint
+sync geometri properti
+creat r s node
+updat
+on focu
+on blur
+on kei event
+write input stream
+write byte buffer
+write imag
+close
+binder
+on devic error
+run
+on repeat request error
+on devic idl
+run
+on captur start
+run
+on result receiv
+run
+run
+on prepar
+on request queue empti
+run
+run
+run
+notifi fail switch
+run
+run
+run
+binder di
+prepar
+prepar
+tear down
+final output configur
+captur
+captur singl request
+captur burst
+captur burst request
+stop repeat
+abort captur
+updat output configur
+is reprocess
+switch offlin
+support offlin process
+close
+creat high speed request list
+prepar
+prepar
+tear down
+captur
+captur singl request
+captur burst
+captur burst request
+stop repeat
+abort captur
+updat output configur
+switch offlin
+support offlin process
+close without drain
+close
+is reprocess
+replac session close
+is abort
+final output configur
+on configur
+on configur fail
+on readi
+on activ
+on captur queue empti
+on close
+on surfac prepar
+updat tracker
+updat tracker
+pop partial result
+is repeat
+ha batch output
+creat from parcel
+new arrai
+describ content
+write parcel
+read from parcel
+initi stream configur data
+swap
+is empti
+write valu
+read valu
+dump log
+prepar
+prepar
+tear down
+final output configur
+captur
+captur singl request
+captur burst
+captur burst request
+stop repeat
+abort captur
+updat output configur
+switch offlin
+support offlin process
+is reprocess
+replac session close
+close without drain
+close
+is abort
+on captur start
+on captur partial
+on captur progress
+on captur complet
+on captur fail
+on captur sequenc complet
+on captur sequenc abort
+on captur buffer lost
+on open
+on disconnect
+on error
+on activ
+on idl
+on busi
+on unconfigur
+on request queue empti
+on surfac prepar
+on drain
+on drain
+on drain
+run
+run
+run
+run
+run
+run
+run
+run
+configur output
+configur stream check
+creat captur session
+creat captur session output configur
+creat reprocess captur session
+creat reprocess captur session configur
+creat constrain high speed captur session
+creat custom captur session
+creat captur session
+is session configur support
+creat captur request
+creat captur request
+creat reprocess captur request
+prepar
+prepar
+updat output configur
+switch offlin
+run
+support offlin process
+tear down
+final output config
+captur
+captur burst
+run
+stop repeat
+flush
+close
+on unconfigur
+on activ
+on busi
+on idl
+on request queue empti
+on surfac prepar
+run
+on devic error
+run
+run
+on devic idl
+binder
+on devic error
+on repeat request error
+on devic idl
+on captur start
+run
+on result receiv
+run
+run
+on prepar
+on request queue empti
+execut
+binder di
+run
+creat from parcel
+new arrai
+describ content
+write parcel
+read from parcel
+is sequenc complet
+mark sequenc complet
+is inflight complet
+mark inflight complet
+unlink death
+disconnect
+submit request
+submit request list
+cancel request
+begin configur
+end configur
+delet stream
+creat stream
+creat input stream
+creat default request
+wait until idl
+is session configur support
+flush
+prepar
+tear down
+prepare2
+updat output configur
+switch offlin
+final output configur
+creat from parcel
+new arrai
+describ content
+write parcel
+read from parcel
+on configur
+on configur fail
+on readi
+on activ
+on captur queue empti
+on close
+on surfac prepar
+captur singl request
+captur burst request
+updat output configur
+switch offlin
+support offlin process
+on readi
+on activ
+on captur queue empti
+on close
+on surfac prepar
+on captur start
+on captur partial
+on captur progress
+on captur complet
+on captur fail
+on captur sequenc complet
+on captur sequenc abort
+on captur buffer lost
+marshal
+unmarsh
+calcul marshal size
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+calcul marshal size
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+calcul marshal size
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+calcul marshal size
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+unmarsh
+calcul marshal size
+marshal
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+calcul marshal size
+creat marshal
+is type map support
+marshal
+calcul marshal size
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+marshal
+unmarsh
+creat marshal
+is type map support
+equal
+hash code
+calcul marshal size
+is reprocess
+is part c request list
+equal
+hash code
+creat from parcel
+new arrai
+describ content
+write parcel
+contain target
+convert surfac stream id
+recov stream id surfac
+add target
+remov target
+build
+is empti
+dump log
+compar
+dump perform data
+start timer
+stop timer
+add timestamp
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+is repeat
+produc request holder
+run
+close
+wait open
+close
+on devic error
+on devic idl
+on captur start
+on result receiv
+on prepar
+on repeat request error
+on request queue empti
+binder
+handl messag
+disconnect
+submit request
+submit request list
+cancel request
+is session configur support
+begin configur
+end configur
+delet stream
+creat stream
+final output configur
+creat input stream
+creat default request
+updat output configur
+wait until idl
+flush
+prepar
+prepare2
+tear down
+switch offlin
+binder
+meter
+face
+face
+on error
+on pictur taken
+on shutter
+on frame avail
+handl messag
+start
+flush
+quit
+submit captur request
+cancel repeat
+configur
+configur surfac
+draw into surfac
+cleanup e g l context
+flush
+on face detect
+process face detect mode
+map result face
+wait until start
+wait and get handler
+ha ani messag
+remov messag
+queue idl
+wait until idl
+is queue empti
+handl messag
+start
+wait until start
+quit
+queue new frame
+ignor new frame
+wait until idl
+allow new frame
+cach convert result metadata
+on error
+run
+on configur
+on idl
+run
+on busi
+on captur start
+run
+on request queue empti
+run
+on captur result
+run
+on repeat request error
+run
+configur output
+configur output
+submit request list
+submit request
+cancel request
+wait until idl
+flush
+is close
+close
+is preview complet
+is jpeg complet
+is complet
+try complet
+compar
+equal
+queue request
+wait empti
+wait preview empti
+wait request complet
+jpeg captur
+jpeg produc
+ha pend preview captur
+preview captur
+preview produc
+fail next preview
+fail next jpeg
+fail all
+build
+is repeat
+ha jpeg target
+ha preview target
+num jpeg target
+num preview target
+jpeg type
+fail request
+request fail
+is output abandon
+process request trigger
+on auto focu move
+on auto focu
+map result trigger
+compar
+creat from parcel
+new arrai
+describ content
+write parcel
+read from parcel
+close
+close
+acquir lock
+acquir exclus lock
+releas lock
+task start
+begin drain
+task finish
+creat from parcel
+new arrai
+describ content
+write parcel
+read from parcel
+equal
+hash code
+creat from parcel
+new arrai
+describ content
+write parcel
+read from parcel
+creat from parcel
+new arrai
+describ content
+write parcel
+read from parcel
+task start
+task finish
+begin drain
+copi color curv
+equal
+hash code
+copi gain factor
+equal
+hash code
+equal
+hash code
+enabl surfac share
+is physic camera
+is defer configur
+add surfac
+remov surfac
+creat from parcel
+new arrai
+describ content
+write parcel
+equal
+hash code
+equal
+hash code
+is input
+equal
+hash code
+is reprocess
+equal
+hash code
+compar
+equal
+hash code
+copi element
+copi element
+equal
+hash code
+equal
+equal
+hash code
+equal
+hash code
+is output support
+is output support
+is output support
+equal
+hash code
+equal
+hash code
+copi
+equal
+hash code
+creat from parcel
+new arrai
+write parcel
+describ content
+equal
+hash code
+is output support
+is output support
+equal
+hash code
+creat from parcel
+new arrai
+describ content
+write parcel
+equal
+hash code
+copi
+equal
+hash code
+creat from parcel
+new arrai
+describ content
+write parcel
+is input
+is output
+equal
+hash code
+is concurr session configur support
+regist avail callback
+regist avail callback
+unregist avail callback
+regist torch callback
+regist torch callback
+unregist torch callback
+open camera
+open camera
+open camera uid
+on camera avail
+on camera unavail
+on camera access prioriti chang
+on physic camera avail
+on physic camera unavail
+on camera open
+on camera close
+on torch mode unavail
+on torch mode chang
+binder
+compar
+on statu chang
+on physic camera statu chang
+on torch statu chang
+on camera access prioriti chang
+on camera open
+on camera close
+is concurr session configur support
+camera id ha concurr stream lock
+run
+run
+run
+run
+run
+regist avail callback
+unregist avail callback
+regist torch callback
+unregist torch callback
+on statu chang
+on physic camera statu chang
+on torch statu chang
+on camera access prioriti chang
+on camera open
+on camera close
+binder di
+imag captur
+creat captur session
+creat captur request
+is session configur support
+on close
+on start job
+on stop job
+mark complet
+on receiv
+ping user updat
+notifi camera state
+handl messag
+on start
+on start user
+on switch user
+binder di
+run
+dump usag event
+c e d i s l l o w c o p y n d m o v e
+stop
+releas
+captur
+start preview
+start record
+prepar camera input
+creat sub window surfac
+prepar photo
+prepar video
+prepar camera
+save data
+on take photo
+add take photo listen
+add error listen
+add record listen
+on camera size chang
+on camera offset chang
+mark whole
+on first buffer avail
+add prepar event listen
+on buffer avail
+releas
+creat
+stop
+take photo
+start preview
+start record
+on camera size chang
+on camera offset chang
+add prepar event listen
+add take photo listen
+add error listen
+add record listen
+builder
+builder
+build
+clear
+take photo
+start record
+close record
+camera compon
+camera compon
+sign set resolut
+is set resolut
+creat render node
+creat element
+releas
+creat
+creat camera
+open camera
+take photo
+add take photo listen
+add error listen
+add pre view size chang
+add prepar event listen
+chang camera compon id
+prepar
+take photo
+start record
+close record
+start preview
+stop preview
+start
+show toast
+hide toast
+show
+hide
+show
+hide
+updat
+dump
+show
+builder
+builder
+build
+sync surfac and run
+do frame
+dump
+on pre draw
+on stuck target
+on unstuck from target
+on releas target
+on stuck target
+on unstuck from target
+on releas target
+on click
+on down
+on move
+on up
+on click
+on down
+on move
+on up
+on theme chang
+on orient chang
+on layout direct chang
+on displai size chang
+on comput intern inset
+on initi access node info intern
+updat expand view theme
+updat expand view direct
+perform access action intern
+updat content descript
+is expand
+is expans anim
+add bubbl
+remov bubbl
+updat bubbl
+updat bubbl order
+hide stack user educ
+mayb show manag educ
+stack dismiss
+collaps stack
+show expand view content
+hide current input method
+on im visibl chang
+subtract obscur touchabl region
+on intercept touch event
+dispatch touch event
+on anim end
+anim flyout bubbl
+perform back press need
+updat dimens
+updat icon
+show dot
+log u i event
+ha metadata shortcut id
+cleanup view
+inflat
+is inflat
+stop inflat
+is visual interrupt
+is intent activ
+mark access
+mark updat
+show shade
+is import convers
+show dot
+show flyout
+should auto expand
+is bubbl
+enabl
+disabl
+is enabl
+dump
+equal
+hash code
+log u i event
+on state chang
+on zen chang
+on config chang
+on bubbl notif suppress chang
+on user chang
+on packag ad
+on packag chang
+on packag remov
+on packag avail
+on packag unavail
+on shortcut chang
+add notif callback
+hide current input method
+on pend entri ad
+on pre entri updat
+on entri remov
+on notif rank updat
+on notif remov request
+on group suppress chang
+remov notif
+invalid notif
+mayb cancel summari
+on entri ad
+on entri updat
+on rank updat
+on entri remov
+on statu bar visibl chang
+on ui mode chang
+on overlai chang
+on config chang
+landscap
+ha bubbl
+is stack expand
+collaps stack
+is bubbl notif suppress from shade
+is bubbl expand
+promot bubbl from overflow
+expand stack and select bubbl
+on user chang import
+perform back press need
+updat bubbl
+load overflow bubbl from disk
+updat bubbl
+inflat and add
+on user chang bubbl
+remov bubbl
+appli updat
+handl dismiss intercept
+updat stack
+dump
+on task move front
+on activ restart attempt
+on activ launch on secondari displai rerout
+on back press on task root
+on singl task displai drawn
+on singl task displai empti
+on im visibl chang
+log
+log overflow remov
+log overflow add
+start shortcut activ
+start activ
+on locat chang
+on task background color chang
+can receiv pointer event
+releas
+surfac creat
+surfac chang
+surfac destroi
+on anim end
+move bound
+move first bubbl stack follow
+is stack on left side
+spring stack
+spring stack after fling
+fling stack spring edg
+move stack similar posit after rotat
+dump
+cancel stack posit anim
+anim im visibl
+move stack from touch
+on unstuck from target
+anim stack dismiss
+on child ad
+on child remov
+on child reorder
+on activ control layout
+updat resourc
+expand from stack
+expand from stack
+notifi prepar collaps
+collaps back stack
+updat resourc
+on unstuck from target
+prepar bubbl drag
+drag bubbl out
+dismiss drag out bubbl
+snap bubbl back
+on gestur finish
+updat y posit
+dump
+on activ control layout
+on child ad
+on child remov
+on child reorder
+equal
+add view
+remov view
+remov view
+reorder view
+properti anim
+properti anim on view
+cancel all anim
+cancel all anim properti
+cancel anim on view
+on anim end
+properti
+alpha
+alpha
+translat x
+translat x
+translat y
+translat y
+posit
+follow anim target along path
+on anim end
+scale x
+scale x
+scale y
+scale y
+start veloc
+damp ratio
+stiff
+posit start veloc
+start delai
+start
+on anim end
+on anim start
+on anim end
+on activ view readi
+on activ view destroi
+on task creat
+on task remov start
+updat dimens
+snapshot activ surfac
+updat obscur touchabl region
+appli theme attr
+hide im visibl
+updat inset
+updat
+on initi access node info
+popul expand view
+perform back press need
+updat height
+updat view
+clean up expand state
+notifi displai empti
+can scroll vertic
+on creat
+updat dimens
+updat theme
+on data chang
+on start
+on restart
+on resum
+on paus
+on stop
+on destroi
+on creat view holder
+on bind view holder
+on initi access node info
+anyth chang
+bubbl remov
+ha bubbl
+is expand
+ha ani bubbl kei
+ha bubbl stack kei
+ha overflow bubbl kei
+notif entri updat
+dismiss bubbl kei
+add summari suppress
+remov suppress summari
+is summari suppress
+remov bubbl invalid shortcut
+remov bubbl packag name
+overflow bubbl
+dismiss all
+notifi displai empti
+dump
+spring
+spring out
+on draw
+add dot suppress flag
+remov dot suppress flag
+updat dot visibl
+draw dot
+hide flyout
+creat
+updat
+perform layout
+pop bubbl
+fire pop event
+handl mous event
+paint
+creat element
+creat render node
+paint
+perform build
+fire pop event
+is declar
+on creat
+queri xml resourc
+queri raw data
+queri non index kei
+add index
+process
+visit type
+on start
+on unlock user
+run
+on cleanup user
+on some packag chang
+on packag modifi
+on chang
+launch assist
+dump
+updat searchabl list
+compar
+dump
+paint
+paint
+perform build
+local updat
+creat
+updat
+perform layout
+on valu chang
+fire submit event
+handl enter event
+handl focu event
+handl mous event
+handl mous hover event
+builder
+builder
+build
+search compon
+search compon
+creat render node
+creat element
+function void
+evalu
+evalu
+init anim
+overrid durat scale
+add updat listen
+remov all updat listen
+remov updat listen
+start without puls
+start
+cancel
+end
+resum
+paus
+is run
+is start
+revers
+can revers
+commit anim frame
+anim base on time
+anim base on plai time
+skip end valu
+is initi
+puls anim frame
+anim valu
+clone
+do frame
+add anim frame callback
+add on shot commit callback
+remov callback
+run
+auto cancel base on
+post frame callback
+post commit callback
+clone
+invert
+convert back
+convert
+on anim end
+add state
+clone
+jump current state
+append chang configur
+creat constant state
+new instanc
+start
+anim base on time
+anim valu
+init anim
+evalu
+evalu
+start
+should auto cancel
+init anim
+anim valu
+is initi
+clone
+evalu
+ha valu
+valu set on start
+clone
+clone
+clone
+enabl transit type
+disabl transit type
+is transit type enabl
+on anim end
+on layout chang
+on anim start
+on anim cancel
+on anim end
+start chang anim
+end chang anim
+is chang layout
+is run
+cancel
+cancel
+on anim end
+on anim end
+layout chang
+add child
+show child
+show child
+remov child
+hide child
+hide child
+add transit listen
+remov transit listen
+on view attach window
+on view detach from window
+on pre draw
+on anim cancel
+on anim end
+on anim repeat
+on anim start
+on anim paus
+on anim resum
+clone
+clone
+init
+calcul valu
+calcul valu
+clone
+calcul valu
+clone
+convert
+convert
+evalu
+evalu
+clone
+creat x float keyfram
+creat y float keyfram
+creat x int keyfram
+creat y int keyfram
+clone
+start
+cancel
+end
+paus
+resum
+is paus
+is start
+add listen
+remov listen
+add paus listen
+remov paus listen
+remov all listen
+append chang configur
+creat constant state
+clone
+can revers
+revers
+puls anim frame
+start without puls
+skip end valu
+is initi
+anim base on plai time
+new instanc
+evalu
+clone
+on anim end
+plai togeth
+plai togeth
+plai sequenti
+plai sequenti
+plai
+cancel
+end
+is run
+is start
+paus
+resum
+start
+start without puls
+skip end valu
+anim base on plai time
+is initi
+do anim frame
+commit anim frame
+puls anim frame
+clone
+on anim end
+can revers
+revers
+compar
+should plai togeth
+clone
+add child
+add sibl
+add parent
+add parent
+reset
+updat seek direct
+is activ
+
+befor
+after
+after
+ha alpha
+add anim
+restrict durat
+comput durat hint
+initi invalid region
+scale current durat
+initi
+reset
+restor children start offset
+chang transform matrix
+chang bound
+creat nativ interpol
+clear
+compos
+post compos
+ha clip rect
+short string
+short string
+print short string
+initi
+initi
+creat nativ interpol
+creat nativ interpol
+chang transform matrix
+initi
+reset
+cancel
+detach
+is initi
+initi
+run
+run
+run
+restrict durat
+scale current durat
+start
+start now
+is fill enabl
+ha round corner
+chang transform matrix
+chang bound
+comput durat hint
+dispatch anim start
+dispatch anim repeat
+dispatch anim end
+ha start
+ha end
+initi invalid region
+ha alpha
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+overlap
+start
+is done
+chang transform matrix
+chang bound
+ha alpha
+creat nativ interpol
+resolv scale
+initi
+overlap
+creat nativ interpol
+creat nativ interpol
+start animation2d
+start anim
+start animation2d
+start anim
+creat anim
+on anim end
+on anim end
+on anim end
+move bound
+move first bubbl stack follow
+is stack on left side
+spring stack
+spring stack after fling
+fling stack spring edg
+move stack similar posit after rotat
+dump
+cancel stack posit anim
+anim im visibl
+move stack from touch
+on unstuck from target
+anim stack dismiss
+on child ad
+on child remov
+on child reorder
+on activ control layout
+updat resourc
+expand from stack
+expand from stack
+notifi prepar collaps
+collaps back stack
+updat resourc
+on unstuck from target
+prepar bubbl drag
+drag bubbl out
+dismiss drag out bubbl
+snap bubbl back
+on gestur finish
+updat y posit
+dump
+on activ control layout
+on child ad
+on child remov
+on child reorder
+equal
+add view
+remov view
+remov view
+reorder view
+properti anim
+properti anim on view
+cancel all anim
+cancel all anim properti
+cancel anim on view
+on anim end
+properti
+alpha
+alpha
+translat x
+translat x
+translat y
+translat y
+posit
+follow anim target along path
+on anim end
+scale x
+scale x
+scale y
+scale y
+start veloc
+damp ratio
+stiff
+posit start veloc
+start delai
+start
+on anim end
+on anim start
+on anim end
+start
+cancel
+end
+paus
+resum
+is run
+is start
+add delai anim
+remov delai anim
+run
+clone
+creat nativ interpol
+on frame
+move intern
+creat properti anim
+creat motion anim
+cubic curv creator
+copi
+evalu
+evalu
+evalu
+evalu
+evalu
+on init notifi
+ha init valu
+on js engin destroi
+animat transform oper
+animat transform oper
+animat transform oper
+move
+add transform oper
+clear
+oper
+comput blend matrix4
+plai transform anim
+move
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+remov start listen
+remov start listen
+remov stop listen
+remov stop listen
+remov repeat listen
+remov repeat listen
+remov paus listen
+remov paus listen
+remov resum listen
+remov resum listen
+remov idl listen
+remov idl listen
+remov prepar listen
+remov prepar listen
+clear start listen
+clear stop listen
+clear repeat listen
+clear paus listen
+clear resum listen
+clear idl listen
+clear prepar listen
+clear all listen
+notifi start listen
+notifi stop listen
+notifi repeat listen
+notifi paus listen
+notifi resum listen
+notifi idl listen
+notifi prepar listen
+mass
+stiff
+damp
+is valid
+posit
+veloc
+build
+posit
+veloc
+posit
+veloc
+posit
+veloc
+is valid
+spring curv
+spring curv
+move intern
+add properti anim
+blend
+anim
+valu
+veloc
+request frame
+reset request frame cnt
+trigger on frame
+trigger frame
+trigger frame
+regist vsync callback
+repaint
+paint child
+restor
+measur
+creat platform window
+creat window
+on post flush
+init control
+regist transit listen
+control stiff
+control damp
+stiff transfer
+damp transfer
+stiff coeffici
+damp coeffici
+interv
+min interv
+max interv
+frame delai
+on control node chang
+on node add
+on node delet
+flush anim
+end posit
+cancel
+schedul
+schedul
+schedul
+on frame
+start
+stop
+is activ
+anim
+open implicit anim
+close implicit anim
+add kei frame
+add kei frame
+build
+add updat listen
+add updat listen
+notifi updat listen
+remov updat listen
+clear
+pars anim style
+updat prop anim
+extent pair
+extent pair
+extent pair
+lead
+trail
+scroll motion
+scroll motion
+is complet
+move
+is valid
+spring motion
+spring motion
+move
+is complet
+is complet
+reset
+move
+is complet
+transfer
+transfer
+transfer
+is support run asynchron
+run async
+end valu
+cancel
+transfer param
+on anim
+on updat
+on end
+reset node
+is run
+is anim end
+cubic curv
+cubic curv
+move intern
+regist transit listen
+ha share transit
+on timestamp chang
+on normal timestamp chang
+on init notifi
+is support run asynchron
+run async
+anim group
+anim group
+add anim
+remov anim
+plai
+stop
+move
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+is complet
+move
+on timestamp chang
+nativ curv
+nativ motion path option
+friction motion
+friction motion
+reset
+is complet
+move
+reset control
+flush anim
+move
+anim
+on pre flush
+on post anim flush
+on post flush
+end valu
+transfer param
+reset node
+on anim
+updat durat scale
+add pictur
+clear pictur
+auto scale
+on timestamp chang
+anim
+anim
+anim
+attach schedul
+ha schedul
+add interpol
+remov interpol
+clear interpol
+add proxi control
+remov proxi control
+clear proxi control
+is stop
+is run
+is pend
+appli option
+updat plai time
+trigger frame
+plai motion
+plai
+revers
+forward
+backward
+paus
+resum
+stop
+finish
+cancel
+notifi control index chang
+notifi node add
+notifi node delet
+flush anim
+tick anim
+on control node chang
+on node add
+on node delet
+curv
+curv
+notifi next
+add page transit listen
+add page transit listen
+remov page transit listen
+remov page transit listen
+clear page transit listen
+notifi page transit listen
+add node
+dump node
+flush anim
+add keyfram
+add keyfram
+replac keyfram
+run async
+add animat
+add listen
+share transit effect
+share transit effect
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow
+evalu
+evalu
+init anim
+overrid durat scale
+add updat listen
+remov all updat listen
+remov updat listen
+start without puls
+start
+cancel
+end
+resum
+paus
+is run
+is start
+revers
+can revers
+commit anim frame
+anim base on time
+anim base on plai time
+skip end valu
+is initi
+puls anim frame
+anim valu
+clone
+do frame
+add anim frame callback
+add on shot commit callback
+remov callback
+run
+auto cancel base on
+post frame callback
+post commit callback
+clone
+invert
+convert back
+convert
+on anim end
+add state
+clone
+jump current state
+append chang configur
+creat constant state
+new instanc
+start
+anim base on time
+anim valu
+init anim
+evalu
+evalu
+start
+should auto cancel
+init anim
+anim valu
+is initi
+clone
+evalu
+ha valu
+valu set on start
+clone
+clone
+clone
+enabl transit type
+disabl transit type
+is transit type enabl
+on anim end
+on layout chang
+on anim start
+on anim cancel
+on anim end
+start chang anim
+end chang anim
+is chang layout
+is run
+cancel
+cancel
+on anim end
+on anim end
+layout chang
+add child
+show child
+show child
+remov child
+hide child
+hide child
+add transit listen
+remov transit listen
+on view attach window
+on view detach from window
+on pre draw
+on anim cancel
+on anim end
+on anim repeat
+on anim start
+on anim paus
+on anim resum
+clone
+clone
+init
+calcul valu
+calcul valu
+clone
+calcul valu
+clone
+convert
+convert
+evalu
+evalu
+clone
+creat x float keyfram
+creat y float keyfram
+creat x int keyfram
+creat y int keyfram
+clone
+start
+cancel
+end
+paus
+resum
+is paus
+is start
+add listen
+remov listen
+add paus listen
+remov paus listen
+remov all listen
+append chang configur
+creat constant state
+clone
+can revers
+revers
+puls anim frame
+start without puls
+skip end valu
+is initi
+anim base on plai time
+new instanc
+evalu
+clone
+on anim end
+plai togeth
+plai togeth
+plai sequenti
+plai sequenti
+plai
+cancel
+end
+is run
+is start
+paus
+resum
+start
+start without puls
+skip end valu
+anim base on plai time
+is initi
+do anim frame
+commit anim frame
+puls anim frame
+clone
+on anim end
+can revers
+revers
+compar
+should plai togeth
+clone
+add child
+add sibl
+add parent
+add parent
+reset
+updat seek direct
+is activ
+
+befor
+after
+after
+ha alpha
+add anim
+restrict durat
+comput durat hint
+initi invalid region
+scale current durat
+initi
+reset
+restor children start offset
+chang transform matrix
+chang bound
+creat nativ interpol
+clear
+compos
+post compos
+ha clip rect
+short string
+short string
+print short string
+initi
+initi
+creat nativ interpol
+creat nativ interpol
+chang transform matrix
+initi
+reset
+cancel
+detach
+is initi
+initi
+run
+run
+run
+restrict durat
+scale current durat
+start
+start now
+is fill enabl
+ha round corner
+chang transform matrix
+chang bound
+comput durat hint
+dispatch anim start
+dispatch anim repeat
+dispatch anim end
+ha start
+ha end
+initi invalid region
+ha alpha
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+overlap
+start
+is done
+chang transform matrix
+chang bound
+ha alpha
+creat nativ interpol
+resolv scale
+initi
+overlap
+creat nativ interpol
+creat nativ interpol
+start animation2d
+start anim
+start animation2d
+start anim
+creat anim
+on anim end
+on anim end
+on anim end
+move bound
+move first bubbl stack follow
+is stack on left side
+spring stack
+spring stack after fling
+fling stack spring edg
+move stack similar posit after rotat
+dump
+cancel stack posit anim
+anim im visibl
+move stack from touch
+on unstuck from target
+anim stack dismiss
+on child ad
+on child remov
+on child reorder
+on activ control layout
+updat resourc
+expand from stack
+expand from stack
+notifi prepar collaps
+collaps back stack
+updat resourc
+on unstuck from target
+prepar bubbl drag
+drag bubbl out
+dismiss drag out bubbl
+snap bubbl back
+on gestur finish
+updat y posit
+dump
+on activ control layout
+on child ad
+on child remov
+on child reorder
+equal
+add view
+remov view
+remov view
+reorder view
+properti anim
+properti anim on view
+cancel all anim
+cancel all anim properti
+cancel anim on view
+on anim end
+properti
+alpha
+alpha
+translat x
+translat x
+translat y
+translat y
+posit
+follow anim target along path
+on anim end
+scale x
+scale x
+scale y
+scale y
+start veloc
+damp ratio
+stiff
+posit start veloc
+start delai
+start
+on anim end
+on anim start
+on anim end
+start
+cancel
+end
+paus
+resum
+is run
+is start
+add delai anim
+remov delai anim
+run
+clone
+creat nativ interpol
+on frame
+move intern
+creat properti anim
+creat motion anim
+cubic curv creator
+copi
+evalu
+evalu
+evalu
+evalu
+evalu
+on init notifi
+ha init valu
+on js engin destroi
+animat transform oper
+animat transform oper
+animat transform oper
+move
+add transform oper
+clear
+oper
+comput blend matrix4
+plai transform anim
+move
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+remov start listen
+remov start listen
+remov stop listen
+remov stop listen
+remov repeat listen
+remov repeat listen
+remov paus listen
+remov paus listen
+remov resum listen
+remov resum listen
+remov idl listen
+remov idl listen
+remov prepar listen
+remov prepar listen
+clear start listen
+clear stop listen
+clear repeat listen
+clear paus listen
+clear resum listen
+clear idl listen
+clear prepar listen
+clear all listen
+notifi start listen
+notifi stop listen
+notifi repeat listen
+notifi paus listen
+notifi resum listen
+notifi idl listen
+notifi prepar listen
+mass
+stiff
+damp
+is valid
+posit
+veloc
+build
+posit
+veloc
+posit
+veloc
+posit
+veloc
+is valid
+spring curv
+spring curv
+move intern
+add properti anim
+blend
+anim
+valu
+veloc
+request frame
+reset request frame cnt
+trigger on frame
+trigger frame
+trigger frame
+regist vsync callback
+repaint
+paint child
+restor
+measur
+creat platform window
+creat window
+on post flush
+init control
+regist transit listen
+control stiff
+control damp
+stiff transfer
+damp transfer
+stiff coeffici
+damp coeffici
+interv
+min interv
+max interv
+frame delai
+on control node chang
+on node add
+on node delet
+flush anim
+end posit
+cancel
+schedul
+schedul
+schedul
+on frame
+start
+stop
+is activ
+anim
+open implicit anim
+close implicit anim
+add kei frame
+add kei frame
+build
+add updat listen
+add updat listen
+notifi updat listen
+remov updat listen
+clear
+pars anim style
+updat prop anim
+extent pair
+extent pair
+extent pair
+lead
+trail
+scroll motion
+scroll motion
+is complet
+move
+is valid
+spring motion
+spring motion
+move
+is complet
+is complet
+reset
+move
+is complet
+transfer
+transfer
+transfer
+is support run asynchron
+run async
+end valu
+cancel
+transfer param
+on anim
+on updat
+on end
+reset node
+is run
+is anim end
+cubic curv
+cubic curv
+move intern
+regist transit listen
+ha share transit
+on timestamp chang
+on normal timestamp chang
+on init notifi
+is support run asynchron
+run async
+anim group
+anim group
+add anim
+remov anim
+plai
+stop
+move
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+is complet
+move
+on timestamp chang
+nativ curv
+nativ motion path option
+friction motion
+friction motion
+reset
+is complet
+move
+reset control
+flush anim
+move
+anim
+on pre flush
+on post anim flush
+on post flush
+end valu
+transfer param
+reset node
+on anim
+updat durat scale
+add pictur
+clear pictur
+auto scale
+on timestamp chang
+anim
+anim
+anim
+attach schedul
+ha schedul
+add interpol
+remov interpol
+clear interpol
+add proxi control
+remov proxi control
+clear proxi control
+is stop
+is run
+is pend
+appli option
+updat plai time
+trigger frame
+plai motion
+plai
+revers
+forward
+backward
+paus
+resum
+stop
+finish
+cancel
+notifi control index chang
+notifi node add
+notifi node delet
+flush anim
+tick anim
+on control node chang
+on node add
+on node delet
+curv
+curv
+notifi next
+add page transit listen
+add page transit listen
+remov page transit listen
+remov page transit listen
+clear page transit listen
+notifi page transit listen
+add node
+dump node
+flush anim
+add keyfram
+add keyfram
+replac keyfram
+run async
+add animat
+add listen
+share transit effect
+share transit effect
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow
+evalu
+evalu
+init anim
+overrid durat scale
+add updat listen
+remov all updat listen
+remov updat listen
+start without puls
+start
+cancel
+end
+resum
+paus
+is run
+is start
+revers
+can revers
+commit anim frame
+anim base on time
+anim base on plai time
+skip end valu
+is initi
+puls anim frame
+anim valu
+clone
+do frame
+add anim frame callback
+add on shot commit callback
+remov callback
+run
+auto cancel base on
+post frame callback
+post commit callback
+clone
+invert
+convert back
+convert
+on anim end
+add state
+clone
+jump current state
+append chang configur
+creat constant state
+new instanc
+start
+anim base on time
+anim valu
+init anim
+evalu
+evalu
+start
+should auto cancel
+init anim
+anim valu
+is initi
+clone
+evalu
+ha valu
+valu set on start
+clone
+clone
+clone
+enabl transit type
+disabl transit type
+is transit type enabl
+on anim end
+on layout chang
+on anim start
+on anim cancel
+on anim end
+start chang anim
+end chang anim
+is chang layout
+is run
+cancel
+cancel
+on anim end
+on anim end
+layout chang
+add child
+show child
+show child
+remov child
+hide child
+hide child
+add transit listen
+remov transit listen
+on view attach window
+on view detach from window
+on pre draw
+on anim cancel
+on anim end
+on anim repeat
+on anim start
+on anim paus
+on anim resum
+clone
+clone
+init
+calcul valu
+calcul valu
+clone
+calcul valu
+clone
+convert
+convert
+evalu
+evalu
+clone
+creat x float keyfram
+creat y float keyfram
+creat x int keyfram
+creat y int keyfram
+clone
+start
+cancel
+end
+paus
+resum
+is paus
+is start
+add listen
+remov listen
+add paus listen
+remov paus listen
+remov all listen
+append chang configur
+creat constant state
+clone
+can revers
+revers
+puls anim frame
+start without puls
+skip end valu
+is initi
+anim base on plai time
+new instanc
+evalu
+clone
+on anim end
+plai togeth
+plai togeth
+plai sequenti
+plai sequenti
+plai
+cancel
+end
+is run
+is start
+paus
+resum
+start
+start without puls
+skip end valu
+anim base on plai time
+is initi
+do anim frame
+commit anim frame
+puls anim frame
+clone
+on anim end
+can revers
+revers
+compar
+should plai togeth
+clone
+add child
+add sibl
+add parent
+add parent
+reset
+updat seek direct
+is activ
+
+befor
+after
+after
+ha alpha
+add anim
+restrict durat
+comput durat hint
+initi invalid region
+scale current durat
+initi
+reset
+restor children start offset
+chang transform matrix
+chang bound
+creat nativ interpol
+clear
+compos
+post compos
+ha clip rect
+short string
+short string
+print short string
+initi
+initi
+creat nativ interpol
+creat nativ interpol
+chang transform matrix
+initi
+reset
+cancel
+detach
+is initi
+initi
+run
+run
+run
+restrict durat
+scale current durat
+start
+start now
+is fill enabl
+ha round corner
+chang transform matrix
+chang bound
+comput durat hint
+dispatch anim start
+dispatch anim repeat
+dispatch anim end
+ha start
+ha end
+initi invalid region
+ha alpha
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+overlap
+start
+is done
+chang transform matrix
+chang bound
+ha alpha
+creat nativ interpol
+resolv scale
+initi
+overlap
+creat nativ interpol
+creat nativ interpol
+start animation2d
+start anim
+start animation2d
+start anim
+creat anim
+on anim end
+on anim end
+on anim end
+move bound
+move first bubbl stack follow
+is stack on left side
+spring stack
+spring stack after fling
+fling stack spring edg
+move stack similar posit after rotat
+dump
+cancel stack posit anim
+anim im visibl
+move stack from touch
+on unstuck from target
+anim stack dismiss
+on child ad
+on child remov
+on child reorder
+on activ control layout
+updat resourc
+expand from stack
+expand from stack
+notifi prepar collaps
+collaps back stack
+updat resourc
+on unstuck from target
+prepar bubbl drag
+drag bubbl out
+dismiss drag out bubbl
+snap bubbl back
+on gestur finish
+updat y posit
+dump
+on activ control layout
+on child ad
+on child remov
+on child reorder
+equal
+add view
+remov view
+remov view
+reorder view
+properti anim
+properti anim on view
+cancel all anim
+cancel all anim properti
+cancel anim on view
+on anim end
+properti
+alpha
+alpha
+translat x
+translat x
+translat y
+translat y
+posit
+follow anim target along path
+on anim end
+scale x
+scale x
+scale y
+scale y
+start veloc
+damp ratio
+stiff
+posit start veloc
+start delai
+start
+on anim end
+on anim start
+on anim end
+start
+cancel
+end
+paus
+resum
+is run
+is start
+add delai anim
+remov delai anim
+run
+clone
+creat nativ interpol
+on frame
+move intern
+creat properti anim
+creat motion anim
+cubic curv creator
+copi
+evalu
+evalu
+evalu
+evalu
+evalu
+on init notifi
+ha init valu
+on js engin destroi
+animat transform oper
+animat transform oper
+animat transform oper
+move
+add transform oper
+clear
+oper
+comput blend matrix4
+plai transform anim
+move
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+remov start listen
+remov start listen
+remov stop listen
+remov stop listen
+remov repeat listen
+remov repeat listen
+remov paus listen
+remov paus listen
+remov resum listen
+remov resum listen
+remov idl listen
+remov idl listen
+remov prepar listen
+remov prepar listen
+clear start listen
+clear stop listen
+clear repeat listen
+clear paus listen
+clear resum listen
+clear idl listen
+clear prepar listen
+clear all listen
+notifi start listen
+notifi stop listen
+notifi repeat listen
+notifi paus listen
+notifi resum listen
+notifi idl listen
+notifi prepar listen
+mass
+stiff
+damp
+is valid
+posit
+veloc
+build
+posit
+veloc
+posit
+veloc
+posit
+veloc
+is valid
+spring curv
+spring curv
+move intern
+add properti anim
+blend
+anim
+valu
+veloc
+request frame
+reset request frame cnt
+trigger on frame
+trigger frame
+trigger frame
+regist vsync callback
+repaint
+paint child
+restor
+measur
+creat platform window
+creat window
+on post flush
+init control
+regist transit listen
+control stiff
+control damp
+stiff transfer
+damp transfer
+stiff coeffici
+damp coeffici
+interv
+min interv
+max interv
+frame delai
+on control node chang
+on node add
+on node delet
+flush anim
+end posit
+cancel
+schedul
+schedul
+schedul
+on frame
+start
+stop
+is activ
+anim
+open implicit anim
+close implicit anim
+add kei frame
+add kei frame
+build
+add updat listen
+add updat listen
+notifi updat listen
+remov updat listen
+clear
+pars anim style
+updat prop anim
+extent pair
+extent pair
+extent pair
+lead
+trail
+scroll motion
+scroll motion
+is complet
+move
+is valid
+spring motion
+spring motion
+move
+is complet
+is complet
+reset
+move
+is complet
+transfer
+transfer
+transfer
+is support run asynchron
+run async
+end valu
+cancel
+transfer param
+on anim
+on updat
+on end
+reset node
+is run
+is anim end
+cubic curv
+cubic curv
+move intern
+regist transit listen
+ha share transit
+on timestamp chang
+on normal timestamp chang
+on init notifi
+is support run asynchron
+run async
+anim group
+anim group
+add anim
+remov anim
+plai
+stop
+move
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+is complet
+move
+on timestamp chang
+nativ curv
+nativ motion path option
+friction motion
+friction motion
+reset
+is complet
+move
+reset control
+flush anim
+move
+anim
+on pre flush
+on post anim flush
+on post flush
+end valu
+transfer param
+reset node
+on anim
+updat durat scale
+add pictur
+clear pictur
+auto scale
+on timestamp chang
+anim
+anim
+anim
+attach schedul
+ha schedul
+add interpol
+remov interpol
+clear interpol
+add proxi control
+remov proxi control
+clear proxi control
+is stop
+is run
+is pend
+appli option
+updat plai time
+trigger frame
+plai motion
+plai
+revers
+forward
+backward
+paus
+resum
+stop
+finish
+cancel
+notifi control index chang
+notifi node add
+notifi node delet
+flush anim
+tick anim
+on control node chang
+on node add
+on node delet
+curv
+curv
+notifi next
+add page transit listen
+add page transit listen
+remov page transit listen
+remov page transit listen
+clear page transit listen
+notifi page transit listen
+add node
+dump node
+flush anim
+add keyfram
+add keyfram
+replac keyfram
+run async
+add animat
+add listen
+share transit effect
+share transit effect
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow
+evalu
+evalu
+init anim
+overrid durat scale
+add updat listen
+remov all updat listen
+remov updat listen
+start without puls
+start
+cancel
+end
+resum
+paus
+is run
+is start
+revers
+can revers
+commit anim frame
+anim base on time
+anim base on plai time
+skip end valu
+is initi
+puls anim frame
+anim valu
+clone
+do frame
+add anim frame callback
+add on shot commit callback
+remov callback
+run
+auto cancel base on
+post frame callback
+post commit callback
+clone
+invert
+convert back
+convert
+on anim end
+add state
+clone
+jump current state
+append chang configur
+creat constant state
+new instanc
+start
+anim base on time
+anim valu
+init anim
+evalu
+evalu
+start
+should auto cancel
+init anim
+anim valu
+is initi
+clone
+evalu
+ha valu
+valu set on start
+clone
+clone
+clone
+enabl transit type
+disabl transit type
+is transit type enabl
+on anim end
+on layout chang
+on anim start
+on anim cancel
+on anim end
+start chang anim
+end chang anim
+is chang layout
+is run
+cancel
+cancel
+on anim end
+on anim end
+layout chang
+add child
+show child
+show child
+remov child
+hide child
+hide child
+add transit listen
+remov transit listen
+on view attach window
+on view detach from window
+on pre draw
+on anim cancel
+on anim end
+on anim repeat
+on anim start
+on anim paus
+on anim resum
+clone
+clone
+init
+calcul valu
+calcul valu
+clone
+calcul valu
+clone
+convert
+convert
+evalu
+evalu
+clone
+creat x float keyfram
+creat y float keyfram
+creat x int keyfram
+creat y int keyfram
+clone
+start
+cancel
+end
+paus
+resum
+is paus
+is start
+add listen
+remov listen
+add paus listen
+remov paus listen
+remov all listen
+append chang configur
+creat constant state
+clone
+can revers
+revers
+puls anim frame
+start without puls
+skip end valu
+is initi
+anim base on plai time
+new instanc
+evalu
+clone
+on anim end
+plai togeth
+plai togeth
+plai sequenti
+plai sequenti
+plai
+cancel
+end
+is run
+is start
+paus
+resum
+start
+start without puls
+skip end valu
+anim base on plai time
+is initi
+do anim frame
+commit anim frame
+puls anim frame
+clone
+on anim end
+can revers
+revers
+compar
+should plai togeth
+clone
+add child
+add sibl
+add parent
+add parent
+reset
+updat seek direct
+is activ
+
+befor
+after
+after
+ha alpha
+add anim
+restrict durat
+comput durat hint
+initi invalid region
+scale current durat
+initi
+reset
+restor children start offset
+chang transform matrix
+chang bound
+creat nativ interpol
+clear
+compos
+post compos
+ha clip rect
+short string
+short string
+print short string
+initi
+initi
+creat nativ interpol
+creat nativ interpol
+chang transform matrix
+initi
+reset
+cancel
+detach
+is initi
+initi
+run
+run
+run
+restrict durat
+scale current durat
+start
+start now
+is fill enabl
+ha round corner
+chang transform matrix
+chang bound
+comput durat hint
+dispatch anim start
+dispatch anim repeat
+dispatch anim end
+ha start
+ha end
+initi invalid region
+ha alpha
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+creat nativ interpol
+overlap
+start
+is done
+chang transform matrix
+chang bound
+ha alpha
+creat nativ interpol
+resolv scale
+initi
+overlap
+creat nativ interpol
+creat nativ interpol
+start animation2d
+start anim
+start animation2d
+start anim
+creat anim
+on anim end
+on anim end
+on anim end
+move bound
+move first bubbl stack follow
+is stack on left side
+spring stack
+spring stack after fling
+fling stack spring edg
+move stack similar posit after rotat
+dump
+cancel stack posit anim
+anim im visibl
+move stack from touch
+on unstuck from target
+anim stack dismiss
+on child ad
+on child remov
+on child reorder
+on activ control layout
+updat resourc
+expand from stack
+expand from stack
+notifi prepar collaps
+collaps back stack
+updat resourc
+on unstuck from target
+prepar bubbl drag
+drag bubbl out
+dismiss drag out bubbl
+snap bubbl back
+on gestur finish
+updat y posit
+dump
+on activ control layout
+on child ad
+on child remov
+on child reorder
+equal
+add view
+remov view
+remov view
+reorder view
+properti anim
+properti anim on view
+cancel all anim
+cancel all anim properti
+cancel anim on view
+on anim end
+properti
+alpha
+alpha
+translat x
+translat x
+translat y
+translat y
+posit
+follow anim target along path
+on anim end
+scale x
+scale x
+scale y
+scale y
+start veloc
+damp ratio
+stiff
+posit start veloc
+start delai
+start
+on anim end
+on anim start
+on anim end
+start
+cancel
+end
+paus
+resum
+is run
+is start
+add delai anim
+remov delai anim
+run
+clone
+creat nativ interpol
+on frame
+move intern
+creat properti anim
+creat motion anim
+cubic curv creator
+copi
+evalu
+evalu
+evalu
+evalu
+evalu
+on init notifi
+ha init valu
+on js engin destroi
+animat transform oper
+animat transform oper
+animat transform oper
+move
+add transform oper
+clear
+oper
+comput blend matrix4
+plai transform anim
+move
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+add start listen
+add stop listen
+add repeat listen
+add paus listen
+add resum listen
+add idl listen
+add prepar listen
+remov start listen
+remov start listen
+remov stop listen
+remov stop listen
+remov repeat listen
+remov repeat listen
+remov paus listen
+remov paus listen
+remov resum listen
+remov resum listen
+remov idl listen
+remov idl listen
+remov prepar listen
+remov prepar listen
+clear start listen
+clear stop listen
+clear repeat listen
+clear paus listen
+clear resum listen
+clear idl listen
+clear prepar listen
+clear all listen
+notifi start listen
+notifi stop listen
+notifi repeat listen
+notifi paus listen
+notifi resum listen
+notifi idl listen
+notifi prepar listen
+mass
+stiff
+damp
+is valid
+posit
+veloc
+build
+posit
+veloc
+posit
+veloc
+posit
+veloc
+is valid
+spring curv
+spring curv
+move intern
+add properti anim
+blend
+anim
+valu
+veloc
+request frame
+reset request frame cnt
+trigger on frame
+trigger frame
+trigger frame
+regist vsync callback
+repaint
+paint child
+restor
+measur
+creat platform window
+creat window
+on post flush
+init control
+regist transit listen
+control stiff
+control damp
+stiff transfer
+damp transfer
+stiff coeffici
+damp coeffici
+interv
+min interv
+max interv
+frame delai
+on control node chang
+on node add
+on node delet
+flush anim
+end posit
+cancel
+schedul
+schedul
+schedul
+on frame
+start
+stop
+is activ
+anim
+open implicit anim
+close implicit anim
+add kei frame
+add kei frame
+build
+add updat listen
+add updat listen
+notifi updat listen
+remov updat listen
+clear
+pars anim style
+updat prop anim
+extent pair
+extent pair
+extent pair
+lead
+trail
+scroll motion
+scroll motion
+is complet
+move
+is valid
+spring motion
+spring motion
+move
+is complet
+is complet
+reset
+move
+is complet
+transfer
+transfer
+transfer
+is support run asynchron
+run async
+end valu
+cancel
+transfer param
+on anim
+on updat
+on end
+reset node
+is run
+is anim end
+cubic curv
+cubic curv
+move intern
+regist transit listen
+ha share transit
+on timestamp chang
+on normal timestamp chang
+on init notifi
+is support run asynchron
+run async
+anim group
+anim group
+add anim
+remov anim
+plai
+stop
+move
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+move intern
+is complet
+move
+on timestamp chang
+nativ curv
+nativ motion path option
+friction motion
+friction motion
+reset
+is complet
+move
+reset control
+flush anim
+move
+anim
+on pre flush
+on post anim flush
+on post flush
+end valu
+transfer param
+reset node
+on anim
+updat durat scale
+add pictur
+clear pictur
+auto scale
+on timestamp chang
+anim
+anim
+anim
+attach schedul
+ha schedul
+add interpol
+remov interpol
+clear interpol
+add proxi control
+remov proxi control
+clear proxi control
+is stop
+is run
+is pend
+appli option
+updat plai time
+trigger frame
+plai motion
+plai
+revers
+forward
+backward
+paus
+resum
+stop
+finish
+cancel
+notifi control index chang
+notifi node add
+notifi node delet
+flush anim
+tick anim
+on control node chang
+on node add
+on node delet
+curv
+curv
+notifi next
+add page transit listen
+add page transit listen
+remov page transit listen
+remov page transit listen
+clear page transit listen
+notifi page transit listen
+add node
+dump node
+flush anim
+add keyfram
+add keyfram
+replac keyfram
+run async
+add animat
+add listen
+share transit effect
+share transit effect
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow
+creat anim
+appli anim
+allow

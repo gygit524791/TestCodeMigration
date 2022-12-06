@@ -13,15 +13,15 @@ public class TaskParameter {
 
     private Integer taskId;
     /**
-     * 用于mapping的source
+     * 用于mapping的source,支持多个目录，用逗号分割
      */
     private String sourceFilepath;
     /**
-     * 用于mapping的target
+     * 用于mapping的target, 支持多个目录，用逗号分割
      */
     private String targetFilepath;
     /**
-     * 用于解析test文件，所有sourceCode
+     * 用于解析test文件，所有sourceCode,支持多个目录，用逗号分割
      */
     private String targetSourceCodeFilepath;
 

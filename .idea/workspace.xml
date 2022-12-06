@@ -5,17 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14Lexer.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14Lexer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14Lexer.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14Parser.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14Parser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14Parser.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14ParserBaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14ParserBaseVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14ParserListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp/CPP14ParserVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/harmony/animator.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/harmony/animator_simple.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/CommonTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec/corpus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/corpus.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec/word2vec.model" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/word2vec.model" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/MappingRuleWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/MappingRuleWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/AntlrCPPTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/AntlrCPPTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +54,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/src/main/java/com/test/migration/antlr/antlr_cpp",
+    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/target/classes/mappingRule",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -60,11 +64,15 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/target/classes/mappingRule" />
       <recent name="$PROJECT_DIR$/demo/harmony" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/antlr_cpp" />
       <recent name="$PROJECT_DIR$/demo/android/test" />
       <recent name="$PROJECT_DIR$/demo/android" />
-      <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate" />
-      <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/service" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.test.migration.service.invocation" />
@@ -74,7 +82,7 @@
       <recent name="com.test.migration.po" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ApiMappingMain">
+  <component name="RunManager" selected="TestNG.CommonTest.testFindTestFile">
     <configuration name="ApiMappingMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.test.migration.ApiMappingMain" />
       <module name="TestMigrationV2" />
@@ -84,13 +92,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainTest" />
-      <module name="TestMigrationV2" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,39 +109,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TaskParameterReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utils.TaskParameterReader" />
+    <configuration name="AntlrCPPTest.testRead" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestMigrationV2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AntlrCPPTest" />
+      <option name="METHOD_NAME" value="testRead" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TranslateMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.test.migration.TranslateMain" />
+    <configuration name="CommonTest.testFindTestFile (1)" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestMigrationV2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.test.migration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CommonTest" />
+      <option name="METHOD_NAME" value="testFindTestFile" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommonTest.testFindTestFile" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="TestMigrationV2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="CommonTest" />
+      <option name="METHOD_NAME" value="testFindTestFile" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CommonTest.testFindTestFile" />
+        <item itemvalue="TestNG.CommonTest.testFindTestFile (1)" />
         <item itemvalue="Application.ApiMappingMain" />
         <item itemvalue="Application.MappingRuleWriter" />
-        <item itemvalue="Application.MainTest" />
-        <item itemvalue="Application.TranslateMain" />
-        <item itemvalue="Application.TaskParameterReader" />
+        <item itemvalue="TestNG.AntlrCPPTest.testRead" />
       </list>
     </recent_temporary>
   </component>
@@ -157,7 +168,8 @@
       <workItem from="1669949819531" duration="8630000" />
       <workItem from="1670046814636" duration="10865000" />
       <workItem from="1670135786727" duration="184000" />
-      <workItem from="1670135999797" duration="1029000" />
+      <workItem from="1670135999797" duration="19709000" />
+      <workItem from="1670292151612" duration="8279000" />
     </task>
     <servers />
   </component>
@@ -178,15 +190,20 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java</url>
           <line>48</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java</url>
-          <line>55</line>
+          <line>59</line>
           <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/antlr/antlr4-runtime/4.7/antlr4-runtime-4.7-sources.jar!/org/antlr/v4/runtime/atn/ATNSerializer.java</url>
+          <line>423</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiMappingDao.java</url>

@@ -1,5 +1,6 @@
 package com.test.migration.service;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.test.migration.antlr.java.Java8Lexer;
@@ -29,6 +30,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class TranslateTestService {
@@ -52,23 +55,40 @@ public class TranslateTestService {
         List<ApiBasic> apiBasics = apiBasicService.selectByIds(targetApiIds);
 
         try {
-            List<String> allTargetSourceCodeFilepathList = GetFoldFileNames.readfile(taskParameter.getTargetSourceCodeFilepath());
+            String targetSourceCodeFilepath = taskParameter.getTargetSourceCodeFilepath();
+            List<String> targetSourceCodeFilepathList = Splitter.on(",").splitToList(targetSourceCodeFilepath);
+            List<String> allTargetSourceCodeFilepathList = targetSourceCodeFilepathList.stream()
+                    .flatMap(filepath -> {
+                        try {
+                            return GetFoldFileNames.readfileWithType(filepath, "java").stream();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .distinct()
+                    .toList();
             Map<String, List<ApiBasic>> fileApiBasicMap = apiBasics.stream().collect(Collectors.groupingBy(ApiBasic::getFilepath));
 
             List<TranslateTest> translateTests = Lists.newArrayList();
-            // 所有的api，以所在文件为单位（key）进行处理，避免文件多次解析
+            // filepath：所有目标api，以所在文件为单位（key）进行处理，避免文件多次解析
+            // allTargetSourceCodeFilepathList：该模块对应的测试方法所在文件路径
             fileApiBasicMap.forEach((filepath, fileApis) -> {
-                String testFilepath = getTestFilepath(allTargetSourceCodeFilepathList, filepath);
-                Map<String, List<Integer>> testMethodInvokeApiMap = getTestMethodInvocationMap(testFilepath, fileApis);
-                translateTests.add(TranslateTest.builder()
-                        .taskId(taskParameter.getTaskId())
-                        .testFilepath(testFilepath)
-                        .testMethodApiInvocation(JsonUtil.objectToJson(testMethodInvokeApiMap))
-                        .build());
+                List<String> testFilepathList = getTestFilepath(allTargetSourceCodeFilepathList, filepath);
+                for (String testFilepath : testFilepathList) {
+                    Map<String, List<Integer>> testMethodInvokeApiMap = getTestMethodInvocationMap(testFilepath, fileApis);
+                    // 存在api映射关系，但是找不到目标api合适的测试类，直接跳过
+                    if (!testFilepathList.isEmpty() && !testMethodInvokeApiMap.keySet().isEmpty()) {
+                        translateTests.add(TranslateTest.builder()
+                                .taskId(taskParameter.getTaskId())
+                                .testFilepath(testFilepath)
+                                .testMethodApiInvocation(JsonUtil.objectToJson(testMethodInvokeApiMap))
+                                .build());
+                    }
+                }
             });
 
             batchSave(translateTests);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -144,23 +164,36 @@ public class TranslateTestService {
     /**
      * 通过常规Test命名规则来获取test类：
      * AClass对应的测试类为：TestAClass 或者 AClassTest
-     *
+     * <p>
      * 但是这个规则不一定找出所有的test，比如AClass对应的测试类命名是其它风格
+     * <p>
+     * 补充规则：AnimatorSet对应的测试类AnimatorSetActivityTest目前是匹配不出来的，为了匹配到这种命名，使用  ：
+     * *（通配符）+类名+*（通配符）+Test（前后缀）的方式来匹配测试类文件
      *
      * @param allTargetSourceCodeFilepathList
      * @param filepath
      * @return
      */
     @NotNull
-    private String getTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {
+    private List<String> getTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {
         String className = getClassNameByFilepath(filepath);
-        String prefix = "Test" + className;
-        String suffix = className + "Test";
+        Pattern pattern = Pattern.compile("(.*)(" + className + ")(.*)");
 
-        // 遍历apiBasics， apiBasic中的文件，加上Test前后缀，然后从test文件中过滤出对应的testFile
         return allTargetSourceCodeFilepathList.stream()
-                .filter(sourceFilepath -> sourceFilepath.contains(prefix) || sourceFilepath.contains(suffix))
-                .findFirst().orElse(StringUtils.EMPTY);
+                .filter(sourceFilepath -> {
+                    String testClassFileName = getClassNameByFilepath(sourceFilepath);
+
+                    // 必须带有test前后缀，否则视为非测试文件
+                    boolean isTestFile = testClassFileName.toLowerCase().startsWith("test")
+                            || testClassFileName.toLowerCase().endsWith("test");
+                    if (!isTestFile) {
+                        return false;
+                    }
+
+                    // 正则匹配
+                    Matcher matcher = pattern.matcher(testClassFileName);
+                    return matcher.find();
+                }).collect(Collectors.toList());
     }
 
     private String getClassNameByFilepath(String filepath) {
