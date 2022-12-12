@@ -3,6 +3,7 @@ package com.test.migration.service;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.dao.TranslateTestDao;
@@ -11,7 +12,8 @@ import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.entity.po.ApiMapping;
 import com.test.migration.entity.po.TranslateTest;
 import com.test.migration.service.invocation.ApiInvocationVisitor;
-import com.test.migration.service.translate.MethodVisitor;
+import com.test.migration.service.translate.ReplaceRuleService;
+import com.test.migration.service.translate.TestMethodVisitor;
 import com.test.migration.service.translate.common.MethodDeclarationTranslate;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -72,9 +74,16 @@ public class TranslateTestService {
             List<TranslateTest> translateTests = Lists.newArrayList();
             // filepath：所有目标api，以所在文件为单位（key）进行处理，避免文件多次解析
             // allTargetSourceCodeFilepathList：该模块对应的测试方法所在文件路径
+            Set<String> tmpTestFilepathSets = Sets.newHashSet();
             fileApiBasicMap.forEach((filepath, fileApis) -> {
-                List<String> testFilepathList = getTestFilepath(allTargetSourceCodeFilepathList, filepath);
+                List<String> testFilepathList = filterTestFilepath(allTargetSourceCodeFilepathList, filepath);
                 for (String testFilepath : testFilepathList) {
+                    // 避免同一个测试文件重复解析
+                    if (tmpTestFilepathSets.contains(testFilepath)) {
+                        continue;
+                    }
+                    tmpTestFilepathSets.add(testFilepath);
+
                     Map<String, List<Integer>> testMethodInvokeApiMap = getTestMethodInvocationMap(testFilepath, fileApis);
                     // 存在api映射关系，但是找不到目标api合适的测试类，直接跳过
                     if (!testFilepathList.isEmpty() && !testMethodInvokeApiMap.keySet().isEmpty()) {
@@ -125,13 +134,19 @@ public class TranslateTestService {
 
         Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
         ParseTree parseTree = parser.compilationUnit();
-        MethodVisitor methodVisitor = new MethodVisitor();
-        methodVisitor.setMethodBlockMap(parserRuleContextMap);
-        methodVisitor.visit(parseTree);
+        TestMethodVisitor testMethodVisitor = new TestMethodVisitor();
+        testMethodVisitor.setMethodBlockMap(parserRuleContextMap);
+        testMethodVisitor.visit(parseTree);
 
+        // 代码转换的前置条件：初始化replace的typeNameMap
+        // todo demo 后面做成自动化
+        testMethodVisitor.getTypeNameMap().put("mActivityRule","ActivityTestRule<AnimatorSetActivity>");
+        ReplaceRuleService.typeNameMap = testMethodVisitor.getTypeNameMap();
+
+         代码转换
         MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
         List<String> translateCodes = Lists.newArrayList();
-        methodVisitor.methodBlockMap.forEach((k, v) -> {
+        testMethodVisitor.methodBlockMap.forEach((k, v) -> {
             translateCodes.add(translate.translateMethodDeclaration(v));
         });
 
@@ -171,11 +186,11 @@ public class TranslateTestService {
      * *（通配符）+类名+*（通配符）+Test（前后缀）的方式来匹配测试类文件
      *
      * @param allTargetSourceCodeFilepathList
-     * @param filepath
+     * @param filepath 目标api所在的文件路径
      * @return
      */
     @NotNull
-    private List<String> getTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {
+    private List<String> filterTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {
         String className = getClassNameByFilepath(filepath);
         Pattern pattern = Pattern.compile("(.*)(" + className + ")(.*)");
 
@@ -184,8 +199,9 @@ public class TranslateTestService {
                     String testClassFileName = getClassNameByFilepath(sourceFilepath);
 
                     // 必须带有test前后缀，否则视为非测试文件
-                    boolean isTestFile = testClassFileName.toLowerCase().startsWith("test")
-                            || testClassFileName.toLowerCase().endsWith("test");
+                    String testFileName = testClassFileName.toLowerCase();
+                    boolean isTestFile = testFileName.startsWith("test") || testFileName.endsWith("test")
+                            || testFileName.startsWith("tests") || testFileName.endsWith("tests");
                     if (!isTestFile) {
                         return false;
                     }
@@ -225,7 +241,7 @@ public class TranslateTestService {
         return androidMethodVisitor.getInvocationList().stream()
                 .filter(x -> x.getCallee() != null && x.getCallee().size() > 0)
                 .collect(Collectors.toMap(ApiInvocationVisitor.MethodInvocation::getCaller,
-                        ApiInvocationVisitor.MethodInvocation::getCallee));
+                        ApiInvocationVisitor.MethodInvocation::getCallee, (x, y) -> x));
     }
 
     /**

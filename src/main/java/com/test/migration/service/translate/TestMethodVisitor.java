@@ -1,5 +1,6 @@
 package com.test.migration.service.translate;
 
+import com.google.common.collect.Maps;
 import com.test.migration.antlr.java.Java8BaseVisitor;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
@@ -14,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Map;
 
 @Data
-public class MethodVisitor extends Java8BaseVisitor<RuleNode> {
+public class TestMethodVisitor extends Java8BaseVisitor<RuleNode> {
 
     /**
      * key:methodName
@@ -22,29 +23,31 @@ public class MethodVisitor extends Java8BaseVisitor<RuleNode> {
      */
     public Map<String, ParserRuleContext> methodBlockMap;
 
+    /**
+     * typeName对应的类型mapping表，举个例子：
+     *
+     * typeName.methodIdentifier:
+     * mActivityRule.runOnUiThread(()->{
+     *
+     * });
+     * typeName是mActivityRule，对应的类型是ActivityTestRule<AnimatorSetActivity>，mapping规则中保存的是ActivityTestRule<AnimatorSetActivity>
+     *     因此需要一个从mActivityRule到ActivityTestRule<AnimatorSetActivity>的映射关系
+     * methodIdentifier是runOnUiThread
+     *
+     *
+     * TODO
+     *
+     */
+    public Map<String, String> typeNameMap = Maps.newHashMap();
+
     @Override
     public RuleNode visitMethodDeclaration(Java8Parser.MethodDeclarationContext ctx) {
-        //方法开始/结束行
-        int startLine = ctx.getStart().getLine();
-        int endLine = ctx.getStop().getLine();
-
         String methodName = fetchPublicMethodName(ctx);
         if (methodBlockMap.containsKey(methodName)) {
             methodBlockMap.put(methodName, ctx);
         }
         return visitChildren(ctx);
     }
-
-//    @Override
-//    public RuleNode visitBlockStatement(Java8Parser.BlockStatementContext ctx) {
-//        if (needCollectStatement && ctx.getStart().getLine() >= collectMethodStartLine
-//                && ctx.getStop().getLine() <= collectMethodEndLine) {
-//            // key对应的value为null，初始化list
-//            maps.computeIfAbsent(collectMethodName, k -> Lists.newArrayList());
-//            maps.get(collectMethodName).add(ctx);
-//        }
-//        return visitChildren(ctx);
-//    }
 
     private String fetchPublicMethodName(Java8Parser.MethodDeclarationContext ctx) {
         // 获取method的Declaration

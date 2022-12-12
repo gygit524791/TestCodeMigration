@@ -1,32 +1,35 @@
 import com.test.migration.entity.TaskParameter;
+import org.testng.annotations.Test;
+import org.yaml.snakeyaml.Yaml;
 import utils.CallPythonUtil;
 import utils.TaskParameterReader;
 
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainTest {
-    public static void main(String[] args) {
-        extracted();
-        extracted();
-//        test();
+    @Test
+    public void testReadYml(){
+        Yaml yaml = new Yaml();
+        InputStream resourceAsStream = ClassLoader.getSystemResourceAsStream("test.yml");
+        Map obj = yaml.load(resourceAsStream);
+        Map<String,Object> param = new HashMap<>();
+        //需要注意，此类加载器只能得到它的最顶层的key的值
+        Map<String,Object> params= (Map) obj.get("animation");
+        param.putAll(params);
+
+
+        System.out.println( param.get("dataType"));
+        System.out.println( param.get("testToolMethodName"));
+
+        System.out.println("params = " + params );
     }
 
-    private static void extracted() {
-        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
-        String[] pyArgs = new String[]{
-                taskParameter.getPythonBinPath(),
-                taskParameter.getPythonWordVec(),
-                String.valueOf(taskParameter.getTaskId()),
-                taskParameter.getDbFilepath()
-        };
-        List<String> call = CallPythonUtil.call(pyArgs);
-        call.forEach(System.out::println);
-    }
 
-//    static void test(){
-//        Jedis jedis = new Jedis("127.0.0.1", 6379);
-//        jedis.set("1","2");
-//        System.out.println(jedis.get("1"));
-//        System.out.println(jedis.get("2"));
-//    }
+    class MappingRule{
+        private String dataType;
+
+    }
 }

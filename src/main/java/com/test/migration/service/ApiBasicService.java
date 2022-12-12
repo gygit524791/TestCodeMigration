@@ -61,7 +61,8 @@ public class ApiBasicService {
                 String.valueOf(taskParameter.getTaskId()),
                 taskParameter.getDbFilepath(),
                 taskParameter.getWordVecModelFilepath(),
-                taskParameter.getApiVectorDictFilepath()
+                taskParameter.getApiVectorDictFilepath(),
+                taskParameter.getClassVectorDictFilepath()
         };
         CallPythonUtil.call(tokenArgs);
     }
@@ -196,6 +197,7 @@ public class ApiBasicService {
                     .type(0)
                     .methodWordSequence(Joiner.on(",").join(Preprocess.generateWordSequence(split[1])))
                     .tokenSequence(Joiner.on(",").join(Preprocess.preprocess(split[1])))
+                    .classNameTokenSequence(Joiner.on(",").join(Preprocess.preprocess(split[0])))
                     .build();
         }).collect(Collectors.toList());
     }
@@ -206,9 +208,9 @@ public class ApiBasicService {
      */
     private void generateTokenCorpus(List<ApiBasic> apiBasics, TaskParameter taskParameter) {
         // 取出所有token序列
-        List<String> tokens = apiBasics.stream()
-                .map(api -> api.getTokenSequence().replace(",", " "))
-                .collect(Collectors.toList());
+        List<String> tokens = Lists.newArrayList();
+        tokens.addAll(apiBasics.stream().map(api -> api.getTokenSequence().replace(",", " ")).toList());
+        tokens.addAll(apiBasics.stream().map(api -> api.getClassNameTokenSequence().replace(",", " ")).toList());
 
         // 填充token语料库文件
         fillCorpus(taskParameter, tokens);

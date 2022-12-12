@@ -33,6 +33,7 @@ public class ApiBasic {
 
     /**
      * 词干序列，用逗号分割
+     * ！！方法名！！
      */
     private String tokenSequence;
 
@@ -41,4 +42,12 @@ public class ApiBasic {
      */
     @Deprecated
     private String tokenVector;
+
+    /**
+     * 用于二级筛选mapping，比如：
+     * harmony api：Animator#start
+     * android api：AnimatorSet#start，Animator#start
+     * 预期结果：Animator#start 和 Animator#start
+     */
+    private String classNameTokenSequence;
 }

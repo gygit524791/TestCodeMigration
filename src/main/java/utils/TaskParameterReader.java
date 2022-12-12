@@ -36,6 +36,7 @@ public class TaskParameterReader {
                 .pythonCalcSimilarity(properties.getProperty("pythonCalcSimilarity"))
                 .dbFilepath(properties.getProperty("dbFilepath"))
                 .apiVectorDictFilepath(properties.getProperty("apiVectorDictFilepath"))
+                .classVectorDictFilepath(properties.getProperty("classVectorDictFilepath"))
                 .apiWordListFilepath(properties.getProperty("apiWordListFilepath"))
                 .build();
     }

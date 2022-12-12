@@ -2,7 +2,7 @@ package com.test.migration.service.translate.expression;
 
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.ReplaceRule;
+import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.common.ArgumentListTranslate;
 import com.test.migration.service.translate.common.ExpressionNameTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -118,7 +118,7 @@ public class MethodInvocationTranslate {
                 argumentList.append(argumentListTranslate.translateArgumentList((ParserRuleContext) ctx.getChild(i)));
             }
         }
-        return ReplaceRule.replaceMethodName(methodName) + "(" + argumentList + ")";
+        return ReplaceRuleService.replaceMethodInvocationMethodName(methodName) + "(" + argumentList + ")";
     }
 
     /**
@@ -141,7 +141,7 @@ public class MethodInvocationTranslate {
             }
         }
         String originTranslate = typeName + "." + methodNameIdentifier + "(" + argumentList + ")";
-        return ReplaceRule.replaceMethodInvocation(originTranslate, typeName, methodNameIdentifier, argumentList.toString());
+        return ReplaceRuleService.replaceMethodInvocationTypeName(originTranslate, typeName, methodNameIdentifier, argumentList.toString());
     }
 
     public String translateMethodName(ParserRuleContext ctx) {

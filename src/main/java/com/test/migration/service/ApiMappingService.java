@@ -27,7 +27,8 @@ public class ApiMappingService {
                 taskParameter.getPythonCalcSimilarity(),
                 String.valueOf(taskParameter.getTaskId()),
                 taskParameter.getDbFilepath(),
-                taskParameter.getApiVectorDictFilepath()
+                taskParameter.getApiVectorDictFilepath(),
+                taskParameter.getClassVectorDictFilepath()
         };
 
         List<String> resultLines = CallPythonUtil.call(tokenArgs);
@@ -60,10 +61,9 @@ public class ApiMappingService {
             ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
             ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
             // 安卓的api
-            String key = targetApi.getClassName() + "->" + targetApi.getApiName();
-            // 鸿蒙的api
             String value = sourceApi.getClassName() + "->" + sourceApi.getApiName();
-
+            // 鸿蒙的api
+            String key = targetApi.getClassName() + "->" + targetApi.getApiName();
             MappingRuleWriter.writeApiMappingProperties(key, value);
         });
     }

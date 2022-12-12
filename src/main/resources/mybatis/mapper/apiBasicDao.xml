@@ -14,7 +14,8 @@
             type,
             method_word_sequence,
             token_sequence,
-            token_vector
+            token_vector,
+            class_name_token_sequence
         from api_basic
     </sql>
 
@@ -32,7 +33,8 @@
              `type` INTEGER DEFAULT NULL,
              `method_word_sequence` TEXT DEFAULT NULL,
              `token_sequence` TEXT DEFAULT NULL,
-             `token_vector` TEXT DEFAULT NULL
+             `token_vector` TEXT DEFAULT NULL,
+             `class_name_token_sequence` TEXT DEFAULT NULL
         )
     </update>
 
@@ -47,7 +49,8 @@
                 type,
                 method_word_sequence,
                 token_sequence,
-                token_vector
+                token_vector,
+                class_name_token_sequence
             ) values (
                 #{taskId},
                 #{filepath},
@@ -56,7 +59,8 @@
                 #{type},
                 #{methodWordSequence},
                 #{tokenSequence},
-                #{tokenVector}
+                #{tokenVector},
+                #{classNameTokenSequence}
             )
         ]]>
     </insert>
@@ -72,7 +76,8 @@
             type,
             method_word_sequence,
             token_sequence,
-            token_vector
+            token_vector,
+            class_name_token_sequence
         )
         ]]>
         values
@@ -85,7 +90,8 @@
             #{item.type},
             #{item.methodWordSequence},
             #{item.tokenSequence},
-            #{item.tokenVector}
+            #{item.tokenVector},
+            #{item.classNameTokenSequence}
         )
         </foreach>
     </insert>

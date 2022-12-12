@@ -113,14 +113,16 @@ public class APIExtractorService extends Java8BaseVisitor<RuleNode> {
             return;
         }
 
+        String className = fetchClassNameWithFilePath(filePath);
         ApiBasic apiBasic = ApiBasic.builder()
                 .taskId(taskId)
                 .filepath(filePath)
-                .className(fetchClassNameWithFilePath(filePath))
+                .className(className)
                 .apiName(apiName)
                 .type(1)
                 .methodWordSequence(Joiner.on(",").join(Preprocess.generateWordSequence(apiName)))
                 .tokenSequence(Joiner.on(",").join(Preprocess.preprocess(apiName)))
+                .classNameTokenSequence(className)
                 .build();
         apiBasics.add(apiBasic);
     }

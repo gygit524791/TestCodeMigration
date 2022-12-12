@@ -17,7 +17,7 @@ public class MappingRuleWriter {
 
     public static void writeApiMappingProperties(String key, String value) {
         try {
-            writeProperties("mappingRule/apiMapping.properties",key, value);
+            writeProperties("mappingRule/customMethodInvocationTypeNameMapping.properties",key, value);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

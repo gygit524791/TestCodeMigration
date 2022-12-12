@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.MappingRule;
+import com.test.migration.service.translate.MappingRuleLoader;
 import com.test.migration.service.translate.expression.ExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
@@ -218,7 +218,7 @@ public class LocalVariableDeclarationStatementTranslate {
     }
 
     public Map<String, String> queryReferenceMapping() {
-        return MappingRule.basicMapping;
+        return MappingRuleLoader.basicMapping;
     }
 
     /**
