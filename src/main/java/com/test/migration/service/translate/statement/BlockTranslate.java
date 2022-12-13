@@ -2,7 +2,7 @@ package com.test.migration.service.translate.statement;
 
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.common.ClassDeclarationTranslate;
+import com.test.migration.service.translate.declaration.ClassDeclarationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -75,10 +75,11 @@ public class BlockTranslate {
 
     /**
      * lockStatement
-     * 	:	localVariableDeclarationStatement
-     * 	|	classDeclaration
-     * 	|	statement
-     * 	;
+     * :	localVariableDeclarationStatement
+     * |	classDeclaration
+     * |	statement
+     * ;
+     *
      * @param ctx
      * @return
      */
@@ -88,17 +89,17 @@ public class BlockTranslate {
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
-        if(childRuleContext.getRuleIndex() == Java8Parser.RULE_localVariableDeclarationStatement){
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_localVariableDeclarationStatement) {
             LocalVariableDeclarationStatementTranslate subTranslate = new LocalVariableDeclarationStatementTranslate();
             return subTranslate.translateLocalVariableDeclarationStatement(childRuleContext);
         }
 
-        if(childRuleContext.getRuleIndex() == Java8Parser.RULE_classDeclaration){
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classDeclaration) {
             ClassDeclarationTranslate subTranslate = new ClassDeclarationTranslate();
             return subTranslate.translateClassDeclaration(childRuleContext);
         }
 
-        if(childRuleContext.getRuleIndex() == Java8Parser.RULE_statement){
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_statement) {
             StatementTranslate subTranslate = new StatementTranslate();
             return subTranslate.translateStatement(childRuleContext);
         }

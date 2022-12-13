@@ -5,38 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/commonClassNameMapping.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/commonMethodInvocationTypeNameMapping.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/customClassNameMapping.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/customMethodInvocationTypeNameMapping.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/testToolMethodNameMapping.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/doc/mapping1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/apiMapping_animator.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/test.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ClassBodyTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/TypeParameterListTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/TypeParametersTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/UnannTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/VariableDeclaratorListTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/ClassBodyDeclarationTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/ClassMemberDeclarationTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/ConstructorDeclarationTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/EnumDeclarationTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/FieldDeclarationTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/InstanceInitializerTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/InterfaceDeclarationTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/NormalClassDeclarationTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/StaticInitializerTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/corpus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/corpus.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/word2vec.model" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/word2vec.model" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/ApiBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/po/ApiBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/extract/APIExtractorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/extract/APIExtractorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRuleLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MethodVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestMethodVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/MethodInvocationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/MethodInvocationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRuleLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRuleLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ClassDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/ClassDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/MethodDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/MethodDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/BlockTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/BlockTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/LocalVariableDeclarationStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/LocalVariableDeclarationStatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/MappingRuleReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/MappingRuleReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/MappingRuleWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/MappingRuleWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/TaskParameterReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/TaskParameterReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/apiMapping.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiBasicDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/apiBasicDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MainTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,11 +81,11 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.test.migration.service.translate.declaration" />
+      <recent name="com.test.migration.service.translate.common" />
       <recent name="com.test.migration.service.invocation" />
       <recent name="com.test.migration.service.preprocess" />
       <recent name="com.test.migration.service.extract" />
-      <recent name="com.test.migration.dao" />
-      <recent name="com.test.migration.po" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MappingRuleLoader">
@@ -189,7 +178,7 @@
       <workItem from="1670292151612" duration="53289000" />
       <workItem from="1670569983960" duration="4647000" />
       <workItem from="1670812883210" duration="3635000" />
-      <workItem from="1670820166180" duration="9015000" />
+      <workItem from="1670820166180" duration="16592000" />
     </task>
     <servers />
   </component>

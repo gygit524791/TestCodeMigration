@@ -14,7 +14,7 @@ import com.test.migration.entity.po.TranslateTest;
 import com.test.migration.service.invocation.ApiInvocationVisitor;
 import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.TestMethodVisitor;
-import com.test.migration.service.translate.common.MethodDeclarationTranslate;
+import com.test.migration.service.translate.declaration.MethodDeclarationTranslate;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -143,7 +143,7 @@ public class TranslateTestService {
         testMethodVisitor.getTypeNameMap().put("mActivityRule","ActivityTestRule<AnimatorSetActivity>");
         ReplaceRuleService.typeNameMap = testMethodVisitor.getTypeNameMap();
 
-         代码转换
+        // 代码转换
         MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
         List<String> translateCodes = Lists.newArrayList();
         testMethodVisitor.methodBlockMap.forEach((k, v) -> {
