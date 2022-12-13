@@ -40,17 +40,27 @@ public class MappingRuleLoader {
         Map<String, String> map = Maps.newHashMap();
         for (String line : mappingStr) {
             String[] mapping = line.split("=");
-            map.put(mapping[0], mapping[1]);
+            if (mapping.length < 2) {
+                map.put(mapping[0], StringUtils.EMPTY);
+            } else {
+                map.put(mapping[0], mapping[1]);
+            }
         }
         return map;
     }
 
-    private static MethodInvocationTypeNameRule buildMapping(String MappingLine) {
-        String[] mappingStr = MappingLine.split("=");
+    private static MethodInvocationTypeNameRule buildMapping(String mappingLine) {
+        String[] mappingStr = mappingLine.split("=");
         String sourceStr = mappingStr[0];
-        String targetStr = mappingStr[1];
+        String targetStr = StringUtils.EMPTY;
 
         MethodInvocationTypeNameRule rule = new MethodInvocationTypeNameRule();
+        if (mappingStr.length < 2) {
+            rule.setTargetClassName(StringUtils.EMPTY);
+            rule.setTargetMethodName(StringUtils.EMPTY);
+        } else {
+            targetStr = mappingStr[1];
+        }
 
         if (StringUtils.isNotBlank(sourceStr)) {
             String[] source = sourceStr.split("->");
@@ -69,6 +79,7 @@ public class MappingRuleLoader {
             rule.setTargetClassName(StringUtils.EMPTY);
             rule.setTargetMethodName(StringUtils.EMPTY);
         }
+
         return rule;
     }
 

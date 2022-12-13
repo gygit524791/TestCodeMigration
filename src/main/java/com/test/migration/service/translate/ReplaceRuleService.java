@@ -10,7 +10,7 @@ public class ReplaceRuleService {
     /**
      * 前置条件；由visitor负责初始化
      *
-     * @see TestMethodVisitor
+     * @see TestCodeVisitor
      */
     public static Map<String, String> typeNameMap;
 

@@ -13,7 +13,7 @@ import com.test.migration.entity.po.ApiMapping;
 import com.test.migration.entity.po.TranslateTest;
 import com.test.migration.service.invocation.ApiInvocationVisitor;
 import com.test.migration.service.translate.ReplaceRuleService;
-import com.test.migration.service.translate.TestMethodVisitor;
+import com.test.migration.service.translate.TestCodeVisitor;
 import com.test.migration.service.translate.declaration.MethodDeclarationTranslate;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -132,25 +132,27 @@ public class TranslateTestService {
             parserRuleContextMap.put(testMethodName, null);
         }
 
-        Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
-        ParseTree parseTree = parser.compilationUnit();
-        TestMethodVisitor testMethodVisitor = new TestMethodVisitor();
-        testMethodVisitor.setMethodBlockMap(parserRuleContextMap);
-        testMethodVisitor.visit(parseTree);
+//        Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
+//        ParseTree parseTree = parser.compilationUnit();
+//        TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
+//        testCodeVisitor.setParserRuleContextMap(parserRuleContextMap);
+//        testCodeVisitor.visit(parseTree);
 
         // 代码转换的前置条件：初始化replace的typeNameMap
         // todo demo 后面做成自动化
-        testMethodVisitor.getTypeNameMap().put("mActivityRule","ActivityTestRule<AnimatorSetActivity>");
-        ReplaceRuleService.typeNameMap = testMethodVisitor.getTypeNameMap();
+//        testCodeVisitor.getTypeNameMap().put("mActivityRule","ActivityTestRule<AnimatorSetActivity>");
+//        ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
 
         // 代码转换
-        MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
-        List<String> translateCodes = Lists.newArrayList();
-        testMethodVisitor.methodBlockMap.forEach((k, v) -> {
-            translateCodes.add(translate.translateMethodDeclaration(v));
-        });
+//        MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
+//        List<String> translateCodes = Lists.newArrayList();
+//        testCodeVisitor.parserRuleContextMap.forEach((k, v) -> {
+//            translateCodes.add(translate.translateMethodDeclaration(v));
+//        });
 
-        return JsonUtil.objectToJson(translateCodes);
+//        return JsonUtil.objectToJson(translateCodes);
+
+        return null;
     }
 
     @NotNull

@@ -2,6 +2,8 @@ package com.test.migration.service.translate.declaration;
 
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.common.MethodBodyTranslate;
+import com.test.migration.service.translate.common.MethodHeaderTranslate;
 import com.test.migration.service.translate.statement.BlockTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
@@ -14,15 +16,6 @@ public class MethodDeclarationTranslate {
      * methodDeclaration
      * :  methodModifier* methodHeader methodBody
      * ;
-     * <p>
-     * methodBody
-     * :  block
-     * |  ';'
-     * ;
-     * 只翻译到methodBody，其它拼接
-     *
-     * @param ctx
-     * @return
      */
     public String translateMethodDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_methodDeclaration)) {
@@ -31,17 +24,16 @@ public class MethodDeclarationTranslate {
         }
 
         //筛选出methodBody
-        ParserRuleContext methodBodyRule = null;
         ParserRuleContext methodHeaderRule = null;
+        ParserRuleContext methodBodyRule = null;
         for (int i = 0; i < ctx.getChildCount(); i++) {
-            if (ctx.getChild(i) instanceof RuleContext &&
-                    ((RuleContext) ctx.getChild(i)).getRuleIndex() == Java8Parser.RULE_methodBody) {
-                methodBodyRule = (ParserRuleContext) ctx.getChild(i);
-            }
-
             if (ctx.getChild(i) instanceof RuleContext &&
                     ((RuleContext) ctx.getChild(i)).getRuleIndex() == Java8Parser.RULE_methodHeader) {
                 methodHeaderRule = (ParserRuleContext) ctx.getChild(i);
+            }
+            if (ctx.getChild(i) instanceof RuleContext &&
+                    ((RuleContext) ctx.getChild(i)).getRuleIndex() == Java8Parser.RULE_methodBody) {
+                methodBodyRule = (ParserRuleContext) ctx.getChild(i);
             }
         }
 
@@ -49,18 +41,14 @@ public class MethodDeclarationTranslate {
             System.out.println("methodBodyRule为空");
             return null;
         }
-        //methodBody的孩子要么是block，要么是;
-        String methodBody = "";
-        if (methodBodyRule.getChild(0) instanceof RuleContext) {
-            BlockTranslate blockTranslate = new BlockTranslate();
-            methodBody = blockTranslate.translateBlock((ParserRuleContext) methodBodyRule.getChild(0));
-        } else {
-            methodBody = ";";
-        }
 
-        String methodName = fetchMethodName(methodHeaderRule);
+        MethodHeaderTranslate methodHeaderTranslate = new MethodHeaderTranslate();
+        String methodHeader = methodHeaderTranslate.translateMethodHeader(methodHeaderRule);
 
-        return "void " + methodName + methodBody;
+        MethodBodyTranslate methodBodyTranslate = new MethodBodyTranslate();
+        String methodBody = methodBodyTranslate.translateMethodBody(methodBodyRule);
+
+        return methodHeader + " " + methodBody;
     }
 
     /**

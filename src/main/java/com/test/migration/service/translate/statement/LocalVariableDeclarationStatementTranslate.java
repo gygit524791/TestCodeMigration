@@ -2,12 +2,9 @@ package com.test.migration.service.translate.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.common.UnannTypeTranslate;
-import com.test.migration.service.translate.common.VariableDeclaratorListTranslate;
-import com.test.migration.service.translate.expression.ExpressionTranslate;
+import com.test.migration.service.translate.common.variable.VariableDeclaratorListTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 目前支持下面类型的解析

@@ -1,6 +1,7 @@
 package utils;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,17 +15,17 @@ public class MappingRuleReader {
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(filepath));
-            while (br.readLine() != null) {
-                String line = br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
                 if (line.trim().startsWith("#")) {
                     continue;
                 }
-                lines.add(br.readLine());
+                lines.add(line);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        return lines;
+        return lines.stream().filter(StringUtils::isNotBlank).toList();
     }
 }

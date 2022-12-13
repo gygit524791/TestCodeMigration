@@ -1,4 +1,4 @@
-package com.test.migration.service.translate.common;
+package com.test.migration.service.translate.common.variable;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.expression.ExpressionTranslate;
@@ -52,7 +52,8 @@ public class VariableDeclaratorListTranslate {
             }
             RuleContext childRuleContext = (RuleContext) child;
             if (childRuleContext.getRuleIndex() == Java8Parser.RULE_variableDeclaratorId) {
-                variableDeclaratorId = translateVariableDeclaratorId((ParserRuleContext) childRuleContext);
+                VariableDeclaratorIdTranslate variableDeclaratorIdTranslate = new VariableDeclaratorIdTranslate();
+                variableDeclaratorId = variableDeclaratorIdTranslate.translateVariableDeclaratorId((ParserRuleContext) childRuleContext);
             }
             if (childRuleContext.getRuleIndex() == Java8Parser.RULE_variableInitializer) {
                 variableInitializer = translateVariableInitializer((ParserRuleContext) childRuleContext);
@@ -62,18 +63,6 @@ public class VariableDeclaratorListTranslate {
         // TODO： 暂未解决多个'='问题（int a =2, b=3;）
         return StringUtils.isBlank(variableInitializer) ? variableDeclaratorId
                 : variableDeclaratorId + "=" + variableInitializer;
-    }
-
-    /**
-     * 变量标识符，直接返回text
-     * 比如：int a = 3   返回的是a
-     */
-    public String translateVariableDeclaratorId(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_variableDeclaratorId) {
-            System.out.println("variableDeclaratorIdContext 为null");
-            return "";
-        }
-        return ctx.getText();
     }
 
     /**

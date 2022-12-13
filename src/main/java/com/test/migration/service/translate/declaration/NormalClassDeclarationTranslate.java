@@ -45,8 +45,11 @@ public class NormalClassDeclarationTranslate {
         }
 
         // typeParameters 范型
-        TypeParametersTranslate typeParametersTranslate = new TypeParametersTranslate();
-        String typeParameters = typeParametersTranslate.translateTypeParameters(typeParametersRule);
+        String typeParameters = StringUtils.EMPTY;
+        if (typeParametersRule != null) {
+            TypeParametersTranslate typeParametersTranslate = new TypeParametersTranslate();
+            typeParameters = typeParametersTranslate.translateTypeParameters(typeParametersRule);
+        }
 
         // classBody
         ClassBodyTranslate classBodyTranslate = new ClassBodyTranslate();

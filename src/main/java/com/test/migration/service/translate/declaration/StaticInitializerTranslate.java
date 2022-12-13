@@ -5,8 +5,8 @@ import org.antlr.v4.runtime.ParserRuleContext;
 
 public class StaticInitializerTranslate {
     public String translateStaticInitializer(ParserRuleContext ctx) {
-        if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_methodDeclaration)) {
-            System.out.println("RULE_methodDeclaration 没找到，不科学");
+        if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_staticInitializer)) {
+            System.out.println("RULE_staticInitializer 没找到，不科学");
             return null;
         }
         return null;

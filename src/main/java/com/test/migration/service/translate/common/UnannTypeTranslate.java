@@ -55,11 +55,12 @@ public class UnannTypeTranslate {
         }
 
         // TODO 类/接口类型，从映射表中找对应关系
-        Map<String, String> referenceMapping = queryReferenceMapping();
-        return "";
+        // TODO TIPS 不考虑存在注解和范型的情况
+        Map<String, String> referenceMapping = MappingRuleLoader.commonClassNameMapping;
+        if(referenceMapping.containsKey(ctx.getText())){
+            return referenceMapping.get(ctx.getText());
+        }
+        return ctx.getText();
     }
 
-    public Map<String, String> queryReferenceMapping() {
-        return MappingRuleLoader.commonClassNameMapping;
-    }
 }
