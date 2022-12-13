@@ -1,4 +1,3 @@
-import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.MappingRuleLoader;
@@ -6,7 +5,7 @@ import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.TestCodeVisitor;
 import com.test.migration.service.translate.declaration.ClassDeclarationTranslate;
 import com.test.migration.service.translate.declaration.FieldDeclarationTranslate;
-import com.test.migration.service.translate.declaration.MethodDeclarationTranslate;
+import com.test.migration.service.translate.common.method.MethodDeclarationTranslate;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -15,7 +14,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 public class TranslateTest {
 
@@ -71,8 +69,4 @@ public class TranslateTest {
 
     }
 
-//    private A a;
-//    class A{
-//        int b;
-//    }
 }

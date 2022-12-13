@@ -5,35 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/translate/source/ADemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/translate/source/ValueAnimatorTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/translate/targets/ADemo.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/MethodBodyTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/MethodDeclaratorTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/MethodHeaderTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ResultTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/parameter/FormalParameterListTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/parameter/FormalParameterTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/parameter/FormalParametersTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/parameter/LastFormalParameterTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/parameter/ReceiverParameterTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorIdTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TranslateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRuleLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRuleLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestMethodVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/UnannTypeTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/UnannTypeTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/VariableDeclaratorListTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorListTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/FieldDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/FieldDeclarationTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/InstanceInitializerTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/InstanceInitializerTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/MethodDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/MethodDeclarationTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/NormalClassDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/NormalClassDeclarationTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/StaticInitializerTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/StaticInitializerTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/LocalVariableDeclarationStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/LocalVariableDeclarationStatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/MappingRuleReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/MappingRuleReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/commonClassNameMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/commonClassNameMapping.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/translate/source/ADemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/translate/source/ADemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/translate/targets/ADemo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/demo/translate/targets/ADemo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TranslateTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +72,7 @@
       <recent name="com.test.migration.service.preprocess" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.TranslateTest.test1">
+  <component name="RunManager" selected="TestNG.TranslateTest.test1 (2)">
     <configuration name="MappingRuleLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.test.migration.service.translate.MappingRuleLoader" />
       <module name="TestMigrationV2" />
@@ -124,11 +99,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainTest.testReadYml (2)" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TranslateTest.test1 (1)" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestMigrationV2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MainTest" />
-      <option name="METHOD_NAME" value="testReadYml" />
+      <option name="MAIN_CLASS_NAME" value="TranslateTest" />
+      <option name="METHOD_NAME" value="test1" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -136,7 +111,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TranslateTest.test1 (1)" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TranslateTest.test1 (2)" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestMigrationV2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TranslateTest" />
@@ -162,11 +137,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.TranslateTest.test1 (2)" />
         <item itemvalue="TestNG.TranslateTest.test1" />
         <item itemvalue="TestNG.TranslateTest.test1 (1)" />
         <item itemvalue="Application.MappingRuleLoader" />
         <item itemvalue="Application.MappingRuleReader" />
-        <item itemvalue="TestNG.MainTest.testReadYml (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -187,7 +162,7 @@
       <workItem from="1670292151612" duration="53289000" />
       <workItem from="1670569983960" duration="4647000" />
       <workItem from="1670812883210" duration="3635000" />
-      <workItem from="1670820166180" duration="35162000" />
+      <workItem from="1670820166180" duration="35311000" />
     </task>
     <servers />
   </component>

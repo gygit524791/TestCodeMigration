@@ -1,4 +1,4 @@
-package com.test.migration.service.translate.expression;
+package com.test.migration.service.translate.common.method;
 
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;

@@ -1,6 +1,7 @@
 package com.test.migration.service.translate.declaration;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.common.method.MethodDeclarationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;

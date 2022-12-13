@@ -1,4 +1,4 @@
-package com.test.migration.service.translate.common;
+package com.test.migration.service.translate.common.method;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.statement.BlockTranslate;

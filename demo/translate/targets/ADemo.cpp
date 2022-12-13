@@ -4,7 +4,7 @@ public:
     Target b;
     Target c = new Target();
 
-    void test1(){
+    void test1(Target a){
         ADemo::BDemo * d = new ADemo::BDemo();
         d->test2();
     }
@@ -13,7 +13,7 @@ public:
         public:
             int a;
             std::string b;
-            void test2(){
+            void test2(std::string a){
                 printf("hello");
             }
     };

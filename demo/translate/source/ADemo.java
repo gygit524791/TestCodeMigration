@@ -3,7 +3,7 @@ public class ADemo {
     private Source b;
     private Source c = new Source();
 
-    public void test1(){
+    public void test1(Source a){
         BDemo d = new BDemo();
         d.test2();
     }
@@ -11,7 +11,7 @@ public class ADemo {
     class BDemo{
         private int a;
         private String b;
-        public void test2(){
+        public void test2(String a){
             System.out.println("hello");
         }
     }
