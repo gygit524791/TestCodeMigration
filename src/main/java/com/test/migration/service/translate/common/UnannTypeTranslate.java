@@ -2,6 +2,7 @@ package com.test.migration.service.translate.common;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.MappingRuleLoader;
+import com.test.migration.service.translate.TestCodeContext;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -65,11 +66,21 @@ public class UnannTypeTranslate {
 
     /**
      * 替换引用类型
+     * <p>
+     * 1.String 不带*
+     * 2.如果是内部类 改为A::B的形式
      */
     private String replaceClassOrInterfaceType(String clsName) {
         Map<String, String> referenceMapping = MappingRuleLoader.commonClassNameMapping;
         if (StringUtils.equals("String", clsName)) {
             return referenceMapping.get(clsName);
+        }
+
+        // 内部类 改为A::B
+        boolean isInnerCls = TestCodeContext.ClassMemberDeclaration.classes.stream()
+                .anyMatch(x -> StringUtils.equals(x.name, clsName));
+        if (isInnerCls) {
+            return TestCodeContext.className + "::" + clsName;
         }
 
         return referenceMapping.getOrDefault(clsName, clsName) + " * ";

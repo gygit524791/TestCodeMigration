@@ -1,8 +1,8 @@
 class ADemo : public testing::Test {
 public:
     int a;
-    Target b;
-    Target c = new Target();
+    Target b,e,f;
+    Target * c = new Target();
 
     void test1(Target a){
         ADemo::BDemo * d = new ADemo::BDemo();

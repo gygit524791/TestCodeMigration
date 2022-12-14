@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testCtx/Context.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testCtx/ContextReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testCtx/TestContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/testCtx/WriteContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/translate/source/ADemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/translate/source/ADemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/translate/targets/ADemo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/demo/translate/targets/ADemo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ClassBodyTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/ClassBodyTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/UnannTypeTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/UnannTypeTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorListTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorListTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/FieldDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/FieldDeclarationTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/LocalVariableDeclarationStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/statement/LocalVariableDeclarationStatementTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TranslateTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,19 +75,6 @@
     </key>
   </component>
   <component name="RunManager" selected="TestNG.TranslateTest.test1">
-    <configuration name="MappingRuleLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.test.migration.service.translate.MappingRuleLoader" />
-      <module name="TestMigrationV2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.test.migration.service.translate.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestContext" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="testCtx.TestContext" />
       <module name="TestMigrationV2" />
@@ -133,6 +112,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TranslateTest.test1 (3)" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="TestMigrationV2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TranslateTest" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TranslateTest.test1" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestMigrationV2" />
       <option name="PACKAGE_NAME" value="" />
@@ -148,10 +139,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.TranslateTest.test1" />
+        <item itemvalue="TestNG.TranslateTest.test1 (3)" />
         <item itemvalue="Application.TestContext" />
         <item itemvalue="TestNG.TranslateTest.test1 (2)" />
         <item itemvalue="TestNG.TranslateTest.test1 (1)" />
-        <item itemvalue="Application.MappingRuleLoader" />
       </list>
     </recent_temporary>
   </component>
@@ -172,7 +163,7 @@
       <workItem from="1670292151612" duration="53289000" />
       <workItem from="1670569983960" duration="4647000" />
       <workItem from="1670812883210" duration="3635000" />
-      <workItem from="1670820166180" duration="55160000" />
+      <workItem from="1670820166180" duration="62664000" />
     </task>
     <servers />
   </component>
@@ -227,11 +218,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorListTranslate.java</url>
           <line>75</line>
           <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/method/MethodDeclarationTranslate.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/method/MethodDeclarationTranslate.java</url>

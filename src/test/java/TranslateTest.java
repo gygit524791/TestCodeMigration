@@ -38,6 +38,10 @@ public class TranslateTest {
         // visit之后的必备步骤
         TestCodeContext.loadDeclaration();
 
+        TestCodeContext.ClassMemberDeclaration.classes.forEach(System.out::println);
+        TestCodeContext.ClassMemberDeclaration.fields.forEach(System.out::println);
+
+
         testCodeVisitor.getTypeNameMap().put("mActivityRule", "ActivityTestRule<AnimatorSetActivity>");
         ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
 

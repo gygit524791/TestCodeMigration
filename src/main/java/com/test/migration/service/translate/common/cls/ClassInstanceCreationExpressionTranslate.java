@@ -3,6 +3,7 @@ package com.test.migration.service.translate.common.cls;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.MappingRuleLoader;
+import com.test.migration.service.translate.TestCodeContext;
 import com.test.migration.service.translate.common.ArgumentListTranslate;
 import com.test.migration.service.translate.common.ClassBodyTranslate;
 import com.test.migration.service.translate.common.ExpressionNameTranslate;
@@ -11,6 +12,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
@@ -34,7 +36,7 @@ public class ClassInstanceCreationExpressionTranslate {
         boolean isRuleContext = child instanceof RuleContext;
 
         // 获取第一个Identifier
-        String identifier = getIdentifier(ctx);
+        String identifier = replaceIdentifier(ctx);
 
         // 获取argumentList
         ParserRuleContext argumentListRule = null;
@@ -107,7 +109,7 @@ public class ClassInstanceCreationExpressionTranslate {
         // '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
         // 简化为 '.' 'new' Identifier '(' argumentList? ')' classBody?
         // 获取第一个Identifier
-        String identifier = getIdentifier(ctx);
+        String identifier = replaceIdentifier(ctx);
 
         // 获取argumentList
         ParserRuleContext argumentListRule = null;
@@ -157,7 +159,7 @@ public class ClassInstanceCreationExpressionTranslate {
         boolean isRuleContext = child instanceof RuleContext;
 
         // 获取第一个Identifier, 这个new 后面的identifier 按说应该类似于typename 类型名称，需要做替换的
-        String identifier = getIdentifier(ctx);
+        String identifier = replaceIdentifier(ctx);
 
         // 获取argumentList
         ParserRuleContext argumentListRule = null;
@@ -210,7 +212,7 @@ public class ClassInstanceCreationExpressionTranslate {
      * 存在替换规则
      * new 后面的identifier 相当于typeName
      */
-    private static String getIdentifier(ParserRuleContext ctx) {
+    private static String replaceIdentifier(ParserRuleContext ctx) {
         String identifier = "";
         for (int k = 0; k < ctx.getChildCount(); k++) {
             ParseTree child1 = ctx.getChild(k);
@@ -224,6 +226,16 @@ public class ClassInstanceCreationExpressionTranslate {
         }
 
         Map<String, String> commonClassNameMapping = MappingRuleLoader.commonClassNameMapping;
+
+        // 内部类 改为A::B
+        String finalIdentifier = identifier;
+        boolean isInnerCls = TestCodeContext.ClassMemberDeclaration.classes.stream()
+                .anyMatch(x -> StringUtils.equals(x.name, finalIdentifier));
+        if (isInnerCls) {
+            return TestCodeContext.className + "::" + identifier;
+        }
+
         return commonClassNameMapping.getOrDefault(identifier, identifier);
     }
+
 }
