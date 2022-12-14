@@ -37,8 +37,10 @@ public class FieldDeclarationTranslate {
 
         UnannTypeTranslate unannTypeTranslate = new UnannTypeTranslate();
         String unannType = unannTypeTranslate.translateUnannType(unannTypeCtx);
+
         VariableDeclaratorListTranslate variableDeclaratorListTranslate = new VariableDeclaratorListTranslate();
         String variableDeclaratorList = variableDeclaratorListTranslate.translateVariableDeclaratorList(variableDeclaratorListCtx);
+
         return unannType + " " + variableDeclaratorList + ";";
     }
 }

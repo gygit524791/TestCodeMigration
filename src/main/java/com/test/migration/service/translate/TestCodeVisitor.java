@@ -1,11 +1,9 @@
 package com.test.migration.service.translate;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.test.migration.antlr.java.Java8BaseVisitor;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -15,17 +13,11 @@ import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
 public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
-    private String className;
-    private List<ParserRuleContext> classBodyDeclarationCtxList = Lists.newArrayList();
-    private List<ParserRuleContext> fieldDeclarationCtxList = Lists.newArrayList();
-    private List<ParserRuleContext> methodDeclarationCtxList = Lists.newArrayList();
-    private List<ParserRuleContext> classDeclarationCtxList = Lists.newArrayList();
 
     /**
      * typeName对应的类型mapping表，举个例子：
@@ -45,12 +37,12 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
 
     @Override
     public RuleNode visitNormalClassDeclaration(Java8Parser.NormalClassDeclarationContext ctx) {
-        if (StringUtils.isBlank(className)) {
+        if (StringUtils.isBlank(TestCodeContext.className)) {
             for (int i = 0; i < ctx.getChildCount(); i++) {
                 ParseTree child = ctx.getChild(i);
                 if (child instanceof TerminalNode terminalNode) {
                     if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
-                        className = terminalNode.getText();
+                        TestCodeContext.className = terminalNode.getText();
                     }
                 }
             }
@@ -60,7 +52,7 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
 
     @Override
     public RuleNode visitClassBody(Java8Parser.ClassBodyContext ctx) {
-        if (classBodyDeclarationCtxList.isEmpty()) {
+        if (TestCodeContext.classBodyDeclarationCtxList.isEmpty()) {
             for (int i = 0; i < ctx.getChildCount(); i++) {
                 boolean isRuleContext = ctx.getChild(i) instanceof RuleContext;
                 if (!isRuleContext) {
@@ -68,46 +60,11 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
                 }
                 RuleContext childRuleContext = (RuleContext) ctx.getChild(i);
                 if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classBodyDeclaration) {
-                    classBodyDeclarationCtxList.add((ParserRuleContext) childRuleContext);
+                    TestCodeContext.classBodyDeclarationCtxList.add((ParserRuleContext) childRuleContext);
                 }
             }
         }
         return visitChildren(ctx);
-    }
-
-    public void loadDeclaration() {
-        if (classBodyDeclarationCtxList.isEmpty()) {
-            return;
-        }
-
-        for (ParserRuleContext parserRuleContext : classBodyDeclarationCtxList) {
-            ParseTree child = parserRuleContext.getChild(0);
-            boolean isRuleContext = child instanceof RuleContext;
-            if (!isRuleContext) {
-                continue;
-            }
-            RuleContext node = (RuleContext) child;
-            if (node.getRuleIndex() != Java8Parser.RULE_classMemberDeclaration) {
-                continue;
-            }
-
-            ParseTree declarationChild = node.getChild(0);
-            boolean isSubRuleContext = declarationChild instanceof RuleContext;
-            if (!isSubRuleContext) {
-                continue;
-            }
-
-            RuleContext subNode = (RuleContext) declarationChild;
-            if (subNode.getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
-                fieldDeclarationCtxList.add((ParserRuleContext) subNode);
-            }
-            if (subNode.getRuleIndex() == Java8Parser.RULE_methodDeclaration) {
-                methodDeclarationCtxList.add((ParserRuleContext) subNode);
-            }
-            if (subNode.getRuleIndex() == Java8Parser.RULE_classDeclaration) {
-                classDeclarationCtxList.add((ParserRuleContext) subNode);
-            }
-        }
     }
 
 

@@ -20,7 +20,7 @@ public class ClassBodyTranslate {
         }
 
         ClassBodyDeclarationTranslate classBodyDeclarationTranslate = new ClassBodyDeclarationTranslate();
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder classBodyDeclarations = new StringBuilder();
         for (int i = 0; i < ctx.getChildCount(); i++) {
             ParseTree child = ctx.getChild(i);
             boolean isRuleContext = child instanceof RuleContext;
@@ -31,10 +31,10 @@ public class ClassBodyTranslate {
 
             if (node.getRuleIndex() == Java8Parser.RULE_classBodyDeclaration) {
                 String classBodyDeclaration = classBodyDeclarationTranslate.translateClassBodyDeclaration((ParserRuleContext) node);
-                stringBuilder.append(classBodyDeclaration);
+                classBodyDeclarations.append(classBodyDeclaration);
             }
         }
 
-        return "{" + stringBuilder + "}";
+        return "{" + classBodyDeclarations + "}";
     }
 }

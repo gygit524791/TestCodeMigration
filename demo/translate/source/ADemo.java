@@ -1,6 +1,6 @@
 public class ADemo {
     private int a;
-    private Source b;
+    private Source b,e,f;
     private Source c = new Source();
 
     public void test1(Source a){

@@ -2,6 +2,7 @@ import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.MappingRuleLoader;
 import com.test.migration.service.translate.ReplaceRuleService;
+import com.test.migration.service.translate.TestCodeContext;
 import com.test.migration.service.translate.TestCodeVisitor;
 import com.test.migration.service.translate.declaration.ClassDeclarationTranslate;
 import com.test.migration.service.translate.declaration.FieldDeclarationTranslate;
@@ -35,23 +36,23 @@ public class TranslateTest {
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
         // visit之后的必备步骤
-        testCodeVisitor.loadDeclaration();
+        TestCodeContext.loadDeclaration();
 
         testCodeVisitor.getTypeNameMap().put("mActivityRule", "ActivityTestRule<AnimatorSetActivity>");
         ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
 
-        System.out.println(testCodeVisitor.getClassName());
+        System.out.println(TestCodeContext.className);
 
         System.out.println("====translate FieldDeclaration====");
         FieldDeclarationTranslate fieldDeclarationTranslate = new FieldDeclarationTranslate();
-        for (ParserRuleContext parserRuleContext : testCodeVisitor.getFieldDeclarationCtxList()) {
+        for (ParserRuleContext parserRuleContext : TestCodeContext.fieldDeclarationCtxList) {
             System.out.println(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
             System.out.println("---------------------------");
         }
 
         System.out.println("====translate MethodDeclaration====");
         MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
-        for (ParserRuleContext parserRuleContext : testCodeVisitor.getMethodDeclarationCtxList()) {
+        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
             System.out.println(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
             System.out.println("---------------------------");
         }
@@ -59,7 +60,7 @@ public class TranslateTest {
 
         System.out.println("====translate ClassDeclaration====");
         ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
-        for (ParserRuleContext parserRuleContext : testCodeVisitor.getClassDeclarationCtxList()) {
+        for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
             System.out.println(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
             System.out.println("---------------------------");
         }

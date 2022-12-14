@@ -33,13 +33,6 @@ public class LocalVariableDeclarationStatementTranslate {
      * localVariableDeclarationStatement
      * :	localVariableDeclaration ';'
      * ;
-     * <p>
-     * localVariableDeclaration
-     * :	variableModifier* unannType variableDeclaratorList
-     * ;
-     *
-     * @param ctx
-     * @return
      */
     public String translateLocalVariableDeclarationStatement(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_localVariableDeclarationStatement) {
@@ -48,15 +41,29 @@ public class LocalVariableDeclarationStatementTranslate {
         }
         ParserRuleContext localVariableDeclaration = (ParserRuleContext) ctx.getChild(0);
 
+        return translateLocalVariableDeclaration(localVariableDeclaration) + ";";
+    }
+
+    /**
+     * localVariableDeclaration
+     * :	variableModifier* unannType variableDeclaratorList
+     * ;
+     */
+    public String translateLocalVariableDeclaration(ParserRuleContext ctx) {
+        if (ctx.getRuleIndex() != Java8Parser.RULE_localVariableDeclaration) {
+            System.out.println("RULE_localVariableDeclaration 为null");
+            return "";
+        }
+
         // find unanntype variableDeclaratorList
         ParserRuleContext unannTypeCtx = null;
         ParserRuleContext variableDeclaratorListCtx = null;
-        for (int i = 0; i < localVariableDeclaration.getChildCount(); i++) {
-            boolean isRuleContext = localVariableDeclaration.getChild(i) instanceof RuleContext;
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            boolean isRuleContext = ctx.getChild(i) instanceof RuleContext;
             if (!isRuleContext) {
                 continue;
             }
-            RuleContext childRuleContext = (RuleContext) localVariableDeclaration.getChild(i);
+            RuleContext childRuleContext = (RuleContext) ctx.getChild(i);
             if (childRuleContext.getRuleIndex() == Java8Parser.RULE_unannType) {
                 unannTypeCtx = (ParserRuleContext) childRuleContext;
             }
@@ -67,9 +74,11 @@ public class LocalVariableDeclarationStatementTranslate {
 
         UnannTypeTranslate unannTypeTranslate = new UnannTypeTranslate();
         String unannType = unannTypeTranslate.translateUnannType(unannTypeCtx);
+
         VariableDeclaratorListTranslate variableDeclaratorListTranslate = new VariableDeclaratorListTranslate();
         String variableDeclaratorList = variableDeclaratorListTranslate.translateVariableDeclaratorList(variableDeclaratorListCtx);
-        return unannType + variableDeclaratorList;
+
+        return unannType + " " + variableDeclaratorList;
     }
 
 

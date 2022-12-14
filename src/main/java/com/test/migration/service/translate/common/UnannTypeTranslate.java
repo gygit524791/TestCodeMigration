@@ -5,6 +5,7 @@ import com.test.migration.service.translate.MappingRuleLoader;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
@@ -56,11 +57,22 @@ public class UnannTypeTranslate {
 
         // TODO 类/接口类型，从映射表中找对应关系
         // TODO TIPS 不考虑存在注解和范型的情况
+        return replaceClassOrInterfaceType(ctx.getText());
+    }
+
+
+    /** replace strategy **/
+
+    /**
+     * 替换引用类型
+     */
+    private String replaceClassOrInterfaceType(String clsName) {
         Map<String, String> referenceMapping = MappingRuleLoader.commonClassNameMapping;
-        if(referenceMapping.containsKey(ctx.getText())){
-            return referenceMapping.get(ctx.getText());
+        if (StringUtils.equals("String", clsName)) {
+            return referenceMapping.get(clsName);
         }
-        return ctx.getText();
+
+        return referenceMapping.getOrDefault(clsName, clsName) + " * ";
     }
 
 }
