@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/cls/ClassInstanceCreationExpressionTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/translate/source/ADemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/translate/source/ADemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/translate/targets/ADemo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/demo/translate/targets/ADemo.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TranslateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8BaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8BaseVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8Lexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8Lexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8Lexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8Listener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/com/test/migration/antlr/java/Java8Visitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/method/MethodInvocationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/method/MethodInvocationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/ExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/ExpressionTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/PrimaryNoNewArrayLfNoPrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/PrimaryNoNewArrayLfNoPrimaryTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/StatementExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/expression/StatementExpressionTranslate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +175,7 @@
       <workItem from="1670292151612" duration="53289000" />
       <workItem from="1670569983960" duration="4647000" />
       <workItem from="1670812883210" duration="3635000" />
-      <workItem from="1670820166180" duration="35311000" />
+      <workItem from="1670820166180" duration="48475000" />
     </task>
     <servers />
   </component>
@@ -198,10 +211,25 @@
           <line>423</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/declaration/FieldDeclarationTranslate.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorListTranslate.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/utils/MappingRuleReader.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="42" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorListTranslate.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/common/variable/VariableDeclaratorListTranslate.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/dao/ApiMappingDao.java</url>

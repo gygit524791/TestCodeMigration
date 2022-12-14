@@ -7,6 +7,14 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 public class ExpressionTranslate {
+    /**
+     * expression
+     * 	:	lambdaExpression
+     * 	|	assignmentExpression
+     * 	;
+     * @param ctx
+     * @return
+     */
     public String translateExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_expression) {
             System.out.println("expressionRule 没找到，不科学");
@@ -28,8 +36,10 @@ public class ExpressionTranslate {
     }
 
     /**
-     * @param ctx
-     * @return
+     * assignmentExpression
+     * 	:	conditionalExpression
+     * 	|	assignment
+     * 	;
      */
     private String translateAssignmentExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_assignmentExpression) {

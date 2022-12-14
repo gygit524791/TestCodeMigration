@@ -1,10 +1,12 @@
 package com.test.migration.service.translate.expression;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.common.method.MethodInvocationTranslate;
 import com.test.migration.service.translate.statement.BlockTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import org.checkerframework.checker.units.qual.C;
 
 public class PrimaryNoNewArrayLfNoPrimaryTranslate {
     /**
@@ -48,7 +50,10 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
             return translateLiteral(childRuleContext);
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classInstanceCreationExpression_lfno_primary) {
-            return translateVariableInitializerWithClassInstanceCreation(childRuleContext);
+            // TODO 这里有坑
+//            return translateVariableInitializerWithClassInstanceCreation(childRuleContext);
+            ClassInstanceCreationExpressionTranslate classInstanceCreationExpressionTranslate = new ClassInstanceCreationExpressionTranslate();
+            return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression_lfno_primary(childRuleContext);
         }
 
         System.out.println("translateVariableInitializer 不支持的解析类型");

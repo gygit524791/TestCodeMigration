@@ -46,7 +46,7 @@ public class ReplaceRuleService {
 
             if (StringUtils.isNotBlank(methodInvocationTypeNameRule.getTargetClassName())
                     && StringUtils.isNotBlank(methodInvocationTypeNameRule.getTargetMethodName())) {
-                return typeName + "." + methodInvocationTypeNameRule.getTargetMethodName() + "(" + argumentList + ")";
+                return typeName + "->" + methodInvocationTypeNameRule.getTargetMethodName() + "(" + argumentList + ")";
             }
 
         }

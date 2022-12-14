@@ -46,10 +46,7 @@ public class MethodInvocationTranslate {
      * 方法调用，antlr将方法调用的写法格式划分为3类12种（很多都不常用）
      * methodInvocation_lfno_primary
      * <p>
-     * ，目前先支持最简单的两种
-     *
-     * @param ctx
-     * @return
+     * ，目前先支持最简单的两种，其他懒得搞了
      */
     public String translateMethodInvocationLfNoPrimary(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation_lfno_primary) {
@@ -140,7 +137,7 @@ public class MethodInvocationTranslate {
                 argumentList.append(argumentListTranslate.translateArgumentList((ParserRuleContext) ctx.getChild(i)));
             }
         }
-        String originTranslate = typeName + "." + methodNameIdentifier + "(" + argumentList + ")";
+        String originTranslate = typeName + "->" + methodNameIdentifier + "(" + argumentList + ")";
         return ReplaceRuleService.replaceMethodInvocationTypeName(originTranslate, typeName, methodNameIdentifier, argumentList.toString());
     }
 

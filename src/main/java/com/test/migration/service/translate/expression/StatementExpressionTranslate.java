@@ -2,6 +2,7 @@ package com.test.migration.service.translate.expression;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.common.AssignmentTranslate;
+import com.test.migration.service.translate.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.common.method.MethodInvocationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 
@@ -49,8 +50,8 @@ public class StatementExpressionTranslate {
             return translate.translateMethodInvocation(childRuleContext);
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classInstanceCreationExpression) {
-            MethodInvocationTranslate methodInvocationTranslate = new MethodInvocationTranslate();
-            return methodInvocationTranslate.translateMethodInvocation(childRuleContext);
+            ClassInstanceCreationExpressionTranslate classInstanceCreationExpressionTranslate = new ClassInstanceCreationExpressionTranslate();
+            return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression(childRuleContext);
         }
 
         System.out.println("translateStatementExpression 不可能到这里");
