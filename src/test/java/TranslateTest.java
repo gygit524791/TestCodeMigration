@@ -1,12 +1,9 @@
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.MappingRuleLoader;
-import com.test.migration.service.translate.ReplaceRuleService;
-import com.test.migration.service.translate.TestCodeContext;
-import com.test.migration.service.translate.TestCodeVisitor;
-import com.test.migration.service.translate.declaration.ClassDeclarationTranslate;
-import com.test.migration.service.translate.declaration.FieldDeclarationTranslate;
-import com.test.migration.service.translate.common.method.MethodDeclarationTranslate;
+import com.test.migration.service.translate.*;
+import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
+import com.test.migration.service.translate.bnf.declaration.FieldDeclarationTranslate;
+import com.test.migration.service.translate.bnf.common.method.MethodDeclarationTranslate;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -35,8 +32,6 @@ public class TranslateTest {
         ParseTree parseTree = parser.compilationUnit();
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
-        // visit之后的必备步骤
-        TestCodeContext.loadDeclaration();
 
         TestCodeContext.ClassMemberDeclaration.classes.forEach(System.out::println);
         TestCodeContext.ClassMemberDeclaration.fields.forEach(System.out::println);
@@ -69,6 +64,12 @@ public class TranslateTest {
             System.out.println("---------------------------");
         }
 
+
+        System.out.println("==== MISMATCH HINT=======");
+        if (TranslateHint.MisMatchInfo.codes.size() > 0) {
+            System.out.println(TranslateHint.MisMatchInfo.MIS_MATCH_TIPS);
+            TranslateHint.MisMatchInfo.codes.forEach(System.out::println);
+        }
         // 代码转换
 //        ClassDeclarationTranslate translate = new ClassDeclarationTranslate();
 

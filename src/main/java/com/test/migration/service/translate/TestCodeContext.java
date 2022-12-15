@@ -17,46 +17,22 @@ import java.util.List;
  * 在antlr执行visitor完毕后，所有上下文信息将被填充，这些信息便于后续在其它地方使用，相当于一个简易内存数据库
  */
 public class TestCodeContext {
-    public static String className = "";
-    public static List<ParserRuleContext> classDeclarationCtxList = Lists.newArrayList();
-    public static List<ParserRuleContext> classBodyDeclarationCtxList = Lists.newArrayList();
-    public static List<ParserRuleContext> fieldDeclarationCtxList = Lists.newArrayList();
-    public static List<ParserRuleContext> methodDeclarationCtxList = Lists.newArrayList();
 
-    public static void loadDeclaration() {
-        if (classBodyDeclarationCtxList.isEmpty()) {
-            return;
-        }
 
-        for (ParserRuleContext parserRuleContext : classBodyDeclarationCtxList) {
-            ParseTree child = parserRuleContext.getChild(0);
-            boolean isRuleContext = child instanceof RuleContext;
-            if (!isRuleContext) {
-                continue;
-            }
-            RuleContext node = (RuleContext) child;
-            if (node.getRuleIndex() != Java8Parser.RULE_classMemberDeclaration) {
-                continue;
-            }
+    public static String className;
 
-            ParseTree declarationChild = node.getChild(0);
-            boolean isSubRuleContext = declarationChild instanceof RuleContext;
-            if (!isSubRuleContext) {
-                continue;
-            }
+    /**
+     * testCode的成员变量, 待迁移
+     */
+    public static List<ParserRuleContext> fieldDeclarationCtxList;
+    public static List<ParserRuleContext> methodDeclarationCtxList;
+    public static List<ParserRuleContext> classDeclarationCtxList;
 
-            RuleContext subNode = (RuleContext) declarationChild;
-            if (subNode.getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
-                fieldDeclarationCtxList.add((ParserRuleContext) subNode);
-            }
-            if (subNode.getRuleIndex() == Java8Parser.RULE_methodDeclaration) {
-                methodDeclarationCtxList.add((ParserRuleContext) subNode);
-            }
-            if (subNode.getRuleIndex() == Java8Parser.RULE_classDeclaration) {
-                classDeclarationCtxList.add((ParserRuleContext) subNode);
-            }
-        }
-
+    public static void init() {
+        className = "";
+        fieldDeclarationCtxList = Lists.newArrayList();
+        methodDeclarationCtxList = Lists.newArrayList();
+        classDeclarationCtxList = Lists.newArrayList();
     }
 
     /**
@@ -69,18 +45,21 @@ public class TestCodeContext {
         public static List<Method> methods = Lists.newArrayList();
         public static List<Class> classes = Lists.newArrayList();
         public static List<Interface> interfaces = Lists.newArrayList();
+
         @Data
         public static class Field {
-            public  String type;
-            public  String name;
+            public String type;
+            public String name;
         }
+
         @Data
         public static class Method {
             public static String name;
         }
+
         @Data
         public static class Class {
-            public  String name;
+            public String name;
         }
 
         public static class Interface {

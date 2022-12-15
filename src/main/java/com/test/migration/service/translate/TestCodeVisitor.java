@@ -22,6 +22,13 @@ import java.util.Map;
 @Setter
 public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
 
+    /***
+     * 每个测试类内部的classBody不止一个，只对最外层class收集类成员变量
+     *
+     * 首次visit classBody之后，该值设为false
+     */
+    private static boolean isTopClass = true;
+
     /**
      * typeName对应的类型mapping表，举个例子：
      * <p>
@@ -54,55 +61,107 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
         return visitChildren(ctx);
     }
 
-
+    /**
+     *
+     * @param ctx the parse tree
+     * @return
+     */
     @Override
     public RuleNode visitClassBody(Java8Parser.ClassBodyContext ctx) {
-        if (TestCodeContext.classBodyDeclarationCtxList.isEmpty()) {
-            for (int i = 0; i < ctx.getChildCount(); i++) {
-                boolean isRuleContext = ctx.getChild(i) instanceof RuleContext;
-                if (!isRuleContext) {
-                    continue;
-                }
-
-                RuleContext childRuleContext = (RuleContext) ctx.getChild(i);
-                if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classBodyDeclaration) {
-                    TestCodeContext.classBodyDeclarationCtxList.add((ParserRuleContext) childRuleContext);
-                    RuleContext childContext = (RuleContext) childRuleContext.getChild(0);
-                    if (childContext.getRuleIndex() == Java8Parser.RULE_classMemberDeclaration) {
-                        ParseTree classMemberChild = childContext.getChild(0);
-                        boolean isClassMemberRuleContext = classMemberChild instanceof RuleContext;
-                        if (!isClassMemberRuleContext) {
-                            continue;
-                        }
-
-                        // 解析field
-                        if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
-                            fillFields(classMemberChild);
-                        }
-
-                        // 解析method todo
-                        if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_methodDeclaration) {
-
-                        }
-
-                        // 解析class
-                        // TODO class可能有多层嵌套定义，目前只支持到二层
-                        if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_classDeclaration) {
-                            fillMethods(classMemberChild);
-                        }
-
-                        // 解析interface todo
-                        if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_interfaceDeclaration) {
-
-                        }
-
-
-                    }
-                }
-            }
+        if (!isTopClass) {
+            return visitChildren(ctx);
         }
 
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            boolean isRuleContext = ctx.getChild(i) instanceof RuleContext;
+            if (!isRuleContext) {
+                continue;
+            }
+
+            RuleContext childRuleContext = (RuleContext) ctx.getChild(i);
+            if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classBodyDeclaration) {
+                fillClassMemberContext(childRuleContext);
+
+                fillBasicContext(childRuleContext);
+            }
+        }
+        isTopClass = false;
         return visitChildren(ctx);
+    }
+
+
+    /*
+        私有方法区
+     */
+
+
+    /**
+     * 填充方法名，类名，成员变量名等基础信息
+     * @param childRuleContext
+     */
+    private static void fillBasicContext(RuleContext childRuleContext) {
+        RuleContext childContext = (RuleContext) childRuleContext.getChild(0);
+        if (childContext.getRuleIndex() == Java8Parser.RULE_classMemberDeclaration) {
+            ParseTree classMemberChild = childContext.getChild(0);
+            boolean isClassMemberRuleContext = classMemberChild instanceof RuleContext;
+            if (!isClassMemberRuleContext) {
+                return;
+            }
+
+            // 解析field
+            if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
+                fillFields(classMemberChild);
+            }
+
+            // 解析method todo
+            if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_methodDeclaration) {
+
+            }
+
+            // 解析class
+            // TODO class可能有多层嵌套定义，目前只支持到二层
+            if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_classDeclaration) {
+                fillMethods(classMemberChild);
+            }
+
+            // 解析interface todo
+            if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_interfaceDeclaration) {
+
+            }
+
+        }
+    }
+
+    /**
+     * 填充成员变量子树，方法子树，类子树等信息
+     * @param childRuleContext
+     */
+    private static void fillClassMemberContext(RuleContext childRuleContext) {
+        ParseTree child = childRuleContext.getChild(0);
+        boolean isChildRuleContext = child instanceof RuleContext;
+        if (!isChildRuleContext) {
+            return;
+        }
+        RuleContext node = (RuleContext) child;
+        if (node.getRuleIndex() != Java8Parser.RULE_classMemberDeclaration) {
+            return;
+        }
+
+        ParseTree declarationChild = node.getChild(0);
+        boolean isSubRuleContext = declarationChild instanceof RuleContext;
+        if (!isSubRuleContext) {
+            return;
+        }
+        RuleContext subNode = (RuleContext) declarationChild;
+        if (subNode.getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
+            TestCodeContext.fieldDeclarationCtxList.add((ParserRuleContext) subNode);
+        }
+        if (subNode.getRuleIndex() == Java8Parser.RULE_methodDeclaration) {
+            TestCodeContext.methodDeclarationCtxList.add((ParserRuleContext) subNode);
+        }
+        if (subNode.getRuleIndex() == Java8Parser.RULE_classDeclaration) {
+            TestCodeContext.classDeclarationCtxList.add((ParserRuleContext) subNode);
+        }
     }
 
     private static void fillMethods(ParseTree classMemberChild) {
@@ -162,7 +221,6 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
                     return field;
                 }).toList());
     }
-
 
     private static boolean isExistAnnotation(RuleContext node) {
         boolean existAnnotation = false;
