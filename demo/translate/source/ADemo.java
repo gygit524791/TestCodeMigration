@@ -8,6 +8,10 @@ public class ADemo {
         d.test2();
     }
 
+    public void method1(Source a){
+        d.test2();
+    }
+
     class BDemo{
         private int a;
         private String b;

@@ -48,38 +48,4 @@ public class MethodDeclarationTranslate {
         return methodHeader + " " + methodBody;
     }
 
-    /**
-     * @param ctx methodHeader
-     * @return
-     */
-    public String fetchMethodName(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodHeader) {
-            return "";
-        }
-
-        for (int j = 0; j < ctx.getChildCount(); j++) {
-            // 获取method的Header
-            ParseTree methodHeaderChild = ctx.getChild(j);
-            boolean isMethodHeaderChildRuleContext = methodHeaderChild instanceof RuleContext;
-            if (!isMethodHeaderChildRuleContext) {
-                continue;
-            }
-            RuleContext methodHeaderChildNode = (RuleContext) methodHeaderChild;
-            if (methodHeaderChildNode.getRuleIndex() != Java8Parser.RULE_methodDeclarator) {
-                continue;
-            }
-
-            // 获取method的Identifier
-            for (int k = 0; k < methodHeaderChildNode.getChildCount(); k++) {
-                ParseTree child1 = methodHeaderChildNode.getChild(k);
-                if (child1 instanceof TerminalNode terminalNode) {
-                    if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
-                        return terminalNode.getText();
-                    }
-                }
-            }
-
-        }
-        return "";
-    }
 }

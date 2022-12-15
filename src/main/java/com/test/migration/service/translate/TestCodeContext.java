@@ -25,14 +25,30 @@ public class TestCodeContext {
      * testCode的成员变量, 待迁移
      */
     public static List<ParserRuleContext> fieldDeclarationCtxList;
+    // 不包含test方法
     public static List<ParserRuleContext> methodDeclarationCtxList;
     public static List<ParserRuleContext> classDeclarationCtxList;
 
+    public static List<ParserRuleContext> testMethodDeclarationCtxList;
+
+    /**
+     * visit之前调用 清空历史数据
+     */
     public static void init() {
         className = "";
         fieldDeclarationCtxList = Lists.newArrayList();
         methodDeclarationCtxList = Lists.newArrayList();
         classDeclarationCtxList = Lists.newArrayList();
+        testMethodDeclarationCtxList = Lists.newArrayList();
+    }
+
+    /**
+     * visit之后调用 过滤不需要迁移的代码
+     */
+    public static void filter() {
+        TestCodeFilter.filterFieldDeclarationCtxList();
+        TestCodeFilter.filterMethodDeclarationCtxList();
+        TestCodeFilter.filterClassDeclarationCtxList();
     }
 
     /**

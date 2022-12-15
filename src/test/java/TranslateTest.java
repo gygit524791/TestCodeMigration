@@ -30,8 +30,11 @@ public class TranslateTest {
 
         Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
         ParseTree parseTree = parser.compilationUnit();
+
+        TestCodeContext.init();
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
+        TestCodeContext.filter();
 
         TestCodeContext.ClassMemberDeclaration.classes.forEach(System.out::println);
         TestCodeContext.ClassMemberDeclaration.fields.forEach(System.out::println);
@@ -56,13 +59,19 @@ public class TranslateTest {
             System.out.println("---------------------------");
         }
 
-
         System.out.println("====translate ClassDeclaration====");
         ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
             System.out.println(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
             System.out.println("---------------------------");
         }
+
+        System.out.println("====translate TestMethodDeclaration====");
+        for (ParserRuleContext parserRuleContext : TestCodeContext.testMethodDeclarationCtxList) {
+            System.out.println(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
+            System.out.println("---------------------------");
+        }
+
 
 
         System.out.println("==== MISMATCH HINT=======");
