@@ -82,7 +82,8 @@ public class APIExtractorService extends Java8BaseVisitor<RuleNode> {
                 // 获取method的Identifier
                 for (int k = 0; k < methodHeaderChildNode.getChildCount(); k++) {
                     ParseTree child1 = methodHeaderChildNode.getChild(k);
-                    if (child1 instanceof TerminalNode terminalNode) {
+                    if (child1 instanceof TerminalNode) {
+                        TerminalNode terminalNode = (TerminalNode)child1;
                         if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                             return terminalNode.getText();
                         }

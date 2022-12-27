@@ -69,7 +69,7 @@ public class TranslateTestService {
                         }
                     })
                     .distinct()
-                    .toList();
+                    .collect(Collectors.toList());
             Map<String, List<ApiBasic>> fileApiBasicMap = apiBasics.stream().collect(Collectors.groupingBy(ApiBasic::getFilepath));
 
             List<TranslateTest> translateTests = Lists.newArrayList();

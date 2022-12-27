@@ -105,7 +105,8 @@ public class ReplaceRuleService {
         String identifier = "";
         for (int k = 0; k < ctx.getChildCount(); k++) {
             ParseTree child1 = ctx.getChild(k);
-            if (child1 instanceof TerminalNode terminalNode) {
+            if (child1 instanceof TerminalNode) {
+                TerminalNode terminalNode = (TerminalNode)child1;
                 if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                     identifier = terminalNode.getText();
                     // 只取第一个identifier，取到后必须break

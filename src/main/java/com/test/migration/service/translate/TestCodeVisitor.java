@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -51,7 +52,8 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
         if (StringUtils.isBlank(TestCodeContext.className)) {
             for (int i = 0; i < ctx.getChildCount(); i++) {
                 ParseTree child = ctx.getChild(i);
-                if (child instanceof TerminalNode terminalNode) {
+                if (child instanceof TerminalNode) {
+                    TerminalNode terminalNode = (TerminalNode) child;
                     if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                         TestCodeContext.className = terminalNode.getText();
                     }
@@ -62,7 +64,6 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
     }
 
     /**
-     *
      * @param ctx the parse tree
      * @return
      */
@@ -97,6 +98,7 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
 
     /**
      * 填充方法名，类名，成员变量名等基础信息
+     *
      * @param childRuleContext
      */
     private static void fillBasicContext(RuleContext childRuleContext) {
@@ -134,6 +136,7 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
 
     /**
      * 填充成员变量子树，方法子树，类子树等信息
+     *
      * @param childRuleContext
      */
     private static void fillClassMemberContext(RuleContext childRuleContext) {
@@ -172,7 +175,8 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
             String identifier = "";
             for (int j = 0; j < classMemberChildRuleCtx.getChildCount(); j++) {
                 ParseTree child1 = classMemberChildRuleCtx.getChild(j);
-                if (child1 instanceof TerminalNode terminalNode) {
+                if (child1 instanceof TerminalNode) {
+                    TerminalNode terminalNode = (TerminalNode)child1;
                     if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                         identifier = terminalNode.getText();
                         break;
@@ -219,6 +223,6 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
                     }
                     field.name = variableDeclarator;
                     return field;
-                }).toList());
+                }).collect(Collectors.toList()));
     }
 }

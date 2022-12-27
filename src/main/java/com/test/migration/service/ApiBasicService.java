@@ -79,7 +79,7 @@ public class ApiBasicService {
                     }
                 })
                 .distinct()
-                .toList();
+                .collect(Collectors.toList());
 
         // 过滤掉测试相关的类文件
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
@@ -103,7 +103,7 @@ public class ApiBasicService {
                     }
                 })
                 .distinct()
-                .toList();
+                .collect(Collectors.toList());
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
                 .flatMap(filepath -> parseHarmonyApiBasic(filepath, taskParameter).stream())
@@ -209,8 +209,8 @@ public class ApiBasicService {
     private void generateTokenCorpus(List<ApiBasic> apiBasics, TaskParameter taskParameter) {
         // 取出所有token序列
         List<String> tokens = Lists.newArrayList();
-        tokens.addAll(apiBasics.stream().map(api -> api.getTokenSequence().replace(",", " ")).toList());
-        tokens.addAll(apiBasics.stream().map(api -> api.getClassNameTokenSequence().replace(",", " ")).toList());
+        tokens.addAll(apiBasics.stream().map(api -> api.getTokenSequence().replace(",", " ")).collect(Collectors.toList()));
+        tokens.addAll(apiBasics.stream().map(api -> api.getClassNameTokenSequence().replace(",", " ")).collect(Collectors.toList()));
 
         // 填充token语料库文件
         fillCorpus(taskParameter, tokens);

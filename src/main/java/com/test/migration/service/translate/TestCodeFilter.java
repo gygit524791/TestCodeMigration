@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 过滤掉不需要进行迁移的代码结构：
@@ -31,11 +32,10 @@ public class TestCodeFilter {
                         return false;
                     }
                     return true;
-                }).toList();
+                }).collect(Collectors.toList());
 
         TestCodeContext.testMethodDeclarationCtxList = testMethodDeclarationCtxList;
     }
-
 
 
     public static void filterClassDeclarationCtxList() {
@@ -79,7 +79,8 @@ public class TestCodeFilter {
             // 获取method的Identifier
             for (int k = 0; k < methodHeaderChildNode.getChildCount(); k++) {
                 ParseTree child1 = methodHeaderChildNode.getChild(k);
-                if (child1 instanceof TerminalNode terminalNode) {
+                if (child1 instanceof TerminalNode) {
+                    TerminalNode terminalNode = (TerminalNode) child1;
                     if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                         return terminalNode.getText();
                     }

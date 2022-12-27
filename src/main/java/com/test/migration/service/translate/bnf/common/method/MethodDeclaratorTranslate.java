@@ -27,13 +27,15 @@ public class MethodDeclaratorTranslate {
         String formalParameterList = "";
         for (int i = 0; i < ctx.getChildCount(); i++) {
             ParseTree child = ctx.getChild(i);
-            if (child instanceof TerminalNode terminalNode) {
+            if (child instanceof TerminalNode) {
+                TerminalNode terminalNode = (TerminalNode)child;
                 if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                     identifier = terminalNode.getText();
                 }
             }
 
-            if (child instanceof RuleContext ruleContext) {
+            if (child instanceof RuleContext) {
+                RuleContext ruleContext = (RuleContext) child;
                 if (ruleContext.getRuleIndex() == Java8Parser.RULE_formalParameterList) {
                     FormalParameterListTranslate formalParameterListTranslate = new FormalParameterListTranslate();
                     formalParameterList = formalParameterListTranslate.translateFormalParameterList((ParserRuleContext) ruleContext);

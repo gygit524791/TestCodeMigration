@@ -48,8 +48,8 @@ public class ApiMappingService {
 
     private void saveMappingRule(List<ApiMapping> mappings) {
         List<Integer> apiBasicIds = Lists.newArrayList();
-        apiBasicIds.addAll(mappings.stream().map(ApiMapping::getSourceApiId).toList());
-        apiBasicIds.addAll(mappings.stream().map(ApiMapping::getTargetApiId).toList());
+        apiBasicIds.addAll(mappings.stream().map(ApiMapping::getSourceApiId).collect(Collectors.toList()));
+        apiBasicIds.addAll(mappings.stream().map(ApiMapping::getTargetApiId).collect(Collectors.toList()));
 
         if (apiBasicIds.size() == 0) {
             return;

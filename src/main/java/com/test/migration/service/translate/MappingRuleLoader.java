@@ -10,6 +10,7 @@ import utils.MappingRuleReader;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -23,11 +24,11 @@ public class MappingRuleLoader {
     public static void load() {
         List<String> customMethodInvocationTypeNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/customMethodInvocationTypeNameMapping.properties");
         customMethodInvocationTypeNameMapping = customMethodInvocationTypeNameMappingStr.stream()
-                .map(MappingRuleLoader::buildMapping).toList();
+                .map(MappingRuleLoader::buildMapping).collect(Collectors.toList());
 
         List<String> commonMethodInvocationTypeNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/commonMethodInvocationTypeNameMapping.properties");
         commonMethodInvocationTypeNameMapping = commonMethodInvocationTypeNameMappingStr.stream()
-                .map(MappingRuleLoader::buildMapping).toList();
+                .map(MappingRuleLoader::buildMapping).collect(Collectors.toList());
 
         List<String> testToolMethodNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/testToolMethodNameMapping.properties");
         testToolMethodNameMapping = convertToMap(testToolMethodNameMappingStr);
