@@ -90,7 +90,7 @@ public class ReplaceRuleService {
 
         // hint for mismatch
         if (!referenceMapping.containsKey(clsName)) {
-            TranslateHint.MisMatchInfo.codes.add(clsName);
+            TranslateHint.misMatchCodes.add(clsName);
         }
 
         return referenceMapping.getOrDefault(clsName, clsName) + " * ";
@@ -126,7 +126,7 @@ public class ReplaceRuleService {
 
         // hint for mismatch
         if (!commonClassNameMapping.containsKey(identifier)) {
-            TranslateHint.MisMatchInfo.codes.add(ctx.getText());
+            TranslateHint.misMatchCodes.add(ctx.getText());
         }
 
         return commonClassNameMapping.getOrDefault(identifier, identifier);

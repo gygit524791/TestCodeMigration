@@ -30,7 +30,7 @@ public class BlockTranslate {
             return "{ }";
         }
 
-        // 对于method里面的每个blckStatement
+        // 对于method里面的每个blockStatement
         List<ParserRuleContext> blockStatementsList = Lists.newArrayList();
         for (int i = 0; i < ctx.getChildCount(); i++) {
             ParseTree child = ctx.getChild(i);

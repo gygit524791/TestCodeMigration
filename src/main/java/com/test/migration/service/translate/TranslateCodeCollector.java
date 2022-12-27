@@ -1,5 +1,6 @@
 package com.test.migration.service.translate;
 
+import com.google.common.collect.Lists;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.util.List;
@@ -11,13 +12,25 @@ import java.util.List;
  * 2.测试方法
  * 方法由blockStatement组成，测试方法用一组[blockStatement,hint]组成
  */
-public class TranslateCodeGenerator {
-    public static List<ClassMemberTranslateCode> classMemberTranslateCodes;
+public class TranslateCodeCollector {
+    public static List<FieldDeclarationTranslateCode> fieldDeclarationTranslateCodes;
+    public static List<ClassDeclarationTranslateCode> classDeclarationTranslateCodes;
+    public static List<TestMethodTranslateCode> testMethodTranslateCodes;
 
-    /**
-     * test code 类成员
-     */
-    public static class ClassMemberTranslateCode {
+
+    public static void init() {
+        fieldDeclarationTranslateCodes = Lists.newArrayList();
+        classDeclarationTranslateCodes = Lists.newArrayList();
+        testMethodTranslateCodes = Lists.newArrayList();
+    }
+
+
+    public static class FieldDeclarationTranslateCode {
+        public String translateCode;
+        public TranslateHint translateHint;
+    }
+
+    public static class ClassDeclarationTranslateCode {
         public String translateCode;
         public TranslateHint translateHint;
     }

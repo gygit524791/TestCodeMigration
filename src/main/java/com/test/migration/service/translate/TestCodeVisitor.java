@@ -221,20 +221,4 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
                     return field;
                 }).toList());
     }
-
-    private static boolean isExistAnnotation(RuleContext node) {
-        boolean existAnnotation = false;
-        for (int j = 0; j < node.getChildCount(); j++) {
-            boolean isChildRuleContext = node.getChild(j) instanceof RuleContext;
-            if (!isChildRuleContext) {
-                continue;
-            }
-            RuleContext methodModifierNode = (RuleContext) node.getChild(j);
-            if (methodModifierNode.getRuleIndex() == Java8Parser.RULE_annotation) {
-                existAnnotation = true;
-            }
-        }
-        return existAnnotation;
-    }
-
 }

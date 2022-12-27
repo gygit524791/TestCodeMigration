@@ -12,6 +12,10 @@ import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.entity.po.ApiMapping;
 import com.test.migration.entity.po.TranslateTest;
 import com.test.migration.service.invocation.ApiInvocationVisitor;
+import com.test.migration.service.translate.*;
+import com.test.migration.service.translate.bnf.common.method.MethodDeclarationTranslate;
+import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
+import com.test.migration.service.translate.bnf.declaration.FieldDeclarationTranslate;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -106,11 +110,11 @@ public class TranslateTestService {
     public void translateCode() {
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<TranslateTest> translateTests = selectByTaskId(taskParameter.getTaskId());
-
+        MappingRuleLoader.load();
         // 以文件为代码进行转换
         translateTests.forEach(translateTest -> {
-            String translateCode = translateFile(translateTest);
-            translateTest.setTranslateCode(translateCode);
+//            String translateCode = translateFile(translateTest);
+            translateTest.setTranslateCode("translateCode");
             update(translateTest);
         });
     }
@@ -123,11 +127,61 @@ public class TranslateTestService {
             e.printStackTrace();
         }
 
-        Map<String, List<String>> testMethodApiInvocationMap = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
-        Map<String, ParserRuleContext> parserRuleContextMap = Maps.newHashMap();
-        for (String testMethodName : testMethodApiInvocationMap.keySet()) {
-            parserRuleContextMap.put(testMethodName, null);
+//        Map<String, List<String>> testMethodApiInvocationMap = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
+//        Map<String, ParserRuleContext> parserRuleContextMap = Maps.newHashMap();
+//        for (String testMethodName : testMethodApiInvocationMap.keySet()) {
+//            parserRuleContextMap.put(testMethodName, null);
+//        }
+//
+        Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
+        ParseTree parseTree = parser.compilationUnit();
+
+        TestCodeContext.init();
+        TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
+        testCodeVisitor.visit(parseTree);
+        TestCodeContext.filter();
+
+        TestCodeContext.ClassMemberDeclaration.classes.forEach(System.out::println);
+        TestCodeContext.ClassMemberDeclaration.fields.forEach(System.out::println);
+
+
+        testCodeVisitor.getTypeNameMap().put("mActivityRule", "ActivityTestRule<AnimatorSetActivity>");
+        ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
+
+        System.out.println(TestCodeContext.className);
+
+        System.out.println("====translate FieldDeclaration====");
+        FieldDeclarationTranslate fieldDeclarationTranslate = new FieldDeclarationTranslate();
+        for (ParserRuleContext parserRuleContext : TestCodeContext.fieldDeclarationCtxList) {
+            System.out.println(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
+            System.out.println("---------------------------");
         }
+
+        System.out.println("====translate MethodDeclaration====");
+        MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
+        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
+            System.out.println(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
+            System.out.println("---------------------------");
+        }
+
+        System.out.println("====translate ClassDeclaration====");
+        ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
+        for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
+            System.out.println(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
+            System.out.println("---------------------------");
+        }
+
+        System.out.println("====translate TestMethodDeclaration====");
+        for (ParserRuleContext parserRuleContext : TestCodeContext.testMethodDeclarationCtxList) {
+            System.out.println(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
+            System.out.println("---------------------------");
+        }
+
+//        System.out.println("==== MISMATCH HINT=======");
+//        if (TranslateHint.MisMatchInfo.codes.size() > 0) {
+//            System.out.println(TranslateHint.MisMatchInfo.MIS_MATCH_TIPS);
+//            TranslateHint.MisMatchInfo.codes.forEach(System.out::println);
+//        }
 
 //        Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
 //        ParseTree parseTree = parser.compilationUnit();
