@@ -2,6 +2,8 @@ package com.test.migration.service.translate.bnf.statement;
 
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.TranslateCodeCollector;
+import com.test.migration.service.translate.TranslateHint;
 import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
@@ -69,9 +71,18 @@ public class BlockTranslate {
             }
             blockStatementList.add((ParserRuleContext) child);
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        blockStatementList.forEach(blockStatement -> stringBuilder.append(translateBlockStatement(blockStatement)));
-        return stringBuilder.toString();
+        StringBuilder blockStatementListStr = new StringBuilder();
+        blockStatementList.forEach(blockStatement -> {
+            TranslateHint.init();
+            String translateBlockStatement = translateBlockStatement(blockStatement);
+            blockStatementListStr.append(translateBlockStatement);
+            // 收集器
+            TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode = new TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode();
+            blockStatementTranslateCode.translateCode = translateBlockStatement;
+            blockStatementTranslateCode.misMatchCodes = TranslateHint.misMatchCodes;
+            TranslateCodeCollector.blockStatementTranslateCodes.add(blockStatementTranslateCode);
+        });
+        return blockStatementListStr.toString();
     }
 
     /**

@@ -2,6 +2,8 @@ package com.test.migration.service.translate.bnf.common.method;
 
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.TranslateCodeCollector;
+import com.test.migration.service.translate.TranslateHint;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -41,10 +43,20 @@ public class MethodDeclarationTranslate {
 
         MethodHeaderTranslate methodHeaderTranslate = new MethodHeaderTranslate();
         String methodHeader = methodHeaderTranslate.translateMethodHeader(methodHeaderRule);
+        // 判断是否待翻译method中的内部方法，如果是就不收集header了
+        boolean isInnerMethod = ctx.getStart().getLine() < TranslateCodeCollector.methodStartLine && ctx.getStop().getLine() > TranslateCodeCollector.methodEndLine;
+        if (!isInnerMethod) {
+            // 收集methodHeader信息
+            // TODO 存在bug
+            TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode methodHeaderTranslateCode = new TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode();
+            methodHeaderTranslateCode.translateCode = methodHeader;
+            methodHeaderTranslateCode.misMatchCodes = TranslateHint.misMatchCodes;
+            TranslateCodeCollector.methodHeaderTranslateCode = methodHeaderTranslateCode;
+        }
+
 
         MethodBodyTranslate methodBodyTranslate = new MethodBodyTranslate();
         String methodBody = methodBodyTranslate.translateMethodBody(methodBodyRule);
-
         return methodHeader + " " + methodBody;
     }
 

@@ -15,6 +15,11 @@ import java.util.List;
  * 存储代码转换过程需要的中间信息
  * 简单实现：用static变量暂存antlr解析和生成的待转换code信息
  * 在antlr执行visitor完毕后，所有上下文信息将被填充，这些信息便于后续在其它地方使用，相当于一个简易内存数据库
+ *
+ *
+ *
+ *
+ *
  */
 public class TestCodeContext {
 
@@ -28,7 +33,6 @@ public class TestCodeContext {
     // 不包含test方法
     public static List<ParserRuleContext> methodDeclarationCtxList;
     public static List<ParserRuleContext> classDeclarationCtxList;
-
     public static List<ParserRuleContext> testMethodDeclarationCtxList;
 
     /**

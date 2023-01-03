@@ -30,6 +30,8 @@ public class ClassDeclarationTranslate {
             return subTranslate.translateEnumDeclaration(childRuleContext);
         }
 
+        System.out.println("RULE_classDeclaration error");
+
         return null;
     }
 }

@@ -31,7 +31,10 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
     private static boolean isTopClass = true;
 
     /**
-     * typeName对应的类型mapping表，举个例子：
+     * typeName对应的类型mapping表，是实现代码转换中非常关键的一个环节
+     * 在visitor过程中完成typename的初始化
+     * <p>
+     * 举个例子：
      * <p>
      * typeName.methodIdentifier:
      * mActivityRule.runOnUiThread(()->{
@@ -41,8 +44,7 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
      * 因此需要一个从mActivityRule到ActivityTestRule<AnimatorSetActivity>的映射关系
      * methodIdentifier是runOnUiThread
      * <p>
-     * <p>
-     * TODO
+     * todo 单层映射（identifier重名问题）
      */
     private Map<String, String> typeNameMap = Maps.newHashMap();
 
@@ -90,11 +92,116 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
         return visitChildren(ctx);
     }
 
+    @Override
+    public RuleNode visitFieldDeclaration(Java8Parser.FieldDeclarationContext ctx) {
+        // 完成typename的设置, key为变量名，value为类型
+        fillTypeNameMap(ctx);
+        return visitChildren(ctx);
+    }
+
+
+    @Override
+    public RuleNode visitFormalParameter(Java8Parser.FormalParameterContext ctx) {
+        // 完成typename的设置, key为变量名，value为类型
+        fillTypeNameMapFormalParameter(ctx);
+        return visitChildren(ctx);
+    }
+
+    @Override
+    public RuleNode visitLocalVariableDeclaration(Java8Parser.LocalVariableDeclarationContext ctx) {
+        // 完成typename的设置, key为变量名，value为类型
+        fillTypeNameMap(ctx);
+        return visitChildren(ctx);
+    }
 
     /*
         私有方法区
      */
 
+    private void fillTypeNameMap(ParserRuleContext ctx) {
+        List<String> typeNameKeys = findTypeNameKeys(ctx);
+        String typeNameValue = findTypeNameValue(ctx);
+        if (StringUtils.isNotBlank(typeNameValue)) {
+            typeNameKeys.forEach(key -> typeNameMap.put(key, typeNameValue));
+        }
+    }
+
+
+    private void fillTypeNameMapFormalParameter(ParserRuleContext ctx) {
+        String key = "";
+        String value = "";
+        // AClass a,b,c=new xxx(); 作用是获取a,b,c为key， AClass为value
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree child = ctx.getChild(i);
+            if (child instanceof RuleContext) {
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_unannType) {
+                    RuleContext child1 = (RuleContext) child.getChild(0);
+                    if (child1.getRuleIndex() == Java8Parser.RULE_unannReferenceType) {
+                        value = child1.getText();
+                    }
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_variableDeclaratorId) {
+                    if (child.getText().contains("=")) {
+                        key = child.getText().split("=")[0].trim();
+                    } else {
+                        key = child.getText();
+                    }
+                }
+            }
+        }
+        if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(value)) {
+            typeNameMap.put(key, value);
+        }
+    }
+
+
+    private String findTypeNameValue(ParserRuleContext ctx) {
+        //unannType
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree child = ctx.getChild(i);
+            if (child instanceof RuleContext) {
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_unannType) {
+                    RuleContext child1 = (RuleContext) child.getChild(0);
+                    if (child1.getRuleIndex() == Java8Parser.RULE_unannReferenceType) {
+                        return child1.getText();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private List<String> findTypeNameKeys(ParserRuleContext ctx) {
+        //variableDeclaratorList
+
+        // AClass a,b,c=new xxx(); 作用是获取a,b,c为key， AClass为value
+        List<String> typeNameKeys = Lists.newArrayList();
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree child = ctx.getChild(i);
+            if (!(child instanceof RuleContext)) {
+                continue;
+            }
+            if (((RuleContext) child).getRuleIndex() != Java8Parser.RULE_variableDeclaratorList) {
+                continue;
+            }
+            for (int j = 0; j < child.getChildCount(); j++) {
+                ParseTree child1 = child.getChild(j);
+                if (!(child1 instanceof RuleContext)) {
+                    continue;
+                }
+                RuleContext childNode = (RuleContext) child1;
+                if (childNode.getRuleIndex() != Java8Parser.RULE_variableDeclarator) {
+                    continue;
+                }
+                if (childNode.getText().contains("=")) {
+                    typeNameKeys.add(childNode.getText().split("=")[0].trim());
+                } else {
+                    typeNameKeys.add(childNode.getText());
+                }
+            }
+        }
+        return typeNameKeys;
+    }
 
     /**
      * 填充方法名，类名，成员变量名等基础信息
@@ -136,8 +243,6 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
 
     /**
      * 填充成员变量子树，方法子树，类子树等信息
-     *
-     * @param childRuleContext
      */
     private static void fillClassMemberContext(RuleContext childRuleContext) {
         ParseTree child = childRuleContext.getChild(0);
@@ -156,6 +261,10 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
             return;
         }
         RuleContext subNode = (RuleContext) declarationChild;
+//        System.out.println("subNode.getText() 1");
+//        System.out.println(subNode.getText());
+//        System.out.println("subNode.getText() 2");
+//        System.out.println();
         if (subNode.getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
             TestCodeContext.fieldDeclarationCtxList.add((ParserRuleContext) subNode);
         }
@@ -176,7 +285,7 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
             for (int j = 0; j < classMemberChildRuleCtx.getChildCount(); j++) {
                 ParseTree child1 = classMemberChildRuleCtx.getChild(j);
                 if (child1 instanceof TerminalNode) {
-                    TerminalNode terminalNode = (TerminalNode)child1;
+                    TerminalNode terminalNode = (TerminalNode) child1;
                     if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                         identifier = terminalNode.getText();
                         break;

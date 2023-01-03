@@ -23,7 +23,6 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
-import org.jetbrains.annotations.NotNull;
 import utils.GetFoldFileNames;
 import utils.JsonUtil;
 import utils.MyBatisUtil;
@@ -113,7 +112,7 @@ public class TranslateTestService {
         MappingRuleLoader.load();
         // 以文件为代码进行转换
         translateTests.forEach(translateTest -> {
-//            String translateCode = translateFile(translateTest);
+            String translateCode = translateFile(translateTest);
             translateTest.setTranslateCode("translateCode");
             update(translateTest);
         });
@@ -139,7 +138,7 @@ public class TranslateTestService {
         TestCodeContext.init();
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
-        TestCodeContext.filter();
+//        TestCodeContext.filter();
 
         TestCodeContext.ClassMemberDeclaration.classes.forEach(System.out::println);
         TestCodeContext.ClassMemberDeclaration.fields.forEach(System.out::println);
@@ -206,7 +205,6 @@ public class TranslateTestService {
         return null;
     }
 
-    @NotNull
     private Map<String, List<Integer>> getTestMethodInvocationMap(String testFilepath, List<ApiBasic> fileApis) {
 
         // antlr解析每个testFile，获取所有testMethod还有对应每个testMethod调用的方法列表（map结构）
@@ -242,7 +240,6 @@ public class TranslateTestService {
      * @param filepath 目标api所在的文件路径
      * @return
      */
-    @NotNull
     private List<String> filterTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {
         String className = getClassNameByFilepath(filepath);
         Pattern pattern = Pattern.compile("(.*)(" + className + ")(.*)");

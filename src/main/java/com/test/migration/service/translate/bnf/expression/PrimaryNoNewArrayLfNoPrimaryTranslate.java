@@ -1,6 +1,8 @@
 package com.test.migration.service.translate.bnf.expression;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.ArrayAccessLfnoPrimaryTranslate;
+import com.test.migration.service.translate.bnf.common.FieldAccessLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationTranslate;
 import com.test.migration.service.translate.bnf.statement.BlockTranslate;
@@ -32,27 +34,44 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
             System.out.println("RULE_primaryNoNewArray_lfno_primary 没找到，不科学");
             return null;
         }
-
         if (ctx.getChildCount() != 1) {
-            System.out.println("暂不支持RULE_primaryNoNewArray_lfno_primary的解析类型");
-            return null;
+            System.out.println(ctx.getText());
+            System.out.println("RULE_primaryNoNewArray_lfno_primary暂不支持多子节点的解析类型");
+            return ctx.getText();
         }
 
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
+
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_literal) {
+            return translateLiteral(childRuleContext);
+        }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classInstanceCreationExpression_lfno_primary) {
+            // TODO 这里有坑
+//            return translateVariableInitializerWithClassInstanceCreation(childRuleContext);
+            ClassInstanceCreationExpressionTranslate classInstanceCreationExpressionTranslate = new ClassInstanceCreationExpressionTranslate();
+            return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression_lfno_primary(childRuleContext);
+        }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_fieldAccess_lfno_primary) {
+            FieldAccessLfnoPrimaryTranslate translate = new FieldAccessLfnoPrimaryTranslate();
+            return translate.translateFieldAccessLfnoPrimary(childRuleContext);
+        }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_arrayAccess_lfno_primary) {
+            ArrayAccessLfnoPrimaryTranslate translate = new ArrayAccessLfnoPrimaryTranslate();
+            return translate.translateArrayAccessLfnoPrimary(childRuleContext);
+        }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_methodInvocation_lfno_primary) {
             MethodInvocationTranslate methodInvocationTranslate = new MethodInvocationTranslate();
             return methodInvocationTranslate.translateMethodInvocationLfNoPrimary(childRuleContext);
         }
 
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_literal) {
-            return translateLiteral(childRuleContext);
-        }
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classInstanceCreationExpression_lfno_primary) {
-            // TODO 这里有坑
-//            return translateVariableInitializerWithClassInstanceCreation(childRuleContext);
-            ClassInstanceCreationExpressionTranslate classInstanceCreationExpressionTranslate = new ClassInstanceCreationExpressionTranslate();
-            return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression_lfno_primary(childRuleContext);
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_methodReference_lfno_primary) {
+            System.out.println("RULE_methodReference_lfno_primary 暂不支持");
+            return ctx.getText();
         }
 
         System.out.println("translateVariableInitializer 不支持的解析类型");

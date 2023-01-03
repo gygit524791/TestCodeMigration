@@ -41,7 +41,6 @@ public class MethodHeaderTranslate {
         ResultTranslate resultTranslate = new ResultTranslate();
         String result = resultTranslate.translateResult(resultRule);
 
-
         MethodDeclaratorTranslate methodDeclaratorTranslate = new MethodDeclaratorTranslate();
         String methodDeclarator = methodDeclaratorTranslate.translateMethodDeclarator(methodDeclaratorRule);
 
