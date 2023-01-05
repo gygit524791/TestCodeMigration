@@ -1,10 +1,12 @@
 package com.test.migration.service.translate.bnf.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.PartMigrationMainTest;
 import com.test.migration.service.translate.TranslateCodeCollector;
 import com.test.migration.service.translate.TranslateHint;
 import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.apache.commons.lang3.StringUtils;
 
 public class BlockStatementTranslate {
 
@@ -41,6 +43,16 @@ public class BlockStatementTranslate {
 
         if (translateBlockStatement == null) {
             System.out.println("translateBlockStatement 出错");
+        }
+
+        // 调整策略
+        String key = ctx.getStart().getLine() + "$" + translateBlockStatement;
+        String modifyType = PartMigrationMainTest.blockStatementModifyMap.getOrDefault(key, "keep");
+        if (StringUtils.equals(modifyType, "remove")) {
+            // 清空bs收集到的hint
+            TranslateHint.init();
+            System.out.println("命中 部分迁移调整策略，被remove");
+            return "";
         }
 
         // 收集器
