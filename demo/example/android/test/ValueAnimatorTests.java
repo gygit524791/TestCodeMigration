@@ -47,13 +47,13 @@ public class ValueAnimatorTests {
 
     private final static long POLL_INTERVAL = 100; // ms
 
-    private ActivityTestRule<BasicAnimatorActivity> mActivityRule =
-            new ActivityTestRule<>(BasicAnimatorActivity.class);
+//    private ActivityTestRule<BasicAnimatorActivity> mActivityRule =
+//            new ActivityTestRule<>(BasicAnimatorActivity.class);
 
     @Before
     public void setUp() throws Exception {
-        a1 = ValueAnimator.ofFloat(A1_START_VALUE, A1_END_VALUE).setDuration(300);
-        a2 = ValueAnimator.ofInt(A2_START_VALUE, A2_END_VALUE).setDuration(500);
+//        a1 = ValueAnimator.ofFloat(A1_START_VALUE, A1_END_VALUE).setDuration(300);
+//        a2 = ValueAnimator.ofInt(A2_START_VALUE, A2_END_VALUE).setDuration(500);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class ValueAnimatorTests {
             public void run() {
                 assertTrue(a1.isRunning());
                 assertTrue(a2.isRunning());
-                a1.pause();
+                a1.Pause();
                 assertTrue(a1.isPaused());
                 assertFalse(a2.isPaused());
                 assertTrue(a1.isRunning());

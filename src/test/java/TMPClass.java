@@ -1,5 +1,3 @@
-package com.test.migration.service.translate;
-
 import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.util.List;
@@ -16,6 +14,7 @@ public class TMPClass {
 
 
     public static void main(String[] args) {
+        BlockStatementTreeNode blockStatementTreeNode = new BlockStatementTreeNode();
 
     }
 

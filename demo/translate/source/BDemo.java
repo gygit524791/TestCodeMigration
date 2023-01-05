@@ -1,22 +1,24 @@
 public class ADemo {
-    private int a;
-    private Source2 b,e,f;
-    private Source c = new Source();
+    private AClass a,b;
+    private BClass c = new BClass();
 
-    public void test1(Source a){
-        BDemo d = new BDemo();
-        d.test2();
+    public void test1(){
+        CClass d = new CClass();
     }
 
-    public void method1(Source a){
-        d.test2();
+    public void method1(DClass e){
     }
 
-    class BDemo{
-        private int a;
-        private String b;
-        public void test2(String a){
-            System.out.println("hello");
-        }
+    class EClass{
+        private FClass f;
+    }
+
+    public void test(){
+        a.fun();
+        b.fun();
+        c.fun();
+        d.fun();
+        e.fun();
+        f.fun();
     }
 }

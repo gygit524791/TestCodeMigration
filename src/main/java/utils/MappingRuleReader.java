@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MappingRuleReader {
 
@@ -26,6 +27,6 @@ public class MappingRuleReader {
             throw new RuntimeException(e);
         }
 
-        return lines.stream().filter(StringUtils::isNotBlank).toList();
+        return lines.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList());
     }
 }

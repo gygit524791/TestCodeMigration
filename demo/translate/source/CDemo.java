@@ -1,24 +1,46 @@
-public class ADemo {
-    private AClass a,b;
-    private BClass c = new BClass();
+public class CDemo {
 
-    public void test1(){
-        CClass d = new CClass();
+    public void test() {
+
+        for (int i = 0; i < 10; i++) {
+
+            for (int j = 0; j < 10; j++) {
+
+                if (i + j < 1) {
+                    print();
+                    print();
+                }
+
+                print();
+            }
+
+            print();
+
+        }
+
+        print();
     }
 
-    public void method1(DClass e){
-    }
+    /**
+     *m1
+     * b1
+     *  b11
+     *      b111
+     *          b1111
+     *          b1112
+     *      b112
+     *  b12
+     * b2
+     */
 
-    class EClass{
-        private FClass f;
-    }
+    public void test2() {
+        int a = 1;
 
-    public void test(){
-        a.fun();
-        b.fun();
-        c.fun();
-        d.fun();
-        e.fun();
-        f.fun();
+        int b = 0;
+
+        assertFalse(b!=0);
+
+        assertTrue(a > 0);
+
     }
 }
