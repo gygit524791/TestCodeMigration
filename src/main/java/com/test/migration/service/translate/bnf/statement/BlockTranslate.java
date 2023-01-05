@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.TranslateCodeCollector;
 import com.test.migration.service.translate.TranslateHint;
-import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -72,52 +71,12 @@ public class BlockTranslate {
             blockStatementList.add((ParserRuleContext) child);
         }
         StringBuilder blockStatementListStr = new StringBuilder();
+        BlockStatementTranslate blockStatementTranslate = new BlockStatementTranslate();
         blockStatementList.forEach(blockStatement -> {
-            TranslateHint.init();
-            String translateBlockStatement = translateBlockStatement(blockStatement);
+            String translateBlockStatement = blockStatementTranslate.translateBlockStatement(blockStatement);
             blockStatementListStr.append(translateBlockStatement);
-            // 收集器
-            TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode = new TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode();
-            blockStatementTranslateCode.translateCode = translateBlockStatement;
-            blockStatementTranslateCode.misMatchCodes = TranslateHint.misMatchCodes;
-            TranslateCodeCollector.blockStatementTranslateCodes.add(blockStatementTranslateCode);
         });
         return blockStatementListStr.toString();
-    }
-
-    /**
-     * lockStatement
-     * :	localVariableDeclarationStatement
-     * |	classDeclaration
-     * |	statement
-     * ;
-     *
-     * @param ctx
-     * @return
-     */
-    private String translateBlockStatement(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatement) {
-            System.out.println("RULE_blockStatement 没找到，不科学");
-            return null;
-        }
-        ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_localVariableDeclarationStatement) {
-            LocalVariableDeclarationStatementTranslate subTranslate = new LocalVariableDeclarationStatementTranslate();
-            return subTranslate.translateLocalVariableDeclarationStatement(childRuleContext);
-        }
-
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classDeclaration) {
-            ClassDeclarationTranslate subTranslate = new ClassDeclarationTranslate();
-            return subTranslate.translateClassDeclaration(childRuleContext);
-        }
-
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_statement) {
-            StatementTranslate subTranslate = new StatementTranslate();
-            return subTranslate.translateStatement(childRuleContext);
-        }
-
-        System.out.println("translateBlockStatement 不可能到这里");
-        return null;
     }
 
 

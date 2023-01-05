@@ -1,0 +1,54 @@
+package com.test.migration.service.translate.bnf.statement;
+
+import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.TranslateCodeCollector;
+import com.test.migration.service.translate.TranslateHint;
+import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
+import org.antlr.v4.runtime.ParserRuleContext;
+
+public class BlockStatementTranslate {
+
+    /**
+     * lockStatement
+     * :	localVariableDeclarationStatement
+     * |	classDeclaration
+     * |	statement
+     * ;
+     */
+    public String translateBlockStatement(ParserRuleContext ctx) {
+        TranslateHint.init();
+        TranslateHint.misMatchCodes.add(TranslateHint.BS_HINT_TAG);
+        String translateBlockStatement = null;
+        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatement) {
+            System.out.println("RULE_blockStatement 没找到，不科学");
+            return null;
+        }
+        ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_localVariableDeclarationStatement) {
+            LocalVariableDeclarationStatementTranslate subTranslate = new LocalVariableDeclarationStatementTranslate();
+            translateBlockStatement = subTranslate.translateLocalVariableDeclarationStatement(childRuleContext);
+        }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classDeclaration) {
+            ClassDeclarationTranslate subTranslate = new ClassDeclarationTranslate();
+            translateBlockStatement = subTranslate.translateClassDeclaration(childRuleContext);
+        }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_statement) {
+            StatementTranslate subTranslate = new StatementTranslate();
+            translateBlockStatement = subTranslate.translateStatement(childRuleContext);
+        }
+
+        if (translateBlockStatement == null) {
+            System.out.println("translateBlockStatement 出错");
+        }
+
+        // 收集器
+        TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode = new TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode();
+        blockStatementTranslateCode.translateCode = translateBlockStatement;
+        blockStatementTranslateCode.misMatchCodes = TranslateHint.misMatchCodes;
+        TranslateCodeCollector.blockStatementTranslateCodes.add(blockStatementTranslateCode);
+
+        return translateBlockStatement;
+    }
+}
