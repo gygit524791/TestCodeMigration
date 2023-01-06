@@ -46,12 +46,11 @@ public class BlockStatementTranslate {
         }
 
         // 调整策略
-        String key = ctx.getStart().getLine() + "$" + translateBlockStatement;
+        String key = String.valueOf(ctx.getStart().getStartIndex());
         String modifyType = PartMigrationMainTest.blockStatementModifyMap.getOrDefault(key, "keep");
         if (StringUtils.equals(modifyType, "remove")) {
             // 清空bs收集到的hint
             TranslateHint.init();
-            System.out.println("命中 部分迁移调整策略，被remove");
             return "";
         }
 
@@ -63,4 +62,8 @@ public class BlockStatementTranslate {
 
         return translateBlockStatement;
     }
+
+
+
+
 }

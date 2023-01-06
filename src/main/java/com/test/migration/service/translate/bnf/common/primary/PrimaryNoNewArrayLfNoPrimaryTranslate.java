@@ -1,8 +1,6 @@
-package com.test.migration.service.translate.bnf.expression;
+package com.test.migration.service.translate.bnf.common.primary;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.bnf.common.ArrayAccessLfnoPrimaryTranslate;
-import com.test.migration.service.translate.bnf.common.FieldAccessLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationTranslate;
 import com.test.migration.service.translate.bnf.statement.BlockTranslate;

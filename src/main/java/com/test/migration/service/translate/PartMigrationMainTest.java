@@ -1,5 +1,7 @@
 package com.test.migration.service.translate;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.test.migration.antlr.java.Java8Lexer;
@@ -51,7 +53,7 @@ public class PartMigrationMainTest {
 
         String translateBlockStatement;
 
-        String bsStartLine;
+        String bsStartIndex;
 
         /**
          * 直接子blockStatement
@@ -69,8 +71,16 @@ public class PartMigrationMainTest {
         String nonBlockStatementHint;
 
 
-        public boolean isNonBlockStatementTranslateFail() {
-            return StringUtils.isNotBlank(nonBlockStatementHint);
+        public boolean isTranslateBlockStatementFail() {
+            if (StringUtils.isBlank(hint)) {
+                return false;
+            }
+            List<String> hintList = Splitter.on(TranslateHint.BS_HINT_TAG).splitToList(hint).stream()
+                    .filter(StringUtils::isNotBlank)
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            return !hintList.isEmpty();
         }
 
     }
@@ -80,6 +90,7 @@ public class PartMigrationMainTest {
      */
     public BlockStatementTreeNode buildMethodBlockStatementTree(ParserRuleContext parserRuleContext) {
         if (parserRuleContext.getRuleIndex() != Java8Parser.RULE_blockStatement) {
+            System.out.println("ahb");
             return null;
         }
 
@@ -120,10 +131,9 @@ public class PartMigrationMainTest {
     }
 
 
-    public void testSubBlockStatementTag() {
+    public static void main(String[] args) {
         MappingRuleLoader.load();
-        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/test/ValueAnimatorTests.java";
-//        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/translate/source/BDemo.java";
+        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/translate/partMigrationTestDemo/ADemo.java";
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(filepath);
@@ -144,27 +154,100 @@ public class PartMigrationMainTest {
         TranslateCodeCollector.init();
         TranslateCodeCollector.className = TestCodeContext.className;
         // 处理每个method
-        for (ParserRuleContext ctx : TestCodeContext.methodDeclarationCtxList) {
+        List<String> partTranslateMethods = Lists.newArrayList();
+        BlockStatementTranslate blockStatementTranslate = new BlockStatementTranslate();
+        PartMigrationMainTest partMigrationMainTest = new PartMigrationMainTest();
 
+        for (ParserRuleContext ctx : TestCodeContext.methodDeclarationCtxList) {
             // 1. 构建部分迁移model
-            MethodDeclarationNode methodDeclarationNode = buildBSModel(ctx);
+            MethodDeclarationNode methodDeclarationNode = partMigrationMainTest.buildBSModel(ctx);
 
             // 2. 填充hint
             List<BlockStatementTreeNode> blockStatementTreeNodes = methodDeclarationNode.blockStatementTreeNodes;
-            fillBSModel(blockStatementTreeNodes);
+            partMigrationMainTest.fillBSModel(blockStatementTreeNodes);
 
-            // 3. 执行部分迁移bs调整策略，构建调整策略map
+            // 3.1 执行部分迁移bs调整策略，构建调整策略map
             for (BlockStatementTreeNode blockStatementTreeNode : blockStatementTreeNodes) {
-                executePartMigrationModifyStrategy(blockStatementTreeNode);
+                partMigrationMainTest.executePartMigrationModifyStrategy(blockStatementTreeNode);
             }
 
-            // 4.
+            // 3.2 todo 名字暂定
+            partMigrationMainTest.dfsModify(blockStatementTreeNodes);
 
+            // 4. 二次转换，并合并出部分迁移结果
+            List<String> translateBlockStatements = methodDeclarationNode.blockStatementTreeNodes.stream()
+                    .map(x -> blockStatementTranslate.translateBlockStatement(x.blockStatement))
+                    .collect(Collectors.toList());
+
+
+            String methodBlockStatements = Joiner.on("").join(translateBlockStatements);
+            String translateMethod = methodDeclarationNode.methodHeader + "{" + methodBlockStatements + "}";
+            partTranslateMethods.add(translateMethod);
         }
+
+        for (String method : partTranslateMethods) {
+            System.out.println("=====part - translate - method start=====");
+            System.out.println(method);
+            System.out.println("=====part - translate - method end=====");
+            System.out.println();
+        }
+
+    }
+
+    /**
+     * b1 b2 b3
+     *
+     * @param blockStatementTreeNodes
+     */
+    private void dfsModify(List<BlockStatementTreeNode> blockStatementTreeNodes) {
+        BlockStatementTreeNode parent = new BlockStatementTreeNode();
+
+        parent.blockStatement = null;
+        parent.translateBlockStatement = StringUtils.EMPTY;
+        parent.subBlockStatementTreeNodes = blockStatementTreeNodes;
+        parent.bsStartIndex = StringUtils.EMPTY;
+        parent.hint = StringUtils.EMPTY;
+        parent.nonBlockStatementHint = StringUtils.EMPTY;
+
+        processDfs(parent);
+    }
+
+    private void processDfs(BlockStatementTreeNode blockStatementTreeNode) {
+//
+//        blockStatementModifyMap.forEach((k,v)->{
+//            System.out.println(k+":"+v);
+//        });
+//        System.out.println("===----=== ");
+
+        boolean setRemove = false;
+        Stack<BlockStatementTreeNode> stack = new Stack<>();
+        stack.push(blockStatementTreeNode);
+        // dfs
+        while (!stack.isEmpty()) {
+            BlockStatementTreeNode statementTreeNode = stack.pop();
+            String key = statementTreeNode.bsStartIndex;
+
+            if (setRemove) {
+                blockStatementModifyMap.put(key, "remove");
+            } else {
+                // 如果遇到调整策略是remove，那么后续的所有bs均改为remove
+                if (StringUtils.equals("remove", blockStatementModifyMap.getOrDefault(key, "keep"))) {
+                    setRemove = true;
+                }
+            }
+
+            for (int i = statementTreeNode.subBlockStatementTreeNodes.size() - 1; i >= 0; i--) {
+                stack.push(statementTreeNode.subBlockStatementTreeNodes.get(i));
+            }
+        }
+
+//        blockStatementModifyMap.forEach((k,v)->{
+//            System.out.println(k+":"+v);
+//        });
     }
 
     private void executePartMigrationModifyStrategy(BlockStatementTreeNode blockStatementTreeNode) {
-        String key = blockStatementTreeNode.bsStartLine + "$" + blockStatementTreeNode.translateBlockStatement;
+        String key = blockStatementTreeNode.bsStartIndex;
 
         // 初始化默认值
         blockStatementModifyMap.put(key, "keep");
@@ -172,27 +255,14 @@ public class PartMigrationMainTest {
         // 策略1 如果存在nonBlockStatementHint，直接remove
         if (StringUtils.isNotBlank(blockStatementTreeNode.nonBlockStatementHint)) {
             blockStatementModifyMap.put(key, "remove");
-            return;
         }
 
-        // 策略2 本语句，如果是assert语句，直接remove
-        if (blockStatementTreeNode.translateBlockStatement.startsWith("assert")) {
+        if (blockStatementTreeNode.isTranslateBlockStatementFail()) {
             blockStatementModifyMap.put(key, "remove");
-            return;
-        }
-
-        // 策略3 直接子语句bs，如果顺序在最后一个的bs存在hint，直接remove
-        List<BlockStatementTreeNode> subBlockStatementTreeNodes = blockStatementTreeNode.subBlockStatementTreeNodes;
-        if (subBlockStatementTreeNodes.size() > 0) {
-            BlockStatementTreeNode lastSubBlockStatementTreeNode = subBlockStatementTreeNodes.get(subBlockStatementTreeNodes.size() - 1);
-            String subKey = lastSubBlockStatementTreeNode.bsStartLine + "$" + lastSubBlockStatementTreeNode.translateBlockStatement;
-            if (StringUtils.isNotBlank(lastSubBlockStatementTreeNode.nonBlockStatementHint)) {
-                blockStatementModifyMap.put(subKey, "remove");
-            }
         }
 
         // 递归处理子bs
-        for (BlockStatementTreeNode statementTreeNode : subBlockStatementTreeNodes) {
+        for (BlockStatementTreeNode statementTreeNode : blockStatementTreeNode.subBlockStatementTreeNodes) {
             executePartMigrationModifyStrategy(statementTreeNode);
         }
     }
@@ -205,19 +275,18 @@ public class PartMigrationMainTest {
         BlockStatementTranslate blockStatementTranslate = new BlockStatementTranslate();
         for (BlockStatementTreeNode blockStatementTreeNode : blockStatementTreeNodes) {
             ParserRuleContext blockStatement = blockStatementTreeNode.blockStatement;
-            String translateBlockStatement = blockStatementTranslate.translateBlockStatement(blockStatement);
 
             // 填充bs直接转换后的结果
-            blockStatementTreeNode.translateBlockStatement = translateBlockStatement;
+            blockStatementTreeNode.translateBlockStatement = blockStatementTranslate.translateBlockStatement(blockStatement);
 
             // 填充bs源码开始行号
-            blockStatementTreeNode.bsStartLine = String.valueOf(blockStatement.getStart().getLine());
+            blockStatementTreeNode.bsStartIndex = String.valueOf(blockStatement.getStart().getStartIndex());
 
             // 填充bs转换的hint
             blockStatementTreeNode.hint = TranslateHint.misMatchCodesToString();
 
             // 填充非子句部分的hint
-            blockStatementTreeNode.nonBlockStatementHint = fetchNonBlockStatementHint(translateBlockStatement);
+            blockStatementTreeNode.nonBlockStatementHint = fetchNonBlockStatementHint(blockStatementTreeNode.hint);
 
             // 递归填充子bs
             fillBSModel(blockStatementTreeNode.subBlockStatementTreeNodes);
@@ -227,12 +296,12 @@ public class PartMigrationMainTest {
     /**
      *
      */
-    private String fetchNonBlockStatementHint(String translateBlockStatement) {
-        if (StringUtils.isBlank(translateBlockStatement)) {
+    private String fetchNonBlockStatementHint(String blockStatementHint) {
+        if (StringUtils.isBlank(blockStatementHint)) {
             return StringUtils.EMPTY;
         }
 
-        String[] bsHints = translateBlockStatement.split(TranslateHint.BS_HINT_TAG);
+        String[] bsHints = blockStatementHint.split(TranslateHint.BS_HINT_TAG);
         if (bsHints.length < 2) {
             return StringUtils.EMPTY;
         }
@@ -244,13 +313,16 @@ public class PartMigrationMainTest {
         ParserRuleContext methodHeaderRule = null;
         ParserRuleContext methodBodyRule = null;
         for (int i = 0; i < ctx.getChildCount(); i++) {
-            if (ctx.getChild(i) instanceof RuleContext &&
-                    ((RuleContext) ctx.getChild(i)).getRuleIndex() == Java8Parser.RULE_methodHeader) {
-                methodHeaderRule = (ParserRuleContext) ctx.getChild(i);
+            ParseTree child = ctx.getChild(i);
+            if (!(child instanceof RuleContext)) {
+                continue;
             }
-            if (ctx.getChild(i) instanceof RuleContext &&
-                    ((RuleContext) ctx.getChild(i)).getRuleIndex() == Java8Parser.RULE_methodBody) {
-                methodBodyRule = (ParserRuleContext) ctx.getChild(i);
+            if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_methodHeader) {
+                methodHeaderRule = (ParserRuleContext) child;
+            }
+
+            if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_methodBody) {
+                methodBodyRule = (ParserRuleContext) child;
             }
         }
 
@@ -278,16 +350,23 @@ public class PartMigrationMainTest {
         if (!isRuleContext) {
             return Lists.newArrayList();
         }
+
+        // { }
         if (child.getChildCount() == 2) {
             return Lists.newArrayList();
         }
 
         List<ParserRuleContext> blockStatementsList = Lists.newArrayList();
         for (int i = 0; i < child.getChildCount(); i++) {
-            if (!(child.getChild(i) instanceof RuleContext)) {
+            ParseTree subChild = child.getChild(i);
+            if (!(subChild instanceof RuleContext)) {
                 continue;
             }
-            blockStatementsList.add((ParserRuleContext) child.getChild(i));
+            // blockStatements
+            for (int j = 0; j < subChild.getChildCount(); j++) {
+                // blockStatement
+                blockStatementsList.add((ParserRuleContext) subChild.getChild(j));
+            }
         }
 
         return blockStatementsList;

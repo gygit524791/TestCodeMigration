@@ -2,8 +2,10 @@ package com.test.migration.service.translate;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.util.List;
+import java.util.Set;
 
 public class TranslateHint {
     public static final String BS_HINT_TAG = "-BSHINT-";

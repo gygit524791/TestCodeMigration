@@ -127,7 +127,7 @@ public class ReplaceRuleService {
 
         // hint for mismatch
         if (!commonClassNameMapping.containsKey(identifier)) {
-            TranslateHint.misMatchCodes.add(ctx.getText());
+            TranslateHint.misMatchCodes.add(identifier);
         }
 
         return commonClassNameMapping.getOrDefault(identifier, identifier);

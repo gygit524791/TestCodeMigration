@@ -34,7 +34,8 @@ public class StatementTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_ifThenStatement) {
-            System.out.println("RULE_ifThenStatement 建设中");
+            IfThenStatementTranslate ifThenStatementTranslate = new IfThenStatementTranslate();
+            return ifThenStatementTranslate.translateIfThenStatement(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_ifThenElseStatement) {
@@ -47,7 +48,8 @@ public class StatementTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_forStatement) {
-            System.out.println("RULE_forStatement 建设中");
+            ForStatementTranslate forStatementTranslate = new ForStatementTranslate();
+            return forStatementTranslate.translateForStatement(childRuleContext);
         }
 
         System.out.println("statement解析不可能来到这里，赶紧查一下bug");

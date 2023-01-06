@@ -1,4 +1,4 @@
-package com.test.migration.service.translate.bnf.common;
+package com.test.migration.service.translate.bnf.common.primary;
 
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;

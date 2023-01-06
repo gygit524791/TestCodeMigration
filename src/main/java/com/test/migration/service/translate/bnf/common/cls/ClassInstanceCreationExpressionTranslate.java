@@ -5,7 +5,7 @@ import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
 import com.test.migration.service.translate.bnf.common.ClassBodyTranslate;
 import com.test.migration.service.translate.bnf.common.ExpressionNameTranslate;
-import com.test.migration.service.translate.bnf.common.PrimaryTranslate;
+import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;

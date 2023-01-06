@@ -1,17 +1,26 @@
-package com.test.migration.service.translate.bnf.common;
+package com.test.migration.service.translate.bnf.common.primary;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.bnf.expression.PrimaryNoNewArrayLfNoPrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 public class PrimaryTranslate {
+
+    /**
+     * primary
+     * 	:	(	primaryNoNewArray_lfno_primary
+     * 		|	arrayCreationExpression
+     * 		)
+     * 		(	primaryNoNewArray_lf_primary
+     * 		)*
+     * 	;
+     */
     public String translatePrimary(ParserRuleContext ctx) {
-        if (ctx == null ||ctx.getRuleIndex() != Java8Parser.RULE_primary) {
+        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_primary) {
             System.out.println("RULE_primary 没找到，不科学");
             return null;
         }
 
-        if(ctx.getChildCount()!=1){
+        if (ctx.getChildCount() != 1) {
             System.out.println("暂不支持的解析translatePrimary");
             return null;
         }
