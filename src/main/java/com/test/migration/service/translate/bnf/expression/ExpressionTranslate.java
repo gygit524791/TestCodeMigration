@@ -2,6 +2,8 @@ package com.test.migration.service.translate.bnf.expression;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.AssignmentTranslate;
+import com.test.migration.service.translate.bnf.expression.lambda.LambdaBodyTranslate;
+import com.test.migration.service.translate.bnf.expression.lambda.LambdaExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -24,8 +26,8 @@ public class ExpressionTranslate {
         ParseTree child = ctx.getChild(0);
         RuleContext childRuleContext = (RuleContext) child;
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_lambdaExpression) {
-            System.out.println("暂不支持lambda表达式"+ childRuleContext.getText());
-            return childRuleContext.getText();
+            LambdaExpressionTranslate lambdaExpressionTranslate = new LambdaExpressionTranslate();
+            return lambdaExpressionTranslate.translateLambdaExpression((ParserRuleContext) childRuleContext);
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_assignmentExpression) {
             return translateAssignmentExpression((ParserRuleContext) childRuleContext);

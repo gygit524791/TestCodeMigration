@@ -5,34 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/migration/animator/AnimatorSetActivityTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/migration/animator/PhysicsAnimationLayoutTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/migration/animator/ValueAnimatorTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo/migration/case/AnimatorSetActivityTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/PartMigrationProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/TryStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestFindModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/lambda/InferredFormalParameterListTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/lambda/LambdaBodyTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/lambda/LambdaExpressionTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/lambda/LambdaParametersTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/classVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/classVectorDict.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/corpus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/corpus.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/word2vec.model" beforeDir="false" afterPath="$PROJECT_DIR$/doc/word2vec/word2vec.model" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/ExpressionNameTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/ExpressionNameTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/parameter/LastFormalParameterTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/parameter/LastFormalParameterTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryNoNewArrayLfNoPrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryNoNewArrayLfNoPrimaryTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ConditionalExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ConditionalExpressionTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/migration/case/AnimatorSetActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/migration/case/AnimatorSetActivityTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ExpressionTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementWithoutTrailingSubStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementWithoutTrailingSubStatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/commonClassNameMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/commonClassNameMapping.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/customMethodInvocationTypeNameMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/customMethodInvocationTypeNameMapping.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,11 +72,11 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.test.migration.service.translate.bnf.expression.lambda" />
+      <recent name="com.test.migration.service.translate.bnf.expression" />
       <recent name="com.test.migration.service.translate.bnf.common" />
       <recent name="com.test.migration.service.translate" />
       <recent name="com.test.migration.service.translate.bnf.common.array" />
-      <recent name="com.test.migration.service.translate.bnf.common.primary" />
-      <recent name="com.test.migration.service.translate.bnf.common.cls" />
     </key>
   </component>
   <component name="RunManager" selected="Application.TranslateMain">
@@ -202,7 +181,7 @@
       <workItem from="1672896953333" duration="20083000" />
       <workItem from="1672969240187" duration="19991000" />
       <workItem from="1673059885446" duration="1050000" />
-      <workItem from="1673230859442" duration="15439000" />
+      <workItem from="1673230859442" duration="17133000" />
     </task>
     <servers />
   </component>

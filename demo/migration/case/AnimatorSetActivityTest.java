@@ -80,32 +80,31 @@ public class AnimatorSetActivityTest {
     public void testAddListener() throws InterruptedException {
         // Verify that the listener is added to the list of listeners in the AnimatorSet
         // and that newly added listener gets callback for lifecycle events of the animator
-//        final AnimatorSet s = new AnimatorSet();
-//        s.play(a1).before(a2).before(a3).after(a4).after(a5);
-//        final MyListener listener = new MyListener();
-//        if (s.getListeners() != null) {
-//            assertFalse(s.getListeners().contains(listener));
-//        }
-//        s.addListener(listener);
-//        assertTrue(s.getListeners().contains(listener));
-//
-//        assertFalse(listener.startIsCalled);
-//        assertFalse(listener.endIsCalled);
-//
-//        try {
-//            mActivityRule.runOnUiThread(() -> {
-//                s.start();
-//                assertTrue(listener.startIsCalled);
-//                assertFalse(listener.endIsCalled);
-//            });
-//        } catch (Throwable throwable) {
-//            throwable.printStackTrace();
-//        }
-//
-        Thread.sleep(1200);
-//        Thread.sleep(s.getTotalDuration() + 200);
-//        assertTrue(listener.startIsCalled);
-//        assertTrue(listener.endIsCalled);
+        final AnimatorSet s = new AnimatorSet();
+        s.play(a1).before(a2).before(a3).after(a4).after(a5);
+        final MyListener listener = new MyListener();
+        if (s.getListeners() != null) {
+            assertFalse(s.getListeners().contains(listener));
+        }
+        s.addListener(listener);
+        assertTrue(s.getListeners().contains(listener));
+
+        assertFalse(listener.startIsCalled);
+        assertFalse(listener.endIsCalled);
+
+        try {
+            mActivityRule.runOnUiThread(() -> {
+                s.start();
+                assertTrue(listener.startIsCalled);
+                assertFalse(listener.endIsCalled);
+            });
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+
+        Thread.sleep(s.getTotalDuration() + 200);
+        assertTrue(listener.startIsCalled);
+        assertTrue(listener.endIsCalled);
     }
 
 
