@@ -53,9 +53,15 @@ public class StatementWithoutTrailingSubStatementTranslate {
             ExpressionStatement translate = new ExpressionStatement();
             return translate.translateExpressionStatement(childRuleContext);
         }
+
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_doStatement) {
             DoStatementTranslate translate = new DoStatementTranslate();
             return translate.translateDoStatement(childRuleContext);
+        }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_throwStatement) {
+            ThrowStatementTranslate translate = new ThrowStatementTranslate();
+            return translate.translateThrowStatement(childRuleContext);
         }
 
         /** 待测试 **/
@@ -73,9 +79,7 @@ public class StatementWithoutTrailingSubStatementTranslate {
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_synchronizedStatement) {
             System.out.println("RULE_synchronizedStatement 建设中");
         }
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_throwStatement) {
-            System.out.println("RULE_throwStatement 建设中");
-        }
+
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_tryStatement) {
             TryStatementTranslate translate = new TryStatementTranslate();
             return translate.translateTryStatement(childRuleContext);

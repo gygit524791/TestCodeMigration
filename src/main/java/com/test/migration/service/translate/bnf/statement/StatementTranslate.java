@@ -20,7 +20,7 @@ public class StatementTranslate {
      */
     public String translateStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statement) {
-            System.out.println("RULE_statement 没找到，不科学");
+            System.out.println("RULE_statement 没找到");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
@@ -30,7 +30,8 @@ public class StatementTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_labeledStatement) {
-            System.out.println("RULE_labeledStatement 建设中");
+            LabeledStatementTranslate translate = new LabeledStatementTranslate();
+            return translate.translateLabeledStatement(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_ifThenStatement) {
@@ -39,7 +40,8 @@ public class StatementTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_ifThenElseStatement) {
-            System.out.println("RULE_ifThenElseStatement 建设中");
+            IfThenElseStatementTranslate translate = new IfThenElseStatementTranslate();
+            return translate.translateIfThenElseStatement(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_whileStatement) {

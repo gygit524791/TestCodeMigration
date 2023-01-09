@@ -23,7 +23,7 @@ public class BlockStatementTranslate {
         TranslateHint.misMatchCodes.add(TranslateHint.BS_HINT_TAG);
         String translateBlockStatement = null;
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatement) {
-            System.out.println("RULE_blockStatement 没找到，不科学");
+            System.out.println("RULE_blockStatement 没找到");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);

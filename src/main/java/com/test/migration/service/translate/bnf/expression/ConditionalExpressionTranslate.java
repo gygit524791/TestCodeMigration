@@ -219,10 +219,15 @@ public class ConditionalExpressionTranslate {
         }
 
         // equalityExpression '==' relationalExpression
+
+        boolean existEqual = false;
         for (int i = 0; i < ctx.getChildCount(); i++) {
             if (StringUtils.equals(ctx.getChild(i).getText(), "==")) {
-                return translateEqualityExpressionWithEqual((ParserRuleContext) ctx.getChild(i));
+                existEqual = true;
             }
+        }
+        if (existEqual) {
+            return translateEqualityExpressionWithEqual(ctx);
         }
         //equalityExpression '!=' relationalExpression
         return translateEqualityExpressionWithNotEqual(ctx);
@@ -750,12 +755,14 @@ public class ConditionalExpressionTranslate {
 
     /**
      * TODO 暂不支持
-     *
-     * @param ctx
-     * @return
+     * castExpression
+     * 	:	'(' primitiveType ')' unaryExpression
+     * 	|	'(' referenceType additionalBound* ')' unaryExpressionNotPlusMinus
+     * 	|	'(' referenceType additionalBound* ')' lambdaExpression
+     * 	;
      */
     public String translateCastExpression(ParserRuleContext ctx) {
-        System.out.println("暂不支持translateCastExpression");
+//        System.out.println("暂不支持translateCastExpression");
         return ctx.getText();
     }
 

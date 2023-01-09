@@ -14,7 +14,7 @@ public class ArrayCreationExpressionTranslate {
      */
     public String translateArrayType(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_arrayType)) {
-            System.out.println("RULE_arrayType 没找到，不科学");
+            System.out.println("RULE_arrayType 没找到");
             return null;
         }
 
