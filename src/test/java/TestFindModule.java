@@ -1,3 +1,4 @@
+import com.google.common.base.Joiner;
 import utils.GetFoldFileNames;
 
 import java.io.File;
@@ -27,7 +28,7 @@ public class TestFindModule {
                 .filter(file -> file.contains(type))
                 .collect(Collectors.toList());
 
-        if(type.equals("form")){
+        if (type.equals("form")) {
             return;
         }
         List<String> moduleFiles = files.stream()
@@ -37,15 +38,30 @@ public class TestFindModule {
                 .filter(x -> x.contains("test"))
                 .collect(Collectors.toList());
 
-        if(moduleFiles.size()>0 && testFiles.size()>0){
-            System.out.println(type+"---------start---------");
+//        if (moduleFiles.size() > 0 && testFiles.size() > 0) {
+//            System.out.println(type + "---------start---------");
+//            System.out.println("harmony:");
+//            System.out.println(hfilepath + "/" + type);
+//            System.out.println("android:");
+//            moduleFiles.forEach(System.out::println);
+//            System.out.println("====test====");
+//            testFiles.forEach(System.out::println);
+//            System.out.println(type + "---------end---------");
+//            System.out.println();
+//        }
+
+        if (moduleFiles.size() > 0 && testFiles.size() > 0) {
+            System.out.println(type + "---------start---------");
             System.out.println("harmony:");
-            System.out.println(hfilepath+"/"+type);
+            System.out.println(hfilepath + "/" + type);
             System.out.println("android:");
-            moduleFiles.forEach(System.out::println);
+            String ads = Joiner.on(",").join(moduleFiles);
+            System.out.println(ads);
+
             System.out.println("====test====");
-            testFiles.forEach(System.out::println);
-            System.out.println(type+"---------end---------");
+            String tests = Joiner.on(",").join(testFiles);
+            System.out.println(tests);
+            System.out.println(type + "---------end---------");
             System.out.println();
         }
 
@@ -54,15 +70,15 @@ public class TestFindModule {
     public static void main(String[] args) {
         String afilepath = "/Users/gaoyi/IdeaProjects/staticCodeAnalysis/doc/android/source/platform_frameworks_base";
 
-        String hfilepath = "/Users/gaoyi/IdeaProjects/staticCodeAnalysis/doc/harmony/source/arkui_ace_engine-master/frameworks/core/";
+        String hfilepath = "/Users/gaoyi/IdeaProjects/staticCodeAnalysis/doc/harmony/source/arkui_ace_engine-master/frameworks/core";
         File file = new File(hfilepath);
-        if(file.isDirectory()){
+        if (file.isDirectory()) {
             Arrays.stream(Objects.requireNonNull(file.list()))
-                    .filter(x->!x.contains("."))
-                    .filter(x->!x.contains("test"))
-                    .forEach(type-> {
+                    .filter(x -> !x.contains("."))
+                    .filter(x -> !x.contains("test"))
+                    .forEach(type -> {
                         try {
-                            testFindModule(afilepath,hfilepath, type);
+                            testFindModule(afilepath, hfilepath, type);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }

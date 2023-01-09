@@ -38,74 +38,117 @@ import java.util.ArrayList;
 
 @SmallTest
 public class AnimatorSetActivityTest {
-
-    @Rule
-    public final ActivityTestRule<AnimatorSetActivity> mActivityRule =
-            new ActivityTestRule<>(AnimatorSetActivity.class);
-
-    private static final long POLL_INTERVAL = 100; // ms
-    private AnimatorSetActivity mActivity;
-    private ObjectAnimator a1,a2,a3;
-    private ValueAnimator a4,a5;
-
-    static class MyListener implements Animator.AnimatorListener {
-        boolean startIsCalled = false;
-        boolean endIsCalled = false;
-        boolean cancelIsCalled = false;
-
-        @Override
-        public void onAnimationStart(Animator animation) {
-            startIsCalled = true;
-        }
-
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            endIsCalled = true;
-        }
-
-        @Override
-        public void onAnimationCancel(Animator animation) {
-            cancelIsCalled = true;
-        }
-
-        @Override
-        public void onAnimationRepeat(Animator animation) {
-
-        }
-    }
-
-
-
-    @Test
-    public void testAddListener() throws InterruptedException {
-        // Verify that the listener is added to the list of listeners in the AnimatorSet
-        // and that newly added listener gets callback for lifecycle events of the animator
-        final AnimatorSet s = new AnimatorSet();
-        s.play(a1).before(a2).before(a3).after(a4).after(a5);
-        final MyListener listener = new MyListener();
-        if (s.getListeners() != null) {
-            assertFalse(s.getListeners().contains(listener));
-        }
-        s.addListener(listener);
-        assertTrue(s.getListeners().contains(listener));
-
-        assertFalse(listener.startIsCalled);
-        assertFalse(listener.endIsCalled);
-
-        try {
-            mActivityRule.runOnUiThread(() -> {
-                s.start();
-                assertTrue(listener.startIsCalled);
-                assertFalse(listener.endIsCalled);
+    public void test(){
+        do {
+            Thread.sleep(POLL_INTERVAL);
+            mActivityRule.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    assertTrue(l1.lastUpdateTime > lastUpdate[0]);
+                    lastUpdate[0] = l1.lastUpdateTime;
+                }
             });
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-
-        Thread.sleep(s.getTotalDuration() + 200);
-        assertTrue(listener.startIsCalled);
-        assertTrue(listener.endIsCalled);
+        } while (!a1.isStarted());
     }
 
+//    @Rule
+//    public final ActivityTestRule<AnimatorSetActivity> mActivityRule =
+//            new ActivityTestRule<>(AnimatorSetActivity.class);
+//
+//    private static final long POLL_INTERVAL = 100; // ms
+//    private AnimatorSetActivity mActivity;
+//    private ObjectAnimator a1,a2,a3;
+//    private ValueAnimator a4,a5;
+//
+//    static class MyListener implements Animator.AnimatorListener {
+//        boolean startIsCalled = false;
+//        boolean endIsCalled = false;
+//        boolean cancelIsCalled = false;
+//
+//        @Override
+//        public void onAnimationStart(Animator animation) {
+//            startIsCalled = true;
+//        }
+//
+//        @Override
+//        public void onAnimationEnd(Animator animation) {
+//            endIsCalled = true;
+//        }
+//
+//        @Override
+//        public void onAnimationCancel(Animator animation) {
+//            cancelIsCalled = true;
+//        }
+//
+//        @Override
+//        public void onAnimationRepeat(Animator animation) {
+//
+//        }
+//    }
+//
+//
+//
+
+
+//    @Test
+//    public void testAddListener() throws InterruptedException {
+//        // Verify that the listener is added to the list of listeners in the AnimatorSet
+//        // and that newly added listener gets callback for lifecycle events of the animator
+//        final AnimatorSet s = new AnimatorSet();
+//        s.play(a1).before(a2).before(a3).after(a4).after(a5);
+//        final MyListener listener = new MyListener();
+//        if (s.getListeners() != null) {
+//            assertFalse(s.getListeners().contains(listener));
+//        }
+//        s.addListener(listener);
+//        assertTrue(s.getListeners().contains(listener));
+//
+//        assertFalse(listener.startIsCalled);
+//        assertFalse(listener.endIsCalled);
+//
+//        try {
+//            mActivityRule.runOnUiThread(() -> {
+//                s.start();
+//                assertTrue(listener.startIsCalled);
+//                assertFalse(listener.endIsCalled);
+//            });
+//        } catch (Throwable throwable) {
+//            throwable.printStackTrace();
+//        }
+//
+//        Thread.sleep(s.getTotalDuration() + 200);
+//        assertTrue(listener.startIsCalled);
+//        assertTrue(listener.endIsCalled);
+//    }
+
+//    class MyListener implements Animator.AnimatorListener {
+//        boolean startCalled = false;
+//        boolean cancelCalled = false;
+//        boolean endCalled = false;
+//        long startTime = -1;
+//        long endTime = -1;
+//
+//        @Override
+//        public void onAnimationStart(Animator animation) {
+//            startCalled = true;
+//            startTime = SystemClock.uptimeMillis();
+//        }
+//
+//        @Override
+//        public void onAnimationEnd(Animator animation) {
+//            endCalled = true;
+//            endTime = SystemClock.uptimeMillis();
+//        }
+//
+//        @Override
+//        public void onAnimationCancel(Animator animation) {
+//            cancelCalled = true;
+//        }
+//
+//        @Override
+//        public void onAnimationRepeat(Animator animation) {
+//
+//        }
+//    }
 
 }

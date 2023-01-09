@@ -15,8 +15,8 @@ public class DoStatementTranslate {
      * @return
      */
     public String translateDoStatement(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_whileStatement) {
-            System.out.println("RULE_whileStatement 没找到，不科学");
+        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_doStatement) {
+            System.out.println("RULE_doStatement 没找到");
             return null;
         }
 

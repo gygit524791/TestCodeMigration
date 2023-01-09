@@ -11,8 +11,6 @@ public class ArrayAccessLfnoPrimaryTranslate {
             return null;
         }
 
-        System.out.println("RULE_arrayAccess_lfno_primary 建设中");
-
-        return "";
+        return ctx.getText();
     }
 }

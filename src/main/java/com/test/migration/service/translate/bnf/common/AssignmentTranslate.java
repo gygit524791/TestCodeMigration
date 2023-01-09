@@ -1,6 +1,9 @@
 package com.test.migration.service.translate.bnf.common;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.primary.ArrayAccessLfnoPrimaryTranslate;
+import com.test.migration.service.translate.bnf.common.primary.ArrayAccessTranslate;
+import com.test.migration.service.translate.bnf.common.primary.FieldAccessLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 
@@ -31,9 +34,6 @@ public class AssignmentTranslate {
      * |	fieldAccess
      * |	arrayAccess
      * ;
-     *
-     * @param ctx
-     * @return
      */
     public String translateLeftHandSide(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_leftHandSide) {
@@ -41,13 +41,21 @@ public class AssignmentTranslate {
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
-        if (childRuleContext.getRuleIndex() != Java8Parser.RULE_expressionName) {
-            System.out.println("目前只支持leftHandSide子节点expressionName的解析");
-            return null;
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_expressionName) {
+            ExpressionNameTranslate translate = new ExpressionNameTranslate();
+            return translate.translateExpressionName(childRuleContext);
         }
-        ExpressionNameTranslate translate = new ExpressionNameTranslate();
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_fieldAccess) {
+            FieldAccessTranslate translate = new FieldAccessTranslate();
+            return translate.translateFieldAccess(childRuleContext);
+        }
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_arrayAccess) {
+            ArrayAccessTranslate translate = new ArrayAccessTranslate();
+            return translate.translateArrayAccess(childRuleContext);
+        }
 
-        return translate.translateExpressionName(childRuleContext);
+        System.out.println("translateLeftHandSide error");
+        return null;
     }
 
     /**
