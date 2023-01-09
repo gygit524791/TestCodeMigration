@@ -1,0 +1,32 @@
+package com.test.migration.service.translate.bnf.common;
+
+import com.test.migration.antlr.java.Java8Parser;
+import org.antlr.v4.runtime.ParserRuleContext;
+
+public class TypeArgumentTranslate {
+
+    /**
+     * typeArgument
+     * :	referenceType
+     * |	wildcard
+     * ;
+     */
+    public String translateTypeArgument(ParserRuleContext ctx) {
+        if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_typeArgument)) {
+            System.out.println("RULE_typeArgument 没找到，不科学");
+            return null;
+        }
+        ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);
+        if (child.getRuleIndex() == Java8Parser.RULE_referenceType) {
+            ReferenceTypeTranslate referenceTypeTranslate = new ReferenceTypeTranslate();
+            return referenceTypeTranslate.translateReferenceType(child);
+        }
+
+        if (child.getRuleIndex() == Java8Parser.RULE_wildcard) {
+            WildcardTranslate wildcardTranslate = new WildcardTranslate();
+            return wildcardTranslate.translateWildCard(child);
+        }
+
+        return null;
+    }
+}

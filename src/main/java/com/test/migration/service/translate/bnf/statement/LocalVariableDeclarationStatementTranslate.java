@@ -25,8 +25,6 @@ import org.antlr.v4.runtime.RuleContext;
  * 2.expression:
  * 不支持不含primaryNoNewArray_lfno_primary子节点的情况
  * 不支持arrayCreationExpression
- * 方法调用：
- * 不支持methodInvocation_lf_primary
  */
 public class LocalVariableDeclarationStatementTranslate {
     /**

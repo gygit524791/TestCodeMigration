@@ -1,4 +1,4 @@
-package com.test.migration.service.translate.bnf.common;
+package com.test.migration.service.translate.bnf.common.cls;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.declaration.ClassBodyDeclarationTranslate;

@@ -5,27 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/translate/partMigrationTestDemo/ADemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryNoNewArrayLfPrimaryTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ForStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/IfThenElseStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/IfThenStatementTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementNoShortIfTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/ArrayTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/DimsTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/ReferenceTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/TypeArgumentListTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/TypeArgumentTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/TypeArgumentsTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/WildcardBoundsTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/WildcardTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/array/ArrayCreationExpressionTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/array/ArrayTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/ClassOrInterfaceTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/ClassTypeLfClassOrInterfaceTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/ClassTypeLfnoClassOrInterfaceTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/InterfaceTypeLfClassOrInterfaceTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/InterfaceTypeLfnoClassOrInterfaceTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/ArrayAccessLfPrimaryTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/FieldAccessLfPrimaryTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/MethodReferenceLfPrimaryTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/variable/TypeVariableTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/PartMigrationMainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/PartMigrationMainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateHint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateHint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/ArrayAccessLfnoPrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/ArrayAccessLfnoPrimaryTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/FieldAccessLfnoPrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/FieldAccessLfnoPrimaryTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/MethodReferenceLfnoPrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/MethodReferenceLfnoPrimaryTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/PrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/ClassBodyTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/ClassBodyTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/ClassInstanceCreationExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/cls/ClassInstanceCreationExpressionTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PrimaryNoNewArrayLfNoPrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryNoNewArrayLfNoPrimaryTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/partMigration/PartMigrationMainTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryNoNewArrayLfPrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryNoNewArrayLfPrimaryTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/primary/PrimaryTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/NormalClassDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/NormalClassDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/LocalVariableDeclarationStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/LocalVariableDeclarationStatementTranslate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,11 +91,11 @@
       <recent name="$PROJECT_DIR$/src/main/java/com/test/migration/antlr/java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.test.migration.service.translate.bnf.statement" />
-      <recent name="com.test.migration.service.translate" />
-      <recent name="" />
-      <recent name="com.test.migration.service.translate.common.parameter" />
-      <recent name="com.test.migration.service.translate.common" />
+      <recent name="com.test.migration.service.translate.bnf.common.array" />
+      <recent name="com.test.migration.service.translate.bnf.common.primary" />
+      <recent name="com.test.migration.service.translate.bnf.common.cls" />
+      <recent name="com.test.migration.service.translate.bnf.common" />
+      <recent name="com.test.migration.service.translate.bnf.common.variable" />
     </key>
   </component>
   <component name="RunManager" selected="Application.com.test.migration.service.translate.PartMigrationMainTest">
@@ -193,7 +199,8 @@
       <workItem from="1672797279423" duration="20015000" />
       <workItem from="1672882320775" duration="7417000" />
       <workItem from="1672896953333" duration="20083000" />
-      <workItem from="1672969240187" duration="10709000" />
+      <workItem from="1672969240187" duration="19991000" />
+      <workItem from="1673059885446" duration="1050000" />
     </task>
     <servers />
   </component>

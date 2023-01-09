@@ -3,7 +3,6 @@ package com.test.migration.service.translate.bnf.common.cls;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
-import com.test.migration.service.translate.bnf.common.ClassBodyTranslate;
 import com.test.migration.service.translate.bnf.common.ExpressionNameTranslate;
 import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;

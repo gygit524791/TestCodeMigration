@@ -5,10 +5,12 @@ import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
 import com.test.migration.service.translate.bnf.common.ExpressionNameTranslate;
+import com.test.migration.service.translate.bnf.common.TypeArgumentsTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.apache.commons.lang3.StringUtils;
 
 public class MethodInvocationTranslate {
 
@@ -45,8 +47,6 @@ public class MethodInvocationTranslate {
      * <p>
      * 方法调用，antlr将方法调用的写法格式划分为3类12种（很多都不常用）
      * methodInvocation_lfno_primary
-     * <p>
-     * ，目前先支持最简单的两种，其他懒得搞了
      */
     public String translateMethodInvocationLfNoPrimary(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation_lfno_primary) {
@@ -54,6 +54,46 @@ public class MethodInvocationTranslate {
             return null;
         }
         return parseMethodInvocation(ctx);
+    }
+
+    /**
+     * methodInvocation_lf_primary
+     * :	'.' typeArguments? Identifier '(' argumentList? ')'
+     * ;
+     */
+    public String translateMethodInvocationLfPrimary(ParserRuleContext ctx) {
+        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation_lf_primary) {
+            System.out.println("RULE_methodInvocation_lf_primary 为null");
+            return null;
+        }
+        String identifier = StringUtils.EMPTY;
+        ParserRuleContext typeArgumentsCtx = null;
+        ParserRuleContext argumentListCtx = null;
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            if (ctx.getChild(i) instanceof RuleContext) {
+                RuleContext childRuleContext = (RuleContext) ctx.getChild(i);
+                if (childRuleContext.getRuleIndex() == Java8Parser.RULE_typeArguments) {
+                    typeArgumentsCtx = (ParserRuleContext) childRuleContext;
+                }
+                if (childRuleContext.getRuleIndex() == Java8Parser.RULE_argumentList) {
+                    argumentListCtx = (ParserRuleContext) childRuleContext;
+                }
+            }
+            if (ctx.getChild(i) instanceof TerminalNode) {
+                TerminalNode terminalNode = (TerminalNode) ctx.getChild(i);
+                if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
+                    identifier = terminalNode.getText();
+                }
+            }
+        }
+
+        TypeArgumentsTranslate typeArgumentsTranslate = new TypeArgumentsTranslate();
+        String typeArguments = typeArgumentsCtx == null ? "" : typeArgumentsTranslate.translateTypeArguments(typeArgumentsCtx);
+
+        ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
+        String argumentList = argumentListCtx == null ? "" : argumentListTranslate.translateArgumentList(argumentListCtx);
+
+        return "." + typeArguments + " " + identifier + "(" + argumentList + ")";
     }
 
     private String parseMethodInvocation(ParserRuleContext ctx) {
@@ -174,24 +214,4 @@ public class MethodInvocationTranslate {
         }
         return ctx.getText();
     }
-
-
-    public ParserRuleContext findSubRuleDfs(ParserRuleContext ctx, int subRuleIndex) {
-//         深度优先遍历 寻找指定rule
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            ParseTree child = ctx.getChild(i);
-            boolean isRuleContext = child instanceof RuleContext;
-            if (!isRuleContext) {
-                continue;
-            }
-            RuleContext childNode = (RuleContext) child;
-            if (childNode.getRuleIndex() != subRuleIndex) {
-                return findSubRuleDfs((ParserRuleContext) childNode, subRuleIndex);
-            } else {
-                return (ParserRuleContext) childNode;
-            }
-        }
-        return null;
-    }
-
 }

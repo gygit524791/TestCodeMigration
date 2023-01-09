@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.bnf.declaration;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.bnf.common.ClassBodyTranslate;
+import com.test.migration.service.translate.bnf.common.cls.ClassBodyTranslate;
 import com.test.migration.service.translate.bnf.common.TypeParametersTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
