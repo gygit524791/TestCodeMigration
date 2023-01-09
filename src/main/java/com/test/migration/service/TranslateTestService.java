@@ -231,9 +231,10 @@ public class TranslateTestService {
      * 通过常规Test命名规则来获取test类：
      * AClass对应的测试类为：TestAClass 或者 AClassTest
      * <p>
-     * 但是这个规则不一定找出所有的test，比如AClass对应的测试类命名是其它风格
+     * 但是这个规则不一定找出所有的test，测试文件名不一定按照规范来设定，比如
      * <p>
-     * 补充规则：AnimatorSet对应的测试类AnimatorSetActivityTest目前是匹配不出来的，为了匹配到这种命名，使用  ：
+     * AnimatorSet对应的测试类AnimatorSetActivityTest目前是匹配不出来的
+     * 补充规则：为了匹配到这种命名，使用  ：
      * *（通配符）+类名+*（通配符）+Test（前后缀）的方式来匹配测试类文件
      *
      * @param allTargetSourceCodeFilepathList

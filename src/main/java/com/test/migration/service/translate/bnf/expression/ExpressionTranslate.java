@@ -24,8 +24,8 @@ public class ExpressionTranslate {
         ParseTree child = ctx.getChild(0);
         RuleContext childRuleContext = (RuleContext) child;
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_lambdaExpression) {
-            System.out.println("暂不支持lambda表达式");
-            return null;
+            System.out.println("暂不支持lambda表达式"+ childRuleContext.getText());
+            return childRuleContext.getText();
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_assignmentExpression) {
             return translateAssignmentExpression((ParserRuleContext) childRuleContext);

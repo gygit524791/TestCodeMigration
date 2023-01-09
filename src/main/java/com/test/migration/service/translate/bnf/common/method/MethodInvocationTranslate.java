@@ -6,6 +6,7 @@ import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
 import com.test.migration.service.translate.bnf.common.ExpressionNameTranslate;
 import com.test.migration.service.translate.bnf.common.TypeArgumentsTranslate;
+import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -23,16 +24,109 @@ public class MethodInvocationTranslate {
      * |	'super' '.' typeArguments? Identifier '(' argumentList? ')'
      * |	typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
      * ;
-     *
-     * @param ctx
-     * @return
      */
     public String translateMethodInvocation(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation) {
             System.out.println("RULE_methodInvocation 为null");
             return null;
         }
-        return parseMethodInvocation(ctx);
+        // 1.获取各个类型子节点
+        ParseTree identifier = null;
+        ParserRuleContext methodNameCtx = null;
+        ParserRuleContext argumentListCtx = null;
+        ParserRuleContext typeArgumentsCtx = null;
+        ParserRuleContext typeNameCtx = null;
+        ParserRuleContext expressionNameCtx = null;
+        ParserRuleContext primaryCtx = null;
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree child = ctx.getChild(i);
+            if (child instanceof RuleContext) {
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_methodName) {
+                    methodNameCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_argumentList) {
+                    argumentListCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_typeArguments) {
+                    typeArgumentsCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_typeName) {
+                    typeNameCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_expressionName) {
+                    expressionNameCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_primary) {
+                    primaryCtx = (ParserRuleContext) child;
+                }
+            }
+            if (child instanceof TerminalNode) {
+                TerminalNode terminalNode = (TerminalNode) child;
+                if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
+                    identifier = terminalNode;
+                }
+            }
+        }
+        ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
+        TypeArgumentsTranslate typeArgumentsTranslate = new TypeArgumentsTranslate();
+        ExpressionNameTranslate expressionNameTranslate = new ExpressionNameTranslate();
+        PrimaryTranslate primaryTranslate = new PrimaryTranslate();
+
+        String identifierStr = identifier == null ? "" : identifier.getText();
+        String methodName = methodNameCtx == null ? "" : translateMethodInvocationMethodName(methodNameCtx);
+        String argumentList = argumentListCtx == null ? "" : argumentListTranslate.translateArgumentList(argumentListCtx);
+        String typeArguments = typeArgumentsCtx == null ? "" : typeArgumentsTranslate.translateTypeArguments(typeArgumentsCtx);
+        String typeName = typeNameCtx == null ? "" : translateTypeName(typeNameCtx);
+        String expressionName = expressionNameCtx == null ? "" : expressionNameTranslate.translateExpressionName(expressionNameCtx);
+        String primary = primaryCtx == null ? "" : primaryTranslate.translatePrimary(primaryCtx);
+
+        // 2. 判断第一个孩子节点的类型
+        ParseTree firstChild = ctx.getChild(0);
+        boolean isRuleContext = firstChild instanceof RuleContext;
+        if (!isRuleContext) {
+            //'super' '.' typeArguments? Identifier '(' argumentList? ')'
+            return "super" + "->" + typeArguments + " " + identifierStr + "(" + argumentList + ")";
+        } else {
+            int ruleIndex = ((RuleContext) firstChild).getRuleIndex();
+
+            if (ruleIndex == Java8Parser.RULE_methodName) {
+                //methodName '(' argumentList? ')'
+                return methodName + "(" + argumentList + ")";
+            }
+
+            if (ruleIndex == Java8Parser.RULE_expressionName) {
+                //expressionName '.' typeArguments? Identifier '(' argumentList? ')'
+                return expressionName + "->" + typeArguments + " " + identifierStr + "(" + argumentList + ")";
+            }
+
+            if (ruleIndex == Java8Parser.RULE_primary) {
+                //primary '.' typeArguments? Identifier '(' argumentList? ')'
+                return primary + "->" + typeArguments + " " + identifierStr + "(" + argumentList + ")";
+            }
+
+            if (ruleIndex == Java8Parser.RULE_typeName) {
+                // 判断ctx中是否包含super
+                boolean haveSuper = false;
+                for (int i = 0; i < ctx.getChildCount(); i++) {
+                    if (StringUtils.equals("super", ctx.getChild(i).getText())) {
+                        haveSuper = true;
+                    }
+                }
+
+                //typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
+                if (haveSuper) {
+                    return typeName + "->" + "super" + "->" + typeArguments + " " + identifierStr + "(" + argumentList + ")";
+                }
+
+                //typeName '.' typeArguments? Identifier '(' argumentList? ')'
+                else {
+                    return translateMethodInvocationTypeName(ctx);
+                }
+            }
+        }
+
+        System.out.println("translateMethodInvocation error");
+        return null;
     }
 
 
@@ -53,7 +147,92 @@ public class MethodInvocationTranslate {
             System.out.println("RULE_methodInvocation_lfno_primary 为null");
             return null;
         }
-        return parseMethodInvocation(ctx);
+        // 1.获取各个类型子节点
+        ParseTree identifier = null;
+        ParserRuleContext methodNameCtx = null;
+        ParserRuleContext argumentListCtx = null;
+        ParserRuleContext typeArgumentsCtx = null;
+        ParserRuleContext typeNameCtx = null;
+        ParserRuleContext expressionNameCtx = null;
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree child = ctx.getChild(i);
+            if (child instanceof RuleContext) {
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_methodName) {
+                    methodNameCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_argumentList) {
+                    argumentListCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_typeArguments) {
+                    typeArgumentsCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_typeName) {
+                    typeNameCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_expressionName) {
+                    expressionNameCtx = (ParserRuleContext) child;
+                }
+            }
+            if (child instanceof TerminalNode) {
+                TerminalNode terminalNode = (TerminalNode) child;
+                if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
+                    identifier = terminalNode;
+                }
+            }
+        }
+        ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
+        TypeArgumentsTranslate typeArgumentsTranslate = new TypeArgumentsTranslate();
+        ExpressionNameTranslate expressionNameTranslate = new ExpressionNameTranslate();
+
+        String identifierStr = identifier == null ? "" : identifier.getText();
+        String methodName = methodNameCtx == null ? "" : translateMethodInvocationMethodName(methodNameCtx);
+        String argumentList = argumentListCtx == null ? "" : argumentListTranslate.translateArgumentList(argumentListCtx);
+        String typeArguments = typeArgumentsCtx == null ? "" : typeArgumentsTranslate.translateTypeArguments(typeArgumentsCtx);
+        String typeName = typeNameCtx == null ? "" : translateTypeName(typeNameCtx);
+        String expressionName = expressionNameCtx == null ? "" : expressionNameTranslate.translateExpressionName(expressionNameCtx);
+
+        // 2. 判断第一个孩子节点的类型
+        ParseTree firstChild = ctx.getChild(0);
+        boolean isRuleContext = firstChild instanceof RuleContext;
+        if (!isRuleContext) {
+            //'super' '.' typeArguments? Identifier '(' argumentList? ')'
+            return "super" + "->" + typeArguments + " " + identifierStr + "(" + argumentList + ")";
+        } else {
+            int ruleIndex = ((RuleContext) firstChild).getRuleIndex();
+
+            if (ruleIndex == Java8Parser.RULE_methodName) {
+                //methodName '(' argumentList? ')'
+                return methodName + "(" + argumentList + ")";
+            }
+
+            if (ruleIndex == Java8Parser.RULE_expressionName) {
+                //expressionName '.' typeArguments? Identifier '(' argumentList? ')'
+                return expressionName + "->" + typeArguments + " " + identifierStr + "(" + argumentList + ")";
+            }
+
+            if (ruleIndex == Java8Parser.RULE_typeName) {
+                // 判断ctx中是否包含super
+                boolean haveSuper = false;
+                for (int i = 0; i < ctx.getChildCount(); i++) {
+                    if (StringUtils.equals("super", ctx.getChild(i).getText())) {
+                        haveSuper = true;
+                    }
+                }
+
+                //typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
+                if (haveSuper) {
+                    return typeName + "->" + "super" + "->" + typeArguments + " " + identifierStr + "(" + argumentList + ")";
+                }
+
+                //typeName '.' typeArguments? Identifier '(' argumentList? ')'
+                else {
+                    return translateMethodInvocationTypeName(ctx);
+                }
+            }
+        }
+
+        System.out.println("translateMethodInvocation error");
+        return null;
     }
 
     /**
@@ -93,69 +272,15 @@ public class MethodInvocationTranslate {
         ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
         String argumentList = argumentListCtx == null ? "" : argumentListTranslate.translateArgumentList(argumentListCtx);
 
-        return "." + typeArguments + " " + identifier + "(" + argumentList + ")";
+        return "->" + typeArguments + " " + identifier + "(" + argumentList + ")";
     }
-
-    private String parseMethodInvocation(ParserRuleContext ctx) {
-        // 格式类型检查：暂不支持的不做翻译
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            ParseTree child = ctx.getChild(i);
-            if (child.getText().contains("super")) {
-                System.out.println("不支持的方法调用格式: super " + ctx.getText());
-                return null;
-            }
-            // 暂不支持：expressionName '.' typeArguments? Identifier '(' argumentList? ')'
-            boolean isRuleContext = child instanceof RuleContext;
-            if (!isRuleContext) {
-                continue;
-            }
-            RuleContext childNode = (RuleContext) child;
-            if (childNode.getRuleIndex() == Java8Parser.RULE_expressionName) {
-                ExpressionNameTranslate translate = new ExpressionNameTranslate();
-                return translate.translateExpressionName((ParserRuleContext) childNode);
-            }
-        }
-
-        // 转换两种格式的方法调用：
-        // methodName '(' argumentList? ')' 或者
-        // typeName '.' typeArguments? Identifier '(' argumentList? ')'
-        ParseTree firstChild = ctx.getChild(0);
-        boolean isRuleContext = firstChild instanceof RuleContext;
-        if (!isRuleContext) {
-            System.out.println("不支持的方法调用格式（按说不可能走到这里）:  " + ctx.getText());
-            return null;
-        }
-        RuleContext firstChildRule = (RuleContext) firstChild;
-        // todo ctx参数可能有问题
-        // 处理typeName '.' typeArguments? Identifier '(' argumentList? ')'
-        if (firstChildRule.getRuleIndex() == Java8Parser.RULE_typeName) {
-            return translateMethodInvocationTypeName(ctx);
-        }
-        if (firstChildRule.getRuleIndex() == Java8Parser.RULE_methodName) {
-            return translateMethodInvocationMethodName(ctx);
-        }
-        System.out.println("不支持的方法调用格式（按说也不可能走到这里）:  " + ctx.getText());
-        return null;
-    }
-
 
     /**
-     * 格式：methodName '(' argumentList? ')'
-     *
-     * @param ctx methodInvocation_lfno_primary
-     * @return
      */
     public String translateMethodInvocationMethodName(ParserRuleContext ctx) {
-        String methodName = translateMethodName((ParserRuleContext) ctx.getChild(0));
-        ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
-        StringBuilder argumentList = new StringBuilder();
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            if (ctx.getChild(i) instanceof RuleContext && ((RuleContext) ctx.getChild(i)).getRuleIndex()
-                    == Java8Parser.RULE_argumentList) {
-                argumentList.append(argumentListTranslate.translateArgumentList((ParserRuleContext) ctx.getChild(i)));
-            }
-        }
-        return ReplaceRuleService.replaceMethodInvocationMethodName(methodName) + "(" + argumentList + ")";
+        String methodName = translateMethodName(ctx);
+
+        return ReplaceRuleService.replaceMethodInvocationMethodName(methodName);
     }
 
     /**

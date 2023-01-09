@@ -33,13 +33,12 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
             return null;
         }
         if (ctx.getChildCount() != 1) {
-            System.out.println(ctx.getText());
-            System.out.println("RULE_primaryNoNewArray_lfno_primary暂不支持多子节点的解析类型");
+//            System.out.println(ctx.getText());
+//            System.out.println("RULE_primaryNoNewArray_lfno_primary暂不支持多子节点的解析类型");
             return ctx.getText();
         }
 
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
-
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_literal) {
             return translateLiteral(childRuleContext);
@@ -68,8 +67,8 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_methodReference_lfno_primary) {
-            System.out.println("RULE_methodReference_lfno_primary 暂不支持");
-            return ctx.getText();
+            MethodReferenceLfnoPrimaryTranslate translate = new MethodReferenceLfnoPrimaryTranslate();
+            return translate.translateMethodReferenceLfnoPrimary(childRuleContext);
         }
 
         System.out.println("translateVariableInitializer 不支持的解析类型");

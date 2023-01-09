@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.PartMigrationMainTest;
+import com.test.migration.service.translate.PartMigrationProcessor;
 import com.test.migration.service.translate.TranslateCodeCollector;
 import com.test.migration.service.translate.TranslateHint;
 import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
@@ -47,7 +48,7 @@ public class BlockStatementTranslate {
 
         // 调整策略
         String key = String.valueOf(ctx.getStart().getStartIndex());
-        String modifyType = PartMigrationMainTest.blockStatementModifyMap.getOrDefault(key, "keep");
+        String modifyType = PartMigrationProcessor.blockStatementModifyMap.getOrDefault(key, "keep");
         if (StringUtils.equals(modifyType, "remove")) {
             // 清空bs收集到的hint
             TranslateHint.init();

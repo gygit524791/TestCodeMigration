@@ -52,7 +52,6 @@ public class ReplaceRuleService {
                     && StringUtils.isNotBlank(methodInvocationTypeNameRule.getTargetMethodName())) {
                 return typeName + "->" + methodInvocationTypeNameRule.getTargetMethodName() + "(" + argumentList + ")";
             }
-
         }
 
         return originTranslate;

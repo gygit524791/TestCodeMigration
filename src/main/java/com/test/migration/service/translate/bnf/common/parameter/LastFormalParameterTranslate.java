@@ -17,8 +17,9 @@ public class LastFormalParameterTranslate {
             return null;
         }
         if (ctx.getChildCount() != 1) {
-            System.out.println("translateLastFormalParameter 不支持的转换类型");
-            return null;
+            // todo 补充 hint  （AnimatorSet...sets）
+            System.out.println("translateLastFormalParameter 不支持的转换类型 "+ ctx.getText());
+            return ctx.getText();
         }
         FormalParameterTranslate formalParameterTranslate = new FormalParameterTranslate();
         return formalParameterTranslate.translateFormalParameter((ParserRuleContext) ctx.getChild(0));

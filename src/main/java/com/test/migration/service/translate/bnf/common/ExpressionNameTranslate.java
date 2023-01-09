@@ -22,7 +22,7 @@ public class ExpressionNameTranslate {
         if (ctx.getChildCount() == 1) {
             return ctx.getText();
         }
-        return translateAmbiguousName((ParserRuleContext) ctx.getChild(0)) + "." + ctx.getChild(2).getText();
+        return translateAmbiguousName((ParserRuleContext) ctx.getChild(0)) + "->" + ctx.getChild(2).getText();
     }
 
     public String translateAmbiguousName(ParserRuleContext ctx) {

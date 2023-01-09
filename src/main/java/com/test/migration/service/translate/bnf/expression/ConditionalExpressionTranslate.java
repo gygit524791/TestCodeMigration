@@ -21,12 +21,12 @@ public class ConditionalExpressionTranslate {
      * @return
      */
     public String translateConditionalExpression(ParserRuleContext ctx) {
-        if (ctx.getRuleIndex() != Java8Parser.RULE_conditionalExpression) {
+        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_conditionalExpression) {
             System.out.println("conditionalExpression 不正确哈:" + ctx.getText());
             return null;
         }
 
-        // todo conditionalOrExpression '?' expression ':' conditionalExpression
+        // conditionalOrExpression '?' expression ':' conditionalExpression
         if (ctx.getChildCount() > 1) {
             return translateConditionalOrExpressionWithTernary(ctx);
         }
@@ -39,7 +39,6 @@ public class ConditionalExpressionTranslate {
     }
 
     /**
-     * TODO
      * 三目运算符条件句翻译
      * conditionalOrExpression '?' expression ':' conditionalExpression
      *
@@ -47,8 +46,33 @@ public class ConditionalExpressionTranslate {
      * @return
      */
     public String translateConditionalOrExpressionWithTernary(ParserRuleContext ctx) {
-        System.out.println("暂不支持三目运算符解析");
-        return null;
+        ParserRuleContext conditionalOrExpressionCtx = null;
+        ParserRuleContext expressionCtx = null;
+        ParserRuleContext conditionalExpressionCtx = null;
+
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            boolean isRuleContext = ctx.getChild(i) instanceof RuleContext;
+            if (!isRuleContext) {
+                continue;
+            }
+            ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(i);
+            if (childRuleContext.getRuleIndex() == Java8Parser.RULE_conditionalOrExpression) {
+                conditionalOrExpressionCtx = childRuleContext;
+            }
+            if (childRuleContext.getRuleIndex() == Java8Parser.RULE_expression) {
+                expressionCtx = childRuleContext;
+            }
+            if (childRuleContext.getRuleIndex() == Java8Parser.RULE_conditionalExpression) {
+                conditionalExpressionCtx = childRuleContext;
+            }
+        }
+        String conditionalOrExpression = translateConditionalOrExpression(conditionalOrExpressionCtx);
+        ExpressionTranslate expressionTranslate = new ExpressionTranslate();
+        String expression = expressionTranslate.translateExpression(expressionCtx);
+        String conditionalExpression = translateConditionalExpression(conditionalExpressionCtx);
+
+        //conditionalOrExpression '?' expression ':' conditionalExpression
+        return conditionalOrExpression + "?" + expression + ":" + conditionalExpression;
     }
 
     /**
@@ -58,7 +82,7 @@ public class ConditionalExpressionTranslate {
      * ;
      */
     public String translateConditionalOrExpression(ParserRuleContext ctx) {
-        if (ctx.getRuleIndex() != Java8Parser.RULE_conditionalOrExpression) {
+        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_conditionalOrExpression) {
             System.out.println("conditionalOrExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }

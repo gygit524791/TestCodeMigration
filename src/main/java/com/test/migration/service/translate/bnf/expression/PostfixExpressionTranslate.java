@@ -1,6 +1,7 @@
 package com.test.migration.service.translate.bnf.expression;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.ExpressionNameTranslate;
 import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
@@ -40,7 +41,8 @@ public class PostfixExpressionTranslate {
         RuleContext childRuleContext = (RuleContext) child;
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_expressionName) {
-            return childRuleContext.getText();
+            ExpressionNameTranslate expressionNameTranslate = new ExpressionNameTranslate();
+            return expressionNameTranslate.translateExpressionName((ParserRuleContext) childRuleContext);
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_primary) {
             PrimaryTranslate primaryTranslate = new PrimaryTranslate();

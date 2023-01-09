@@ -1,6 +1,7 @@
 package com.test.migration.service.translate.bnf.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.TryStatementTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 public class StatementWithoutTrailingSubStatementTranslate {
@@ -76,7 +77,8 @@ public class StatementWithoutTrailingSubStatementTranslate {
             System.out.println("RULE_throwStatement 建设中");
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_tryStatement) {
-            System.out.println("RULE_tryStatement 建设中");
+            TryStatementTranslate translate = new TryStatementTranslate();
+            return translate.translateTryStatement(childRuleContext);
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_assertStatement) {
             System.out.println("RULE_assertStatement 建设中");
