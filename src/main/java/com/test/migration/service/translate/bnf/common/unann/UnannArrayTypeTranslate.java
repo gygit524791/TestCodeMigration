@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.bnf.common.unann;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.ReplaceRuleService;
+import com.test.migration.service.translate.bnf.common.DimsTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -21,39 +21,60 @@ public class UnannArrayTypeTranslate {
             return "";
         }
 
+        // 1.获取各个类型子节点
+        ParserRuleContext unannPrimitiveTypeCtx = null;
+        ParserRuleContext unannClassOrInterfaceTypeCtx = null;
+        ParserRuleContext unannTypeVariableCtx = null;
+        ParserRuleContext dimsCtx = null;
 
+        for (int i = 0; i < ctx.getChildCount(); i++) {
+            ParseTree child = ctx.getChild(i);
+            if (child instanceof RuleContext) {
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_unannPrimitiveType) {
+                    unannPrimitiveTypeCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_unannClassOrInterfaceType) {
+                    unannClassOrInterfaceTypeCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_unannTypeVariable) {
+                    unannTypeVariableCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_dims) {
+                    dimsCtx = (ParserRuleContext) child;
+                }
+            }
+        }
+        UnannPrimitiveTypeTranslate unannPrimitiveTypeTranslate = new UnannPrimitiveTypeTranslate();
+        UnannClassOrInterfaceTypeTranslate unannClassOrInterfaceTypeTranslate = new UnannClassOrInterfaceTypeTranslate();
+        UnannTypeVariableTranslate unannTypeVariableTranslate = new UnannTypeVariableTranslate();
+        DimsTranslate dimsTranslate = new DimsTranslate();
 
+        String unannPrimitiveType = unannPrimitiveTypeCtx == null ? "" : unannPrimitiveTypeTranslate.translateUnannPrimitiveType(unannPrimitiveTypeCtx);
+        String unannClassOrInterfaceType = unannClassOrInterfaceTypeCtx == null ? "" : unannClassOrInterfaceTypeTranslate.translateUnannClassOrInterfaceType(unannClassOrInterfaceTypeCtx);
+        String unannTypeVariable = unannTypeVariableCtx == null ? "" : unannTypeVariableTranslate.translateUnannTypeVariable(unannTypeVariableCtx);
+        String dims = dimsCtx == null ? "" : dimsTranslate.translateDims(dimsCtx);
 
+        // 2. 判断第一个孩子节点的类型
+        RuleContext firstChild = (RuleContext) ctx.getChild(0);
+        int ruleIndex = firstChild.getRuleIndex();
 
-
-        return "";
-    }
-
-    /**
-     * unannTypeVariable
-     * 	:	Identifier
-     * 	;
-     */
-    public String translateUnannTypeVariable(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_unannTypeVariable) {
-            System.out.println("RULE_unannTypeVariable 为null");
-            return "";
+        //primitiveType dims
+        if (ruleIndex == Java8Parser.RULE_unannPrimitiveType) {
+            return unannPrimitiveType + " " + dims;
         }
 
-        return ctx.getText();
-    }
-
-    public String translateUnannClassOrInterfaceType(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_unannClassOrInterfaceType) {
-            System.out.println("translateUnannClassOrInterfaceType 为null");
-            return "";
+        //classOrInterfaceType dims
+        if (ruleIndex == Java8Parser.RULE_unannClassOrInterfaceType) {
+            return unannClassOrInterfaceType + " " + dims;
         }
 
-        // TODO 类/接口类型，从映射表中找对应关系
-        // TODO TIPS 不考虑存在注解和范型的情况
-        return ReplaceRuleService.replaceClassOrInterfaceType(ctx.getText());
+        //typeVariable dims
+        if (ruleIndex == Java8Parser.RULE_unannTypeVariable) {
+            return unannTypeVariable + " " + dims;
+        }
+
+        System.out.println("translateArrayType error");
+        return null;
     }
-
-
 
 }
