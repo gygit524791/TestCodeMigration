@@ -3,12 +3,11 @@ package com.test.migration.service.translate.bnf.statement.noshortif;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.bnf.common.UnannTypeTranslate;
+import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import com.test.migration.service.translate.bnf.common.variable.VariableDeclaratorIdTranslate;
 import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import com.test.migration.service.translate.bnf.expression.StatementExpressionTranslate;
 import com.test.migration.service.translate.bnf.statement.LocalVariableDeclarationStatementTranslate;
-import com.test.migration.service.translate.bnf.statement.StatementTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 

@@ -1,13 +1,10 @@
 package com.test.migration.service.translate.bnf.common.method;
 
-import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.TranslateCodeCollector;
 import com.test.migration.service.translate.TranslateHint;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class MethodDeclarationTranslate {
 

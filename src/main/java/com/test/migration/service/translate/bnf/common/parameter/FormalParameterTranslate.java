@@ -2,7 +2,7 @@ package com.test.migration.service.translate.bnf.common.parameter;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.variable.VariableDeclaratorIdTranslate;
-import com.test.migration.service.translate.bnf.common.UnannTypeTranslate;
+import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 

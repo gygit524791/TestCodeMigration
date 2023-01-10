@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.bnf.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.bnf.common.UnannTypeTranslate;
+import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import com.test.migration.service.translate.bnf.common.variable.VariableDeclaratorListTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
@@ -81,7 +81,7 @@ public class LocalVariableDeclarationStatementTranslate {
 
 
     /**
-     * 数值和boolean类型，直接转换
+     * 数值和boolean类型，直接转换 TODO
      */
     public String unannPrimitiveType(String originType) {
         return originType;

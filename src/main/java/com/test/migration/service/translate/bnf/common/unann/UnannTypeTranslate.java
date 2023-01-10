@@ -1,4 +1,4 @@
-package com.test.migration.service.translate.bnf.common;
+package com.test.migration.service.translate.bnf.common.unann;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.ReplaceRuleService;
@@ -10,7 +10,7 @@ public class UnannTypeTranslate {
 
     public String translateUnannType(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_unannType) {
-            System.out.println("unannTypeContext 为null");
+            System.out.println("RULE_unannType 为null");
             return "";
         }
         //要么是unannPrimitiveType，要么是unannReferenceType
@@ -31,20 +31,22 @@ public class UnannTypeTranslate {
                 return translateUnannClassOrInterfaceType((ParserRuleContext) referenceTypeRuleContext);
             }
 
-            // todo 数组类型 暂不支持
             if (referenceTypeRuleContext.getRuleIndex() == Java8Parser.RULE_unannArrayType) {
-                System.out.println("暂不支持RULE_unannArrayType, 目前直接返回文本");
-                return referenceTypeRuleContext.getText();
+                UnannArrayTypeTranslate translate = new UnannArrayTypeTranslate();
+                return translate.translateUnannArrayType((ParserRuleContext) referenceTypeChild);
             }
 
-            // TODO: 待调研
             if (referenceTypeRuleContext.getRuleIndex() == Java8Parser.RULE_unannTypeVariable) {
-                System.out.println("暂不支持RULE_unannTypeVariable");
-                return "";
+                UnannTypeVariableTranslate translate = new UnannTypeVariableTranslate();
+                return translate.translateUnannTypeVariable((ParserRuleContext) referenceTypeRuleContext);
             }
         }
+
+        System.out.println("translateUnannType error");
+
         return "";
     }
+
 
     public String translateUnannClassOrInterfaceType(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_unannClassOrInterfaceType) {

@@ -52,7 +52,7 @@ public class PrimaryTranslate {
 
         ArrayCreationExpressionTranslate arrayCreationExpressionTranslate = new ArrayCreationExpressionTranslate();
         String arrayCreationExpression = arrayCreationExpressionCtx == null ? ""
-                : arrayCreationExpressionTranslate.translateArrayType(arrayCreationExpressionCtx);
+                : arrayCreationExpressionTranslate.translateArrayCreationExpression(arrayCreationExpressionCtx);
 
         PrimaryNoNewArrayLfPrimaryTranslate primaryNoNewArrayLfPrimaryTranslate = new PrimaryNoNewArrayLfPrimaryTranslate();
         List<String> primaryNoNewArrayLfPrimaryList = primaryNoNewArray_lf_primaryCtxList.stream()

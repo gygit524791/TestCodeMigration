@@ -1,6 +1,7 @@
 package com.test.migration.service.translate.bnf.common;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
