@@ -12,6 +12,7 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
+import utils.LogUtil;
 
 public class MethodInvocationTranslate {
 
@@ -27,7 +28,7 @@ public class MethodInvocationTranslate {
      */
     public String translateMethodInvocation(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation) {
-            System.out.println("RULE_methodInvocation 为null");
+            LogUtil.info("RULE_methodInvocation 为null");
             return null;
         }
         // 1.获取各个类型子节点
@@ -125,7 +126,7 @@ public class MethodInvocationTranslate {
             }
         }
 
-        System.out.println("translateMethodInvocation error");
+        LogUtil.info("translateMethodInvocation error");
         return null;
     }
 
@@ -144,7 +145,7 @@ public class MethodInvocationTranslate {
      */
     public String translateMethodInvocationLfNoPrimary(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation_lfno_primary) {
-            System.out.println("RULE_methodInvocation_lfno_primary 为null");
+            LogUtil.info("RULE_methodInvocation_lfno_primary 为null");
             return null;
         }
         // 1.获取各个类型子节点
@@ -231,7 +232,7 @@ public class MethodInvocationTranslate {
             }
         }
 
-        System.out.println("translateMethodInvocation error");
+        LogUtil.info("translateMethodInvocation error");
         return null;
     }
 

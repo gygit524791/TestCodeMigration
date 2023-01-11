@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 收集转换后的testCode，两个类别：
+ * 收集转换后的代码结构，两个类别：
  * 1.testCode类成员变量：属性，内部类，非测试方法；其中每一个都带有对应的hint
  * <p>
  * <p>
@@ -20,6 +20,7 @@ import java.util.Set;
  * 每次执行translate之前，调用context的init方法初始化
  * translate过程中会不断填充成员变量，在translate执行完成后，完成填充
  */
+@ToString
 public class TranslateCodeCollector {
 
     public static String className;
@@ -27,8 +28,14 @@ public class TranslateCodeCollector {
     public static List<TranslateCode> classDeclarationTranslateCodes;
     public static List<MethodTranslateCode> methodDeclarationTranslateCodes;
 
+    // 部分迁移 收集到的结果
+    public static List<PartMigrationMethodTranslateCode> partMigrationMethodTranslateCodes;
 
-    /*** TMP ***/
+
+    /***
+     * TMP：辅助代码转换过程（中间结果）
+     * 最终的代码合成部分不用以下这些中间结果
+     */
     public static MethodTranslateCode.MethodHeaderTranslateCode methodHeaderTranslateCode;
     public static List<MethodTranslateCode.BlockStatementTranslateCode> blockStatementTranslateCodes;
     public static int methodStartLine;
@@ -41,6 +48,7 @@ public class TranslateCodeCollector {
         methodDeclarationTranslateCodes = Lists.newArrayList();
         methodHeaderTranslateCode = new MethodTranslateCode.MethodHeaderTranslateCode();
         blockStatementTranslateCodes = Lists.newArrayList();
+        partMigrationMethodTranslateCodes = Lists.newArrayList();
     }
 
     public static class TranslateCode {
@@ -48,9 +56,7 @@ public class TranslateCodeCollector {
         public List<String> misMatchCodes;
     }
 
-
     public static class MethodTranslateCode {
-
         public MethodHeaderTranslateCode methodHeaderTranslateCode;
         public List<BlockStatementTranslateCode> blockStatementTranslateCodes;
 
@@ -58,6 +64,9 @@ public class TranslateCodeCollector {
         public static int methodStartLine;
         public static int methodEndLine;
 
+        /**
+         * method定义可能会出现多层嵌套
+         */
         public static void clearMethodLine() {
             methodStartLine = 0;
             methodEndLine = 0;
@@ -76,5 +85,7 @@ public class TranslateCodeCollector {
         }
     }
 
-
+    public static class PartMigrationMethodTranslateCode {
+        public String translateCode;
+    }
 }

@@ -31,7 +31,7 @@ public class ApiMappingService {
                 taskParameter.getClassVectorDictFilepath()
         };
 
-        List<String> resultLines = CallPythonUtil.call(tokenArgs);
+        List<String> resultLines = CallUtil.call(tokenArgs);
 
         StringBuilder resultLine = new StringBuilder();
         resultLines.forEach(resultLine::append);

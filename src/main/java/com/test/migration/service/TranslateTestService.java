@@ -23,10 +23,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
-import utils.GetFoldFileNames;
-import utils.JsonUtil;
-import utils.MyBatisUtil;
-import utils.TaskParameterReader;
+import utils.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -112,13 +109,13 @@ public class TranslateTestService {
         MappingRuleLoader.load();
         // 以文件为代码进行转换
         translateTests.forEach(translateTest -> {
-            String translateCode = doTranslate(translateTest);
-            translateTest.setTranslateCode("translateCode");
-            update(translateTest);
+            doTranslate(translateTest);
+//            translateTest.setTranslateCode("translateCode");
+//            update(translateTest);
         });
     }
 
-    private String doTranslate(TranslateTest translateTest) {
+    private void doTranslate(TranslateTest translateTest) {
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(translateTest.getTestFilepath());
@@ -132,35 +129,30 @@ public class TranslateTestService {
         TestCodeContext.init();
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
-        Map<String, List<Integer>> map = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
-        List<String> migrateTestMethods = map == null ? Lists.newArrayList() : Lists.newArrayList(map.keySet());
-        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
-
 
         testCodeVisitor.getTypeNameMap().put("mActivityRule", "ActivityTestRule<AnimatorSetActivity>");
         ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
 
-        System.out.println(TestCodeContext.className);
 
-        System.out.println("====translate FieldDeclaration====");
+        LogUtil.info("====translate FieldDeclaration====");
         FieldDeclarationTranslate fieldDeclarationTranslate = new FieldDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.fieldDeclarationCtxList) {
-            System.out.println(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
-            System.out.println("---------------------------");
+            LogUtil.info(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
+            LogUtil.info("---------------------------");
         }
 
-        System.out.println("====translate MethodDeclaration====");
+        LogUtil.info("====translate MethodDeclaration====");
         MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
-            System.out.println(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
-            System.out.println("---------------------------");
+            LogUtil.info(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
+            LogUtil.info("---------------------------");
         }
 
-        System.out.println("====translate ClassDeclaration====");
+        LogUtil.info("====translate ClassDeclaration====");
         ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
-            System.out.println(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
-            System.out.println("---------------------------");
+            LogUtil.info(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
+            LogUtil.info("---------------------------");
         }
 
 //        System.out.println("==== MISMATCH HINT=======");
@@ -188,8 +180,6 @@ public class TranslateTestService {
 //        });
 
 //        return JsonUtil.objectToJson(translateCodes);
-
-        return null;
     }
 
     private Map<String, List<Integer>> getTestMethodInvocationMap(String testFilepath, List<ApiBasic> fileApis) {
@@ -225,7 +215,7 @@ public class TranslateTestService {
      * *（通配符）+类名+*（通配符）+Test（前后缀）的方式来匹配测试类文件
      *
      * @param allTargetSourceCodeFilepathList
-     * @param filepath                        目标api所在的文件路径
+     * @param filepath 目标api所在的文件路径
      * @return
      */
     private List<String> filterTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {

@@ -1,15 +1,20 @@
-import com.test.migration.entity.TaskParameter;
 import org.testng.annotations.Test;
 import org.yaml.snakeyaml.Yaml;
-import utils.CallPythonUtil;
-import utils.TaskParameterReader;
 
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainTest {
+    @Test
+    public void testFindPath(){
+        System.out.println(System.getProperty("user.dir"));
+
+
+    }
+
+
+
     @Test
     public void testReadYml(){
         Yaml yaml = new Yaml();

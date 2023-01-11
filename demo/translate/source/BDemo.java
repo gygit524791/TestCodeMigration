@@ -1,6 +1,4 @@
-public class ADemo {
-    private AClass a,b;
-    private BClass c = new BClass();
+public class ADemo {private AClass a,b;private BClass c = new BClass();
 
     public void test1(){
         CClass d = new CClass();

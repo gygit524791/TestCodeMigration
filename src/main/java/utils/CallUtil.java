@@ -7,20 +7,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class CallPythonUtil {
+/**
+ * java调用shell，python等
+ */
+public class CallUtil {
+
+    public static List<String> callCMD(String cmd){
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+        String prefix1 = isWindows ? "cmd" : "/bin/sh";
+        String prefix2 = isWindows ? "/c" : "-c";
+        return call(new String[]{prefix1, prefix2, cmd});
+    }
+
 
     /**
      * String[] args1=new String[]{"/home/huan/anaconda2/bin/python","/home/huan/myfile/pythonfile/helloword.py"};
      * Process pr=Runtime.getRuntime().exec(args1);
      */
     public static List<String> call(String[] args) {
-        Process proc;
         List<String> resultLines = Lists.newArrayList();
 
         try {
         	/*
 			附加：
-
 			String数组里的那一行很重要
 			首先一定要设置好你所使用的python的位置，切记不要直接使用python，因为系统会默认使用自带的python，所以一定要设置好你所使用的
 			python的位置，否则可能会出现意想不到的问题（比如说我使用的是anaconda中的python，而ubuntu系统会默认调用自带的python，

@@ -4,15 +4,14 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.method.MethodHeaderTranslate;
 import com.test.migration.service.translate.bnf.statement.BlockStatementTranslate;
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -20,75 +19,36 @@ import java.util.stream.Collectors;
 
 public class PartMigrationProcessor {
 
-    /**
-     * 1. 构建bs model(BlockStatementTreeNode)
-     * 2. 执行bs的translate，收集hint
-     * 3. 执行部分迁移bs调整策略，构建调整策略map
-     * 4. 执行bs的translate，依据上述map，构建出部分迁移最终结果。
-     */
+    public String doPartMigrationTranslate(ParserRuleContext ctx) {
+        BlockStatementTranslate blockStatementTranslate = new BlockStatementTranslate();
+        // 1. 构建部分迁移model
+        MethodDeclarationNode methodDeclarationNode = buildBSModel(ctx);
 
-    /**
-     * bs(blockStatement)调整策略map
-     * key：bs的代码行号 + $ + bs经过translate之后的字符串（唯一确定是哪个bs）
-     * value：调整策略（keep，remove）
-     */
-    public static Map<String, String> blockStatementModifyMap = Maps.newHashMap();
+        // 2. 填充hint
+        List<BlockStatementTreeNode> blockStatementTreeNodes = methodDeclarationNode.blockStatementTreeNodes;
+        fillBSModel(blockStatementTreeNodes);
 
-    public static class MethodDeclarationNode {
-
-        public String methodHeader;
-
-        public List<BlockStatementTreeNode> blockStatementTreeNodes;
-    }
-
-    /**
-     * 完整的代码语句：method/if/for等
-     */
-    public static class BlockStatementTreeNode {
-
-        /**
-         * 完整的代码语句，比如一个完整的method，for，if结构等
-         */
-        ParserRuleContext blockStatement;
-
-        String translateBlockStatement;
-
-        String bsStartIndex;
-
-        /**
-         * 直接子blockStatement
-         */
-        List<BlockStatementTreeNode> subBlockStatementTreeNodes;
-
-        /**
-         * 整体hint
-         */
-        String hint;
-
-        /**
-         * nonBlockStatement转换失败时，对应的失败信息收集到nonBlockStatementHint
-         */
-        String nonBlockStatementHint;
-
-
-        public boolean isTranslateBlockStatementFail() {
-            if (StringUtils.isBlank(hint)) {
-                return false;
-            }
-            List<String> hintList = Splitter.on(TranslateHint.BS_HINT_TAG).splitToList(hint).stream()
-                    .filter(StringUtils::isNotBlank)
-                    .distinct()
-                    .collect(Collectors.toList());
-
-            return !hintList.isEmpty();
+        // 3.1 执行部分迁移bs调整策略，构建调整策略map
+        for (BlockStatementTreeNode blockStatementTreeNode : blockStatementTreeNodes) {
+            executePartMigrationModifyStrategy(blockStatementTreeNode);
         }
 
+        // 3.2 todo 方法名字暂定
+        dfsModify(blockStatementTreeNodes);
+
+        // 4. 二次转换，并合并出部分迁移结果
+        List<String> translateBlockStatements = methodDeclarationNode.blockStatementTreeNodes.stream()
+                .map(x -> blockStatementTranslate.translateBlockStatement(x.blockStatement))
+                .collect(Collectors.toList());
+
+        String methodBlockStatements = Joiner.on("").join(translateBlockStatements);
+        return methodDeclarationNode.methodHeader + "{" + methodBlockStatements + "}";
     }
 
     /**
      *
      */
-    public BlockStatementTreeNode buildMethodBlockStatementTree(ParserRuleContext parserRuleContext) {
+    private BlockStatementTreeNode buildMethodBlockStatementTree(ParserRuleContext parserRuleContext) {
         if (parserRuleContext.getRuleIndex() != Java8Parser.RULE_blockStatement) {
             System.out.println("ahb");
             return null;
@@ -130,67 +90,6 @@ public class PartMigrationProcessor {
         return treeNode;
     }
 
-    public void partMigrationProcess(String filepath) {
-        MappingRuleLoader.load();
-        CharStream inputStream = null;
-        try {
-            inputStream = CharStreams.fromFileName(filepath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
-        ParseTree parseTree = parser.compilationUnit();
-
-        TestCodeContext.init();
-        TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
-        testCodeVisitor.visit(parseTree);
-
-        testCodeVisitor.getTypeNameMap().put("mActivityRule", "ActivityTestRule<AnimatorSetActivity>");
-        ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
-
-        TranslateCodeCollector.init();
-        TranslateCodeCollector.className = TestCodeContext.className;
-        // 处理每个method
-        List<String> partTranslateMethods = Lists.newArrayList();
-        BlockStatementTranslate blockStatementTranslate = new BlockStatementTranslate();
-        PartMigrationProcessor partMigrationProcessor = new PartMigrationProcessor();
-
-        for (ParserRuleContext ctx : TestCodeContext.methodDeclarationCtxList) {
-            // 1. 构建部分迁移model
-            MethodDeclarationNode methodDeclarationNode = partMigrationProcessor.buildBSModel(ctx);
-
-            // 2. 填充hint
-            List<BlockStatementTreeNode> blockStatementTreeNodes = methodDeclarationNode.blockStatementTreeNodes;
-            partMigrationProcessor.fillBSModel(blockStatementTreeNodes);
-
-            // 3.1 执行部分迁移bs调整策略，构建调整策略map
-            for (BlockStatementTreeNode blockStatementTreeNode : blockStatementTreeNodes) {
-                partMigrationProcessor.executePartMigrationModifyStrategy(blockStatementTreeNode);
-            }
-
-            // 3.2 todo 方法名字暂定
-            partMigrationProcessor.dfsModify(blockStatementTreeNodes);
-
-            // 4. 二次转换，并合并出部分迁移结果
-            List<String> translateBlockStatements = methodDeclarationNode.blockStatementTreeNodes.stream()
-                    .map(x -> blockStatementTranslate.translateBlockStatement(x.blockStatement))
-                    .collect(Collectors.toList());
-
-            String methodBlockStatements = Joiner.on("").join(translateBlockStatements);
-            String translateMethod = methodDeclarationNode.methodHeader + "{" + methodBlockStatements + "}";
-            partTranslateMethods.add(translateMethod);
-        }
-
-        for (String method : partTranslateMethods) {
-            System.out.println("=====part - translate - method start=====");
-            System.out.println(method);
-            System.out.println("=====part - translate - method end=====");
-            System.out.println();
-        }
-
-    }
-
     /**
      * b1 b2 b3
      *
@@ -210,12 +109,6 @@ public class PartMigrationProcessor {
     }
 
     private void processDfs(BlockStatementTreeNode blockStatementTreeNode) {
-//
-//        blockStatementModifyMap.forEach((k,v)->{
-//            System.out.println(k+":"+v);
-//        });
-//        System.out.println("===----=== ");
-
         boolean setRemove = false;
         Stack<BlockStatementTreeNode> stack = new Stack<>();
         stack.push(blockStatementTreeNode);
@@ -237,10 +130,6 @@ public class PartMigrationProcessor {
                 stack.push(statementTreeNode.subBlockStatementTreeNodes.get(i));
             }
         }
-
-//        blockStatementModifyMap.forEach((k,v)->{
-//            System.out.println(k+":"+v);
-//        });
     }
 
     private void executePartMigrationModifyStrategy(BlockStatementTreeNode blockStatementTreeNode) {
@@ -368,5 +257,72 @@ public class PartMigrationProcessor {
 
         return blockStatementsList;
     }
+
+    // 部分迁移-代码数据结构设计
+
+    /**
+     * 1. 构建bs model(BlockStatementTreeNode)
+     * 2. 执行bs的translate，收集hint
+     * 3. 执行部分迁移bs调整策略，构建调整策略map
+     * 4. 执行bs的translate，依据上述map，构建出部分迁移最终结果。
+     */
+
+    /**
+     * bs(blockStatement)调整策略map
+     * key：bs的代码行号 + $ + bs经过translate之后的字符串（唯一确定是哪个bs）
+     * value：调整策略（keep，remove）
+     */
+    public static Map<String, String> blockStatementModifyMap = Maps.newHashMap();
+
+    public static class MethodDeclarationNode {
+
+        public String methodHeader;
+
+        public List<BlockStatementTreeNode> blockStatementTreeNodes;
+    }
+
+    /**
+     * 完整的代码语句：method/if/for等
+     */
+    public static class BlockStatementTreeNode {
+
+        /**
+         * 完整的代码语句，比如一个完整的method，for，if结构等
+         */
+        ParserRuleContext blockStatement;
+
+        String translateBlockStatement;
+
+        String bsStartIndex;
+
+        /**
+         * 直接子blockStatement
+         */
+        List<BlockStatementTreeNode> subBlockStatementTreeNodes;
+
+        /**
+         * 整体hint
+         */
+        String hint;
+
+        /**
+         * nonBlockStatement转换失败时，对应的失败信息收集到nonBlockStatementHint
+         */
+        String nonBlockStatementHint;
+
+
+        public boolean isTranslateBlockStatementFail() {
+            if (StringUtils.isBlank(hint)) {
+                return false;
+            }
+            List<String> hintList = Splitter.on(TranslateHint.BS_HINT_TAG).splitToList(hint).stream()
+                    .filter(StringUtils::isNotBlank)
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            return !hintList.isEmpty();
+        }
+    }
+
 
 }

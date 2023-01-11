@@ -64,7 +64,7 @@ public class ApiBasicService {
                 taskParameter.getApiVectorDictFilepath(),
                 taskParameter.getClassVectorDictFilepath()
         };
-        CallPythonUtil.call(tokenArgs);
+        CallUtil.call(tokenArgs);
     }
 
     private void extractAndroidApiBasic() throws IOException {
@@ -178,7 +178,7 @@ public class ApiBasicService {
     private List<ApiBasic> parseHarmonyApiBasic(String filepath, TaskParameter taskParameter) {
         String[] args = new String[]{taskParameter.getPythonBinPath(), taskParameter.getPythonCppExtractor(), filepath};
 
-        List<String> resultLines = CallPythonUtil.call(args);
+        List<String> resultLines = CallUtil.call(args);
 
         return buildHarmonyApiBasic(taskParameter.getTaskId(), filepath, resultLines);
 
@@ -222,7 +222,7 @@ public class ApiBasicService {
                 taskParameter.getCorpusFilepath(),
                 taskParameter.getWordVecModelFilepath()
         };
-        CallPythonUtil.call(args);
+        CallUtil.call(args);
     }
 
     private void fillCorpus(TaskParameter taskParameter, List<String> tokens) {

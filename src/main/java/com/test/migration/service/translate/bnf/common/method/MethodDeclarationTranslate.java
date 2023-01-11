@@ -6,6 +6,8 @@ import com.test.migration.service.translate.TranslateHint;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 
+import java.util.stream.Collectors;
+
 public class MethodDeclarationTranslate {
 
     /**
@@ -47,10 +49,9 @@ public class MethodDeclarationTranslate {
             // TODO 存在bug
             TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode methodHeaderTranslateCode = new TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode();
             methodHeaderTranslateCode.translateCode = methodHeader;
-            methodHeaderTranslateCode.misMatchCodes = TranslateHint.misMatchCodes;
+            methodHeaderTranslateCode.misMatchCodes = TranslateHint.misMatchCodes.stream().distinct().collect(Collectors.toList());
             TranslateCodeCollector.methodHeaderTranslateCode = methodHeaderTranslateCode;
         }
-
 
         MethodBodyTranslate methodBodyTranslate = new MethodBodyTranslate();
         String methodBody = methodBodyTranslate.translateMethodBody(methodBodyRule);

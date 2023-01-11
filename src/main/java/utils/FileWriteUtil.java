@@ -12,15 +12,9 @@ public class FileWriteUtil {
         for (String dataLine : dataLines) {
             bufferedWriter.write(dataLine + "\n");
         }
+        bufferedWriter.flush();
         bufferedWriter.close();
     }
 
-    public static void main(String[] args) throws Exception {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/Users/gaoyi/IdeaProjects/testSoftware/doc/demodata/result_android.txt"));
-        for (int i = 0; i < 100; i++) {
-            bufferedWriter.write(i + "123" + "\n");
-        }
-        bufferedWriter.close();
-    }
 
 }

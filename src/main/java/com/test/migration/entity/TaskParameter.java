@@ -1,14 +1,12 @@
 package com.test.migration.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class TaskParameter {
 
     private Integer taskId;
@@ -24,6 +22,10 @@ public class TaskParameter {
      * 用于解析test文件，所有sourceCode,支持多个目录，用逗号分割
      */
     private String targetSourceCodeFilepath;
+    /**
+     * 迁移结果输出文件路径
+     */
+    private String outputFilepath;
 
     /**
      * python 命令路径配置
