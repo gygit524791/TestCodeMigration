@@ -1,6 +1,5 @@
 package com.test.migration.service.translate;
 
-import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -19,22 +18,18 @@ import java.util.stream.Collectors;
  */
 public class TestCodeFilter {
     public static void filterFieldDeclarationCtxList() {
-//        TestCodeContext.fieldDeclarationCtxList;
     }
 
-    public static void filterMethodDeclarationCtxList() {
-        List<ParserRuleContext> testMethodDeclarationCtxList = Lists.newArrayList();
+    public static void filterMethodDeclarationCtxList(List<String> migrateTestMethods) {
         TestCodeContext.methodDeclarationCtxList = TestCodeContext.methodDeclarationCtxList.stream()
                 .filter(ctx -> {
                     String methodName = fetchMethodName(ctx);
                     if (methodName.toLowerCase().startsWith("test") || methodName.toLowerCase().endsWith("test")) {
-                        testMethodDeclarationCtxList.add(ctx);
-                        return false;
+                        return migrateTestMethods.contains(methodName);
                     }
+                    // 不是test方法不做过滤
                     return true;
                 }).collect(Collectors.toList());
-
-        TestCodeContext.testMethodDeclarationCtxList = testMethodDeclarationCtxList;
     }
 
 

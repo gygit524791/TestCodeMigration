@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannClassOrInterfaceTypeTranslate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannReferenceTypeTranslate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/migration/case/PhysicsAnimationLayoutTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/TestFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannArrayTypeTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannArrayTypeTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannTypeTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannTypeTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/output/animator_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/demo/output/animator_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassMemberDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassMemberDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TranslateTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +58,7 @@
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.statistic.project.settings&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -77,7 +84,7 @@
       <recent name="com.test.migration.service.translate.bnf.common.primary" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TranslateMain">
+  <component name="RunManager" selected="Application.TestFilter">
     <configuration name="ApiMappingMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.test.migration.ApiMappingMain" />
       <module name="TestMigrationV2" />
@@ -91,15 +98,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PartMigrationMainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="partMigration.PartMigrationMainTest" />
+    <configuration name="TestFilter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestFilter" />
       <module name="TestMigrationV2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="partMigration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -139,11 +140,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestFilter" />
         <item itemvalue="Application.TranslateMain" />
         <item itemvalue="Application.TestFindModule" />
         <item itemvalue="Application.ApiMappingMain" />
         <item itemvalue="Application.com.test.migration.service.translate.PartMigrationMainTest" />
-        <item itemvalue="Application.PartMigrationMainTest" />
       </list>
     </recent_temporary>
   </component>
@@ -180,7 +181,8 @@
       <workItem from="1672969240187" duration="19991000" />
       <workItem from="1673059885446" duration="1050000" />
       <workItem from="1673230859442" duration="26160000" />
-      <workItem from="1673314855031" duration="6514000" />
+      <workItem from="1673314855031" duration="24751000" />
+      <workItem from="1673402408621" duration="5062000" />
     </task>
     <servers />
   </component>
@@ -240,11 +242,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/variable/VariableDeclaratorListTranslate.java</url>
           <line>94</line>
           <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="77" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

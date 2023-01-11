@@ -1,12 +1,6 @@
 package com.test.migration;
 
-import com.test.migration.service.TranslateTestService;
 import com.test.migration.service.translate.PartMigrationProcessor;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
 
 public class TranslateMain {
     public static void main(String[] args) throws Exception {
@@ -21,8 +15,8 @@ public class TranslateMain {
 //
 //        System.out.println();
 
-//        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/migration/animator/AnimatorSetActivityTest.java";
-        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/migration/animator/ValueAnimatorTests.java";
+        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/migration/animator/AnimatorSetActivityTest.java";
+//        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/migration/animator/ValueAnimatorTests.java";
 //        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/migration/case/AnimatorSetActivityTest.java";
         PartMigrationProcessor processor = new PartMigrationProcessor();
         processor.partMigrationProcess(filepath);

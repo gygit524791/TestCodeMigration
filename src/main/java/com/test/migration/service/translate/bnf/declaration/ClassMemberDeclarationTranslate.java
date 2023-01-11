@@ -50,6 +50,8 @@ public class ClassMemberDeclarationTranslate {
             return subTranslate.translateInterfaceDeclaration(node);
         }
 
+        System.out.println("translateClassMemberDeclaration error");
+
         return null;
     }
 }

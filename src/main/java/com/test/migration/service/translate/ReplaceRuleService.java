@@ -1,5 +1,6 @@
 package com.test.migration.service.translate;
 
+import com.google.common.collect.Maps;
 import com.test.migration.antlr.java.Java8Lexer;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -16,7 +17,7 @@ public class ReplaceRuleService {
      *
      * @see TestCodeVisitor
      */
-    public static Map<String, String> typeNameMap;
+    public static Map<String, String> typeNameMap = Maps.newHashMap();
 
     /**
      * 链式调用
@@ -72,8 +73,6 @@ public class ReplaceRuleService {
         return methodName;
     }
 
-
-
     public static String replaceClassOrInterfaceType(String clsName) {
         Map<String, String> referenceMapping = MappingRuleLoader.commonClassNameMapping;
         if (StringUtils.equals("String", clsName)) {
@@ -105,7 +104,7 @@ public class ReplaceRuleService {
         for (int k = 0; k < ctx.getChildCount(); k++) {
             ParseTree child1 = ctx.getChild(k);
             if (child1 instanceof TerminalNode) {
-                TerminalNode terminalNode = (TerminalNode)child1;
+                TerminalNode terminalNode = (TerminalNode) child1;
                 if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
                     identifier = terminalNode.getText();
                     // 只取第一个identifier，取到后必须break

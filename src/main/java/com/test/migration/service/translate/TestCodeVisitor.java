@@ -237,7 +237,6 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
             if (((RuleContext) classMemberChild).getRuleIndex() == Java8Parser.RULE_interfaceDeclaration) {
 
             }
-
         }
     }
 
@@ -261,10 +260,6 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
             return;
         }
         RuleContext subNode = (RuleContext) declarationChild;
-//        System.out.println("subNode.getText() 1");
-//        System.out.println(subNode.getText());
-//        System.out.println("subNode.getText() 2");
-//        System.out.println();
         if (subNode.getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
             TestCodeContext.fieldDeclarationCtxList.add((ParserRuleContext) subNode);
         }

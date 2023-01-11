@@ -112,13 +112,13 @@ public class TranslateTestService {
         MappingRuleLoader.load();
         // 以文件为代码进行转换
         translateTests.forEach(translateTest -> {
-            String translateCode = translateFile(translateTest);
+            String translateCode = doTranslate(translateTest);
             translateTest.setTranslateCode("translateCode");
             update(translateTest);
         });
     }
 
-    private String translateFile(TranslateTest translateTest) {
+    private String doTranslate(TranslateTest translateTest) {
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(translateTest.getTestFilepath());
@@ -126,22 +126,15 @@ public class TranslateTestService {
             e.printStackTrace();
         }
 
-//        Map<String, List<String>> testMethodApiInvocationMap = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
-//        Map<String, ParserRuleContext> parserRuleContextMap = Maps.newHashMap();
-//        for (String testMethodName : testMethodApiInvocationMap.keySet()) {
-//            parserRuleContextMap.put(testMethodName, null);
-//        }
-//
         Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
         ParseTree parseTree = parser.compilationUnit();
 
         TestCodeContext.init();
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
-//        TestCodeContext.filter();
-
-        TestCodeContext.ClassMemberDeclaration.classes.forEach(System.out::println);
-        TestCodeContext.ClassMemberDeclaration.fields.forEach(System.out::println);
+        Map<String, List<Integer>> map = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
+        List<String> migrateTestMethods = map == null ? Lists.newArrayList() : Lists.newArrayList(map.keySet());
+        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
 
 
         testCodeVisitor.getTypeNameMap().put("mActivityRule", "ActivityTestRule<AnimatorSetActivity>");
@@ -167,12 +160,6 @@ public class TranslateTestService {
         ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
             System.out.println(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
-            System.out.println("---------------------------");
-        }
-
-        System.out.println("====translate TestMethodDeclaration====");
-        for (ParserRuleContext parserRuleContext : TestCodeContext.testMethodDeclarationCtxList) {
-            System.out.println(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
             System.out.println("---------------------------");
         }
 
@@ -238,7 +225,7 @@ public class TranslateTestService {
      * *（通配符）+类名+*（通配符）+Test（前后缀）的方式来匹配测试类文件
      *
      * @param allTargetSourceCodeFilepathList
-     * @param filepath 目标api所在的文件路径
+     * @param filepath                        目标api所在的文件路径
      * @return
      */
     private List<String> filterTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {

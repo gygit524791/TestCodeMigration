@@ -14,12 +14,8 @@ import java.util.List;
  * <p>
  * 存储代码转换过程需要的中间信息
  * 简单实现：用static变量暂存antlr解析和生成的待转换code信息
- * 在antlr执行visitor完毕后，所有上下文信息将被填充，这些信息便于后续在其它地方使用，相当于一个简易内存数据库
- *
- *
- *
- *
- *
+ * 在antlr执行visitor完毕后，所有上下文信息将被填充，
+ * 这些信息便于后续在其它地方使用，相当于一个简易内存数据库
  */
 public class TestCodeContext {
 
@@ -30,10 +26,8 @@ public class TestCodeContext {
      * testCode的成员变量, 待迁移
      */
     public static List<ParserRuleContext> fieldDeclarationCtxList;
-    // 不包含test方法
     public static List<ParserRuleContext> methodDeclarationCtxList;
     public static List<ParserRuleContext> classDeclarationCtxList;
-    public static List<ParserRuleContext> testMethodDeclarationCtxList;
 
     /**
      * visit之前调用 清空历史数据
@@ -43,17 +37,16 @@ public class TestCodeContext {
         fieldDeclarationCtxList = Lists.newArrayList();
         methodDeclarationCtxList = Lists.newArrayList();
         classDeclarationCtxList = Lists.newArrayList();
-        testMethodDeclarationCtxList = Lists.newArrayList();
     }
 
     /**
-     * visit之后调用 过滤不需要迁移的代码
+     * visit之后调用 过滤不需要迁移的测试代码
      */
-    public static void filter() {
-        TestCodeFilter.filterFieldDeclarationCtxList();
-        TestCodeFilter.filterMethodDeclarationCtxList();
-        TestCodeFilter.filterClassDeclarationCtxList();
-    }
+//    public static void filter() {
+//        TestCodeFilter.filterFieldDeclarationCtxList();
+//        TestCodeFilter.filterMethodDeclarationCtxList();
+//        TestCodeFilter.filterClassDeclarationCtxList();
+//    }
 
     /**
      * 保存test code里面定义的类属性基础信息（name，type）：变量，常量等
