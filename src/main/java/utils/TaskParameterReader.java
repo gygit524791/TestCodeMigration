@@ -15,13 +15,14 @@ public class TaskParameterReader {
             return taskParameter;
         }
         taskParameter = buildTaskParameter();
+        Log.info("task parameter: "+taskParameter);
         return taskParameter;
     }
 
     public static TaskParameter buildTaskParameter() {
         String userDir = System.getProperty("user.dir");
-        String pythonPath = userDir + File.separator + "doc" + File.separator + "python" + File.separator;
-        String word2vecPath = userDir + File.separator + "doc" + File.separator + "word2vec";
+        String pythonPath = userDir + File.separator + "model" + File.separator + "python" + File.separator;
+        String word2vecPath = userDir + File.separator + "model" + File.separator + "word2vec" + File.separator;
 
         // python文件路径
         String pythonCppExtractor = pythonPath + "CppExtractor.py";
@@ -30,10 +31,10 @@ public class TaskParameterReader {
         String pythonCalcSimilarity = pythonPath + "CalcSimilarity.py";
 
         //中间过程：生成词向量文件的路径
-        String corpusFilepath = word2vecPath + File.separator + "corpus.txt";
-        String wordVecModelFilepath = word2vecPath + File.separator + "word2vec.model";
-        String apiVectorDictFilepath = word2vecPath + File.separator + "apiVectorDict.txt";
-        String classVectorDictFilepath = word2vecPath + File.separator + "classVectorDict.txt";
+        String corpusFilepath = word2vecPath + "corpus.txt";
+        String wordVecModelFilepath = word2vecPath + "word2vec.model";
+        String apiVectorDictFilepath = word2vecPath + "apiVectorDict.txt";
+        String classVectorDictFilepath = word2vecPath + "classVectorDict.txt";
         // 文件输出路径
         String outputFilepath = userDir + File.separator + "output" + File.separator;
         //临时数据库文件路径

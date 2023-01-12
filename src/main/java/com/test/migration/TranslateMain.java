@@ -13,7 +13,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import utils.JsonUtil;
-import utils.LogUtil;
+import utils.Log;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,17 +21,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TranslateMain {
+
     /**
-     *
-     *
      * TODO 合并到TranslateTestService&doTranslate方法中去
      */
     public static void main(String[] args) throws Exception {
         MappingRuleLoader.load();
-        LogUtil.info("aaaa");
 
-//        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/test/ValueAnimatorTests.java";
-        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/translate/source/BDemo.java";
+//        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/translate/source/BDemo.java";
+        String filepath = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/migration/case/Case1.java";
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(filepath);
@@ -47,7 +45,8 @@ public class TranslateMain {
         testCodeVisitor.visit(parseTree);
 
         // 哪些测试方法需要被迁移，后续改为TranslateTest$testMethodApiInvocation
-        String json = "{\"testArePropertiesAnimating\":[291],\"testCancelAllAnimations\":[304]}";
+        String json = "{\"testAddListener\":[291]," +
+                "\"testCancelAllAnimations\":[304]}";
 
         Map<String, List<Integer>> map = JsonUtil.jsonToPojo(json, Map.class);
         List<String> migrateTestMethods = map == null ? Lists.newArrayList() : Lists.newArrayList(map.keySet());
@@ -71,7 +70,7 @@ public class TranslateMain {
             TranslateHint.init();
             TranslateCodeCollector.TranslateCode translateCode = new TranslateCodeCollector.TranslateCode();
             translateCode.translateCode = classDeclarationTranslate.translateClassDeclaration(parserRuleContext);
-            translateCode.misMatchCodes = TranslateHint.misMatchCodes.stream().distinct().collect(Collectors.toList());
+            translateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
 
             TranslateCodeCollector.classDeclarationTranslateCodes.add(translateCode);
         }
@@ -82,7 +81,7 @@ public class TranslateMain {
             TranslateHint.init();
             TranslateCodeCollector.TranslateCode translateCode = new TranslateCodeCollector.TranslateCode();
             translateCode.translateCode = fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext);
-            translateCode.misMatchCodes = TranslateHint.misMatchCodes.stream().distinct().collect(Collectors.toList());
+            translateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
 
             TranslateCodeCollector.fieldDeclarationTranslateCodes.add(translateCode);
         }
@@ -101,16 +100,17 @@ public class TranslateMain {
             methodTranslateCode.methodHeaderTranslateCode = TranslateCodeCollector.methodHeaderTranslateCode;
             methodTranslateCode.blockStatementTranslateCodes = TranslateCodeCollector.blockStatementTranslateCodes;
             TranslateCodeCollector.methodDeclarationTranslateCodes.add(methodTranslateCode);
+            System.out.println(methodTranslateCode);
 
             TranslateCodeCollector.MethodTranslateCode.clearMethodLine();
         }
 
         // 方法部分迁移
         PartMigrationProcessor partMigrationProcessor = new PartMigrationProcessor();
+        TranslateCodeCollector.isFullTranslate = false; // 内心在滴血。。。
         for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
             TranslateCodeCollector.PartMigrationMethodTranslateCode partMigrationMethodTranslateCode = new TranslateCodeCollector.PartMigrationMethodTranslateCode();
             partMigrationMethodTranslateCode.translateCode = partMigrationProcessor.doPartMigrationTranslate(parserRuleContext);
-
             TranslateCodeCollector.partMigrationMethodTranslateCodes.add(partMigrationMethodTranslateCode);
         }
 

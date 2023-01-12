@@ -134,52 +134,26 @@ public class TranslateTestService {
         ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
 
 
-        LogUtil.info("====translate FieldDeclaration====");
+        Log.info("====translate FieldDeclaration====");
         FieldDeclarationTranslate fieldDeclarationTranslate = new FieldDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.fieldDeclarationCtxList) {
-            LogUtil.info(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
-            LogUtil.info("---------------------------");
+            Log.info(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
+            Log.info("---------------------------");
         }
 
-        LogUtil.info("====translate MethodDeclaration====");
+        Log.info("====translate MethodDeclaration====");
         MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
-            LogUtil.info(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
-            LogUtil.info("---------------------------");
+            Log.info(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
+            Log.info("---------------------------");
         }
 
-        LogUtil.info("====translate ClassDeclaration====");
+        Log.info("====translate ClassDeclaration====");
         ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
-            LogUtil.info(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
-            LogUtil.info("---------------------------");
+            Log.info(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
+            Log.info("---------------------------");
         }
-
-//        System.out.println("==== MISMATCH HINT=======");
-//        if (TranslateHint.MisMatchInfo.codes.size() > 0) {
-//            System.out.println(TranslateHint.MisMatchInfo.MIS_MATCH_TIPS);
-//            TranslateHint.MisMatchInfo.codes.forEach(System.out::println);
-//        }
-
-//        Java8Parser parser = new Java8Parser(new CommonTokenStream(new Java8Lexer(inputStream)));
-//        ParseTree parseTree = parser.compilationUnit();
-//        TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
-//        testCodeVisitor.setParserRuleContextMap(parserRuleContextMap);
-//        testCodeVisitor.visit(parseTree);
-
-        // 代码转换的前置条件：初始化replace的typeNameMap
-        // todo demo 后面做成自动化
-//        testCodeVisitor.getTypeNameMap().put("mActivityRule","ActivityTestRule<AnimatorSetActivity>");
-//        ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
-
-        // 代码转换
-//        MethodDeclarationTranslate translate = new MethodDeclarationTranslate();
-//        List<String> translateCodes = Lists.newArrayList();
-//        testCodeVisitor.parserRuleContextMap.forEach((k, v) -> {
-//            translateCodes.add(translate.translateMethodDeclaration(v));
-//        });
-
-//        return JsonUtil.objectToJson(translateCodes);
     }
 
     private Map<String, List<Integer>> getTestMethodInvocationMap(String testFilepath, List<ApiBasic> fileApis) {

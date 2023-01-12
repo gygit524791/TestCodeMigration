@@ -49,7 +49,7 @@ public class MethodDeclarationTranslate {
             // TODO 存在bug
             TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode methodHeaderTranslateCode = new TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode();
             methodHeaderTranslateCode.translateCode = methodHeader;
-            methodHeaderTranslateCode.misMatchCodes = TranslateHint.misMatchCodes.stream().distinct().collect(Collectors.toList());
+            methodHeaderTranslateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
             TranslateCodeCollector.methodHeaderTranslateCode = methodHeaderTranslateCode;
         }
 

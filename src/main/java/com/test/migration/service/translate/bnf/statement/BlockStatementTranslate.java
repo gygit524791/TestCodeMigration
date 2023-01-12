@@ -7,8 +7,7 @@ import com.test.migration.service.translate.TranslateHint;
 import com.test.migration.service.translate.bnf.declaration.ClassDeclarationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.stream.Collectors;
+import utils.Log;
 
 public class BlockStatementTranslate {
 
@@ -59,13 +58,13 @@ public class BlockStatementTranslate {
         // 收集器
         TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode = new TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode();
         blockStatementTranslateCode.translateCode = translateBlockStatement;
-        blockStatementTranslateCode.misMatchCodes = TranslateHint.misMatchCodes.stream().distinct().collect(Collectors.toList());
-        TranslateCodeCollector.blockStatementTranslateCodes.add(blockStatementTranslateCode);
+        blockStatementTranslateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
+        if (TranslateCodeCollector.isFullTranslate) {
+            TranslateCodeCollector.blockStatementTranslateCodes.add(blockStatementTranslateCode);
+        }
 
         return translateBlockStatement;
     }
-
-
 
 
 }

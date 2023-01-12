@@ -3,7 +3,7 @@ package utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LogUtil {
+public class Log {
     public static void info(String msg) {
         getLogger().info(msg);
     }
@@ -30,7 +30,7 @@ public class LogUtil {
 
     private static StackTraceElement findCaller(){
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        String logClassName = LogUtil.class.getName();
+        String logClassName = Log.class.getName();
 
         /**
          * magic number 事实上不用去专门查找 i，在不改变调用链路的情况下 i = 4

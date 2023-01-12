@@ -3,9 +3,11 @@ package com.test.migration.service.translate;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TranslateHint {
     public static final String BS_HINT_TAG = "-BSHINT-";
@@ -25,6 +27,14 @@ public class TranslateHint {
             return "";
         }
         return Joiner.on(",").join(misMatchCodes);
+    }
+
+    public static List<String> formatMisMatchCodes(List<String> misMatchCodes){
+        return misMatchCodes.stream()
+                .filter(x-> !StringUtils.equals(x, BS_HINT_TAG))
+                .filter(StringUtils::isNotBlank)
+                .distinct()
+                .collect(Collectors.toList());
     }
 }
 

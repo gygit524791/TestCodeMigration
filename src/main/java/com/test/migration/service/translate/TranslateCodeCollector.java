@@ -38,6 +38,12 @@ public class TranslateCodeCollector {
      */
     public static MethodTranslateCode.MethodHeaderTranslateCode methodHeaderTranslateCode;
     public static List<MethodTranslateCode.BlockStatementTranslateCode> blockStatementTranslateCodes;
+
+    /**
+     * low B设计：用这个标志来解完整转换和部分转换之间的冲突（乱用static导致：各种地方都在写入/读取相同static变量）
+     * 根本解决方法在于舍弃static，老老实实new对象
+     */
+    public static boolean isFullTranslate;
     public static int methodStartLine;
     public static int methodEndLine;
 
@@ -49,6 +55,7 @@ public class TranslateCodeCollector {
         methodHeaderTranslateCode = new MethodTranslateCode.MethodHeaderTranslateCode();
         blockStatementTranslateCodes = Lists.newArrayList();
         partMigrationMethodTranslateCodes = Lists.newArrayList();
+        isFullTranslate = true;
     }
 
     public static class TranslateCode {
@@ -56,6 +63,7 @@ public class TranslateCodeCollector {
         public List<String> misMatchCodes;
     }
 
+    @ToString
     public static class MethodTranslateCode {
         public MethodHeaderTranslateCode methodHeaderTranslateCode;
         public List<BlockStatementTranslateCode> blockStatementTranslateCodes;

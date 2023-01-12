@@ -66,6 +66,7 @@ public class TestCodeFilter {
             if (!isMethodHeaderChildRuleContext) {
                 continue;
             }
+            
             RuleContext methodHeaderChildNode = (RuleContext) methodHeaderChild;
             if (methodHeaderChildNode.getRuleIndex() != Java8Parser.RULE_methodDeclarator) {
                 continue;

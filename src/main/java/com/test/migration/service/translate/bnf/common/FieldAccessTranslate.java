@@ -48,7 +48,6 @@ public class FieldAccessTranslate {
         String primary = primaryCtx == null ? "" : primaryTranslate.translatePrimary(primaryCtx);
         String typeName = typeNameCtx == null ? "" : translateTypeName(typeNameCtx);
 
-
         ParseTree firstChild = ctx.getChild(0);
         if (firstChild instanceof TerminalNode) {
             //'super' '.' Identifier

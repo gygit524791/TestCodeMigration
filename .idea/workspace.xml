@@ -5,34 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/output/formattest/animator_test.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/python/CalcSimilarity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/python/CalcTokenVec.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/python/CppExtractor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/python/WordVec.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/LogUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo/migration/case/Case1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/translate/source/BDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/translate/source/BDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/demo/ValueAnimatorTests.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/demo/animator_test.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/python/CalcSimilarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CalcSimilarity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/python/CalcTokenVec.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CalcTokenVec.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/python/CppExtractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CppExtractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/python/WordVec.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/WordVec.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/typename/BDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/apiVectorDict.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec/classVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/classVectorDict.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec/corpus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/corpus.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/word2vec/word2vec.model" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/word2vec.model" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/entity/TaskParameter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/PartMigrationMainTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/PartMigrationProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/PartMigrationProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateHint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateHint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/FieldAccessTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/FieldAccessTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/CallPythonUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/CallUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/FileWriteUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/FileWriteUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/LogUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/Log.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utils/TaskParameterReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/TaskParameterReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TranslateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TranslateTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,21 +59,21 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ToolWindowDatabase Changes.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/doc/python",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.statistic.project.settings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowDatabase Changes.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gaoyi/IdeaProjects/TestMigrationV2/doc/python&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.statistic.project.settings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.test.migration.service.translate" />
@@ -109,7 +106,7 @@
       <module name="TestMigrationV2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="utils.*" />
+          <option name="PATTERN" value="utils.Log" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -122,7 +119,7 @@
       <module name="TestMigrationV2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="utils.*" />
+          <option name="PATTERN" value="utils.Log" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,6 +146,28 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="TestMigrationV2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="MainTest.testFindPath" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="TestMigrationV2" />
@@ -206,7 +225,8 @@
       <workItem from="1673059885446" duration="1050000" />
       <workItem from="1673230859442" duration="26160000" />
       <workItem from="1673314855031" duration="24751000" />
-      <workItem from="1673402408621" duration="20608000" />
+      <workItem from="1673402408621" duration="21153000" />
+      <workItem from="1673490063849" duration="4259000" />
     </task>
     <servers />
   </component>
@@ -249,7 +269,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java</url>
-          <line>22</line>
+          <line>21</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -266,6 +286,41 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/variable/VariableDeclaratorListTranslate.java</url>
           <line>94</line>
           <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

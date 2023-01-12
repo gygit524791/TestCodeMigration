@@ -3,6 +3,7 @@ package com.test.migration.service.translate;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.test.migration.entity.TaskParameter;
+import org.apache.commons.lang3.StringUtils;
 import utils.CallUtil;
 import utils.FileWriteUtil;
 import utils.TaskParameterReader;
@@ -41,12 +42,35 @@ public class TranslateCodeGenerator {
         fileLines.add("using namespace testing::ext;");
         fileLines.add("class " + TranslateCodeCollector.className + " : public testing::Test {");
         fileLines.add("public:");
-
+        // 写入类成员属性
         for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.fieldDeclarationTranslateCodes) {
-            fileLines.add("//以下组件没有匹配:");
-            fileLines.add("//" + Joiner.on(",").join(translateCode.misMatchCodes));
+            addHintIfNeed(translateCode.misMatchCodes, fileLines);
             fileLines.add(translateCode.translateCode);
         }
+
+        // 写入内部类
+        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.classDeclarationTranslateCodes) {
+            addHintIfNeed(translateCode.misMatchCodes, fileLines);
+            fileLines.add(translateCode.translateCode);
+        }
+
+        // 写入方法
+        for (TranslateCodeCollector.MethodTranslateCode methodTranslateCode : TranslateCodeCollector.methodDeclarationTranslateCodes) {
+            addHintIfNeed(methodTranslateCode.methodHeaderTranslateCode.misMatchCodes, fileLines);
+            fileLines.add(methodTranslateCode.methodHeaderTranslateCode.translateCode);
+            fileLines.add("{");
+            for (TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode : methodTranslateCode.blockStatementTranslateCodes) {
+                addHintIfNeed(blockStatementTranslateCode.misMatchCodes, fileLines);
+                fileLines.add(blockStatementTranslateCode.translateCode);
+            }
+            fileLines.add("}");
+        }
+
+        // 写入部分迁移方法
+        for (TranslateCodeCollector.PartMigrationMethodTranslateCode translateCode : TranslateCodeCollector.partMigrationMethodTranslateCodes) {
+            fileLines.add(translateCode.translateCode);
+        }
+        // 测试类结尾
         fileLines.add("}");
 
         // 写入文件
@@ -54,6 +78,17 @@ public class TranslateCodeGenerator {
             FileWriteUtil.writeDataToFile(fileLines, filepath);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 如果有hint，那么添加代码注释，如果没有hint就return
+     */
+    private static void addHintIfNeed(List<String> translateCode, List<String> fileLines) {
+        String formatHintLine = formatHintLine(translateCode);
+        if (StringUtils.isNotBlank(formatHintLine)) {
+            fileLines.add("//以下组件没有匹配:");
+            fileLines.add(formatHintLine);
         }
     }
 
@@ -79,6 +114,14 @@ public class TranslateCodeGenerator {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static String formatHintLine(List<String> misMatchCodes) {
+        if (misMatchCodes == null || misMatchCodes.size() == 0) {
+            return StringUtils.EMPTY;
+        }
+        return "//" + Joiner.on(",").join(misMatchCodes);
     }
 
 
