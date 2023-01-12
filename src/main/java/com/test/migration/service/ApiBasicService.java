@@ -29,11 +29,11 @@ public class ApiBasicService {
      */
     public void extractApiBasic() {
         try {
-            // java文件提取api基础信息
-            extractAndroidApiBasic();
+            // harmony cpp文件提取api基础信息
+            extractSourceApiBasic();
 
-            // cpp文件提取api基础信息
-            extractHarmonyApiBasic();
+            // android java文件提取api基础信息
+            extractTargetApiBasic();
 
             // 生成api的vector并保存
             generateTokenVector();
@@ -51,7 +51,7 @@ public class ApiBasicService {
         generateTokenCorpus(apiBasics, taskParameter);
 
         generateTokenVecDict(taskParameter);
-
+        Log.info("生成api向量（用于mapping计算）完成");
     }
 
     private void generateTokenVecDict(TaskParameter taskParameter) {
@@ -67,7 +67,8 @@ public class ApiBasicService {
         CallUtil.call(tokenArgs);
     }
 
-    private void extractAndroidApiBasic() throws IOException {
+    private void extractTargetApiBasic() throws IOException {
+        Log.info("开始提取目标API信息");
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<String> targetFilepathList = Splitter.on(",").splitToList(taskParameter.getTargetFilepath());
         List<String> moduleApiFilepath = targetFilepathList.stream()
@@ -84,14 +85,18 @@ public class ApiBasicService {
         // 过滤掉测试相关的类文件
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
-                .flatMap(filepath -> parseAndroidApiBasic(filepath, taskParameter).stream())
+                .flatMap(filepath -> parseTargetApiBasic(filepath, taskParameter).stream())
                 .filter(this::filterUselessApi)
                 .collect(Collectors.toList());
 
         batchSave(apiBasics);
+
+        Log.info("目标API信息提取完成");
     }
 
-    private void extractHarmonyApiBasic() throws IOException {
+    private void extractSourceApiBasic() throws IOException {
+        Log.info("开始提取源项目API信息");
+
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<String> sourceFilepathList = Splitter.on(",").splitToList(taskParameter.getSourceFilepath());
         List<String> moduleApiFilepath = sourceFilepathList.stream()
@@ -110,6 +115,8 @@ public class ApiBasicService {
                 .filter(this::filterUselessApi)
                 .collect(Collectors.toList());
         batchSave(apiBasics);
+
+        Log.info("源项目API信息提取完成");
     }
 
     private List<String> filterTestFile(List<String> moduleApiFilepath) {
@@ -160,7 +167,7 @@ public class ApiBasicService {
     }
 
 
-    private List<ApiBasic> parseAndroidApiBasic(String filePath, TaskParameter taskParameter) {
+    private List<ApiBasic> parseTargetApiBasic(String filePath, TaskParameter taskParameter) {
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(filePath);

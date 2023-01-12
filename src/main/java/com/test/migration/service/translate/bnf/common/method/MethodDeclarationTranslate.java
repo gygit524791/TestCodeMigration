@@ -46,7 +46,6 @@ public class MethodDeclarationTranslate {
         boolean isInnerMethod = ctx.getStart().getLine() < TranslateCodeCollector.methodStartLine && ctx.getStop().getLine() > TranslateCodeCollector.methodEndLine;
         if (!isInnerMethod) {
             // 收集methodHeader信息
-            // TODO 存在bug
             TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode methodHeaderTranslateCode = new TranslateCodeCollector.MethodTranslateCode.MethodHeaderTranslateCode();
             methodHeaderTranslateCode.translateCode = methodHeader;
             methodHeaderTranslateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);

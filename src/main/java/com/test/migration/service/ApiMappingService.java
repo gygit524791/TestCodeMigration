@@ -1,15 +1,18 @@
 package com.test.migration.service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.test.migration.dao.ApiMappingDao;
 import com.test.migration.entity.TaskParameter;
 import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.entity.po.ApiMapping;
 import org.apache.ibatis.session.SqlSession;
+import org.jetbrains.annotations.Nullable;
 import utils.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -18,7 +21,7 @@ public class ApiMappingService {
     ApiBasicService apiBasicService = new ApiBasicService();
 
     public void calculateApiMappings() {
-        System.out.println("开始执行mapping计算");
+        Log.info("开始执行mapping计算");
         long startTime = System.currentTimeMillis();
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         // 调用python相似度计算脚本
@@ -36,27 +39,62 @@ public class ApiMappingService {
         StringBuilder resultLine = new StringBuilder();
         resultLines.forEach(resultLine::append);
         List<String> apiMappings = JsonUtil.jsonToList(resultLine.toString(), String.class);
+
         List<ApiMapping> mappings = buildApiMappings(apiMappings);
+
+        Map<Integer, ApiBasic> apiBasicMap = queryApiBasicMap(mappings);
+
+        mappings = filterSameMapping(mappings, apiBasicMap);
+
         batchSave(mappings);
 
         // 保存到mapping规则中
-        saveMappingRule(mappings);
+        saveMappingRule(mappings, apiBasicMap);
 
         long endTime = System.currentTimeMillis();
-        System.out.println("执行mapping计算完毕，耗时（秒）：" + (endTime - startTime) / 1000);
+        Log.info("执行mapping计算完毕，耗时（秒）：" + (endTime - startTime) / 1000);
     }
 
-    private void saveMappingRule(List<ApiMapping> mappings) {
+    /**
+     * 过滤掉重复classname 和 api的mapping
+     */
+    private List<ApiMapping> filterSameMapping(List<ApiMapping> mappings, Map<Integer, ApiBasic> apiBasicMap) {
+        if (mappings == null || mappings.size() == 0) {
+            return Lists.newArrayList();
+        }
+        Set<String> mappingKeySet = Sets.newHashSet();
+        List<ApiMapping> filterMappings = Lists.newArrayList();
+
+        for (ApiMapping apiMapping : mappings) {
+            ApiBasic sourceApi = apiBasicMap.get(apiMapping.getSourceApiId());
+            ApiBasic targetApi = apiBasicMap.get(apiMapping.getTargetApiId());
+            String key = sourceApi.getClassName() + "$" + sourceApi.getApiName() + ":" + targetApi.getClassName() + "$" + targetApi.getApiName();
+            if (!mappingKeySet.contains(key)) {
+                mappingKeySet.add(key);
+                filterMappings.add(apiMapping);
+            }
+        }
+        return filterMappings;
+    }
+
+    private Map<Integer, ApiBasic> queryApiBasicMap(List<ApiMapping> mappings) {
         List<Integer> apiBasicIds = Lists.newArrayList();
         apiBasicIds.addAll(mappings.stream().map(ApiMapping::getSourceApiId).collect(Collectors.toList()));
         apiBasicIds.addAll(mappings.stream().map(ApiMapping::getTargetApiId).collect(Collectors.toList()));
-
         if (apiBasicIds.size() == 0) {
+            return null;
+        }
+        List<ApiBasic> apiBasics = apiBasicService.selectByIds(apiBasicIds);
+
+        return apiBasics.stream()
+                .collect(Collectors.toMap(ApiBasic::getId, Function.identity()));
+    }
+
+    private void saveMappingRule(List<ApiMapping> mappings, Map<Integer, ApiBasic> apiBasicMap) {
+        if (mappings == null || mappings.size() == 0) {
             return;
         }
 
-        List<ApiBasic> apiBasics = apiBasicService.selectByIds(apiBasicIds);
-        Map<Integer, ApiBasic> apiBasicMap = apiBasics.stream().collect(Collectors.toMap(ApiBasic::getId, Function.identity()));
         mappings.forEach(mapping -> {
             ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
             ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
@@ -64,6 +102,7 @@ public class ApiMappingService {
             String value = sourceApi.getClassName() + "->" + sourceApi.getApiName();
             // 鸿蒙的api
             String key = targetApi.getClassName() + "->" + targetApi.getApiName();
+
             MappingRuleWriter.writeApiMappingProperties(key, value);
         });
     }

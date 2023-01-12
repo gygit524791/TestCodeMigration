@@ -3,6 +3,7 @@ package com.test.migration;
 import com.test.migration.service.ApiBasicService;
 import com.test.migration.service.ApiMappingService;
 import com.test.migration.service.TranslateTestService;
+import utils.Log;
 import utils.MyBatisUtil;
 
 public class ApiMappingMain {
@@ -11,27 +12,26 @@ public class ApiMappingMain {
         //brew services start redis
         // 初始化（删除，新建）api，mapping，translate表
         MyBatisUtil.initTable();
-
         // 获取api基础信息
         ApiBasicService apiBasicService = new ApiBasicService();
         long s1 = System.currentTimeMillis();
         apiBasicService.extractApiBasic();
         long e1 = System.currentTimeMillis();
-        System.out.println("获取api基础信息完成，耗时（毫秒）：" + (e1 - s1) );
+        Log.info("获取api基础信息完成，耗时（毫秒）：" + (e1 - s1) );
 
         // 生成mapping关系
         ApiMappingService apiMappingService = new ApiMappingService();
         long s2 = System.currentTimeMillis();
         apiMappingService.calculateApiMappings();
         long e2 = System.currentTimeMillis();
-        System.out.println("生成mapping关系完成，耗时（毫秒）：" + (e2 - s2) );
+        Log.info("生成mapping关系完成，耗时（毫秒）：" + (e2 - s2) );
 
         // 生成api关联test信息
         TranslateTestService translateTestService = new TranslateTestService();
         long s3 = System.currentTimeMillis();
         translateTestService.generateTargetApiTest();
         long e3 = System.currentTimeMillis();
-        System.out.println("生成api关联test信息完成，耗时（毫秒）：" + (e3 - s3) );
+        Log.info("生成api关联test信息完成，耗时（毫秒）：" + (e3 - s3) );
     }
 
 }
