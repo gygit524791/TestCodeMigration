@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang3.StringUtils;
+import utils.Log;
 
 /**
  * 条件表达式解析和翻译
@@ -22,7 +23,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateConditionalExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_conditionalExpression) {
-            System.out.println("conditionalExpression 不正确哈:" + ctx.getText());
+            Log.error("conditionalExpression 不正确哈:" + ctx.getText());
             return null;
         }
 
@@ -83,7 +84,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateConditionalOrExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_conditionalOrExpression) {
-            System.out.println("conditionalOrExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("conditionalOrExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
 
@@ -111,7 +112,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateConditionalAndExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_conditionalAndExpression) {
-            System.out.println("conditionalAndExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("conditionalAndExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         // conditionalAndExpression '&&' inclusiveOrExpression
@@ -137,7 +138,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateInclusiveOrExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_inclusiveOrExpression) {
-            System.out.println("inclusiveOrExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("inclusiveOrExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         //inclusiveOrExpression '|' exclusiveOrExpression
@@ -161,7 +162,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateExclusiveOrExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_exclusiveOrExpression) {
-            System.out.println("exclusiveOrExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("exclusiveOrExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         // exclusiveOrExpression '^' andExpression
@@ -185,7 +186,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateAndExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_andExpression) {
-            System.out.println("andExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("andExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         //andExpression '&' equalityExpression
@@ -210,7 +211,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateEqualityExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_equalityExpression) {
-            System.out.println("equalityExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("equalityExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         // relationalExpression
@@ -288,7 +289,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateRelationalExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_relationalExpression) {
-            System.out.println("relationalExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("relationalExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
 
@@ -319,12 +320,12 @@ public class ConditionalExpressionTranslate {
                 return translateRelationalExpressionWithInstanceof(ctx);
             }
         }
-        System.out.println("不科学， translateRelationalExpression遇到未知表达式" + ctx.getText());
+        Log.error("不科学， translateRelationalExpression遇到未知表达式" + ctx.getText());
         return null;
     }
 
     public String translateRelationalExpressionWithInstanceof(ParserRuleContext ctx) {
-        System.out.println("暂时不支持Instanceof");
+        Log.error("暂时不支持Instanceof");
         return null;
     }
 
@@ -429,12 +430,12 @@ public class ConditionalExpressionTranslate {
      */
     public String translateShiftExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_shiftExpression) {
-            System.out.println("shiftExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("shiftExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
 
         if (ctx.getChildCount() > 1) {
-            System.out.println("暂不支持位运算符的条件表达式！" + ctx.getText());
+            Log.error("暂不支持位运算符的条件表达式！" + ctx.getText());
             return null;
         }
         // additiveExpression
@@ -453,7 +454,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateAdditiveExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_additiveExpression) {
-            System.out.println("additiveExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("additiveExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
 
@@ -471,7 +472,7 @@ public class ConditionalExpressionTranslate {
                 return translateAdditiveExpressionWithMinus(ctx);
             }
         }
-        System.out.println("不科学，translateAdditiveExpression遇到未知表达式" + ctx.getText());
+        Log.error("不科学，translateAdditiveExpression遇到未知表达式" + ctx.getText());
         return null;
     }
 
@@ -534,7 +535,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateMultiplicativeExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_multiplicativeExpression) {
-            System.out.println("multiplicativeExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("multiplicativeExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         //unaryExpression
@@ -555,7 +556,7 @@ public class ConditionalExpressionTranslate {
                 return translateMultiplicativeExpressionWithRemainder(ctx);
             }
         }
-        System.out.println("不科学，translateAdditiveExpression遇到未知表达式" + ctx.getText());
+        Log.error("不科学，translateAdditiveExpression遇到未知表达式" + ctx.getText());
         return null;
     }
 
@@ -639,7 +640,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateUnaryExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_unaryExpression) {
-            System.out.println("unaryExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("unaryExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
 
@@ -674,7 +675,7 @@ public class ConditionalExpressionTranslate {
             }
         }
 
-        System.out.println("translateUnaryExpression 遇到了未知规则");
+        Log.error("translateUnaryExpression 遇到了未知规则");
         return null;
     }
 
@@ -723,7 +724,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateUnaryExpressionNotPlusMinus(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_unaryExpressionNotPlusMinus) {
-            System.out.println("unaryExpressionNotPlusMinusRule 没找到，不科学:" + ctx.getText());
+            Log.error("unaryExpressionNotPlusMinusRule 没找到，不科学:" + ctx.getText());
             return null;
         }
 
@@ -749,7 +750,7 @@ public class ConditionalExpressionTranslate {
             return "!" + translateUnaryExpression((ParserRuleContext) ctx.getChild(1));
         }
 
-        System.out.println("translateUnaryExpressionNotPlusMinus转换失败" + ctx.getText());
+        Log.error("translateUnaryExpressionNotPlusMinus转换失败" + ctx.getText());
         return null;
     }
 
@@ -762,7 +763,7 @@ public class ConditionalExpressionTranslate {
      * 	;
      */
     public String translateCastExpression(ParserRuleContext ctx) {
-//        System.out.println("暂不支持translateCastExpression");
+//        Log.error("暂不支持translateCastExpression");
         return ctx.getText();
     }
 
@@ -772,7 +773,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translatePreDecrementExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_preDecrementExpression) {
-            System.out.println("preDecrementExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("preDecrementExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         return "--" + translateUnaryExpression((ParserRuleContext) ctx.getChild(1));
@@ -787,7 +788,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translatePreIncrementExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_preIncrementExpression) {
-            System.out.println("preIncrementExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("preIncrementExpressionRule 没找到，不科学:" + ctx.getText());
             return null;
         }
         return "++" + translateUnaryExpression((ParserRuleContext) ctx.getChild(1));
@@ -932,7 +933,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translatePostIncrementExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_postIncrementExpression) {
-            System.out.println("RULE_postIncrementExpression 没找到，不科学:" + ctx.getText());
+            Log.error("RULE_postIncrementExpression 没找到，不科学:" + ctx.getText());
             return null;
         }
         PostfixExpressionTranslate postfixExpressionTranslate = new PostfixExpressionTranslate();
@@ -941,7 +942,7 @@ public class ConditionalExpressionTranslate {
 
     public String translatePostDecrementExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_postDecrementExpression) {
-            System.out.println("RULE_postDecrementExpression 没找到，不科学:" + ctx.getText());
+            Log.error("RULE_postDecrementExpression 没找到，不科学:" + ctx.getText());
             return null;
         }
         PostfixExpressionTranslate postfixExpressionTranslate = new PostfixExpressionTranslate();

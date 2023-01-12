@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.method.MethodDeclarationT
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class ClassMemberDeclarationTranslate {
 
@@ -50,7 +51,7 @@ public class ClassMemberDeclarationTranslate {
             return subTranslate.translateInterfaceDeclaration(node);
         }
 
-        System.out.println("translateClassMemberDeclaration error");
+        Log.error("translateClassMemberDeclaration error");
 
         return null;
     }

@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.declaration;
 
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class ClassBodyDeclarationTranslate {
 
@@ -16,7 +17,7 @@ public class ClassBodyDeclarationTranslate {
      */
     public String translateClassBodyDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_classBodyDeclaration)) {
-            System.out.println("RULE_classBodyDeclaration 没找到，不科学");
+            Log.error("RULE_classBodyDeclaration 没找到，不科学");
             return null;
         }
 

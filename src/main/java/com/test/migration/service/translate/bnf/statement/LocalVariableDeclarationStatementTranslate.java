@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import com.test.migration.service.translate.bnf.common.variable.VariableDeclaratorListTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 /**
  * 目前支持下面类型的解析
@@ -34,7 +35,7 @@ public class LocalVariableDeclarationStatementTranslate {
      */
     public String translateLocalVariableDeclarationStatement(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_localVariableDeclarationStatement) {
-            System.out.println("localVariableDeclarationStatementContext 为null");
+            Log.error("localVariableDeclarationStatementContext 为null");
             return "";
         }
         ParserRuleContext localVariableDeclaration = (ParserRuleContext) ctx.getChild(0);
@@ -49,7 +50,7 @@ public class LocalVariableDeclarationStatementTranslate {
      */
     public String translateLocalVariableDeclaration(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_localVariableDeclaration) {
-            System.out.println("RULE_localVariableDeclaration 为null");
+            Log.error("RULE_localVariableDeclaration 为null");
             return "";
         }
 

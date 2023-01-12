@@ -7,6 +7,7 @@ import com.test.migration.service.translate.TranslateHint;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class BlockTranslate {
      */
     public String translateBlock(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_block) {
-            System.out.println("RULE_block 没找到，不科学");
+            Log.error("RULE_block 没找到，不科学");
             return null;
         }
         // 没有blockStatements
@@ -58,7 +59,7 @@ public class BlockTranslate {
      */
     public String translateBlockStatements(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatements) {
-            System.out.println("RULE_blockStatements 没找到，不科学");
+            Log.error("RULE_blockStatements 没找到，不科学");
             return null;
         }
         List<ParserRuleContext> blockStatementList = Lists.newArrayList();

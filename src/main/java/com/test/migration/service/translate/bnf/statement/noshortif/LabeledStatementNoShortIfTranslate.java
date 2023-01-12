@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 public class LabeledStatementNoShortIfTranslate {
 
@@ -17,7 +18,7 @@ public class LabeledStatementNoShortIfTranslate {
      */
     public String translateLabeledStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_labeledStatementNoShortIf) {
-            System.out.println("RULE_labeledStatementNoShortIf 没找到");
+            Log.error("RULE_labeledStatementNoShortIf 没找到");
             return null;
         }
 

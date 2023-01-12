@@ -5,31 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/demo/migration/case/Case1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/demo/ValueAnimatorTests.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/demo/animator_test.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/python/CalcSimilarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CalcSimilarity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/python/CalcTokenVec.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CalcTokenVec.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/python/CppExtractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CppExtractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/python/WordVec.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/WordVec.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/typename/BDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/apiVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/apiVectorDict.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/classVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/classVectorDict.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/corpus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/corpus.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/word2vec/word2vec.model" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/word2vec.model" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateHint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateHint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/FieldAccessTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/FieldAccessTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodInvocationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassBodyDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassBodyDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassMemberDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/ClassMemberDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/FieldDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/FieldDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/InstanceInitializerTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/InstanceInitializerTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/NormalClassDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/declaration/NormalClassDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ConditionalExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ConditionalExpressionTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/ExpressionTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/StatementExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/StatementExpressionTranslate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/LogUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/Log.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/TaskParameterReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/TaskParameterReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/DoStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/DoStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ExpressionStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ExpressionStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ForStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ForStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/IfThenElseStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/IfThenElseStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/IfThenStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/IfThenStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/LabeledStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/LabeledStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/LocalVariableDeclarationStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/LocalVariableDeclarationStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ReturnStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ReturnStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementWithoutTrailingSubStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/StatementWithoutTrailingSubStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ThrowStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/ThrowStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/WhileStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/WhileStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/ForStatementNoShortIfTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/ForStatementNoShortIfTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/IfThenElseStatementNoShortIfTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/IfThenElseStatementNoShortIfTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/LabeledStatementNoShortIfTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/LabeledStatementNoShortIfTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/StatementNoShortIfTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/StatementNoShortIfTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/WhileStatementNoShortIfTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/noshortif/WhileStatementNoShortIfTranslate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +231,7 @@
       <workItem from="1673230859442" duration="26160000" />
       <workItem from="1673314855031" duration="24751000" />
       <workItem from="1673402408621" duration="21153000" />
-      <workItem from="1673490063849" duration="4259000" />
+      <workItem from="1673490063849" duration="5681000" />
     </task>
     <servers />
   </component>
@@ -274,7 +279,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/LocalVariableDeclarationStatementTranslate.java</url>
-          <line>76</line>
+          <line>77</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -289,17 +294,17 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
-          <line>35</line>
+          <line>34</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
-          <line>53</line>
+          <line>52</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
-          <line>55</line>
+          <line>54</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -314,7 +319,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
-          <line>60</line>
+          <line>59</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

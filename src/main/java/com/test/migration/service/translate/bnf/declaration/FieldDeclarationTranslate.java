@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import com.test.migration.service.translate.bnf.common.variable.VariableDeclaratorListTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class FieldDeclarationTranslate {
 
@@ -15,7 +16,7 @@ public class FieldDeclarationTranslate {
      */
     public String translateFieldDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_fieldDeclaration)) {
-            System.out.println("RULE_fieldDeclaration 没找到，不科学");
+            Log.error("RULE_fieldDeclaration 没找到");
             return null;
         }
         // find unanntype variableDeclaratorList

@@ -23,7 +23,7 @@ public class BlockStatementTranslate {
         TranslateHint.misMatchCodes.add(TranslateHint.BS_HINT_TAG);
         String translateBlockStatement = null;
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatement) {
-            System.out.println("RULE_blockStatement 没找到");
+            Log.error("RULE_blockStatement 没找到");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
@@ -43,7 +43,7 @@ public class BlockStatementTranslate {
         }
 
         if (translateBlockStatement == null) {
-            System.out.println("translateBlockStatement 出错");
+            Log.error("translateBlockStatement 出错");
         }
 
         // 调整策略
@@ -59,6 +59,7 @@ public class BlockStatementTranslate {
         TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode = new TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode();
         blockStatementTranslateCode.translateCode = translateBlockStatement;
         blockStatementTranslateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
+
         if (TranslateCodeCollector.isFullTranslate) {
             TranslateCodeCollector.blockStatementTranslateCodes.add(blockStatementTranslateCode);
         }

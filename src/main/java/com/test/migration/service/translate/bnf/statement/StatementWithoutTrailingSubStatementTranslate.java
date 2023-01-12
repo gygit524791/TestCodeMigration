@@ -3,6 +3,7 @@ package com.test.migration.service.translate.bnf.statement;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.TryStatementTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class StatementWithoutTrailingSubStatementTranslate {
     /**
@@ -34,7 +35,7 @@ public class StatementWithoutTrailingSubStatementTranslate {
      */
     public String translateStatementWithoutTrailingSubstatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementWithoutTrailingSubstatement) {
-            System.out.println("RULE_statementWithoutTrailingSubstatement 没找到，不科学");
+            Log.error("RULE_statementWithoutTrailingSubstatement 没找到");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
@@ -74,10 +75,10 @@ public class StatementWithoutTrailingSubStatementTranslate {
 
         /** 暂不考虑 **/
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_switchStatement) {
-            System.out.println("RULE_switchStatement 建设中");
+            Log.error("RULE_switchStatement 建设中");
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_synchronizedStatement) {
-            System.out.println("RULE_synchronizedStatement 建设中");
+            Log.error("RULE_synchronizedStatement 建设中");
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_tryStatement) {
@@ -85,7 +86,7 @@ public class StatementWithoutTrailingSubStatementTranslate {
             return translate.translateTryStatement(childRuleContext);
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_assertStatement) {
-            System.out.println("RULE_assertStatement 建设中");
+            Log.error("RULE_assertStatement 建设中");
             return null;
         }
 

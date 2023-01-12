@@ -6,6 +6,7 @@ import com.test.migration.service.translate.bnf.statement.StatementTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class WhileStatementNoShortIfTranslate {
 
@@ -16,7 +17,7 @@ public class WhileStatementNoShortIfTranslate {
      */
     public String translateWhileStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_whileStatementNoShortIf) {
-            System.out.println("RULE_whileStatementNoShortIf 没找到");
+            Log.error("RULE_whileStatementNoShortIf 没找到");
             return null;
         }
 

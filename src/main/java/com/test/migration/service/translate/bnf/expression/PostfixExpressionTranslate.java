@@ -6,6 +6,7 @@ import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class PostfixExpressionTranslate {
 
@@ -27,12 +28,12 @@ public class PostfixExpressionTranslate {
      */
     public String translatePostfixExpression(ParserRuleContext ctx) {
         if (ctx == null ||ctx.getRuleIndex() != Java8Parser.RULE_postfixExpression) {
-            System.out.println("postfixExpressionRule 没找到，不科学");
+            Log.error("postfixExpressionRule 没找到，不科学");
             return null;
         }
 
         if (ctx.getChildCount() != 1) {
-            System.out.println("暂不支持的postfixExpression解析类型1");
+            Log.error("暂不支持的postfixExpression解析类型1");
             return null;
         }
 
@@ -49,7 +50,7 @@ public class PostfixExpressionTranslate {
             return primaryTranslate.translatePrimary((ParserRuleContext) childRuleContext);
         }
 
-        System.out.println("暂不支持的postfixExpression解析类型2");
+        Log.error("暂不支持的postfixExpression解析类型2");
         return null;
 
     }

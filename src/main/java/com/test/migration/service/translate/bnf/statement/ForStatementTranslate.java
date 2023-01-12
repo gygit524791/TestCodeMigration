@@ -9,6 +9,7 @@ import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import com.test.migration.service.translate.bnf.expression.StatementExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class ForStatementTranslate {
      */
     public String translateForStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forStatement) {
-            System.out.println("RULE_forStatement 没找到，不科学");
+            Log.error("RULE_forStatement 没找到，不科学");
             return null;
         }
 
@@ -35,8 +36,7 @@ public class ForStatementTranslate {
         if (child.getRuleIndex() == Java8Parser.RULE_enhancedForStatement) {
             return translateEnhancedForStatement(child);
         }
-
-        System.out.println("RULE_forStatement error");
+        Log.error("RULE_forStatement error");
         return null;
     }
 

@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class StatementTranslate {
 
@@ -20,7 +21,7 @@ public class StatementTranslate {
      */
     public String translateStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statement) {
-            System.out.println("RULE_statement 没找到");
+            Log.error("RULE_statement 没找到");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
@@ -54,7 +55,7 @@ public class StatementTranslate {
             return forStatementTranslate.translateForStatement(childRuleContext);
         }
 
-        System.out.println("statement解析不可能来到这里，赶紧查一下bug");
+        Log.error("statement解析不可能来到这里，赶紧查一下bug");
         return null;
     }
 

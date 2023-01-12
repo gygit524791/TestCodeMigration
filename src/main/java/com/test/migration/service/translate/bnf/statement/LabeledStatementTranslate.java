@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 public class LabeledStatementTranslate {
 
@@ -17,7 +18,7 @@ public class LabeledStatementTranslate {
      */
     public String translateLabeledStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_labeledStatement) {
-            System.out.println("RULE_labeledStatement 没找到");
+            Log.error("RULE_labeledStatement 没找到");
             return null;
         }
 

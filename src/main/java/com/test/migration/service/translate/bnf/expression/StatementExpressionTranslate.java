@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.AssignmentTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class StatementExpressionTranslate {
 
@@ -24,7 +25,7 @@ public class StatementExpressionTranslate {
      */
     public String translateStatementExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementExpression) {
-            System.out.println("RULE_block 没找到，不科学");
+            Log.error("RULE_block 没找到，不科学");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
@@ -54,7 +55,7 @@ public class StatementExpressionTranslate {
             return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression(childRuleContext);
         }
 
-        System.out.println("translateStatementExpression 不可能到这里");
+        Log.error("translateStatementExpression 不可能到这里");
         return null;
     }
 

@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import com.test.migration.service.translate.bnf.statement.*;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class StatementNoShortIfTranslate {
 
@@ -19,7 +20,7 @@ public class StatementNoShortIfTranslate {
      */
     public String translateStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementNoShortIf) {
-            System.out.println("RULE_statementNoShortIf 没找到");
+            Log.error("RULE_statementNoShortIf 没找到");
             return null;
         }
 
@@ -49,7 +50,7 @@ public class StatementNoShortIfTranslate {
             return translate.translateForStatementNoShortIf(childRuleContext);
         }
 
-        System.out.println("translateStatementNoShortIf error");
+        Log.error("translateStatementNoShortIf error");
         return null;
 
     }

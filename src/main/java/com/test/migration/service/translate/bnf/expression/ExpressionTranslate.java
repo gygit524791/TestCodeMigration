@@ -7,6 +7,7 @@ import com.test.migration.service.translate.bnf.expression.lambda.LambdaExpressi
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class ExpressionTranslate {
     /**
@@ -19,7 +20,7 @@ public class ExpressionTranslate {
      */
     public String translateExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_expression) {
-            System.out.println("expressionRule 没找到，不科学");
+            Log.error("expressionRule 没找到，不科学");
             return null;
         }
         // 只可能有1个孩子节点 lambdaExpression或assignmentExpression
@@ -33,7 +34,7 @@ public class ExpressionTranslate {
             return translateAssignmentExpression((ParserRuleContext) childRuleContext);
         }
 
-        System.out.println("translateExpression失败，不科学");
+        Log.error("translateExpression失败，不科学");
         return null;
     }
 
@@ -45,7 +46,7 @@ public class ExpressionTranslate {
      */
     private String translateAssignmentExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_assignmentExpression) {
-            System.out.println("assignmentExpressionRule 没找到，不科学");
+            Log.error("assignmentExpressionRule 没找到，不科学");
             return null;
         }
         // 只可能有1个孩子节点 conditionalExpression或assignment
@@ -61,7 +62,7 @@ public class ExpressionTranslate {
             return translate.translateAssignment((ParserRuleContext) childRuleContext);
         }
 
-        System.out.println("translateAssignmentExpression失败，不科学");
+        Log.error("translateAssignmentExpression失败，不科学");
         return null;
     }
 

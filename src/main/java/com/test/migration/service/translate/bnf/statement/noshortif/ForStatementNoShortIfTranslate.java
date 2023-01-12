@@ -10,6 +10,7 @@ import com.test.migration.service.translate.bnf.expression.StatementExpressionTr
 import com.test.migration.service.translate.bnf.statement.LocalVariableDeclarationStatementTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateForStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forStatementNoShortIf) {
-            System.out.println("RULE_forStatementNoShortIf 没找到");
+            Log.error("RULE_forStatementNoShortIf 没找到");
             return null;
         }
 
@@ -37,7 +38,7 @@ public class ForStatementNoShortIfTranslate {
             return translateEnhancedForStatementNoShortIf(child);
         }
 
-        System.out.println("translateForStatementNoShortIf error");
+        Log.error("translateForStatementNoShortIf error");
         return null;
     }
 
@@ -49,7 +50,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateBasicForStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_basicForStatement) {
-            System.out.println("RULE_basicForStatement 没找到，不科学");
+            Log.error("RULE_basicForStatement 没找到");
             return null;
         }
         ParserRuleContext forInitCtx = null;
@@ -97,7 +98,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateEnhancedForStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_enhancedForStatementNoShortIf) {
-            System.out.println("RULE_enhancedForStatementNoShortIf 没找到");
+            Log.error("RULE_enhancedForStatementNoShortIf 没找到");
             return null;
         }
 
@@ -150,7 +151,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateForInit(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forInit) {
-            System.out.println("RULE_forInit 没找到，不科学");
+            Log.error("RULE_forInit 没找到，不科学");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);
@@ -162,7 +163,7 @@ public class ForStatementNoShortIfTranslate {
             LocalVariableDeclarationStatementTranslate translate = new LocalVariableDeclarationStatementTranslate();
             return translate.translateLocalVariableDeclaration(child);
         }
-        System.out.println("RULE_forInit error");
+        Log.error("RULE_forInit error");
         return null;
     }
 
@@ -174,14 +175,14 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateForUpdate(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forUpdate) {
-            System.out.println("RULE_forUpdate 没找到，不科学");
+            Log.error("RULE_forUpdate 没找到，不科学");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);
         if (child.getRuleIndex() == Java8Parser.RULE_statementExpressionList) {
             return translateStatementExpressionList(child);
         }
-        System.out.println("RULE_forInit error");
+        Log.error("RULE_forInit error");
         return null;
     }
 
@@ -193,7 +194,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateStatementExpressionList(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementExpressionList) {
-            System.out.println("RULE_statementExpressionList 没找到，不科学");
+            Log.error("RULE_statementExpressionList 没找到，不科学");
             return null;
         }
 

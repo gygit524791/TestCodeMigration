@@ -3,6 +3,7 @@ package com.test.migration.service.translate.bnf.statement;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.expression.StatementExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class ExpressionStatement {
 
@@ -15,7 +16,7 @@ public class ExpressionStatement {
      */
     public String translateExpressionStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_expressionStatement) {
-            System.out.println("RULE_expressionStatement 没找到");
+            Log.error("RULE_expressionStatement 没找到");
             return null;
         }
         StatementExpressionTranslate statementExpressionTranslate = new StatementExpressionTranslate();

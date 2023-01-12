@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class DoStatementTranslate {
     /**
@@ -16,7 +17,7 @@ public class DoStatementTranslate {
      */
     public String translateDoStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_doStatement) {
-            System.out.println("RULE_doStatement 没找到");
+            Log.error("RULE_doStatement 没找到");
             return null;
         }
 

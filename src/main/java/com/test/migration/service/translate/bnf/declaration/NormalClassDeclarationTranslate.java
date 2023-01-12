@@ -6,6 +6,7 @@ import com.test.migration.service.translate.bnf.common.TypeParametersTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.apache.commons.lang3.StringUtils;
+import utils.Log;
 
 public class NormalClassDeclarationTranslate {
 
@@ -18,7 +19,7 @@ public class NormalClassDeclarationTranslate {
      */
     public String translateNormalClassDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_normalClassDeclaration)) {
-            System.out.println("RULE_normalClassDeclaration 没找到，不科学");
+            Log.error("RULE_normalClassDeclaration 没找到");
             return null;
         }
 
