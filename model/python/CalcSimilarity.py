@@ -54,15 +54,15 @@ def loadApiDataFromSQLLite(taskId: str, dbFilepath: str):
     # id, task_id, filepath, class_name, api_name,
     # type, method_word_sequence, token_sequence, token_vector
     cursor = conn.cursor()
-    androidApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 1"
-    cursor.execute(androidApiQuerySql)
-    androidApis = cursor.fetchall()
+    sourceApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 1"
+    cursor.execute(sourceApiQuerySql)
+    sourceApis = cursor.fetchall()
 
-    harmonyApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 0"
-    cursor.execute(harmonyApiQuerySql)
-    harmonyApis = cursor.fetchall()
+    targetApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 0"
+    cursor.execute(targetApiQuerySql)
+    targetApis = cursor.fetchall()
 
-    return androidApis, harmonyApis
+    return sourceApis, targetApis
 
 
 def cos_sim(a, b):
@@ -78,77 +78,74 @@ def cos_sim(a, b):
 计算两个方法名向量相似度，判断是否匹配
 筛选出的api完全匹配（同名api）可能有多个，这种情况下继续根据类名来筛选，eg：
 
-harmony api：Animator#start
-android api：AnimatorSet#start，Animator#start
+target api：Animator#start
+source api：AnimatorSet#start，Animator#start
 预期结果：Animator#start 和 Animator#start
 
-返回格式：找到匹配：harmonyId,androidMappingId;没有找到匹配：空字符串""
+返回格式：找到匹配：targetId,sourceMappingId;没有找到匹配：空字符串""
 """
 
 
-def calculateStringSimilarity(androidApis, harmonyApi, apiVectorDict: dict, classNameVectorDict: dict):
+def calculateStringSimilarity(sourceApi, targetApis, apiVectorDict: dict, classNameVectorDict: dict):
     global stringSimThreshold
-    androidApiSimDict = dict()
-    harmonyApiVec = apiVectorDict[str(harmonyApi[0])]
+    targetApiSimDict = dict()
+    sourceApiVec = apiVectorDict[str(sourceApi[0])]
 
-    for androidApi in androidApis:
-        androidApiVec = apiVectorDict[str(androidApi[0])]
+    for targetApi in targetApis:
+        targetApiVec = apiVectorDict[str(targetApi[0])]
         # dict结构：key：apiId，value：相似度
-        androidApiSimDict[androidApi[0]] = cos_sim(harmonyApiVec, androidApiVec)
+        targetApiSimDict[targetApi[0]] = cos_sim(sourceApiVec, targetApiVec)
 
     # 改为二级筛选，先按照api来筛选，如果有多个最高相似匹配，就再按照class name来筛选
-    # androidApiMappingTopKList：[1:1, 2:1, 3:1]
-    androidApiMappingTopKList = sorted(androidApiSimDict.items(), key=lambda x: x[1], reverse=True)[0:5]
-    # 字符相似度小于0.9995, 直接返回没匹配上 androidMappingTopKApi[0][1]:第1个匹配对的相似度大小
-    topApiSimilarity = androidApiMappingTopKList[0][1]
+    # targetApiMappingTopKList：[1:1, 2:1, 3:1]
+    targetApiMappingTopKList = sorted(targetApiSimDict.items(), key=lambda x: x[1], reverse=True)[0:5]
+    # 字符相似度小于0.9995, 直接返回没匹配上 targetApiMappingTopKList[0][1]:第1个匹配对的相似度大小
+    topApiSimilarity = targetApiMappingTopKList[0][1]
     if topApiSimilarity < stringSimThreshold:
         return ""
 
     topSimApiDictList = list()
-    for apiDict in androidApiMappingTopKList:
+    for apiDict in targetApiMappingTopKList:
         if apiDict[1] >= topApiSimilarity:
             topSimApiDictList.append(apiDict)
 
     # todo 测试代码
-    # return str(harmonyApi[0]) + '-' + str(topSimApiDicList[0][0])
+    # return str(sourceApi[0]) + '-' + str(topSimApiDicList[0][0])
 
     # 二级筛选
     # 如果匹配出的安卓api只有1个，直接返回匹配结果
     if len(topSimApiDictList) == 1:
-        return str(harmonyApi[0]) + '-' + str(topSimApiDictList[0][0])
+        return str(sourceApi[0]) + '-' + str(topSimApiDictList[0][0])
 
     # 二级筛选：根据class name的字符相似度选出最匹配的
-    androidClassNameSimDict = dict()
-    harmonyClassNameVec = classNameVectorDict[str(harmonyApi[0])]
-    # androidApiDict：key：apiId value：classNameVector
-    for androidSimApiDict in topSimApiDictList:
-        androidClassNameSimDict[androidSimApiDict[0]] = cos_sim(harmonyClassNameVec, classNameVectorDict[str(androidSimApiDict[0])])
-    androidClassNameSimDictTopKList = sorted(androidClassNameSimDict.items(), key=lambda x: x[1], reverse=True)[0:2]
+    targetClassNameSimDict = dict()
+    sourceClassNameVec = classNameVectorDict[str(sourceApi[0])]
+    # targetApiDict：key：apiId value：classNameVector
+    for targetSimApiDict in topSimApiDictList:
+        targetClassNameSimDict[targetSimApiDict[0]] = cos_sim(sourceClassNameVec,
+                                                              classNameVectorDict[str(targetSimApiDict[0])])
+    targetClassNameSimDictTopKList = sorted(targetClassNameSimDict.items(), key=lambda x: x[1], reverse=True)[0:2]
 
-    top = androidClassNameSimDictTopKList[0]
+    top = targetClassNameSimDictTopKList[0]
 
-    return str(harmonyApi[0]) + '-' + str(top[0])
+    return str(sourceApi[0]) + '-' + str(top[0])
 
 
-def calculateApiMappings(androidApis, harmonyApis, apiVectorDict, classVectorDict):
+def calculateApiMappings(sourceApis, targetApis, apiVectorDict, classVectorDict):
     """
     计算api mapping
 
-    :param androidApis:
-    :param harmonyApis:
-    :param apiVectorDict:
-    :return:
     """
     # [1-2,3-4,5-6]
     apiMappings = list()
     # 方法名相似度匹配
-    for harmonyApi in harmonyApis:
-        result = calculateStringSimilarity(androidApis, harmonyApi, apiVectorDict, classVectorDict)
+    for sourceApi in sourceApis:
+        result = calculateStringSimilarity(sourceApi, targetApis, apiVectorDict, classVectorDict)
         if result != "":
             apiMappings.append(result)
         else:
             # 方法名关联词相似度匹配
-            result = tokenRelatedSimilarity(androidApis, harmonyApi)
+            result = tokenRelatedSimilarity(sourceApi, targetApis)
             if result != "":
                 apiMappings.append(result)
     return apiMappings
@@ -276,63 +273,19 @@ def calculatePhraseSimilarity(sourcePhrase, targetPhrase):
 """
 
 
-def tokenRelatedSimilarity(androidApis, harmonyApi):
+def tokenRelatedSimilarity(sourceApi, targetApis):
     global tokenRelatedSimThreshold
-    for androidApi in androidApis:
-        sim = calculatePhraseSimilarity(androidApi[6], harmonyApi[6])
+    for targetApi in targetApis:
+        sim = calculatePhraseSimilarity(sourceApi[6], targetApi[6])
         if sim > tokenRelatedSimThreshold:
-            return str(harmonyApi[0]) + '-' + str(androidApi[0])
+            return str(sourceApi[0]) + '-' + str(targetApi[0])
     return ""
 
 
 if __name__ == "__main__":
-    # harmonyApiId, taskId, dbFilepath
-
     generateWordSysnDict(sys.argv[1], sys.argv[2])
-    androidApis, harmonyApis = loadApiDataFromSQLLite(sys.argv[1], sys.argv[2])
+    sourceApis, targetApis = loadApiDataFromSQLLite(sys.argv[1], sys.argv[2])
     apiVectorDict = getVectorDict(sys.argv[3])
     classVectorDict = getVectorDict(sys.argv[4])
-    resultLine = calculateApiMappings(androidApis, harmonyApis, apiVectorDict, classVectorDict)
+    resultLine = calculateApiMappings(sourceApis, targetApis, apiVectorDict, classVectorDict)
     print(resultLine)
-
-    # """
-    # e1 = datetime.datetime.now()
-    # generateWordSysnDict(
-    #     '1',
-    #     '/Users/gaoyi/IdeaProjects/TestMigrationV2/data.db'
-    # )
-    # e2 = datetime.datetime.now()
-    # print(e2-e1)
-    #
-    #
-    # e1 = datetime.datetime.now()
-    # androidApis, harmonyApis = loadApiDataFromSQLLite(
-    #     '1',
-    #     '/Users/gaoyi/IdeaProjects/TestMigrationV2/data.db'
-    # )
-    # e2 = datetime.datetime.now()
-    # print(e2-e1)
-    #
-    # e1 = datetime.datetime.now()
-    # apiVectorDict = getVectorDict(
-    #     '/Users/gaoyi/IdeaProjects/TestMigrationV2/doc/word2vec/apiVectorDict.txt'
-    # )
-    # classNameVectorDict = getVectorDict(
-    #     '/Users/gaoyi/IdeaProjects/TestMigrationV2/doc/word2vec/classVectorDict.txt'
-    # )
-    # e2 = datetime.datetime.now()
-    # print(e2-e1)
-    #
-    # e1 = datetime.datetime.now()
-    # resultLine = calculateApiMappings(androidApis, harmonyApis, apiVectorDict, classNameVectorDict)
-    # e2 = datetime.datetime.now()
-    # print(e2-e1)
-    #
-    # print(resultLine)
-    # """
-
-# 0:00:00.687661
-# 0:00:00.000294
-# 0:00:00.002523
-# 0:00:03.871548
-# ['51-7', '58-31', '65-25', '68-4', '69-5', '70-3', '71-3', '72-2']

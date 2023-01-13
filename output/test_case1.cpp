@@ -10,6 +10,7 @@ public:
     // MyListener
     MyListener *listener = new MyListener();
   }
+
   void testAddListener() {
     ACE_EXPORTGroup *s = new ACE_EXPORTGroup();
     s->Play(a1)->before(a2)->before(a3)->after(a4)->after(a5);

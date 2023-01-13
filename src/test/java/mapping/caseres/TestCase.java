@@ -32,8 +32,5 @@ public class TestCase {
 
             System.out.println(apiMapping.getId()+" "+source.getClassName()+" $ "+ source.getApiName() +" : "+target.getClassName()+" $ "+target.getApiName());
         }
-
     }
-
-
 }

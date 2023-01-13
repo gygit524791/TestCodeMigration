@@ -16,25 +16,20 @@ import java.util.stream.Collectors;
 @Data
 public class MappingRuleLoader {
 
-    public static Map<String, String> commonClassNameMapping;
-    public static Map<String, String> testToolMethodNameMapping;
-    public static List<MethodInvocationTypeNameRule> commonMethodInvocationTypeNameMapping;
-    public static List<MethodInvocationTypeNameRule> customMethodInvocationTypeNameMapping;
+    public static Map<String, String> classNameMapping;
+    public static List<MethodInvocationTypeNameRule> apiMapping;
+    public static Map<String, String> testToolApiMapping;
+
 
     public static void load() {
-        List<String> customMethodInvocationTypeNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/customMethodInvocationTypeNameMapping.properties");
-        customMethodInvocationTypeNameMapping = customMethodInvocationTypeNameMappingStr.stream()
-                .map(MappingRuleLoader::buildMapping).collect(Collectors.toList());
+        List<String> apiMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/apiMapping.properties");
+        apiMapping = apiMappingStr.stream().map(MappingRuleLoader::buildMapping).collect(Collectors.toList());
 
-        List<String> commonMethodInvocationTypeNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/commonMethodInvocationTypeNameMapping.properties");
-        commonMethodInvocationTypeNameMapping = commonMethodInvocationTypeNameMappingStr.stream()
-                .map(MappingRuleLoader::buildMapping).collect(Collectors.toList());
-
-        List<String> testToolMethodNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/testToolMethodNameMapping.properties");
-        testToolMethodNameMapping = convertToMap(testToolMethodNameMappingStr);
+        List<String> testToolApiMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/testToolApiMapping.properties");
+        testToolApiMapping = convertToMap(testToolApiMappingStr);
 
         List<String> commonClassNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/commonClassNameMapping.properties");
-        commonClassNameMapping = convertToMap(commonClassNameMappingStr);
+        classNameMapping = convertToMap(commonClassNameMappingStr);
     }
 
     private static Map<String, String> convertToMap(List<String> mappingStr) {

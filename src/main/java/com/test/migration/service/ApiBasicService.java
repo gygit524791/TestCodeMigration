@@ -29,10 +29,10 @@ public class ApiBasicService {
      */
     public void extractApiBasic() {
         try {
-            // harmony cpp文件提取api基础信息
+            // android java文件提取api基础信息
             extractSourceApiBasic();
 
-            // android java文件提取api基础信息
+            // harmony cpp文件提取api基础信息
             extractTargetApiBasic();
 
             // 生成api的vector并保存
@@ -51,7 +51,6 @@ public class ApiBasicService {
         generateTokenCorpus(apiBasics, taskParameter);
 
         generateTokenVecDict(taskParameter);
-        Log.info("生成api向量（用于mapping计算）完成");
     }
 
     private void generateTokenVecDict(TaskParameter taskParameter) {
@@ -67,14 +66,14 @@ public class ApiBasicService {
         CallUtil.call(tokenArgs);
     }
 
-    private void extractTargetApiBasic() throws IOException {
-        Log.info("开始提取目标API信息");
+    private void extractSourceApiBasic() {
+        Log.info("开始提取源API信息");
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
-        List<String> targetFilepathList = Splitter.on(",").splitToList(taskParameter.getTargetFilepath());
-        List<String> moduleApiFilepath = targetFilepathList.stream()
-                .flatMap(targetFilepath -> {
+        List<String> sourceFilepathList = Splitter.on(",").splitToList(taskParameter.getSourceFilepath());
+        List<String> moduleApiFilepath = sourceFilepathList.stream()
+                .flatMap(filepath -> {
                     try {
-                        return GetFoldFileNames.readfileWithType(targetFilepath, "java").stream();
+                        return GetFoldFileNames.readfileWithType(filepath, "java").stream();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -85,24 +84,24 @@ public class ApiBasicService {
         // 过滤掉测试相关的类文件
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
-                .flatMap(filepath -> parseTargetApiBasic(filepath, taskParameter).stream())
+                .flatMap(filepath -> parseSourceApiBasic(filepath, taskParameter).stream())
                 .filter(this::filterUselessApi)
                 .collect(Collectors.toList());
 
         batchSave(apiBasics);
 
-        Log.info("目标API信息提取完成");
+        Log.info("源API信息提取完成");
     }
 
-    private void extractSourceApiBasic() throws IOException {
-        Log.info("开始提取源项目API信息");
+    private void extractTargetApiBasic() throws IOException {
+        Log.info("开始提取目标项目API信息");
 
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
-        List<String> sourceFilepathList = Splitter.on(",").splitToList(taskParameter.getSourceFilepath());
-        List<String> moduleApiFilepath = sourceFilepathList.stream()
-                .flatMap(sourceFilepath -> {
+        List<String> targetFilepathList = Splitter.on(",").splitToList(taskParameter.getTargetFilepath());
+        List<String> moduleApiFilepath = targetFilepathList.stream()
+                .flatMap(filepath -> {
                     try {
-                        return GetFoldFileNames.readfileWithType(sourceFilepath, "h").stream();
+                        return GetFoldFileNames.readfileWithType(filepath, "h").stream();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -111,12 +110,12 @@ public class ApiBasicService {
                 .collect(Collectors.toList());
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
         List<ApiBasic> apiBasics = moduleApiFilepath.stream()
-                .flatMap(filepath -> parseHarmonyApiBasic(filepath, taskParameter).stream())
+                .flatMap(filepath -> parseTargetApiBasic(filepath, taskParameter).stream())
                 .filter(this::filterUselessApi)
                 .collect(Collectors.toList());
         batchSave(apiBasics);
 
-        Log.info("源项目API信息提取完成");
+        Log.info("目标项目API信息提取完成");
     }
 
     private List<String> filterTestFile(List<String> moduleApiFilepath) {
@@ -167,7 +166,7 @@ public class ApiBasicService {
     }
 
 
-    private List<ApiBasic> parseTargetApiBasic(String filePath, TaskParameter taskParameter) {
+    private List<ApiBasic> parseSourceApiBasic(String filePath, TaskParameter taskParameter) {
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(filePath);
@@ -182,16 +181,16 @@ public class ApiBasicService {
     }
 
 
-    private List<ApiBasic> parseHarmonyApiBasic(String filepath, TaskParameter taskParameter) {
+    private List<ApiBasic> parseTargetApiBasic(String filepath, TaskParameter taskParameter) {
         String[] args = new String[]{taskParameter.getPythonBinPath(), taskParameter.getPythonCppExtractor(), filepath};
 
         List<String> resultLines = CallUtil.call(args);
 
-        return buildHarmonyApiBasic(taskParameter.getTaskId(), filepath, resultLines);
+        return buildTargetApiBasic(taskParameter.getTaskId(), filepath, resultLines);
 
     }
 
-    private List<ApiBasic> buildHarmonyApiBasic(Integer taskId, String filepath, List<String> resultLines) {
+    private List<ApiBasic> buildTargetApiBasic(Integer taskId, String filepath, List<String> resultLines) {
         String apiLines = resultLines.stream().findFirst().orElse(StringUtils.EMPTY);
         List<String> apis = JsonUtil.jsonToList(apiLines, String.class);
         return apis.stream().map(line -> {

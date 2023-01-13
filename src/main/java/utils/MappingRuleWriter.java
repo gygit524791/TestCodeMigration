@@ -17,22 +17,18 @@ public class MappingRuleWriter {
 
     public static void writeApiMappingProperties(String key, String value) {
         try {
-            writeProperties("mappingRule/customMethodInvocationTypeNameMapping.properties",key, value);
+            writeProperties("mappingRule/apiMapping.properties",key, value);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void writeClassMappingProperties(String key, String value) throws IOException {
-        writeProperties("mappingRule/classMapping.properties",key, value);
+    public static void writeClassNameMappingProperties(String key, String value) throws IOException {
+        writeProperties("mappingRule/classNameMapping.properties",key, value);
     }
 
     public static void writeOtherMappingProperties(String key, String value) throws IOException {
         writeProperties("mappingRule/otherMapping.properties",key, value);
-    }
-
-    public static void writePropertiesMappingProperties(String key, String value) throws IOException {
-        writeProperties("mappingRule/propertyMapping.properties",key, value);
     }
 
     private static void writeProperties(String propertyName, String key, String value) throws FileNotFoundException {

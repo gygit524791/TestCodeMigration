@@ -24,20 +24,16 @@ public class ReplaceRuleService {
      */
     public static String replaceMethodInvocationTypeName(String originTranslate,
                                                          String typeName, String methodNameIdentifier, String argumentList) {
-        List<MappingRuleLoader.MethodInvocationTypeNameRule> customMapping = MappingRuleLoader.customMethodInvocationTypeNameMapping;
-        List<MappingRuleLoader.MethodInvocationTypeNameRule> commonMapping = MappingRuleLoader.commonMethodInvocationTypeNameMapping;
+        List<MappingRuleLoader.MethodInvocationTypeNameRule> apiMapping = MappingRuleLoader.apiMapping;
 
-        String replace1 = replaceMethodInvocationTypeName(originTranslate, typeName, methodNameIdentifier, argumentList, customMapping);
-        String replace2 = replaceMethodInvocationTypeName(replace1, typeName, methodNameIdentifier, argumentList, commonMapping);
-
-        return replace2;
+        return replaceMethodInvocationTypeName(originTranslate, typeName, methodNameIdentifier, argumentList, apiMapping);
     }
 
     private static String replaceMethodInvocationTypeName(String originTranslate,
                                                           String typeName, String methodNameIdentifier, String argumentList,
-                                                          List<MappingRuleLoader.MethodInvocationTypeNameRule> customMapping) {
+                                                          List<MappingRuleLoader.MethodInvocationTypeNameRule> apiMapping) {
         String type = typeNameMap.getOrDefault(typeName, StringUtils.EMPTY);
-        MappingRuleLoader.MethodInvocationTypeNameRule methodInvocationTypeNameRule = customMapping.stream()
+        MappingRuleLoader.MethodInvocationTypeNameRule methodInvocationTypeNameRule = apiMapping.stream()
                 .filter(x -> StringUtils.equals(type, x.getSourceClassName())
                         && StringUtils.equals(methodNameIdentifier, x.getSourceMethodName()))
                 .findFirst().orElse(null);
@@ -65,7 +61,7 @@ public class ReplaceRuleService {
     }
 
     private static String replaceTestToolMethodNameMapping(String methodName) {
-        Map<String, String> testToolMethodNameMapping = MappingRuleLoader.testToolMethodNameMapping;
+        Map<String, String> testToolMethodNameMapping = MappingRuleLoader.testToolApiMapping;
         if (testToolMethodNameMapping.containsKey(methodName)) {
             return testToolMethodNameMapping.get(methodName);
         }
@@ -74,7 +70,7 @@ public class ReplaceRuleService {
     }
 
     public static String replaceClassOrInterfaceType(String clsName) {
-        Map<String, String> referenceMapping = MappingRuleLoader.commonClassNameMapping;
+        Map<String, String> referenceMapping = MappingRuleLoader.classNameMapping;
         if (StringUtils.equals("String", clsName)) {
             return referenceMapping.get(clsName);
         }
@@ -113,7 +109,7 @@ public class ReplaceRuleService {
             }
         }
 
-        Map<String, String> commonClassNameMapping = MappingRuleLoader.commonClassNameMapping;
+        Map<String, String> commonClassNameMapping = MappingRuleLoader.classNameMapping;
 
         // 内部类 改为A::B
         String finalIdentifier = identifier;

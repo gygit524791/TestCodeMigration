@@ -44,6 +44,7 @@ public class ApiMappingService {
 
         Map<Integer, ApiBasic> apiBasicMap = queryApiBasicMap(mappings);
 
+        // 过滤掉重复mapping
         mappings = filterSameMapping(mappings, apiBasicMap);
 
         batchSave(mappings);

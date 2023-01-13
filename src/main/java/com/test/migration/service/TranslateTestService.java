@@ -42,16 +42,17 @@ public class TranslateTestService {
      *
      */
     public void generateTargetApiTest() {
+        Log.info("");
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<ApiMapping> apiMappings = apiMappingService.selectByTaskId(taskParameter.getTaskId());
-        List<Integer> targetApiIds = apiMappings.stream()
-                .map(ApiMapping::getTargetApiId)
+        List<Integer> sourceApiIds = apiMappings.stream()
+                .map(ApiMapping::getSourceApiId)
                 .collect(Collectors.toList());
-        if (targetApiIds.size() == 0) {
+        if (sourceApiIds.size() == 0) {
             return;
         }
 
-        List<ApiBasic> apiBasics = apiBasicService.selectByIds(targetApiIds);
+        List<ApiBasic> apiBasics = apiBasicService.selectByIds(sourceApiIds);
 
         try {
             String targetSourceCodeFilepath = taskParameter.getTargetSourceCodeFilepath();

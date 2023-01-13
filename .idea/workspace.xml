@@ -5,20 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/model/python/TokenMatch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/mapping/caseres/TestCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/python/CalcSimilarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CalcSimilarity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/apiVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/apiVectorDict.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/classVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/classVectorDict.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/corpus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/corpus.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/word2vec.model" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/word2vec.model" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/ApiMappingMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/ApiMappingMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test_case1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/output/test_case1.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TargetTestCode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mybatis-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRuleLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/MappingRuleLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/ReplaceRuleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/MappingRuleWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/MappingRuleWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/classMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/classNameMapping.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/commonClassNameMapping.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/commonMethodInvocationTypeNameMapping.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/customClassNameMapping.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/customMethodInvocationTypeNameMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/apiMapping.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/propertyMapping.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/testToolMethodNameMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/testToolApiMapping.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/task.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/task.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/mapping/caseres/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mapping/caseres/TestCase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +98,7 @@
       <recent name="com.test.migration.service.translate.bnf.common.primary" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestCase">
+  <component name="RunManager" selected="Application.ApiMappingMain">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="TestMigrationV2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -166,8 +175,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestCase" />
         <item itemvalue="Application.ApiMappingMain" />
+        <item itemvalue="Application.TestCase" />
         <item itemvalue="Application.TranslateMain" />
         <item itemvalue="Application.TaskParameterReader" />
         <item itemvalue="TestNG.MainTest.testFindPath" />
@@ -210,7 +219,7 @@
       <workItem from="1673314855031" duration="24751000" />
       <workItem from="1673402408621" duration="21153000" />
       <workItem from="1673490063849" duration="13007000" />
-      <workItem from="1673512862176" duration="5924000" />
+      <workItem from="1673512862176" duration="15970000" />
     </task>
     <servers />
   </component>
@@ -298,11 +307,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TestCodeFilter.java</url>
           <line>25</line>
           <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/TranslateMain.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java</url>
