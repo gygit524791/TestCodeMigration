@@ -28,8 +28,8 @@ public class MappingRuleLoader {
         List<String> testToolApiMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/testToolApiMapping.properties");
         testToolApiMapping = convertToMap(testToolApiMappingStr);
 
-        List<String> commonClassNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/commonClassNameMapping.properties");
-        classNameMapping = convertToMap(commonClassNameMappingStr);
+        List<String> classNameMappingStr = MappingRuleReader.readLinesFromProperties("mappingRule/classNameMapping.properties");
+        classNameMapping = convertToMap(classNameMappingStr);
     }
 
     private static Map<String, String> convertToMap(List<String> mappingStr) {

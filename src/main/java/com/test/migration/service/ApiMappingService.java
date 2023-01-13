@@ -1,15 +1,19 @@
 package com.test.migration.service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.test.migration.dao.ApiMappingDao;
 import com.test.migration.entity.TaskParameter;
 import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.entity.po.ApiMapping;
+import lombok.Builder;
+import lombok.Data;
 import org.apache.ibatis.session.SqlSession;
-import org.jetbrains.annotations.Nullable;
 import utils.*;
 
+import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,17 +44,19 @@ public class ApiMappingService {
         resultLines.forEach(resultLine::append);
         List<String> apiMappings = JsonUtil.jsonToList(resultLine.toString(), String.class);
 
-        List<ApiMapping> mappings = buildApiMappings(apiMappings);
+        // 构建mapping结构
+        List<ApiMapping> apiMappingList = buildApiMappings(apiMappings);
 
-        Map<Integer, ApiBasic> apiBasicMap = queryApiBasicMap(mappings);
+        Map<Integer, ApiBasic> apiBasicMap = queryApiBasicMap(apiMappingList);
 
         // 过滤掉重复mapping
-        mappings = filterSameMapping(mappings, apiBasicMap);
+        apiMappingList = filterSameMapping(apiMappingList, apiBasicMap);
 
-        batchSave(mappings);
+        // mapping结果保存到数据库，便于后续使用和分析
+        batchSave(apiMappingList);
 
         // 保存到mapping规则中
-        saveMappingRule(mappings, apiBasicMap);
+        doCalculateMappingRule(apiMappingList, apiBasicMap);
 
         long endTime = System.currentTimeMillis();
         Log.info("执行mapping计算完毕，耗时（秒）：" + (endTime - startTime) / 1000);
@@ -91,12 +97,12 @@ public class ApiMappingService {
                 .collect(Collectors.toMap(ApiBasic::getId, Function.identity()));
     }
 
-    private void saveMappingRule(List<ApiMapping> mappings, Map<Integer, ApiBasic> apiBasicMap) {
-        if (mappings == null || mappings.size() == 0) {
+    private void doCalculateMappingRule(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
+        if (apiMappingList == null || apiMappingList.size() == 0) {
             return;
         }
-
-        mappings.forEach(mapping -> {
+        // 将api mapping写入到配置文件中
+        apiMappingList.forEach(mapping -> {
             ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
             ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
             // 安卓的api
@@ -106,7 +112,60 @@ public class ApiMappingService {
 
             MappingRuleWriter.writeApiMappingProperties(key, value);
         });
+
+        // 计算class mapping
+        classNameMapping(apiMappingList, apiBasicMap);
     }
+
+
+    private void classNameMapping(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
+        Map<String, Integer> classNameNumMapping = Maps.newHashMap();
+
+        apiMappingList.forEach(mapping -> {
+            ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
+            ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
+
+            String mappingKey = sourceApi.getClassName() + "#" + targetApi.getClassName();
+            // (AClass#BClass, 1), (AClass#CClass, 1)
+            classNameNumMapping.merge(mappingKey, 1, Integer::sum);
+        });
+
+        List<ClassApiMappingNum> classApiMappingNumList = Lists.newArrayList();
+        classNameNumMapping.forEach((classNameMapKey, apiNum) -> {
+            String[] classNameMap = classNameMapKey.split("#");
+            classApiMappingNumList.add(ClassApiMappingNum.builder()
+                    .sourceClassName(classNameMap[0])
+                    .targetClassName(classNameMap[1])
+                    .mappingApiNum(apiNum)
+                    .build());
+        });
+
+        calculateClassNameMappings(classApiMappingNumList);
+    }
+
+    private void calculateClassNameMappings(List<ClassApiMappingNum> classApiMappingNumList) {
+        Map<String, List<ClassApiMappingNum>> classApiMappingMap = classApiMappingNumList.stream()
+                .collect(Collectors.groupingBy(ClassApiMappingNum::getSourceClassName));
+
+        classApiMappingMap.forEach((sourceKey, mappingList) -> {
+            // 取api mapping数目最多的一对，如果相同则取第一个
+            ClassApiMappingNum finalMapping = mappingList.stream()
+                    .max(Comparator.comparing(ClassApiMappingNum::getMappingApiNum))
+                    .orElse(null);
+            if (finalMapping == null) {
+                Log.error("class mapping 不存在");
+                return;
+            }
+
+            try {
+                MappingRuleWriter.writeClassNameMappingProperties(finalMapping.getSourceClassName(), finalMapping.getTargetClassName());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
 
     private List<ApiMapping> buildApiMappings(List<String> apiMappings) {
         Integer taskId = TaskParameterReader.getTaskParameter().getTaskId();
@@ -153,5 +212,15 @@ public class ApiMappingService {
         }
     }
 
+    /**
+     * api匹配数量统计
+     */
+    @Data
+    @Builder
+    public static class ClassApiMappingNum {
+        private String sourceClassName;
+        private String targetClassName;
+        private Integer mappingApiNum;
+    }
 
 }
