@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.common;
 
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class TypeArgumentTranslate {
 
@@ -13,7 +14,7 @@ public class TypeArgumentTranslate {
      */
     public String translateTypeArgument(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_typeArgument)) {
-            System.out.println("RULE_typeArgument 没找到，不科学");
+            Log.error("RULE_typeArgument error");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);

@@ -16,7 +16,7 @@ public class ExpressionStatementTranslate {
      */
     public String translateExpressionStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_expressionStatement) {
-            Log.error("RULE_expressionStatement 没找到");
+            Log.error("RULE_expressionStatement error");
             return null;
         }
         StatementExpressionTranslate statementExpressionTranslate = new StatementExpressionTranslate();

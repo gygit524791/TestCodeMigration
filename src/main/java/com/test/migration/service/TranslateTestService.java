@@ -108,15 +108,15 @@ public class TranslateTestService {
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         List<TranslateTest> translateTests = selectByTaskId(taskParameter.getTaskId());
         MappingRuleLoader.load();
-        // 以文件为代码进行转换
-        translateTests.forEach(translateTest -> {
-            doTranslate(translateTest);
-//            translateTest.setTranslateCode("translateCode");
-//            update(translateTest);
-        });
+
+        // 以每个test文件为单位进行代码转换
+        Log.info("总计[" + translateTests.size() + "]个测试文件需要处理代码迁移");
+        translateTests.forEach(this::doTranslate);
     }
 
     private void doTranslate(TranslateTest translateTest) {
+        Log.info("开始处理[" + translateTest.getTestFilepath() + "]测试文件的测试迁移");
+
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(translateTest.getTestFilepath());
@@ -131,26 +131,78 @@ public class TranslateTestService {
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
 
-        Log.info("====translate FieldDeclaration====");
-        FieldDeclarationTranslate fieldDeclarationTranslate = new FieldDeclarationTranslate();
-        for (ParserRuleContext parserRuleContext : TestCodeContext.fieldDeclarationCtxList) {
-//            Log.info(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
-            Log.info("---------------------------");
-        }
+        // 打印typeName
+        printTypeNameMapMessage();
 
-        Log.info("====translate MethodDeclaration====");
-        MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
-        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
-//            Log.info(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
-            Log.info("---------------------------");
-        }
+        Map<String, List<Integer>> map = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
+        List<String> migrateTestMethods = map == null ? Lists.newArrayList() : Lists.newArrayList(map.keySet());
+        // 过滤掉不需要转换的test code
+        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
 
-        Log.info("====translate ClassDeclaration====");
+        // 代码转换
+        translate();
+
+        // 代码生成
+        TranslateCodeGenerator.doGenerate();
+    }
+
+
+    private void translate() {
+        Log.info("开始执行代码转换");
+
+        TranslateCodeCollector.init();
+        TranslateCodeCollector.className = TestCodeContext.className;
+
+        // 类迁移
         ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
-//            Log.info(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
-            Log.info("---------------------------");
+            TranslateHint.init();
+            TranslateCodeCollector.TranslateCode translateCode = new TranslateCodeCollector.TranslateCode();
+            translateCode.translateCode = classDeclarationTranslate.translateClassDeclaration(parserRuleContext);
+            translateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
+
+            TranslateCodeCollector.classDeclarationTranslateCodes.add(translateCode);
         }
+
+        // 成员变量迁移
+        FieldDeclarationTranslate fieldDeclarationTranslate = new FieldDeclarationTranslate();
+        for (ParserRuleContext parserRuleContext : TestCodeContext.fieldDeclarationCtxList) {
+            TranslateHint.init();
+            TranslateCodeCollector.TranslateCode translateCode = new TranslateCodeCollector.TranslateCode();
+            translateCode.translateCode = fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext);
+            translateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
+
+            TranslateCodeCollector.fieldDeclarationTranslateCodes.add(translateCode);
+        }
+
+        // 方法迁移
+        MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
+        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
+            TranslateHint.init();
+            TranslateCodeCollector.MethodTranslateCode.methodStartLine = parserRuleContext.getStart().getLine();
+            TranslateCodeCollector.MethodTranslateCode.methodEndLine = parserRuleContext.getStop().getLine();
+
+            methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext);
+            // methodHeader信息
+            // method blockStatement信息
+            TranslateCodeCollector.MethodTranslateCode methodTranslateCode = new TranslateCodeCollector.MethodTranslateCode();
+            methodTranslateCode.methodHeaderTranslateCode = TranslateCodeCollector.methodHeaderTranslateCode;
+            methodTranslateCode.blockStatementTranslateCodes = TranslateCodeCollector.blockStatementTranslateCodes;
+            TranslateCodeCollector.methodDeclarationTranslateCodes.add(methodTranslateCode);
+
+            TranslateCodeCollector.MethodTranslateCode.clearMethodLine();
+        }
+
+        // 方法部分迁移
+        PartMigrationProcessor partMigrationProcessor = new PartMigrationProcessor();
+        TranslateCodeCollector.isFullTranslate = false; // 内心在滴血。。。
+        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
+            TranslateCodeCollector.PartMigrationMethodTranslateCode partMigrationMethodTranslateCode = new TranslateCodeCollector.PartMigrationMethodTranslateCode();
+            partMigrationMethodTranslateCode.translateCode = partMigrationProcessor.doPartMigrationTranslate(parserRuleContext);
+            TranslateCodeCollector.partMigrationMethodTranslateCodes.add(partMigrationMethodTranslateCode);
+        }
+
+        Log.info("代码转换完成");
     }
 
     private Map<String, List<Integer>> getTestMethodInvocationMap(String testFilepath, List<ApiBasic> fileApis) {
@@ -185,9 +237,7 @@ public class TranslateTestService {
      * 补充规则：为了匹配到这种命名，使用  ：
      * *（通配符）+类名+*（通配符）+Test（前后缀）的方式来匹配测试类文件
      *
-     * @param allTargetSourceCodeFilepathList
      * @param filepath 目标api所在的文件路径
-     * @return
      */
     private List<String> filterTestFilepath(List<String> allTargetSourceCodeFilepathList, String filepath) {
         String className = getClassNameByFilepath(filepath);
@@ -241,6 +291,15 @@ public class TranslateTestService {
                 .filter(x -> x.getCallee() != null && x.getCallee().size() > 0)
                 .collect(Collectors.toMap(ApiInvocationVisitor.MethodInvocation::getCaller,
                         ApiInvocationVisitor.MethodInvocation::getCallee, (x, y) -> x));
+    }
+
+
+    private static void printTypeNameMapMessage() {
+        // typename
+        Log.info("TypeName Map message:");
+        TestCodeContext.typeNameMap.forEach((key, value) -> {
+            Log.info("typeName:" + key + ", typeValue:" + value);
+        });
     }
 
     /**

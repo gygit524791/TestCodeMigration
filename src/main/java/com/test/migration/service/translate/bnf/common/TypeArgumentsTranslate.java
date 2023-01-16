@@ -4,6 +4,7 @@ import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class TypeArgumentsTranslate {
 
@@ -14,7 +15,7 @@ public class TypeArgumentsTranslate {
      */
     public String translateTypeArguments(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_typeArguments)) {
-            System.out.println("RULE_typeArguments 没找到，不科学");
+            Log.error("RULE_typeArguments error");
             return null;
         }
 

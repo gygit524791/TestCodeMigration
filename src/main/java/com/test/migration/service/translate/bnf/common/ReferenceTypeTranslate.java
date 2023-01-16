@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.array.ArrayTypeTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassOrInterfaceTypeTranslate;
 import com.test.migration.service.translate.bnf.common.variable.TypeVariableTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class ReferenceTypeTranslate {
 
@@ -17,7 +18,7 @@ public class ReferenceTypeTranslate {
      */
     public String translateReferenceType(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_referenceType)) {
-            System.out.println("RULE_referenceType 没找到，不科学");
+            Log.error("RULE_referenceType error" );
             return null;
         }
 

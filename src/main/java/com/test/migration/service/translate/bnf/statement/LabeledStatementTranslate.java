@@ -18,7 +18,7 @@ public class LabeledStatementTranslate {
      */
     public String translateLabeledStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_labeledStatement) {
-            Log.error("RULE_labeledStatement 没找到");
+            Log.error("RULE_labeledStatement error");
             return null;
         }
 

@@ -10,9 +10,6 @@ public class ExpressionNameTranslate {
      * :	Identifier
      * |	ambiguousName '.' Identifier
      * ;
-     *
-     * @param ctx
-     * @return
      */
     public String translateExpressionName(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_expressionName) {

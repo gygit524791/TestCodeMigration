@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
  */
 public class TranslateCodeGenerator {
     public static void doGenerate() {
+        Log.info("开始执行代码生成");
+
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         String filepath = taskParameter.getOutputFilepath() + TranslateCodeCollector.className + ".cpp";
 
@@ -31,9 +33,10 @@ public class TranslateCodeGenerator {
         writeMigrationResultToFile(filepath);
 
         //代码格式化
-        Log.info("代码格式化");
         // TODO bug 存在死循环
 //        formatMigrationResultFile(filepath);
+
+        Log.info("代码生成执行完毕");
     }
 
     /**

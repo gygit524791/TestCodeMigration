@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class ResultTranslate {
 
@@ -16,7 +17,7 @@ public class ResultTranslate {
      */
     public String translateResult(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_result) {
-            System.out.println("RULE_result 没找到，不科学");
+            Log.error("RULE_result error");
             return null;
         }
 

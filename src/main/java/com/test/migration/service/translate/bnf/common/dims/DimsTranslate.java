@@ -1,4 +1,4 @@
-package com.test.migration.service.translate.bnf.common;
+package com.test.migration.service.translate.bnf.common.dims;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;

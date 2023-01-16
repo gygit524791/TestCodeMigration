@@ -10,7 +10,7 @@ public class ReturnStatementTranslate {
 
     public String translateReturnStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_returnStatement) {
-            Log.error("RULE_returnStatement 没找到，不科学");
+            Log.error("RULE_returnStatement error");
             return null;
         }
         ExpressionTranslate expressionTranslate = new ExpressionTranslate();

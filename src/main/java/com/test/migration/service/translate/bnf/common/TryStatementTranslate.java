@@ -4,6 +4,7 @@ import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.statement.BlockTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class TryStatementTranslate {
 
@@ -16,7 +17,7 @@ public class TryStatementTranslate {
      */
     public String translateTryStatement(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_tryStatement)) {
-            System.out.println("RULE_tryStatement 没找到");
+            Log.error("RULE_tryStatement error");
             return null;
         }
         if (ctx.getChildCount() == 0) {

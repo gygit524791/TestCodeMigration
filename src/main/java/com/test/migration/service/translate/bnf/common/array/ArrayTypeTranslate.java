@@ -1,7 +1,7 @@
 package com.test.migration.service.translate.bnf.common.array;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.bnf.common.DimsTranslate;
+import com.test.migration.service.translate.bnf.common.dims.DimsTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassOrInterfaceTypeTranslate;
 import com.test.migration.service.translate.bnf.common.variable.TypeVariableTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;

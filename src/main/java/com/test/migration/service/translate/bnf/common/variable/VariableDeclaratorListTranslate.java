@@ -2,11 +2,13 @@ package com.test.migration.service.translate.bnf.common.variable;
 
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.array.ArrayInitializerTranslate;
 import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.apache.commons.lang3.StringUtils;
+import utils.Log;
 
 import java.util.List;
 
@@ -73,7 +75,8 @@ public class VariableDeclaratorListTranslate {
                 variableDeclaratorId = variableDeclaratorIdTranslate.translateVariableDeclaratorId((ParserRuleContext) childRuleContext);
             }
             if (childRuleContext.getRuleIndex() == Java8Parser.RULE_variableInitializer) {
-                variableInitializer = translateVariableInitializer((ParserRuleContext) childRuleContext);
+                VariableInitializerTranslate translate = new VariableInitializerTranslate();
+                variableInitializer = translate.translateVariableInitializer((ParserRuleContext) childRuleContext);
             }
         }
 
@@ -82,31 +85,4 @@ public class VariableDeclaratorListTranslate {
                 : variableDeclaratorId + "=" + variableInitializer;
     }
 
-    /**
-     * variableInitializer
-     * :	expression
-     * |	arrayInitializer
-     * ;
-     *
-     * @param ctx
-     * @return
-     */
-    public String translateVariableInitializer(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_variableInitializer) {
-            System.out.println("VariableInitializer 为null");
-            return "";
-        }
-        ParserRuleContext childRule = (ParserRuleContext) ctx.getChild(0);
-
-        if (childRule.getRuleIndex() == Java8Parser.RULE_arrayInitializer) {
-            System.out.println("暂不支持RULE_arrayInitializer");
-            return "";
-        }
-        ExpressionTranslate expressionTranslate = new ExpressionTranslate();
-        if (childRule.getRuleIndex() == Java8Parser.RULE_expression) {
-            return expressionTranslate.translateExpression(childRule);
-        }
-        System.out.println("translateVariableInitializer 失败");
-        return "";
-    }
 }
