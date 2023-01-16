@@ -34,36 +34,9 @@ public class ApiBasicService {
 
             // harmony cpp文件提取api基础信息
             extractTargetApiBasic();
-
-            // 生成api的vector并保存
-            generateTokenVector();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void generateTokenVector() {
-        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
-        // 根据任务id查所有token序列
-        List<ApiBasic> apiBasics = selectByTaskId(taskParameter.getTaskId());
-
-        // 生成token文本语料库
-        generateTokenCorpus(apiBasics, taskParameter);
-
-        generateTokenVecDict(taskParameter);
-    }
-
-    private void generateTokenVecDict(TaskParameter taskParameter) {
-        String[] tokenArgs = new String[]{
-                taskParameter.getPythonBinPath(),
-                taskParameter.getPythonCalcTokenVec(),
-                String.valueOf(taskParameter.getTaskId()),
-                taskParameter.getDbFilepath(),
-                taskParameter.getWordVecModelFilepath(),
-                taskParameter.getApiVectorDictFilepath(),
-                taskParameter.getClassVectorDictFilepath()
-        };
-        CallUtil.call(tokenArgs);
     }
 
     private void extractSourceApiBasic() {
@@ -206,38 +179,6 @@ public class ApiBasicService {
                     .classNameTokenSequence(Joiner.on(",").join(Preprocess.preprocess(split[0])))
                     .build();
         }).collect(Collectors.toList());
-    }
-
-
-    /**
-     * 根据api序列生成文本语料库，用于生成vec
-     */
-    private void generateTokenCorpus(List<ApiBasic> apiBasics, TaskParameter taskParameter) {
-        // 取出所有token序列
-        List<String> tokens = Lists.newArrayList();
-        tokens.addAll(apiBasics.stream().map(api -> api.getTokenSequence().replace(",", " ")).collect(Collectors.toList()));
-        tokens.addAll(apiBasics.stream().map(api -> api.getClassNameTokenSequence().replace(",", " ")).collect(Collectors.toList()));
-
-        // 填充token语料库文件
-        fillCorpus(taskParameter, tokens);
-
-        // 调用python生成词向量文件
-        String[] args = new String[]{
-                taskParameter.getPythonBinPath(),
-                taskParameter.getPythonWordVec(),
-                taskParameter.getCorpusFilepath(),
-                taskParameter.getWordVecModelFilepath()
-        };
-        CallUtil.call(args);
-    }
-
-    private void fillCorpus(TaskParameter taskParameter, List<String> tokens) {
-        String corpusFilepath = taskParameter.getCorpusFilepath();
-        try {
-            FileWriteUtil.writeDataToFile(tokens, corpusFilepath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**

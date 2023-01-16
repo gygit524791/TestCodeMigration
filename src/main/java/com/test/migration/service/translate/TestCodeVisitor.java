@@ -3,6 +3,7 @@ package com.test.migration.service.translate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.test.migration.antlr.java.Java8BaseVisitor;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
@@ -14,9 +15,11 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
+import utils.Log;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -46,7 +49,6 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
      * <p>
      * todo 单层映射（identifier重名问题）
      */
-    private Map<String, String> typeNameMap = Maps.newHashMap();
 
     @Override
     public RuleNode visitNormalClassDeclaration(Java8Parser.NormalClassDeclarationContext ctx) {
@@ -122,10 +124,11 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
         List<String> typeNameKeys = findTypeNameKeys(ctx);
         String typeNameValue = findTypeNameValue(ctx);
         if (StringUtils.isNotBlank(typeNameValue)) {
-            typeNameKeys.forEach(key -> typeNameMap.put(key, typeNameValue));
+            typeNameKeys.forEach(key -> {
+                TestCodeContext.typeNameMap.put(key, typeNameValue);
+            });
         }
     }
-
 
     private void fillTypeNameMapFormalParameter(ParserRuleContext ctx) {
         String key = "";
@@ -150,7 +153,7 @@ public class TestCodeVisitor extends Java8BaseVisitor<RuleNode> {
             }
         }
         if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(value)) {
-            typeNameMap.put(key, value);
+            TestCodeContext.typeNameMap.put(key, value);
         }
     }
 

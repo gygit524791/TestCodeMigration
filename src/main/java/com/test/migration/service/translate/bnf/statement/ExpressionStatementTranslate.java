@@ -5,7 +5,7 @@ import com.test.migration.service.translate.bnf.expression.StatementExpressionTr
 import org.antlr.v4.runtime.ParserRuleContext;
 import utils.Log;
 
-public class ExpressionStatement {
+public class ExpressionStatementTranslate {
 
     /**
      * expressionStatement

@@ -6,6 +6,7 @@ import com.test.migration.entity.TaskParameter;
 import org.apache.commons.lang3.StringUtils;
 import utils.CallUtil;
 import utils.FileWriteUtil;
+import utils.Log;
 import utils.TaskParameterReader;
 
 import java.io.File;
@@ -26,10 +27,13 @@ public class TranslateCodeGenerator {
         String filepath = taskParameter.getOutputFilepath() + TranslateCodeCollector.className + ".cpp";
 
         //将TranslateCodeCollector的结果整理并输出到一个文件中
+        Log.info("将TranslateCodeCollector的结果整理并输出到一个文件中");
         writeMigrationResultToFile(filepath);
 
         //代码格式化
-        formatMigrationResultFile(filepath);
+        Log.info("代码格式化");
+        // TODO bug 存在死循环
+//        formatMigrationResultFile(filepath);
     }
 
     /**

@@ -22,6 +22,8 @@ public class ApiMappingMain {
         // 生成mapping关系
         ApiMappingService apiMappingService = new ApiMappingService();
         long s2 = System.currentTimeMillis();
+        // 生成api的vector并保存
+        apiMappingService.generateTokenVector();
         apiMappingService.calculateApiMappings();
         long e2 = System.currentTimeMillis();
         Log.info("生成mapping关系完成，耗时（毫秒）：" + (e2 - s2) );

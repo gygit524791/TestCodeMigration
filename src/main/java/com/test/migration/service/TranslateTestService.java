@@ -131,28 +131,24 @@ public class TranslateTestService {
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
 
-        testCodeVisitor.getTypeNameMap().put("mActivityRule", "ActivityTestRule<AnimatorSetActivity>");
-        ReplaceRuleService.typeNameMap = testCodeVisitor.getTypeNameMap();
-
-
         Log.info("====translate FieldDeclaration====");
         FieldDeclarationTranslate fieldDeclarationTranslate = new FieldDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.fieldDeclarationCtxList) {
-            Log.info(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
+//            Log.info(fieldDeclarationTranslate.translateFieldDeclaration(parserRuleContext));
             Log.info("---------------------------");
         }
 
         Log.info("====translate MethodDeclaration====");
         MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
-            Log.info(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
+//            Log.info(methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext));
             Log.info("---------------------------");
         }
 
         Log.info("====translate ClassDeclaration====");
         ClassDeclarationTranslate classDeclarationTranslate = new ClassDeclarationTranslate();
         for (ParserRuleContext parserRuleContext : TestCodeContext.classDeclarationCtxList) {
-            Log.info(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
+//            Log.info(classDeclarationTranslate.translateClassDeclaration(parserRuleContext));
             Log.info("---------------------------");
         }
     }

@@ -40,13 +40,13 @@ public class ClassMemberDeclarationTranslate {
         }
 
         //classDeclaration
-        if (node.getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
+        if (node.getRuleIndex() == Java8Parser.RULE_classDeclaration) {
             ClassDeclarationTranslate subTranslate = new ClassDeclarationTranslate();
             return subTranslate.translateClassDeclaration(node);
         }
 
         //interfaceDeclaration
-        if (node.getRuleIndex() == Java8Parser.RULE_fieldDeclaration) {
+        if (node.getRuleIndex() == Java8Parser.RULE_interfaceDeclaration) {
             InterfaceDeclarationTranslate subTranslate = new InterfaceDeclarationTranslate();
             return subTranslate.translateInterfaceDeclaration(node);
         }

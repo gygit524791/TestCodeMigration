@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.statement;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.TryStatementTranslate;
+import com.test.migration.service.translate.bnf.statement.switchs.SwitchStatementTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import utils.Log;
 
@@ -30,12 +31,10 @@ public class StatementWithoutTrailingSubStatementTranslate {
      * continueStatement
      * 	:	'continue' Identifier? ';'
      * 	;
-     * @param ctx
-     * @return
      */
     public String translateStatementWithoutTrailingSubstatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementWithoutTrailingSubstatement) {
-            Log.error("RULE_statementWithoutTrailingSubstatement 没找到");
+            Log.error("RULE_statementWithoutTrailingSubstatement error");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
@@ -51,7 +50,7 @@ public class StatementWithoutTrailingSubStatementTranslate {
             return translate.translateReturnStatement(childRuleContext);
         }
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_expressionStatement) {
-            ExpressionStatement translate = new ExpressionStatement();
+            ExpressionStatementTranslate translate = new ExpressionStatementTranslate();
             return translate.translateExpressionStatement(childRuleContext);
         }
 
@@ -65,29 +64,33 @@ public class StatementWithoutTrailingSubStatementTranslate {
             return translate.translateThrowStatement(childRuleContext);
         }
 
-        /** 待测试 **/
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_breakStatement) {
-            return childRuleContext.getText();
-        }
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_continueStatement) {
-            return childRuleContext.getText();
-        }
-
-        /** 暂不考虑 **/
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_switchStatement) {
-            Log.error("RULE_switchStatement 建设中");
-        }
-        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_synchronizedStatement) {
-            Log.error("RULE_synchronizedStatement 建设中");
+            SwitchStatementTranslate translate = new SwitchStatementTranslate();
+            return translate.translateSwitchStatement(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_tryStatement) {
             TryStatementTranslate translate = new TryStatementTranslate();
             return translate.translateTryStatement(childRuleContext);
         }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_breakStatement) {
+            return childRuleContext.getText();
+        }
+
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_continueStatement) {
+            return childRuleContext.getText();
+        }
+
+        /** 暂不考虑 **/
+        if (childRuleContext.getRuleIndex() == Java8Parser.RULE_synchronizedStatement) {
+            Log.error("RULE_synchronizedStatement 返回原结果");
+            return ctx.getText();
+        }
+
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_assertStatement) {
-            Log.error("RULE_assertStatement 建设中");
-            return null;
+            Log.error("RULE_assertStatement 返回原结果");
+            return ctx.getText();
         }
 
         return null;

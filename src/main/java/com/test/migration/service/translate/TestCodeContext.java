@@ -1,6 +1,7 @@
 package com.test.migration.service.translate;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.test.migration.antlr.java.Java8Parser;
 import lombok.Data;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -8,6 +9,7 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 代码转换上下文
@@ -28,6 +30,7 @@ public class TestCodeContext {
     public static List<ParserRuleContext> fieldDeclarationCtxList;
     public static List<ParserRuleContext> methodDeclarationCtxList;
     public static List<ParserRuleContext> classDeclarationCtxList;
+    public static Map<String, String> typeNameMap;
 
     /**
      * visit之前调用 清空历史数据
@@ -37,6 +40,7 @@ public class TestCodeContext {
         fieldDeclarationCtxList = Lists.newArrayList();
         methodDeclarationCtxList = Lists.newArrayList();
         classDeclarationCtxList = Lists.newArrayList();
+        typeNameMap = Maps.newHashMap();
     }
 
     /**

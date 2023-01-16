@@ -44,41 +44,10 @@ public class BlockTranslate {
         }
 
         StringBuilder blockStatementsStr = new StringBuilder();
-        blockStatementsList.forEach(blockStatements -> blockStatementsStr.append(translateBlockStatements(blockStatements)));
+        BlockStatementsTranslate blockStatementsTranslate = new BlockStatementsTranslate();
+        blockStatementsList.forEach(blockStatements -> blockStatementsStr.append(blockStatementsTranslate.translateBlockStatements(blockStatements)));
+
         return "{ " + blockStatementsStr + " }";
     }
-
-
-    /**
-     * blockStatements
-     * :	blockStatement+
-     * ;
-     *
-     * @param ctx
-     * @return
-     */
-    public String translateBlockStatements(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatements) {
-            Log.error("RULE_blockStatements 没找到，不科学");
-            return null;
-        }
-        List<ParserRuleContext> blockStatementList = Lists.newArrayList();
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            ParseTree child = ctx.getChild(i);
-            boolean isRuleContext = child instanceof RuleContext;
-            if (!isRuleContext) {
-                continue;
-            }
-            blockStatementList.add((ParserRuleContext) child);
-        }
-        StringBuilder blockStatementListStr = new StringBuilder();
-        BlockStatementTranslate blockStatementTranslate = new BlockStatementTranslate();
-        blockStatementList.forEach(blockStatement -> {
-            String translateBlockStatement = blockStatementTranslate.translateBlockStatement(blockStatement);
-            blockStatementListStr.append(translateBlockStatement);
-        });
-        return blockStatementListStr.toString();
-    }
-
 
 }

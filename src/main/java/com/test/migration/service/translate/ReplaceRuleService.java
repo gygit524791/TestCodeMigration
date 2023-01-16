@@ -1,6 +1,5 @@
 package com.test.migration.service.translate;
 
-import com.google.common.collect.Maps;
 import com.test.migration.antlr.java.Java8Lexer;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -11,13 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ReplaceRuleService {
-
-    /**
-     * 前置条件；由visitor负责初始化
-     *
-     * @see TestCodeVisitor
-     */
-    public static Map<String, String> typeNameMap = Maps.newHashMap();
 
     /**
      * 链式调用
@@ -32,7 +24,7 @@ public class ReplaceRuleService {
     private static String replaceMethodInvocationTypeName(String originTranslate,
                                                           String typeName, String methodNameIdentifier, String argumentList,
                                                           List<MappingRuleLoader.MethodInvocationTypeNameRule> apiMapping) {
-        String type = typeNameMap.getOrDefault(typeName, StringUtils.EMPTY);
+        String type = TestCodeContext.typeNameMap.getOrDefault(typeName, StringUtils.EMPTY);
         MappingRuleLoader.MethodInvocationTypeNameRule methodInvocationTypeNameRule = apiMapping.stream()
                 .filter(x -> StringUtils.equals(type, x.getSourceClassName())
                         && StringUtils.equals(methodNameIdentifier, x.getSourceMethodName()))

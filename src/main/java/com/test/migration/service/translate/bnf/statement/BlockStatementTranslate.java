@@ -12,7 +12,7 @@ import utils.Log;
 public class BlockStatementTranslate {
 
     /**
-     * lockStatement
+     * blockStatement
      * :	localVariableDeclarationStatement
      * |	classDeclaration
      * |	statement
@@ -23,7 +23,7 @@ public class BlockStatementTranslate {
         TranslateHint.misMatchCodes.add(TranslateHint.BS_HINT_TAG);
         String translateBlockStatement = null;
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatement) {
-            Log.error("RULE_blockStatement 没找到");
+            Log.error("RULE_blockStatement error");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);

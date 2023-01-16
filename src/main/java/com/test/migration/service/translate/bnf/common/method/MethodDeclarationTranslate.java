@@ -5,6 +5,7 @@ import com.test.migration.service.translate.TranslateCodeCollector;
 import com.test.migration.service.translate.TranslateHint;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 import java.util.stream.Collectors;
 
@@ -36,7 +37,7 @@ public class MethodDeclarationTranslate {
         }
 
         if (methodBodyRule == null) {
-            System.out.println("methodBodyRule为空");
+            Log.error("methodBodyRule error");
             return null;
         }
 

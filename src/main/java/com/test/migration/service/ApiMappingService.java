@@ -97,11 +97,25 @@ public class ApiMappingService {
                 .collect(Collectors.toMap(ApiBasic::getId, Function.identity()));
     }
 
+
+    /**
+     * TODO 重名类会不会有影响？？？
+     */
     private void doCalculateMappingRule(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
         if (apiMappingList == null || apiMappingList.size() == 0) {
             return;
         }
         // 将api mapping写入到配置文件中
+        calculateApiMapping(apiMappingList, apiBasicMap);
+
+        // 计算class mapping
+        calculateClassNameMapping(apiMappingList, apiBasicMap);
+
+        // 计算get/set(相当于是类属性mapping) mapping， 保存到api mapping配置文件
+//        calculatePropertyApiMapping();
+    }
+
+    private static void calculateApiMapping(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
         apiMappingList.forEach(mapping -> {
             ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
             ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
@@ -112,13 +126,9 @@ public class ApiMappingService {
 
             MappingRuleWriter.writeApiMappingProperties(key, value);
         });
-
-        // 计算class mapping
-        classNameMapping(apiMappingList, apiBasicMap);
     }
 
-
-    private void classNameMapping(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
+    private void calculateClassNameMapping(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
         Map<String, Integer> classNameNumMapping = Maps.newHashMap();
 
         apiMappingList.forEach(mapping -> {
@@ -140,10 +150,10 @@ public class ApiMappingService {
                     .build());
         });
 
-        calculateClassNameMappings(classApiMappingNumList);
+        doCalculateClassNameMapping(classApiMappingNumList);
     }
 
-    private void calculateClassNameMappings(List<ClassApiMappingNum> classApiMappingNumList) {
+    private void doCalculateClassNameMapping(List<ClassApiMappingNum> classApiMappingNumList) {
         Map<String, List<ClassApiMappingNum>> classApiMappingMap = classApiMappingNumList.stream()
                 .collect(Collectors.groupingBy(ClassApiMappingNum::getSourceClassName));
 
@@ -163,24 +173,22 @@ public class ApiMappingService {
                 throw new RuntimeException(e);
             }
         });
-
     }
-
 
     private List<ApiMapping> buildApiMappings(List<String> apiMappings) {
         Integer taskId = TaskParameterReader.getTaskParameter().getTaskId();
         if (apiMappings == null || apiMappings.size() == 0) {
             return Lists.newArrayList();
         }
-        return apiMappings.stream()
-                .map(apiMapping -> {
-                    String[] split = apiMapping.split("-");
-                    return ApiMapping.builder()
-                            .taskId(taskId)
-                            .sourceApiId(Integer.parseInt(split[0]))
-                            .targetApiId(Integer.parseInt(split[1]))
-                            .build();
-                }).collect(Collectors.toList());
+
+        return apiMappings.stream().map(apiMapping -> {
+            String[] split = apiMapping.split("-");
+            return ApiMapping.builder()
+                    .taskId(taskId)
+                    .sourceApiId(Integer.parseInt(split[0]))
+                    .targetApiId(Integer.parseInt(split[1]))
+                    .build();
+        }).collect(Collectors.toList());
     }
 
     /**
@@ -210,6 +218,64 @@ public class ApiMappingService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void generateTokenVector() {
+        Log.info("生成api token向量（用于后续mapping计算）");
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
+        // 根据任务id查所有token序列
+        List<ApiBasic> apiBasics = apiBasicService.selectByTaskId(taskParameter.getTaskId());
+
+        // 生成token文本语料库
+        generateTokenCorpus(apiBasics, taskParameter);
+
+        generateTokenVecDict(taskParameter);
+
+        Log.info("api token向量生成完毕");
+    }
+
+    /**
+     * 根据api序列生成文本语料库，用于生成vec
+     */
+    private void generateTokenCorpus(List<ApiBasic> apiBasics, TaskParameter taskParameter) {
+        // 取出所有token序列
+        List<String> tokens = Lists.newArrayList();
+        tokens.addAll(apiBasics.stream().map(api -> api.getTokenSequence().replace(",", " ")).collect(Collectors.toList()));
+        tokens.addAll(apiBasics.stream().map(api -> api.getClassNameTokenSequence().replace(",", " ")).collect(Collectors.toList()));
+
+        // 填充token语料库文件
+        fillCorpus(taskParameter, tokens);
+
+        // 调用python生成词向量文件
+        String[] args = new String[]{
+                taskParameter.getPythonBinPath(),
+                taskParameter.getPythonWordVec(),
+                taskParameter.getCorpusFilepath(),
+                taskParameter.getWordVecModelFilepath()
+        };
+        CallUtil.call(args);
+    }
+
+    private void fillCorpus(TaskParameter taskParameter, List<String> tokens) {
+        String corpusFilepath = taskParameter.getCorpusFilepath();
+        try {
+            FileWriteUtil.writeDataToFile(tokens, corpusFilepath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void generateTokenVecDict(TaskParameter taskParameter) {
+        String[] tokenArgs = new String[]{
+                taskParameter.getPythonBinPath(),
+                taskParameter.getPythonCalcTokenVec(),
+                String.valueOf(taskParameter.getTaskId()),
+                taskParameter.getDbFilepath(),
+                taskParameter.getWordVecModelFilepath(),
+                taskParameter.getApiVectorDictFilepath(),
+                taskParameter.getClassVectorDictFilepath()
+        };
+        CallUtil.call(tokenArgs);
     }
 
     /**
