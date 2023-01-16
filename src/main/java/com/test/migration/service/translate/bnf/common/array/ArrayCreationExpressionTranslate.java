@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.common.array;
 
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.cls.ClassOrInterfaceTypeTranslate;
+import com.test.migration.service.translate.bnf.common.dims.DimExprsTranslate;
 import com.test.migration.service.translate.bnf.common.dims.DimsTranslate;
 import com.test.migration.service.translate.bnf.common.variable.TypeVariableTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -13,11 +14,11 @@ public class ArrayCreationExpressionTranslate {
 
     /**
      * arrayCreationExpression
-     * 	:	'new' primitiveType dimExprs dims?
-     * 	|	'new' classOrInterfaceType dimExprs dims?
-     * 	|	'new' primitiveType dims arrayInitializer
-     * 	|	'new' classOrInterfaceType dims arrayInitializer
-     * 	;
+     * :	'new' primitiveType dimExprs dims?
+     * |	'new' classOrInterfaceType dimExprs dims?
+     * |	'new' primitiveType dims arrayInitializer
+     * |	'new' classOrInterfaceType dims arrayInitializer
+     * ;
      */
     public String translateArrayCreationExpression(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_arrayCreationExpression)) {
@@ -27,14 +28,18 @@ public class ArrayCreationExpressionTranslate {
 
         // 1.获取各个类型子节点
         ParserRuleContext primitiveTypeCtx = null;
+        ParserRuleContext dimExprsCtx = null;
         ParserRuleContext dimsCtx = null;
         ParserRuleContext classOrInterfaceTypeCtx = null;
-        ParserRuleContext typeVariableCtx = null;
+        ParserRuleContext arrayInitializerCtx = null;
         for (int i = 0; i < ctx.getChildCount(); i++) {
             ParseTree child = ctx.getChild(i);
             if (child instanceof RuleContext) {
                 if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_primitiveType) {
                     primitiveTypeCtx = (ParserRuleContext) child;
+                }
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_dimExprs) {
+                    dimExprsCtx = (ParserRuleContext) child;
                 }
                 if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_dims) {
                     dimsCtx = (ParserRuleContext) child;
@@ -42,38 +47,43 @@ public class ArrayCreationExpressionTranslate {
                 if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_classOrInterfaceType) {
                     classOrInterfaceTypeCtx = (ParserRuleContext) child;
                 }
-                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_typeVariable) {
-                    typeVariableCtx = (ParserRuleContext) child;
+                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_arrayInitializer) {
+                    arrayInitializerCtx = (ParserRuleContext) child;
                 }
             }
         }
+
         DimsTranslate dimsTranslate = new DimsTranslate();
+        DimExprsTranslate dimExprsTranslate = new DimExprsTranslate();
         ClassOrInterfaceTypeTranslate classOrInterfaceTypeTranslate = new ClassOrInterfaceTypeTranslate();
-        TypeVariableTranslate typeVariableTranslate = new TypeVariableTranslate();
-        String primitiveType = primitiveTypeCtx == null ? "" : primitiveTypeCtx.getText();
+        ArrayInitializerTranslate arrayInitializerTranslate = new ArrayInitializerTranslate();
+
         String dims = dimsCtx == null ? "" : dimsTranslate.translateDims(dimsCtx);
+        String dimExprs = dimExprsCtx == null ? "" : dimExprsTranslate.translateDimExprs(dimExprsCtx);
         String classOrInterfaceType = classOrInterfaceTypeCtx == null ? "" : classOrInterfaceTypeTranslate.translateClassOrInterfaceType(classOrInterfaceTypeCtx);
-        String typeVariable = typeVariableCtx == null ? "" : typeVariableTranslate.translateTypeVariable(typeVariableCtx);
+        String arrayInitializer = arrayInitializerCtx == null ? "" : arrayInitializerTranslate.translateArrayInitializer(arrayInitializerCtx);
+        String primitiveType = primitiveTypeCtx == null ? "" : primitiveTypeCtx.getText();
 
-        // 2. 判断第一个孩子节点的类型
-        RuleContext firstChild = (RuleContext) ctx.getChild(0);
-        int ruleIndex = firstChild.getRuleIndex();
-
-        //primitiveType dims
-        if (ruleIndex == Java8Parser.RULE_primitiveType) {
-            return primitiveType + " " + dims;
+        //'new' primitiveType dimExprs dims?
+        if (primitiveTypeCtx != null && dimExprsCtx != null) {
+            return "new " + primitiveType + " " + dimExprs + " " + dims;
         }
 
-        //classOrInterfaceType dims
-        if (ruleIndex == Java8Parser.RULE_expressionName) {
-            return classOrInterfaceType + " " + dims;
+        //'new' primitiveType dims arrayInitializer
+        if (primitiveTypeCtx != null && dimsCtx != null) {
+            return "new " + primitiveType + " " + dims + " " + arrayInitializer;
         }
 
-        //typeVariable dims
-        if (ruleIndex == Java8Parser.RULE_typeName) {
-            return typeVariable + " " + dims;
+        //'new' classOrInterfaceType dimExprs dims?
+        if (classOrInterfaceTypeCtx != null && dimExprsCtx != null) {
+            return "new " + classOrInterfaceType + " " + dimExprs + " " + dims;
         }
 
-        return ctx.getText();
+        //'new' classOrInterfaceType dims arrayInitializer
+        if (classOrInterfaceTypeCtx != null && dimsCtx != null) {
+            return "new " + classOrInterfaceType + " " + dims + " " + arrayInitializer;
+        }
+
+        return null;
     }
 }
