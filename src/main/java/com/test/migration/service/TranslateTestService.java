@@ -115,8 +115,29 @@ public class TranslateTestService {
     }
 
     private void doTranslate(TranslateTest translateTest) {
+        // todo test
+        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/case1/A.java";
+//        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/test/ValueAnimatorTests.java";
+        translateTest.setTestFilepath(filep);
+
         Log.info("开始处理[" + translateTest.getTestFilepath() + "]测试文件的测试迁移");
 
+        fillTestCodeContext(translateTest);
+
+        // 打印typeName
+        printTypeNameMapMessage();
+
+        // 过滤需要转换的test method
+        filterNeedTranslateTestMethod(translateTest);
+
+        // 代码转换
+        translate();
+
+        // 代码生成
+        TranslateCodeGenerator.doGenerate();
+    }
+
+    private static void fillTestCodeContext(TranslateTest translateTest) {
         CharStream inputStream = null;
         try {
             inputStream = CharStreams.fromFileName(translateTest.getTestFilepath());
@@ -131,21 +152,17 @@ public class TranslateTestService {
         TestCodeVisitor testCodeVisitor = new TestCodeVisitor();
         testCodeVisitor.visit(parseTree);
 
-        // 打印typeName
-        printTypeNameMapMessage();
+        Log.info("当前处理的测试类名：" + TestCodeContext.className);
+    }
 
+    private static void filterNeedTranslateTestMethod(TranslateTest translateTest) {
         Map<String, List<Integer>> map = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
         List<String> migrateTestMethods = map == null ? Lists.newArrayList() : Lists.newArrayList(map.keySet());
         // 过滤掉不需要转换的test code
-        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
-
-        // 代码转换
-        translate();
-
-        // 代码生成
-        TranslateCodeGenerator.doGenerate();
+//        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
+        // todo test code
+        TestCodeFilter.filterMethodDeclarationCtxList(null);
     }
-
 
     private void translate() {
         Log.info("开始执行代码转换");
@@ -177,10 +194,13 @@ public class TranslateTestService {
 
         // 方法迁移
         MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
+        Log.info("methodDeclarationTranslate: " + TestCodeContext.methodDeclarationCtxList.size());
+
         for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
             TranslateHint.init();
             TranslateCodeCollector.MethodTranslateCode.methodStartLine = parserRuleContext.getStart().getLine();
             TranslateCodeCollector.MethodTranslateCode.methodEndLine = parserRuleContext.getStop().getLine();
+            Log.info("当前方法开始行和结束行1：(" + TranslateCodeCollector.MethodTranslateCode.methodStartLine + ":" + TranslateCodeCollector.MethodTranslateCode.methodEndLine + ")");
 
             methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext);
             // methodHeader信息
@@ -189,18 +209,19 @@ public class TranslateTestService {
             methodTranslateCode.methodHeaderTranslateCode = TranslateCodeCollector.methodHeaderTranslateCode;
             methodTranslateCode.blockStatementTranslateCodes = TranslateCodeCollector.blockStatementTranslateCodes;
             TranslateCodeCollector.methodDeclarationTranslateCodes.add(methodTranslateCode);
+            Log.info("当前方法开始行和结束行2：(" + TranslateCodeCollector.MethodTranslateCode.methodStartLine + ":" + TranslateCodeCollector.MethodTranslateCode.methodEndLine + ")");
 
-            TranslateCodeCollector.MethodTranslateCode.clearMethodLine();
+            TranslateCodeCollector.MethodTranslateCode.clearMethod();
         }
 
         // 方法部分迁移
-        PartMigrationProcessor partMigrationProcessor = new PartMigrationProcessor();
-        TranslateCodeCollector.isFullTranslate = false; // 内心在滴血。。。
-        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
-            TranslateCodeCollector.PartMigrationMethodTranslateCode partMigrationMethodTranslateCode = new TranslateCodeCollector.PartMigrationMethodTranslateCode();
-            partMigrationMethodTranslateCode.translateCode = partMigrationProcessor.doPartMigrationTranslate(parserRuleContext);
-            TranslateCodeCollector.partMigrationMethodTranslateCodes.add(partMigrationMethodTranslateCode);
-        }
+//        PartMigrationProcessor partMigrationProcessor = new PartMigrationProcessor();
+//        TranslateCodeCollector.isFullTranslate = false; // 。。。
+//        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
+//            TranslateCodeCollector.PartMigrationMethodTranslateCode partMigrationMethodTranslateCode = new TranslateCodeCollector.PartMigrationMethodTranslateCode();
+//            partMigrationMethodTranslateCode.translateCode = partMigrationProcessor.doPartMigrationTranslate(parserRuleContext);
+//            TranslateCodeCollector.partMigrationMethodTranslateCodes.add(partMigrationMethodTranslateCode);
+//        }
 
         Log.info("代码转换完成");
     }

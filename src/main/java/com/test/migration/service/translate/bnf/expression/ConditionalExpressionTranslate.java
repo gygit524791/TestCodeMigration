@@ -454,7 +454,7 @@ public class ConditionalExpressionTranslate {
      */
     public String translateAdditiveExpression(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_additiveExpression) {
-            Log.error("additiveExpressionRule 没找到，不科学:" + ctx.getText());
+            Log.error("additiveExpressionRule error");
             return null;
         }
 
@@ -472,15 +472,12 @@ public class ConditionalExpressionTranslate {
                 return translateAdditiveExpressionWithMinus(ctx);
             }
         }
-        Log.error("不科学，translateAdditiveExpression遇到未知表达式" + ctx.getText());
+
         return null;
     }
 
     /**
      * additiveExpression '+' multiplicativeExpression
-     *
-     * @param ctx
-     * @return
      */
     public String translateAdditiveExpressionWithMinus(ParserRuleContext ctx) {
         String additiveExpression = "";

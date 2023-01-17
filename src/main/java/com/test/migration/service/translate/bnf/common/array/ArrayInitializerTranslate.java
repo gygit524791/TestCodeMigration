@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
+import utils.Log;
 
 public class ArrayInitializerTranslate {
 
@@ -17,7 +18,7 @@ public class ArrayInitializerTranslate {
      */
     public String translateArrayInitializer(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_arrayInitializer)) {
-            System.out.println("RULE_arrayInitializer error");
+            Log.info("RULE_arrayInitializer error");
             return null;
         }
 

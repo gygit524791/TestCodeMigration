@@ -43,7 +43,7 @@ public class BlockStatementTranslate {
         }
 
         if (translateBlockStatement == null) {
-            Log.error("translateBlockStatement 出错");
+            Log.error("translateBlockStatement error");
         }
 
         // 调整策略

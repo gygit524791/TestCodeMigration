@@ -35,7 +35,7 @@ public class LocalVariableDeclarationStatementTranslate {
      */
     public String translateLocalVariableDeclarationStatement(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_localVariableDeclarationStatement) {
-            Log.error("localVariableDeclarationStatementContext 为null");
+            Log.error("localVariableDeclarationStatementContext error");
             return "";
         }
         ParserRuleContext localVariableDeclaration = (ParserRuleContext) ctx.getChild(0);

@@ -1,9 +1,11 @@
 package com.test.migration.service.translate.bnf.common.primary;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionLfPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class PrimaryNoNewArrayLfPrimaryTranslate {
 
@@ -18,15 +20,15 @@ public class PrimaryNoNewArrayLfPrimaryTranslate {
      */
     public String translatePrimaryNoNewArray_lf_primary(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_primaryNoNewArray_lf_primary) {
-            System.out.println("RULE_primaryNoNewArray_lf_primary 没找到，不科学");
+            Log.error("RULE_primaryNoNewArray_lf_primary error");
             return null;
         }
 
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classInstanceCreationExpression_lf_primary) {
-            ClassInstanceCreationExpressionTranslate classInstanceCreationExpressionTranslate = new ClassInstanceCreationExpressionTranslate();
-            return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression_lf_primary(childRuleContext);
+            ClassInstanceCreationExpressionLfPrimaryTranslate translate = new ClassInstanceCreationExpressionLfPrimaryTranslate();
+            return translate.translateClassInstanceCreationExpression_lf_primary(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_fieldAccess_lf_primary) {

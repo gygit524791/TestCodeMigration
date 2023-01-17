@@ -292,19 +292,21 @@ public class MethodInvocationTranslate {
      * @return
      */
     public String translateMethodInvocationTypeName(ParserRuleContext ctx) {
-        String typeName = translateTypeName((ParserRuleContext) ctx.getChild(0));
-        String methodNameIdentifier = fetchMethodNameIdentifier(ctx);
-        ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
+//        String typeName = translateTypeName((ParserRuleContext) ctx.getChild(0));
+//        String methodNameIdentifier = fetchMethodNameIdentifier(ctx);
+//        ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
+//
+//        StringBuilder argumentList = new StringBuilder();
+//        for (int i = 0; i < ctx.getChildCount(); i++) {
+//            if (ctx.getChild(i) instanceof RuleContext && ((RuleContext) ctx.getChild(i)).getRuleIndex()
+//                    == Java8Parser.RULE_argumentList) {
+//                argumentList.append(argumentListTranslate.translateArgumentList((ParserRuleContext) ctx.getChild(i)));
+//            }
+//        }
+//        String originTranslate = typeName + "->" + methodNameIdentifier + "(" + argumentList + ")";
+//        return ReplaceRuleService.replaceMethodInvocationTypeName(originTranslate, typeName, methodNameIdentifier, argumentList.toString());
 
-        StringBuilder argumentList = new StringBuilder();
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            if (ctx.getChild(i) instanceof RuleContext && ((RuleContext) ctx.getChild(i)).getRuleIndex()
-                    == Java8Parser.RULE_argumentList) {
-                argumentList.append(argumentListTranslate.translateArgumentList((ParserRuleContext) ctx.getChild(i)));
-            }
-        }
-        String originTranslate = typeName + "->" + methodNameIdentifier + "(" + argumentList + ")";
-        return ReplaceRuleService.replaceMethodInvocationTypeName(originTranslate, typeName, methodNameIdentifier, argumentList.toString());
+        return ctx.getText();
     }
 
     public String translateMethodName(ParserRuleContext ctx) {
@@ -329,13 +331,13 @@ public class MethodInvocationTranslate {
                 }
             }
         }
-        System.out.println("fetchMethodNameIdentifier 失败");
+        Log.error("fetchMethodNameIdentifier error");
         return "";
     }
 
     public String translateTypeName(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_typeName) {
-            System.out.println("typeNameRule 没找到，不科学:" + ctx.getText());
+            Log.error("RULE_typeName error");
             return null;
         }
         return ctx.getText();

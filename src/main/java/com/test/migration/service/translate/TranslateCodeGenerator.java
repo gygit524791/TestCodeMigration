@@ -33,8 +33,7 @@ public class TranslateCodeGenerator {
         writeMigrationResultToFile(filepath);
 
         //代码格式化
-        // TODO bug 存在死循环
-//        formatMigrationResultFile(filepath);
+        formatMigrationResultFile(filepath);
 
         Log.info("代码生成执行完毕");
     }
@@ -50,16 +49,16 @@ public class TranslateCodeGenerator {
         fileLines.add("class " + TranslateCodeCollector.className + " : public testing::Test {");
         fileLines.add("public:");
         // 写入类成员属性
-        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.fieldDeclarationTranslateCodes) {
-            addHintIfNeed(translateCode.misMatchCodes, fileLines);
-            fileLines.add(translateCode.translateCode);
-        }
+//        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.fieldDeclarationTranslateCodes) {
+//            addHintIfNeed(translateCode.misMatchCodes, fileLines);
+//            fileLines.add(translateCode.translateCode);
+//        }
 
         // 写入内部类
-        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.classDeclarationTranslateCodes) {
-            addHintIfNeed(translateCode.misMatchCodes, fileLines);
-            fileLines.add(translateCode.translateCode);
-        }
+//        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.classDeclarationTranslateCodes) {
+//            addHintIfNeed(translateCode.misMatchCodes, fileLines);
+//            fileLines.add(translateCode.translateCode);
+//        }
 
         // 写入方法
         for (TranslateCodeCollector.MethodTranslateCode methodTranslateCode : TranslateCodeCollector.methodDeclarationTranslateCodes) {
@@ -73,10 +72,10 @@ public class TranslateCodeGenerator {
             fileLines.add("}");
         }
 
-        // 写入部分迁移方法
-        for (TranslateCodeCollector.PartMigrationMethodTranslateCode translateCode : TranslateCodeCollector.partMigrationMethodTranslateCodes) {
-            fileLines.add(translateCode.translateCode);
-        }
+//        // 写入部分迁移方法
+//        for (TranslateCodeCollector.PartMigrationMethodTranslateCode translateCode : TranslateCodeCollector.partMigrationMethodTranslateCodes) {
+//            fileLines.add(translateCode.translateCode);
+//        }
         // 测试类结尾
         fileLines.add("}");
 

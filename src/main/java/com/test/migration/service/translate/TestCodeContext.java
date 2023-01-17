@@ -18,6 +18,8 @@ import java.util.Map;
  * 简单实现：用static变量暂存antlr解析和生成的待转换code信息
  * 在antlr执行visitor完毕后，所有上下文信息将被填充，
  * 这些信息便于后续在其它地方使用，相当于一个简易内存数据库
+ *
+ * 用法问题：短时间内实现功能，设计略糙，更好的方式是用缓存
  */
 public class TestCodeContext {
 

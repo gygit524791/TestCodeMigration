@@ -21,6 +21,11 @@ public class TestCodeFilter {
     }
 
     public static void filterMethodDeclarationCtxList(List<String> migrateTestMethods) {
+        //todo test code
+        if(migrateTestMethods ==null){
+            return;
+        }
+
         TestCodeContext.methodDeclarationCtxList = TestCodeContext.methodDeclarationCtxList.stream()
                 .filter(ctx -> {
                     String methodName = fetchMethodName(ctx);

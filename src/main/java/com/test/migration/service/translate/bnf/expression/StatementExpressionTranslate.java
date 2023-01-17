@@ -55,7 +55,7 @@ public class StatementExpressionTranslate {
             return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression(childRuleContext);
         }
 
-        Log.error("translateStatementExpression 不可能到这里");
+        Log.error("translateStatementExpression error");
         return null;
     }
 

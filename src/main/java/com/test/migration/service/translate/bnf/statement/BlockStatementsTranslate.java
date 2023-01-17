@@ -21,7 +21,7 @@ public class BlockStatementsTranslate {
      */
     public String translateBlockStatements(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_blockStatements) {
-            Log.error("RULE_blockStatements 没找到，不科学");
+            Log.error("RULE_blockStatements error");
             return null;
         }
         List<ParserRuleContext> blockStatementList = Lists.newArrayList();

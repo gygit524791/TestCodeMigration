@@ -7,6 +7,7 @@ import com.test.migration.service.translate.bnf.common.variable.TypeVariableTran
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class ArrayTypeTranslate {
 
@@ -19,7 +20,7 @@ public class ArrayTypeTranslate {
      */
     public String translateArrayType(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_arrayType)) {
-            System.out.println("RULE_arrayType 没找到");
+            Log.info("RULE_arrayType error");
             return null;
         }
 
@@ -72,7 +73,6 @@ public class ArrayTypeTranslate {
             return typeVariable + " " + dims;
         }
 
-        System.out.println("translateArrayType error");
         return null;
     }
 

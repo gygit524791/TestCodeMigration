@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.declaration.ClassBodyDeclaration
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class ClassBodyTranslate {
 
@@ -15,7 +16,7 @@ public class ClassBodyTranslate {
      */
     public String translateClassBody(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_classBody)) {
-            System.out.println("RULE_classBody 没找到，不科学");
+            Log.info("RULE_classBody error");
             return null;
         }
 

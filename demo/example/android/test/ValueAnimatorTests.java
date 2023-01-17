@@ -15,76 +15,26 @@
 */
 
 package android.animation;
-
-import static android.test.MoreAsserts.assertNotEqual;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.os.SystemClock;
-import android.view.Choreographer;
-import android.view.animation.LinearInterpolator;
-
-import androidx.test.filters.MediumTest;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
-
 public class ValueAnimatorTests {
-    private ValueAnimator a1;
-    private ValueAnimator a2;
-
-    private final static long POLL_INTERVAL = 100; // ms
-
-//    private ActivityTestRule<BasicAnimatorActivity> mActivityRule =
-//            new ActivityTestRule<>(BasicAnimatorActivity.class);
-
-    @Before
-    public void setUp() throws Exception {
-//        a1 = ValueAnimator.ofFloat(A1_START_VALUE, A1_END_VALUE).setDuration(300);
-//        a2 = ValueAnimator.ofInt(A2_START_VALUE, A2_END_VALUE).setDuration(500);
-    }
-
     @Test
     public void testPause() throws Throwable {
-        mActivityRule.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                assertFalse(a1.isPaused());
-                assertFalse(a2.isPaused());
+        assertTrue(a1.isStarted());
+        assertTrue(a2.isStarted());
+    }
 
-                a1.start();
-                a2.start();
+    public void testPause2() throws Throwable {
+        assertTrue(a11.isStarted());
+        assertTrue(a21.isStarted());
+        assertTrue(a11.isStarted());
+        assertTrue(a21.isStarted());
+    }
 
-                assertFalse(a1.isPaused());
-                assertFalse(a2.isPaused());
-                assertTrue(a1.isStarted());
-                assertTrue(a2.isStarted());
-            }
-        });
-
-        Thread.sleep(POLL_INTERVAL);
-        mActivityRule.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                assertTrue(a1.isRunning());
-                assertTrue(a2.isRunning());
-                a1.Pause();
-                assertTrue(a1.isPaused());
-                assertFalse(a2.isPaused());
-                assertTrue(a1.isRunning());
-            }
-        });
+    public void testPause3() throws Throwable {
+        assertTrue(a121.isStarted());
+        assertTrue(a231.isStarted());
+        assertTrue(a121.isStarted());
+        assertTrue(a111.isStarted());
+        assertTrue(a221.isStarted());
+        assertTrue(a241.isStarted());
     }
 }

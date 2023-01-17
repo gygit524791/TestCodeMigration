@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import lombok.ToString;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * 收集转换后的代码结构，两个类别：
@@ -44,8 +43,6 @@ public class TranslateCodeCollector {
      * 根本解决方法在于舍弃static，老老实实new对象
      */
     public static boolean isFullTranslate;
-    public static int methodStartLine;
-    public static int methodEndLine;
 
     public static void init() {
         className = "";
@@ -75,9 +72,12 @@ public class TranslateCodeCollector {
         /**
          * method定义可能会出现多层嵌套
          */
-        public static void clearMethodLine() {
+        public static void clearMethod() {
             methodStartLine = 0;
             methodEndLine = 0;
+
+//            TranslateCodeCollector.methodHeaderTranslateCode = new MethodTranslateCode.MethodHeaderTranslateCode();
+            TranslateCodeCollector.blockStatementTranslateCodes = Lists.newArrayList();
         }
 
         @ToString

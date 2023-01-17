@@ -24,7 +24,7 @@ public class BlockTranslate {
      */
     public String translateBlock(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_block) {
-            Log.error("RULE_block 没找到，不科学");
+            Log.error("RULE_block error");
             return null;
         }
         // 没有blockStatements

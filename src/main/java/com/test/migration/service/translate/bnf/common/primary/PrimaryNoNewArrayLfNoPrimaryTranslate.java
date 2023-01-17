@@ -1,11 +1,14 @@
 package com.test.migration.service.translate.bnf.common.primary;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionLfPrimaryTranslate;
+import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationTranslate;
 import com.test.migration.service.translate.bnf.statement.BlockTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class PrimaryNoNewArrayLfNoPrimaryTranslate {
     /**
@@ -23,18 +26,13 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
      * |	methodInvocation_lfno_primary
      * |	methodReference_lfno_primary
      * ;
-     *
-     * @param ctx
-     * @return
      */
     public String translatePrimaryNoNewArray_lfno_primary(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_primaryNoNewArray_lfno_primary) {
-            System.out.println("RULE_primaryNoNewArray_lfno_primary 没找到，不科学");
+            Log.error("RULE_primaryNoNewArray_lfno_primary error");
             return null;
         }
         if (ctx.getChildCount() != 1) {
-//            System.out.println(ctx.getText());
-//            System.out.println("RULE_primaryNoNewArray_lfno_primary暂不支持多子节点的解析类型");
             return ctx.getText();
         }
 
@@ -45,10 +43,8 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classInstanceCreationExpression_lfno_primary) {
-            // TODO 这里有坑
-//            return translateVariableInitializerWithClassInstanceCreation(childRuleContext);
-            ClassInstanceCreationExpressionTranslate classInstanceCreationExpressionTranslate = new ClassInstanceCreationExpressionTranslate();
-            return classInstanceCreationExpressionTranslate.translateClassInstanceCreationExpression_lfno_primary(childRuleContext);
+            ClassInstanceCreationExpressionLfnoPrimaryTranslate translate = new ClassInstanceCreationExpressionLfnoPrimaryTranslate();
+            return translate.translateClassInstanceCreationExpression_lfno_primary(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_fieldAccess_lfno_primary) {
@@ -71,7 +67,7 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
             return translate.translateMethodReferenceLfnoPrimary(childRuleContext);
         }
 
-        System.out.println("translateVariableInitializer 不支持的解析类型");
+        Log.error("translateVariableInitializer error");
         return "";
     }
 

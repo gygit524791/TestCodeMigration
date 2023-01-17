@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.statement.BlockTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class MethodBodyTranslate {
     /**
@@ -15,7 +16,7 @@ public class MethodBodyTranslate {
      */
     public String translateMethodBody(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodBody) {
-            System.out.println("RULE_methodBody 没找到，不科学");
+            Log.error("RULE_methodBody error");
             return null;
         }
 

@@ -17,7 +17,7 @@ public class ClassBodyDeclarationTranslate {
      */
     public String translateClassBodyDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_classBodyDeclaration)) {
-            Log.error("RULE_classBodyDeclaration 没找到，不科学");
+            Log.error("RULE_classBodyDeclaration error");
             return null;
         }
 
