@@ -7,6 +7,7 @@ import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +21,7 @@ public class InferredFormalParameterListTranslate {
      */
     public String translateInferredFormalParameterList(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_inferredFormalParameterList) {
-            System.out.println("RULE_inferredFormalParameterList 没找到");
+            Log.error("RULE_inferredFormalParameterList error");
             return null;
         }
         List<TerminalNode> identifierList = Lists.newArrayList();

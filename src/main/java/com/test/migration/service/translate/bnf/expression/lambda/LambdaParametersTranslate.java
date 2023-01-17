@@ -4,6 +4,7 @@ import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.parameter.FormalParameterListTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class LambdaParametersTranslate {
     /**
@@ -15,7 +16,7 @@ public class LambdaParametersTranslate {
      */
     public String translateLambdaParameters(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_lambdaParameters) {
-            System.out.println("RULE_lambdaParameters 没找到");
+            Log.error("RULE_lambdaParameters error");
             return null;
         }
         //Identifier

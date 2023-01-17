@@ -50,8 +50,8 @@ public class LocalVariableDeclarationStatementTranslate {
      */
     public String translateLocalVariableDeclaration(ParserRuleContext ctx) {
         if (ctx.getRuleIndex() != Java8Parser.RULE_localVariableDeclaration) {
-            Log.error("RULE_localVariableDeclaration 为null");
-            return "";
+            Log.error("RULE_localVariableDeclaration error");
+            return null;
         }
 
         // find unanntype variableDeclaratorList
@@ -79,23 +79,4 @@ public class LocalVariableDeclarationStatementTranslate {
 
         return unannType + " " + variableDeclaratorList;
     }
-
-
-    /**
-     * 数值和boolean类型，直接转换 TODO
-     */
-    public String unannPrimitiveType(String originType) {
-        return originType;
-    }
-
-    public String unannReferenceType(String originType) {
-        return null;
-    }
-
-    //variableDeclaratorList
-    public String variableDeclaratorList() {
-        return null;
-    }
-
-
 }

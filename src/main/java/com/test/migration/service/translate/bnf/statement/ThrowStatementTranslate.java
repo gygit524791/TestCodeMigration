@@ -15,7 +15,7 @@ public class ThrowStatementTranslate {
      */
     public String translateThrowStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_throwStatement) {
-            Log.error("RULE_throwStatement 没找到");
+            Log.error("RULE_throwStatement error");
             return null;
         }
 

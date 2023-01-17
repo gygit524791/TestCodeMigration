@@ -17,7 +17,7 @@ public class WhileStatementNoShortIfTranslate {
      */
     public String translateWhileStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_whileStatementNoShortIf) {
-            Log.error("RULE_whileStatementNoShortIf 没找到");
+            Log.error("RULE_whileStatementNoShortIf error");
             return null;
         }
 

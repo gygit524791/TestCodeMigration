@@ -15,7 +15,7 @@ public class ClassDeclarationTranslate {
      */
     public String translateClassDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_classDeclaration)) {
-            Log.error("RULE_classDeclaration 没找到");
+            Log.error("RULE_classDeclaration error");
             return null;
         }
 
@@ -31,7 +31,7 @@ public class ClassDeclarationTranslate {
             return subTranslate.translateEnumDeclaration(childRuleContext);
         }
 
-        Log.error("RULE_classDeclaration error");
+        Log.error("translateClassDeclaration error");
 
         return null;
     }

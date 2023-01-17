@@ -25,7 +25,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateForStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forStatementNoShortIf) {
-            Log.error("RULE_forStatementNoShortIf 没找到");
+            Log.error("RULE_forStatementNoShortIf error");
             return null;
         }
 
@@ -50,7 +50,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateBasicForStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_basicForStatement) {
-            Log.error("RULE_basicForStatement 没找到");
+            Log.error("RULE_basicForStatement error");
             return null;
         }
         ParserRuleContext forInitCtx = null;
@@ -98,7 +98,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateEnhancedForStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_enhancedForStatementNoShortIf) {
-            Log.error("RULE_enhancedForStatementNoShortIf 没找到");
+            Log.error("RULE_enhancedForStatementNoShortIf error");
             return null;
         }
 
@@ -151,7 +151,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateForInit(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forInit) {
-            Log.error("RULE_forInit 没找到，不科学");
+            Log.error("RULE_forInit error");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);
@@ -175,7 +175,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateForUpdate(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forUpdate) {
-            Log.error("RULE_forUpdate 没找到，不科学");
+            Log.error("RULE_forUpdate error");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);
@@ -194,7 +194,7 @@ public class ForStatementNoShortIfTranslate {
      */
     public String translateStatementExpressionList(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementExpressionList) {
-            Log.error("RULE_statementExpressionList 没找到，不科学");
+            Log.error("RULE_statementExpressionList error");
             return null;
         }
 
@@ -213,6 +213,7 @@ public class ForStatementNoShortIfTranslate {
         List<String> statementExpressionList = statementExpressionCtxList.stream()
                 .map(statementExpressionTranslate::translateStatementExpression)
                 .collect(Collectors.toList());
+
         return Joiner.on(",").join(statementExpressionList);
     }
 

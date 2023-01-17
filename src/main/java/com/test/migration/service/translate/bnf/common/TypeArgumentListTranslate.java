@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class TypeArgumentListTranslate {
      */
     public String translateTypeArgumentList(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_typeArgumentList)) {
-            System.out.println("RULE_typeArgumentList 没找到");
+            Log.error("RULE_typeArgumentList error");
             return null;
         }
         List<ParserRuleContext> typeArgumentCtxList = Lists.newArrayList();

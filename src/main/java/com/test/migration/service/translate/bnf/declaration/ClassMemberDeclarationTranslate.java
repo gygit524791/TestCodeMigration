@@ -19,6 +19,11 @@ public class ClassMemberDeclarationTranslate {
      * ;
      */
     public String translateClassMemberDeclaration(ParserRuleContext ctx) {
+        if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_classMemberDeclaration)) {
+            Log.error("RULE_classMemberDeclaration error");
+            return null;
+        }
+
         ParseTree child = ctx.getChild(0);
         boolean isRuleContext = child instanceof RuleContext;
         // ;

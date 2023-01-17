@@ -3,6 +3,7 @@ package com.test.migration.service.translate.bnf.expression.lambda;
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class LambdaExpressionTranslate {
     /**
@@ -12,7 +13,7 @@ public class LambdaExpressionTranslate {
      */
     public String translateLambdaExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_lambdaExpression) {
-            System.out.println("RULE_lambdaExpression 没找到");
+            Log.error("RULE_lambdaExpression error");
             return null;
         }
 

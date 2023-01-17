@@ -3,6 +3,7 @@ package com.test.migration.service.translate.bnf.common;
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.apache.commons.lang3.StringUtils;
+import utils.Log;
 
 public class WildcardBoundsTranslate {
 
@@ -14,7 +15,7 @@ public class WildcardBoundsTranslate {
      */
     public String translateWildcardBounds(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_wildcardBounds)) {
-            System.out.println("RULE_wildcardBounds 没找到，不科学");
+            Log.error("RULE_wildcardBounds error");
             return null;
         }
         ReferenceTypeTranslate referenceTypeTranslate = new ReferenceTypeTranslate();

@@ -22,15 +22,6 @@ public class StatementWithoutTrailingSubStatementTranslate {
      * |  throwStatement
      * |  tryStatement
      * ;
-     *
-     *
-     * breakStatement
-     * 	:	'break' Identifier? ';'
-     * 	;
-     *
-     * continueStatement
-     * 	:	'continue' Identifier? ';'
-     * 	;
      */
     public String translateStatementWithoutTrailingSubstatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementWithoutTrailingSubstatement) {

@@ -20,7 +20,7 @@ public class StatementNoShortIfTranslate {
      */
     public String translateStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementNoShortIf) {
-            Log.error("RULE_statementNoShortIf 没找到");
+            Log.error("RULE_statementNoShortIf error");
             return null;
         }
 

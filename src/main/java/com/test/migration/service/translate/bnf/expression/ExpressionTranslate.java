@@ -20,7 +20,7 @@ public class ExpressionTranslate {
      */
     public String translateExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_expression) {
-            Log.error("expressionRule 没找到，不科学");
+            Log.error("expressionRule error");
             return null;
         }
         // 只可能有1个孩子节点 lambdaExpression或assignmentExpression
@@ -34,7 +34,7 @@ public class ExpressionTranslate {
             return translateAssignmentExpression((ParserRuleContext) childRuleContext);
         }
 
-        Log.error("translateExpression失败，不科学");
+        Log.error("translateExpression error");
         return null;
     }
 
@@ -46,7 +46,7 @@ public class ExpressionTranslate {
      */
     private String translateAssignmentExpression(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_assignmentExpression) {
-            Log.error("assignmentExpressionRule 没找到，不科学");
+            Log.error("assignmentExpressionRule error");
             return null;
         }
         // 只可能有1个孩子节点 conditionalExpression或assignment
@@ -62,7 +62,7 @@ public class ExpressionTranslate {
             return translate.translateAssignment((ParserRuleContext) childRuleContext);
         }
 
-        Log.error("translateAssignmentExpression失败，不科学");
+        Log.error("translateAssignmentExpression error");
         return null;
     }
 

@@ -19,7 +19,7 @@ public class IfThenElseStatementNoShortIfTranslate {
      */
     public String translateIfThenElseNoShortIfStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_ifThenElseStatementNoShortIf) {
-            Log.error("RULE_ifThenElseStatementNoShortIf 没找到");
+            Log.error("RULE_ifThenElseStatementNoShortIf error");
             return null;
         }
 

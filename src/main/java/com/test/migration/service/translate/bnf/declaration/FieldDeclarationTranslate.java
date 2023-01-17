@@ -16,7 +16,7 @@ public class FieldDeclarationTranslate {
      */
     public String translateFieldDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_fieldDeclaration)) {
-            Log.error("RULE_fieldDeclaration 没找到");
+            Log.error("RULE_fieldDeclaration error");
             return null;
         }
         // find unanntype variableDeclaratorList

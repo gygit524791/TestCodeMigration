@@ -19,7 +19,7 @@ public class WhileStatementTranslate {
      */
     public String translateWhileStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_whileStatement) {
-            Log.error("RULE_whileStatement 没找到，不科学");
+            Log.error("RULE_whileStatement error");
             return null;
         }
 

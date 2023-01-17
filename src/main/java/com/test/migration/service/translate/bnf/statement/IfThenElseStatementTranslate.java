@@ -16,7 +16,7 @@ public class IfThenElseStatementTranslate {
      */
     public String translateIfThenElseStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_ifThenElseStatement) {
-            Log.error("RULE_ifThenElseStatement 没找到，不科学");
+            Log.error("RULE_ifThenElseStatement error");
             return null;
         }
 

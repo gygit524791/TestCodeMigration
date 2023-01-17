@@ -28,7 +28,7 @@ public class PostfixExpressionTranslate {
      */
     public String translatePostfixExpression(ParserRuleContext ctx) {
         if (ctx == null ||ctx.getRuleIndex() != Java8Parser.RULE_postfixExpression) {
-            Log.error("postfixExpressionRule 没找到，不科学");
+            Log.error("postfixExpressionRule error");
             return null;
         }
 

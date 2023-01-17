@@ -55,7 +55,7 @@ public class StatementTranslate {
             return forStatementTranslate.translateForStatement(childRuleContext);
         }
 
-        Log.error("statement解析不可能来到这里，赶紧查一下bug");
+        Log.error("translateStatement error");
         return null;
     }
 

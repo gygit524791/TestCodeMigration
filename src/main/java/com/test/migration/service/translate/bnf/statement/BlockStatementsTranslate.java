@@ -39,6 +39,7 @@ public class BlockStatementsTranslate {
             String translateBlockStatement = blockStatementTranslate.translateBlockStatement(blockStatement);
             blockStatementListStr.append(translateBlockStatement);
         });
+
         return blockStatementListStr.toString();
     }
 

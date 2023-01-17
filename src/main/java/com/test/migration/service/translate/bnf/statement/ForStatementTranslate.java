@@ -24,7 +24,7 @@ public class ForStatementTranslate {
      */
     public String translateForStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forStatement) {
-            Log.error("RULE_forStatement 没找到，不科学");
+            Log.error("RULE_forStatement error");
             return null;
         }
 
@@ -48,7 +48,7 @@ public class ForStatementTranslate {
      */
     public String translateBasicForStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_basicForStatement) {
-            System.out.println("RULE_basicForStatement 没找到，不科学");
+            Log.error("RULE_basicForStatement error");
             return null;
         }
         ParserRuleContext forInitCtx = null;
@@ -96,7 +96,7 @@ public class ForStatementTranslate {
      */
     public String translateEnhancedForStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_enhancedForStatement) {
-            System.out.println("RULE_basicForStatement 没找到，不科学");
+            Log.error("RULE_enhancedForStatement error");
             return null;
         }
 
@@ -149,7 +149,7 @@ public class ForStatementTranslate {
      */
     public String translateForInit(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forInit) {
-            System.out.println("RULE_forInit 没找到，不科学");
+            Log.error("RULE_forInit error");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);
@@ -161,7 +161,7 @@ public class ForStatementTranslate {
             LocalVariableDeclarationStatementTranslate translate = new LocalVariableDeclarationStatementTranslate();
             return translate.translateLocalVariableDeclaration(child);
         }
-        System.out.println("RULE_forInit error");
+        Log.error("translateForInit error");
         return null;
     }
 
@@ -173,14 +173,14 @@ public class ForStatementTranslate {
      */
     public String translateForUpdate(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_forUpdate) {
-            System.out.println("RULE_forUpdate 没找到，不科学");
+            Log.error("RULE_forUpdate error");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);
         if (child.getRuleIndex() == Java8Parser.RULE_statementExpressionList) {
             return translateStatementExpressionList(child);
         }
-        System.out.println("RULE_forInit error");
+        Log.error("translateForUpdate error");
         return null;
     }
 
@@ -192,7 +192,7 @@ public class ForStatementTranslate {
      */
     public String translateStatementExpressionList(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_statementExpressionList) {
-            System.out.println("RULE_statementExpressionList 没找到，不科学");
+            Log.error("RULE_statementExpressionList error");
             return null;
         }
 

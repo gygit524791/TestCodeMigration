@@ -15,11 +15,11 @@ public class NormalClassDeclarationTranslate {
      * :	classModifier* 'class' Identifier typeParameters? superclass? superinterfaces? classBody
      * ;
      * TIPS:
-     * classModifier，superclass，superinterfaces均不考虑在内
+     * classModifier，superclass，superinterfaces均不在转换
      */
     public String translateNormalClassDeclaration(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_normalClassDeclaration)) {
-            Log.error("RULE_normalClassDeclaration 没找到");
+            Log.error("RULE_normalClassDeclaration error");
             return null;
         }
 
@@ -56,6 +56,6 @@ public class NormalClassDeclarationTranslate {
         ClassBodyTranslate classBodyTranslate = new ClassBodyTranslate();
         String classBody = classBodyTranslate.translateClassBody(classBodyRule);
 
-        return identifier + typeParameters + classBody;
+        return identifier + " " + typeParameters + " " + classBody;
     }
 }

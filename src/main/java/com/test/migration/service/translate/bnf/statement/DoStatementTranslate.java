@@ -17,7 +17,7 @@ public class DoStatementTranslate {
      */
     public String translateDoStatement(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_doStatement) {
-            Log.error("RULE_doStatement 没找到");
+            Log.error("RULE_doStatement error");
             return null;
         }
 

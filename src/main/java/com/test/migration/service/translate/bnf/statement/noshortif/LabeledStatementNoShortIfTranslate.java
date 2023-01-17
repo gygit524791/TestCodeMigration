@@ -18,7 +18,7 @@ public class LabeledStatementNoShortIfTranslate {
      */
     public String translateLabeledStatementNoShortIf(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_labeledStatementNoShortIf) {
-            Log.error("RULE_labeledStatementNoShortIf 没找到");
+            Log.error("RULE_labeledStatementNoShortIf error");
             return null;
         }
 

@@ -39,6 +39,8 @@ public class ReferenceTypeTranslate {
             return arrayTypeTranslate.translateArrayType(child);
         }
 
+        Log.error("translateReferenceType error");
+
         return null;
     }
 }
