@@ -7,6 +7,7 @@ import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class ArgumentListTranslate {
      */
     public String translateArgumentList(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_argumentList) {
-            System.out.println("RULE_argumentList 没找到，不科学");
+            Log.error("RULE_argumentList error");
             return null;
         }
         //组合成expression列表

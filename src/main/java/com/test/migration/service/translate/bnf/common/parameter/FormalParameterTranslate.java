@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.variable.VariableDeclarat
 import com.test.migration.service.translate.bnf.common.unann.UnannTypeTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class FormalParameterTranslate {
 
@@ -15,7 +16,7 @@ public class FormalParameterTranslate {
      */
     public String translateFormalParameter(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_formalParameter) {
-            System.out.println("RULE_formalParameter 没找到，不科学");
+            Log.error("RULE_formalParameter error");
             return null;
         }
 
@@ -39,8 +40,8 @@ public class FormalParameterTranslate {
         String unannType = unannTypeTranslate.translateUnannType(unannTypeCtx);
 
         VariableDeclaratorIdTranslate variableDeclaratorIdTranslate = new VariableDeclaratorIdTranslate();
-        String variableDeclaratorList = variableDeclaratorIdTranslate.translateVariableDeclaratorId(variableDeclaratorIdCtx);
+        String variableDeclaratorId = variableDeclaratorIdTranslate.translateVariableDeclaratorId(variableDeclaratorIdCtx);
 
-        return unannType + " " + variableDeclaratorList;
+        return unannType + " " + variableDeclaratorId;
     }
 }

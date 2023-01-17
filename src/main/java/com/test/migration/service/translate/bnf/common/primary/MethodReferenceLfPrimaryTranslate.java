@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 public class MethodReferenceLfPrimaryTranslate {
 
@@ -18,7 +19,7 @@ public class MethodReferenceLfPrimaryTranslate {
      */
     public String translateMethodReferenceLfPrimary(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodReference_lf_primary) {
-            System.out.println("RULE_methodReference_lf_primary 没找到");
+            Log.error("RULE_methodReference_lf_primary error");
             return null;
         }
         String identifier = "";

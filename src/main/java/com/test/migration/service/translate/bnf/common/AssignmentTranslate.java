@@ -6,6 +6,7 @@ import com.test.migration.service.translate.bnf.common.primary.ArrayAccessTransl
 import com.test.migration.service.translate.bnf.common.primary.FieldAccessLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class AssignmentTranslate {
 
@@ -19,7 +20,7 @@ public class AssignmentTranslate {
      */
     public String translateAssignment(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_assignment) {
-            System.out.println("RULE_assignment 没找到，不科学");
+            Log.error("RULE_assignment error");
             return null;
         }
         ExpressionTranslate expressionTranslate = new ExpressionTranslate();
@@ -37,7 +38,7 @@ public class AssignmentTranslate {
      */
     public String translateLeftHandSide(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_leftHandSide) {
-            System.out.println("RULE_leftHandSide 没找到，不科学");
+            Log.error("RULE_leftHandSide error");
             return null;
         }
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
@@ -54,7 +55,7 @@ public class AssignmentTranslate {
             return translate.translateArrayAccess(childRuleContext);
         }
 
-        System.out.println("translateLeftHandSide error");
+        Log.error("translateLeftHandSide error");
         return null;
     }
 
@@ -79,7 +80,7 @@ public class AssignmentTranslate {
      */
     public String translateAssignmentOperator(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_assignmentOperator) {
-            System.out.println("RULE_assignmentOperator 没找到，不科学");
+            Log.error("RULE_assignmentOperator error");
             return null;
         }
         return ctx.getText();

@@ -5,6 +5,7 @@ import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 public class TypeVariableTranslate {
 
@@ -15,7 +16,7 @@ public class TypeVariableTranslate {
      */
     public String translateTypeVariable(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_typeVariable)) {
-            System.out.println("RULE_typeVariable 没找到，不科学");
+            Log.error("RULE_typeVariable error");
             return null;
         }
         String identifier = "";

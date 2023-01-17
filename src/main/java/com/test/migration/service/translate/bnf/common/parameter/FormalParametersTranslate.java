@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class FormalParametersTranslate {
      */
     public String translateFormalParameters(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_formalParameters) {
-            System.out.println("RULE_formalParameters 没找到，不科学");
+            Log.error("RULE_formalParameters error");
             return null;
         }
         List<ParserRuleContext> formalParameterList = Lists.newArrayList();

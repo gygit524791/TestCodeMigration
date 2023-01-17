@@ -2,11 +2,13 @@ package com.test.migration.service.translate.bnf.common;
 
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.method.TypeNameTranslate;
 import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 public class FieldAccessTranslate {
 
@@ -19,7 +21,7 @@ public class FieldAccessTranslate {
      */
     public String translateFieldAccess(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_fieldAccess) {
-            System.out.println("RULE_fieldAccess 没找到");
+            Log.error("RULE_fieldAccess error");
             return null;
         }
         ParseTree identifier = null;
@@ -46,7 +48,9 @@ public class FieldAccessTranslate {
         PrimaryTranslate primaryTranslate = new PrimaryTranslate();
         String identifierStr = identifier == null ? "" : identifier.getText();
         String primary = primaryCtx == null ? "" : primaryTranslate.translatePrimary(primaryCtx);
-        String typeName = typeNameCtx == null ? "" : translateTypeName(typeNameCtx);
+
+        TypeNameTranslate typeNameTranslate = new TypeNameTranslate();
+        String typeName = typeNameCtx == null ? "" : typeNameTranslate.translateTypeName(typeNameCtx);
 
         ParseTree firstChild = ctx.getChild(0);
         if (firstChild instanceof TerminalNode) {
@@ -68,11 +72,4 @@ public class FieldAccessTranslate {
         return ctx.getText();
     }
 
-    public String translateTypeName(ParserRuleContext ctx) {
-        if (ctx.getRuleIndex() != Java8Parser.RULE_typeName) {
-            System.out.println("typeNameRule 没找到，不科学:" + ctx.getText());
-            return null;
-        }
-        return ctx.getText();
-    }
 }

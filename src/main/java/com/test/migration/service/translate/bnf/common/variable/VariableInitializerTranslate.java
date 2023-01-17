@@ -17,7 +17,7 @@ public class VariableInitializerTranslate {
     public String translateVariableInitializer(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_variableInitializer) {
             Log.error("RULE_variableInitializer error");
-            return "";
+            return null;
         }
         ParserRuleContext childRule = (ParserRuleContext) ctx.getChild(0);
 

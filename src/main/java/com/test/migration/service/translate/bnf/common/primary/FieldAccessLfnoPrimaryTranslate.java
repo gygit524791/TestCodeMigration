@@ -5,6 +5,7 @@ import com.test.migration.service.translate.ReplaceRuleService;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class FieldAccessLfnoPrimaryTranslate {
 
@@ -20,7 +21,7 @@ public class FieldAccessLfnoPrimaryTranslate {
      */
     public String translateFieldAccessLfnoPrimary(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_fieldAccess_lfno_primary) {
-            System.out.println("RULE_fieldAccess_lfno_primary 没找到，不科学");
+            Log.error("RULE_fieldAccess_lfno_primary error");
             return null;
         }
 

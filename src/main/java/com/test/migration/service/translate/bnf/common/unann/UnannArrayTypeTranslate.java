@@ -5,6 +5,7 @@ import com.test.migration.service.translate.bnf.common.dims.DimsTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class UnannArrayTypeTranslate {
 
@@ -17,7 +18,7 @@ public class UnannArrayTypeTranslate {
      */
     public String translateUnannArrayType(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_unannArrayType) {
-            System.out.println("RULE_unannArrayType 为null");
+            Log.error("RULE_unannArrayType error");
             return "";
         }
 
@@ -73,7 +74,7 @@ public class UnannArrayTypeTranslate {
             return unannTypeVariable + " " + dims;
         }
 
-        System.out.println("translateArrayType error");
+        Log.error("translateArrayType error");
         return null;
     }
 

@@ -22,8 +22,8 @@ public class VariableDeclaratorListTranslate {
      */
     public String translateVariableDeclaratorList(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_variableDeclaratorList) {
-            System.out.println("RULE_variableDeclaratorList 为null");
-            return "";
+            Log.error("RULE_variableDeclaratorList error");
+            return null;
         }
         List<ParserRuleContext> variableDeclaratorCtxList = Lists.newArrayList();
         for (int i = 0; i < ctx.getChildCount(); i++) {
@@ -39,50 +39,17 @@ public class VariableDeclaratorListTranslate {
         }
 
         StringBuilder variableDeclarators = new StringBuilder();
+        VariableDeclaratorTranslate variableDeclaratorTranslate = new VariableDeclaratorTranslate();
         for (int i = 0; i < variableDeclaratorCtxList.size(); i++) {
             if (i == variableDeclaratorCtxList.size() - 1) {
-                variableDeclarators.append(translateVariableDeclarator(variableDeclaratorCtxList.get(i)));
+                variableDeclarators.append(variableDeclaratorTranslate.translateVariableDeclarator(variableDeclaratorCtxList.get(i)));
             } else {
-                variableDeclarators.append(translateVariableDeclarator(variableDeclaratorCtxList.get(i))).append(",");
+                variableDeclarators.append(variableDeclaratorTranslate.translateVariableDeclarator(variableDeclaratorCtxList.get(i))).append(",");
             }
         }
 
         return variableDeclarators.toString();
     }
 
-    /**
-     * variableDeclarator
-     * :	variableDeclaratorId ('=' variableInitializer)?
-     * ;
-     */
-    public String translateVariableDeclarator(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_variableDeclarator) {
-            System.out.println("variableDeclaratorContext 为null");
-            return "";
-        }
-
-        String variableDeclaratorId = "";
-        String variableInitializer = "";
-        for (int i = 0; i < ctx.getChildCount(); i++) {
-            ParseTree child = ctx.getChild(i);
-            boolean isRuleContext = child instanceof RuleContext;
-            if (!isRuleContext) {
-                continue;
-            }
-            RuleContext childRuleContext = (RuleContext) child;
-            if (childRuleContext.getRuleIndex() == Java8Parser.RULE_variableDeclaratorId) {
-                VariableDeclaratorIdTranslate variableDeclaratorIdTranslate = new VariableDeclaratorIdTranslate();
-                variableDeclaratorId = variableDeclaratorIdTranslate.translateVariableDeclaratorId((ParserRuleContext) childRuleContext);
-            }
-            if (childRuleContext.getRuleIndex() == Java8Parser.RULE_variableInitializer) {
-                VariableInitializerTranslate translate = new VariableInitializerTranslate();
-                variableInitializer = translate.translateVariableInitializer((ParserRuleContext) childRuleContext);
-            }
-        }
-
-        // TODO： 暂未解决多个'='问题（int a =2, b=3;）
-        return StringUtils.isBlank(variableInitializer) ? variableDeclaratorId
-                : variableDeclaratorId + "=" + variableInitializer;
-    }
 
 }

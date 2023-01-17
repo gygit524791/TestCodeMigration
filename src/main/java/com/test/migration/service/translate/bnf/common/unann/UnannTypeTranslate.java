@@ -5,6 +5,7 @@ import com.test.migration.service.translate.ReplaceRuleService;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utils.Log;
 
 public class UnannTypeTranslate {
 
@@ -16,7 +17,7 @@ public class UnannTypeTranslate {
      */
     public String translateUnannType(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_unannType) {
-            System.out.println("RULE_unannType 为null");
+            Log.error("RULE_unannType error");
             return "";
         }
         //要么是unannPrimitiveType，要么是unannReferenceType
@@ -33,8 +34,8 @@ public class UnannTypeTranslate {
             return translate.translateUnannReferenceType(childNode);
         }
 
-        System.out.println("translateUnannType error");
+        Log.error("translateUnannType error");
 
-        return "";
+        return null;
     }
 }
