@@ -1,9 +1,7 @@
 package com.test.migration.service.translate.bnf.common;
 
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.bnf.common.primary.ArrayAccessLfnoPrimaryTranslate;
-import com.test.migration.service.translate.bnf.common.primary.ArrayAccessTranslate;
-import com.test.migration.service.translate.bnf.common.primary.FieldAccessLfnoPrimaryTranslate;
+import com.test.migration.service.translate.bnf.common.array.ArrayAccessTranslate;
 import com.test.migration.service.translate.bnf.expression.ExpressionTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import utils.Log;

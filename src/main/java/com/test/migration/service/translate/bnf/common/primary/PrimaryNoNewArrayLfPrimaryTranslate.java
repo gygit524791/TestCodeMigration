@@ -1,10 +1,9 @@
 package com.test.migration.service.translate.bnf.common.primary;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.array.ArrayAccessLfPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionLfPrimaryTranslate;
-import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationLfPrimaryTranslate;
-import com.test.migration.service.translate.bnf.common.method.MethodInvocationTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import utils.Log;
 

@@ -1,6 +1,8 @@
 package com.test.migration.service.translate.bnf.common.primary;
 
 import com.test.migration.antlr.java.Java8Parser;
+import com.test.migration.service.translate.bnf.common.LiteralTranslate;
+import com.test.migration.service.translate.bnf.common.array.ArrayAccessLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationLfnoPrimaryTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -35,7 +37,8 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
         ParserRuleContext childRuleContext = (ParserRuleContext) ctx.getChild(0);
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_literal) {
-            return translateLiteral(childRuleContext);
+            LiteralTranslate translate = new LiteralTranslate();
+            return translate.translateLiteral(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_classInstanceCreationExpression_lfno_primary) {
@@ -65,9 +68,5 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
 
         Log.error("translateVariableInitializer error");
         return null;
-    }
-
-    public String translateLiteral(ParserRuleContext ctx) {
-        return ctx.getText();
     }
 }
