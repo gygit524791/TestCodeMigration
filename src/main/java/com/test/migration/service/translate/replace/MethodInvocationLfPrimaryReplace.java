@@ -16,6 +16,5 @@ public class MethodInvocationLfPrimaryReplace {
         String argumentList = originals.get(5);
 
         return "->" + typeArguments + methodNameIdentifier + "(" + argumentList + ")";
-
     }
 }
