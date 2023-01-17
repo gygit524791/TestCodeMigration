@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.common.cls;
 
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class InterfaceTypeLfClassOrInterfaceTypeTranslate {
 
@@ -12,7 +13,7 @@ public class InterfaceTypeLfClassOrInterfaceTypeTranslate {
      */
     public String translateInterfaceType_lf_classOrInterfaceType(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_interfaceType_lf_classOrInterfaceType)) {
-            System.out.println("RULE_interfaceType_lf_classOrInterfaceType 没找到");
+            Log.error("RULE_interfaceType_lf_classOrInterfaceType error");
             return null;
         }
         ParserRuleContext child = (ParserRuleContext) ctx.getChild(0);

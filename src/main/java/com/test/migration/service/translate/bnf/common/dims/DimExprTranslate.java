@@ -16,7 +16,7 @@ public class DimExprTranslate {
      */
     public String translateDimExpr(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_dimExpr)) {
-            Log.info("RULE_dimExpr error");
+            Log.error("RULE_dimExpr error");
             return null;
         }
         ParserRuleContext expressionCtx = null;

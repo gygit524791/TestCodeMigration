@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 public class ClassTypeLfClassOrInterfaceTypeTranslate {
 
@@ -17,7 +18,7 @@ public class ClassTypeLfClassOrInterfaceTypeTranslate {
      */
     public String translateClassType_lf_classOrInterfaceType(ParserRuleContext ctx) {
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_classType_lf_classOrInterfaceType)) {
-            System.out.println("RULE_classType_lf_classOrInterfaceType 没找到");
+            Log.error("RULE_classType_lf_classOrInterfaceType error");
             return null;
         }
 

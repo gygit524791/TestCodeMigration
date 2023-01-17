@@ -17,10 +17,6 @@ public class MethodDeclarationTranslate {
      * ;
      */
     public String translateMethodDeclaration(ParserRuleContext ctx) {
-
-
-
-        System.out.println("translateMethodDeclaration translateMethodDeclaration translateMethodDeclaration " + ctx.getText());
         if ((ctx == null) || (ctx.getRuleIndex() != Java8Parser.RULE_methodDeclaration)) {
             Log.error("RULE_methodDeclaration error");
             return null;

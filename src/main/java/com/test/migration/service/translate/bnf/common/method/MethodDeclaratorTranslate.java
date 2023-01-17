@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import utils.Log;
 
 public class MethodDeclaratorTranslate {
 
@@ -14,13 +15,10 @@ public class MethodDeclaratorTranslate {
      * methodDeclarator
      * :	Identifier '(' formalParameterList? ')' dims?
      * ;
-     *
-     * @param ctx
-     * @return
      */
     public String translateMethodDeclarator(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodDeclarator) {
-            System.out.println("RULE_methodDeclarator 没找到，不科学");
+            Log.error("RULE_methodDeclarator error");
             return null;
         }
         String identifier = "";

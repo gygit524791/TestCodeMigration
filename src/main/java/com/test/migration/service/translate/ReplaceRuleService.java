@@ -82,42 +82,4 @@ public class ReplaceRuleService {
         return referenceMapping.getOrDefault(clsName, clsName) + " * ";
     }
 
-
-    /**
-     * 存在替换规则
-     * new 后面的identifier 相当于typeName
-     */
-    public static String replaceClassInstanceCreationIdentifier(ParserRuleContext ctx) {
-        String identifier = "";
-        for (int k = 0; k < ctx.getChildCount(); k++) {
-            ParseTree child1 = ctx.getChild(k);
-            if (child1 instanceof TerminalNode) {
-                TerminalNode terminalNode = (TerminalNode) child1;
-                if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
-                    identifier = terminalNode.getText();
-                    // 只取第一个identifier，取到后必须break
-                    break;
-                }
-            }
-        }
-
-        Map<String, String> commonClassNameMapping = MappingRuleLoader.classNameMapping;
-
-        // 内部类 改为A::B
-        String finalIdentifier = identifier;
-        boolean isInnerCls = TestCodeContext.ClassMemberDeclaration.classes.stream()
-                .anyMatch(x -> StringUtils.equals(x.name, finalIdentifier));
-        if (isInnerCls) {
-            return TestCodeContext.className + "::" + identifier;
-        }
-
-        // hint for mismatch
-        if (!commonClassNameMapping.containsKey(identifier)) {
-            TranslateHint.misMatchCodes.add(identifier);
-        }
-
-        return commonClassNameMapping.getOrDefault(identifier, identifier);
-    }
-
-
 }

@@ -4,6 +4,7 @@ import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.ResultTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import utils.Log;
 
 public class MethodHeaderTranslate {
 
@@ -12,13 +13,10 @@ public class MethodHeaderTranslate {
      * :	result methodDeclarator throws_?
      * |	typeParameters annotation* result methodDeclarator throws_?
      * ;
-     *
-     * @param ctx
-     * @return
      */
     public String translateMethodHeader(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodHeader) {
-            System.out.println("RULE_methodHeader 没找到，不科学");
+            Log.error("RULE_methodHeader error");
             return null;
         }
 
