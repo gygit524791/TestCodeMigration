@@ -4,6 +4,7 @@ import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionLfPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.cls.ClassInstanceCreationExpressionTranslate;
+import com.test.migration.service.translate.bnf.common.method.MethodInvocationLfnoPrimaryTranslate;
 import com.test.migration.service.translate.bnf.common.method.MethodInvocationTranslate;
 import com.test.migration.service.translate.bnf.statement.BlockTranslate;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -58,8 +59,8 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_methodInvocation_lfno_primary) {
-            MethodInvocationTranslate methodInvocationTranslate = new MethodInvocationTranslate();
-            return methodInvocationTranslate.translateMethodInvocationLfNoPrimary(childRuleContext);
+            MethodInvocationLfnoPrimaryTranslate translate = new MethodInvocationLfnoPrimaryTranslate();
+            return translate.translateMethodInvocationLfNoPrimary(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_methodReference_lfno_primary) {

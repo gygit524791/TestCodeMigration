@@ -7,6 +7,7 @@ import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
 import com.test.migration.service.translate.bnf.common.ExpressionNameTranslate;
 import com.test.migration.service.translate.bnf.common.TypeArgumentsTranslate;
 import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;
+import com.test.migration.service.translate.replace.MethodInvocationLfNoPrimaryReplace;
 import com.test.migration.service.translate.replace.MethodInvocationReplace;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
@@ -17,21 +18,19 @@ import utils.Log;
 
 import java.util.List;
 
-public class MethodInvocationTranslate {
-
+public class MethodInvocationLfnoPrimaryTranslate {
     /**
-     * methodInvocation
+     * methodInvocation_lfno_primary
      * :	methodName '(' argumentList? ')'
      * |	typeName '.' typeArguments? Identifier '(' argumentList? ')'
      * |	expressionName '.' typeArguments? Identifier '(' argumentList? ')'
-     * |	primary '.' typeArguments? Identifier '(' argumentList? ')'
      * |	'super' '.' typeArguments? Identifier '(' argumentList? ')'
      * |	typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
      * ;
      */
-    public String translateMethodInvocation(ParserRuleContext ctx) {
-        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation) {
-            Log.error("RULE_methodInvocation error");
+    public String translateMethodInvocationLfNoPrimary(ParserRuleContext ctx) {
+        if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_methodInvocation_lfno_primary) {
+            Log.error("RULE_methodInvocation_lfno_primary error");
             return null;
         }
         // 1.获取各个类型子节点
@@ -41,7 +40,6 @@ public class MethodInvocationTranslate {
         ParserRuleContext typeArgumentsCtx = null;
         ParserRuleContext typeNameCtx = null;
         ParserRuleContext expressionNameCtx = null;
-        ParserRuleContext primaryCtx = null;
         for (int i = 0; i < ctx.getChildCount(); i++) {
             ParseTree child = ctx.getChild(i);
             if (child instanceof RuleContext) {
@@ -60,9 +58,6 @@ public class MethodInvocationTranslate {
                 if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_expressionName) {
                     expressionNameCtx = (ParserRuleContext) child;
                 }
-                if (((RuleContext) child).getRuleIndex() == Java8Parser.RULE_primary) {
-                    primaryCtx = (ParserRuleContext) child;
-                }
             }
             if (child instanceof TerminalNode) {
                 TerminalNode terminalNode = (TerminalNode) child;
@@ -74,7 +69,6 @@ public class MethodInvocationTranslate {
         ArgumentListTranslate argumentListTranslate = new ArgumentListTranslate();
         TypeArgumentsTranslate typeArgumentsTranslate = new TypeArgumentsTranslate();
         ExpressionNameTranslate expressionNameTranslate = new ExpressionNameTranslate();
-        PrimaryTranslate primaryTranslate = new PrimaryTranslate();
         TypeNameTranslate typeNameTranslate = new TypeNameTranslate();
         MethodNameTranslate methodNameTranslate = new MethodNameTranslate();
 
@@ -84,34 +78,27 @@ public class MethodInvocationTranslate {
         String typeArguments = typeArgumentsCtx == null ? "" : typeArgumentsTranslate.translateTypeArguments(typeArgumentsCtx);
         String typeName = typeNameCtx == null ? "" : typeNameTranslate.translateTypeName(typeNameCtx);
         String expressionName = expressionNameCtx == null ? "" : expressionNameTranslate.translateExpressionName(expressionNameCtx);
-        String primary = primaryCtx == null ? "" : primaryTranslate.translatePrimary(primaryCtx);
 
         // 2. 判断第一个孩子节点的类型
-        MethodInvocationReplace replace = new MethodInvocationReplace();
+        MethodInvocationLfNoPrimaryReplace replace = new MethodInvocationLfNoPrimaryReplace();
         ParseTree firstChild = ctx.getChild(0);
         boolean isRuleContext = firstChild instanceof RuleContext;
         if (!isRuleContext) {
             //'super' '.' typeArguments? Identifier '(' argumentList? ')'
-            List<String> originals = Lists.newArrayList("super" , "." , typeArguments , identifierStr , "(" , argumentList , ")");
-            return replace.replaceStructure5(originals);
+            List<String> originals = Lists.newArrayList("super", ".", typeArguments, identifierStr, "(", argumentList, ")");
+            return replace.replaceStructure4(originals);
         } else {
             int ruleIndex = ((RuleContext) firstChild).getRuleIndex();
             if (ruleIndex == Java8Parser.RULE_methodName) {
                 //methodName '(' argumentList? ')'
-                List<String> originals = Lists.newArrayList(methodName , "(" , argumentList , ")");
+                List<String> originals = Lists.newArrayList(methodName, "(", argumentList, ")");
                 return replace.replaceStructure1(originals);
             }
 
             if (ruleIndex == Java8Parser.RULE_expressionName) {
                 //expressionName '.' typeArguments? Identifier '(' argumentList? ')'
-                List<String> originals = Lists.newArrayList(expressionName , "." , typeArguments , identifierStr , "(" , argumentList , ")");
+                List<String> originals = Lists.newArrayList(expressionName, ".", typeArguments, identifierStr, "(", argumentList, ")");
                 return replace.replaceStructure3(originals);
-            }
-
-            if (ruleIndex == Java8Parser.RULE_primary) {
-                //primary '.' typeArguments? Identifier '(' argumentList? ')'
-                List<String> originals = Lists.newArrayList(primary , "." , typeArguments , identifierStr , "(" , argumentList , ")");
-                return replace.replaceStructure4(originals);
             }
 
             if (ruleIndex == Java8Parser.RULE_typeName) {
@@ -126,12 +113,12 @@ public class MethodInvocationTranslate {
                 //typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
                 if (haveSuper) {
                     List<String> originals = Lists.newArrayList(typeName, ".", "super", ".", typeArguments, identifierStr, "(", argumentList, ")");
-                    return replace.replaceStructure6(originals);
+                    return replace.replaceStructure5(originals);
                 }
 
                 //typeName '.' typeArguments? Identifier '(' argumentList? ')'
                 else {
-                    List<String> originals = Lists.newArrayList(typeName , "." , typeArguments , identifierStr , "(" , argumentList , ")");
+                    List<String> originals = Lists.newArrayList(typeName, ".", typeArguments, identifierStr, "(", argumentList, ")");
                     return replace.replaceStructure2(originals);
                 }
             }
@@ -140,4 +127,5 @@ public class MethodInvocationTranslate {
         Log.error("translateMethodInvocation error");
         return null;
     }
+
 }

@@ -24,6 +24,7 @@ public class ReplaceRuleService {
     private static String replaceMethodInvocationTypeName(String originTranslate,
                                                           String typeName, String methodNameIdentifier, String argumentList,
                                                           List<MappingRuleLoader.MethodInvocationTypeNameRule> apiMapping) {
+
         String type = TestCodeContext.typeNameMap.getOrDefault(typeName, StringUtils.EMPTY);
         MappingRuleLoader.MethodInvocationTypeNameRule methodInvocationTypeNameRule = apiMapping.stream()
                 .filter(x -> StringUtils.equals(type, x.getSourceClassName())
