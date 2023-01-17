@@ -66,7 +66,8 @@ public class StatementWithoutTrailingSubStatementTranslate {
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_breakStatement) {
-            return childRuleContext.getText();
+            BreakStatementTranslate translate = new BreakStatementTranslate();
+            return translate.translateBreakStatement(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_continueStatement) {
