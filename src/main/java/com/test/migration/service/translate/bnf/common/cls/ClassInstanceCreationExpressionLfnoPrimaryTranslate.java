@@ -18,6 +18,7 @@ import utils.Log;
 import java.util.List;
 
 public class ClassInstanceCreationExpressionLfnoPrimaryTranslate {
+
     /**
      * classInstanceCreationExpression_lfno_primary
      * :	'new' typeArguments? annotation* Identifier ('.' annotation* Identifier)* typeArgumentsOrDiamond? '(' argumentList? ')' classBody?

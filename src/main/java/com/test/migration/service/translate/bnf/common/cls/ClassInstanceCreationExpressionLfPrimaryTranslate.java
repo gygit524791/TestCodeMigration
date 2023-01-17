@@ -1,11 +1,19 @@
 package com.test.migration.service.translate.bnf.common.cls;
 
+import com.google.common.collect.Lists;
+import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
+import com.test.migration.service.translate.replace.ClassInstanceCreationExpressionLfPrimaryReplace;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.tree.TerminalNode;
+import org.apache.commons.lang3.StringUtils;
 import utils.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClassInstanceCreationExpressionLfPrimaryTranslate {
     /**
@@ -22,8 +30,7 @@ public class ClassInstanceCreationExpressionLfPrimaryTranslate {
         // '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
         // 简化为 '.' 'new' Identifier '(' argumentList? ')' classBody?
         // 获取第一个Identifier
-        String identifier = ReplaceRuleService.replaceClassInstanceCreationIdentifier(ctx);
-
+        String identifier = "";
         // 获取argumentList
         ParserRuleContext argumentListRule = null;
         ParserRuleContext classBodyRule = null;
@@ -35,6 +42,13 @@ public class ClassInstanceCreationExpressionLfPrimaryTranslate {
             if (ctx.getChild(i) instanceof RuleContext &&
                     ((RuleContext) ctx.getChild(i)).getRuleIndex() == Java8Parser.RULE_classBody) {
                 classBodyRule = (ParserRuleContext) ctx.getChild(i);
+            }
+
+            if (StringUtils.isBlank(identifier) && ctx.getChild(i) instanceof TerminalNode) {
+                TerminalNode terminalNode = (TerminalNode) ctx.getChild(i);
+                if (terminalNode.getSymbol().getType() == Java8Lexer.Identifier) {
+                    identifier = terminalNode.getText();
+                }
             }
         }
 
@@ -51,7 +65,8 @@ public class ClassInstanceCreationExpressionLfPrimaryTranslate {
             classBody = classBodyTranslate.translateClassBody(classBodyRule);
         }
 
-        //'.' 'new' Identifier '(' argumentList? ')' classBody?
-        return "." + "new " + " " + identifier + "(" + argumentList + ")" + classBody;
+        ClassInstanceCreationExpressionLfPrimaryReplace replace = new ClassInstanceCreationExpressionLfPrimaryReplace();
+        List<String> originals = Lists.newArrayList("." , "new " , identifier , "(" , argumentList , ")" , classBody);
+        return replace.replaceStructure1(originals);
     }
 }
