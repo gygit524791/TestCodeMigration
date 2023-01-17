@@ -53,7 +53,7 @@ public class PrimaryNoNewArrayLfNoPrimaryTranslate {
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_arrayAccess_lfno_primary) {
             ArrayAccessLfnoPrimaryTranslate translate = new ArrayAccessLfnoPrimaryTranslate();
-            return translate.translateArrayAccessLfnoPrimary(childRuleContext);
+            return translate.translateArrayAccess_lfno_primary(childRuleContext);
         }
 
         if (childRuleContext.getRuleIndex() == Java8Parser.RULE_methodInvocation_lfno_primary) {
