@@ -72,10 +72,10 @@ public class TranslateCodeGenerator {
             fileLines.add("}");
         }
 
-//        // 写入部分迁移方法
-//        for (TranslateCodeCollector.PartMigrationMethodTranslateCode translateCode : TranslateCodeCollector.partMigrationMethodTranslateCodes) {
-//            fileLines.add(translateCode.translateCode);
-//        }
+        // 写入部分迁移方法
+        for (TranslateCodeCollector.PartMigrationMethodTranslateCode translateCode : TranslateCodeCollector.partMigrationMethodTranslateCodes) {
+            fileLines.add(translateCode.translateCode);
+        }
         // 测试类结尾
         fileLines.add("}");
 

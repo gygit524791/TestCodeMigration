@@ -10,6 +10,38 @@ public class A{
         a2 = null;
     }
 
+
+    public void test(){
+        int a1 = 0;
+        if(true){
+            int a2 = 0;
+            for (int i = 0; i < 10; i++) {
+                int a3=0;
+                if(true){
+                    int a4=0;
+                }
+            }
+            int a5=0;
+        }
+    }
+
+
+    public void test(){
+        int a1 = 0;
+        if(true){
+            int a2 = 0;
+            for (int i = 0; i < 10; i++) {
+                int a3=0;
+                if(true){
+                    int a4=0;
+                }
+            }
+            int a5=0;
+
+            XX a = new XX();
+        }
+    }
+
     @Test
     public void testStartDelay() throws Throwable {
         final ValueAnimator a = ValueAnimator.ofFloat(5f, 20f);
@@ -25,7 +57,6 @@ public class A{
         mActivityRule.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                int a =0;
 //                 Test the time between isRunning() and isStarted()
                 assertFalse(a.isStarted());
                 assertFalse(a.isRunning());

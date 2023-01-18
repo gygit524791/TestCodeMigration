@@ -1,6 +1,7 @@
 package com.test.migration.service.translate;
 
 import com.google.common.collect.Lists;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
@@ -87,8 +88,12 @@ public class TranslateCodeCollector {
         }
 
         @ToString
+        @Getter
         public static class BlockStatementTranslateCode {
             public String translateCode;
+            // 用于过滤嵌套bs收集
+            public int tokenStartIndex;
+            public int tokenStopIndex;
             public List<String> misMatchCodes;
         }
     }

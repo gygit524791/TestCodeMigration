@@ -1,5 +1,6 @@
 package com.test.migration.service.translate.bnf.statement;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -8,9 +9,10 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import utils.Log;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlockStatementsTranslate {
-   
+
     /**
      * blockStatements
      * :	blockStatement+
@@ -33,14 +35,12 @@ public class BlockStatementsTranslate {
             }
             blockStatementList.add((ParserRuleContext) child);
         }
-        StringBuilder blockStatementListStr = new StringBuilder();
         BlockStatementTranslate blockStatementTranslate = new BlockStatementTranslate();
-        blockStatementList.forEach(blockStatement -> {
-            String translateBlockStatement = blockStatementTranslate.translateBlockStatement(blockStatement);
-            blockStatementListStr.append(translateBlockStatement);
-        });
 
-        return blockStatementListStr.toString();
+        List<String> list = blockStatementList.stream()
+                .map(blockStatementTranslate::translateBlockStatement)
+                .collect(Collectors.toList());
+        return Joiner.on("").join(list);
     }
 
 

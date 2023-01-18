@@ -46,7 +46,7 @@ public class BlockStatementTranslate {
             Log.error("translateBlockStatement error");
         }
 
-        // 调整策略
+        // 调整策略（部分迁移功能）
         String key = String.valueOf(ctx.getStart().getStartIndex());
         String modifyType = PartMigrationProcessor.blockStatementModifyMap.getOrDefault(key, "keep");
         if (StringUtils.equals(modifyType, "remove")) {
@@ -58,8 +58,11 @@ public class BlockStatementTranslate {
         // 收集器
         TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode = new TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode();
         blockStatementTranslateCode.translateCode = translateBlockStatement;
+        blockStatementTranslateCode.tokenStartIndex = ctx.getStart().getStartIndex();
+        blockStatementTranslateCode.tokenStopIndex = ctx.getStop().getStopIndex();
         blockStatementTranslateCode.misMatchCodes = TranslateHint.formatMisMatchCodes(TranslateHint.misMatchCodes);
 
+        // 如果是完整迁移，则收集bs（区别于部分迁移）
         if (TranslateCodeCollector.isFullTranslate) {
             TranslateCodeCollector.blockStatementTranslateCodes.add(blockStatementTranslateCode);
         }

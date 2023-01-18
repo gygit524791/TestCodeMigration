@@ -27,7 +27,9 @@ public class MethodBodyTranslate {
         }
 
         BlockTranslate blockTranslate = new BlockTranslate();
-        return blockTranslate.translateBlock((ParserRuleContext) child);
+        String translateBlock = blockTranslate.translateBlock((ParserRuleContext) child);
+
+        return translateBlock;
     }
 
 }

@@ -6,10 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/array/ArrayAccessTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/array/ArrayAccessTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/parameter/ReceiverParameterTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/parameter/ReceiverParameterTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannClassOrInterfaceTypeTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/unann/UnannClassOrInterfaceTypeTranslate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/expression/PostfixExpressionTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/example/android/case1/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/example/android/case1/A.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test_a.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/output/test_a.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodBodyTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodBodyTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/common/method/MethodDeclarationTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementTranslate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementsTranslate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/bnf/statement/BlockStatementsTranslate.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +85,7 @@
       <recent name="com.test.migration.service.translate.bnf.declaration" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClassInstanceCreationExpressionLfnoPrimaryReplace">
+  <component name="RunManager" selected="Application.TranslateMain">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="TestMigrationV2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -146,8 +151,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClassInstanceCreationExpressionLfnoPrimaryReplace" />
         <item itemvalue="Application.TranslateMain" />
+        <item itemvalue="Application.ClassInstanceCreationExpressionLfnoPrimaryReplace" />
         <item itemvalue="Application.ApiNum" />
         <item itemvalue="Application.ApiMappingMain" />
         <item itemvalue="Application.ApiMappingService" />
@@ -193,7 +198,7 @@
       <workItem from="1673512862176" duration="25773000" />
       <workItem from="1673676707299" duration="1660000" />
       <workItem from="1673834396388" duration="25003000" />
-      <workItem from="1673920321276" duration="27135000" />
+      <workItem from="1673920321276" duration="32823000" />
     </task>
     <servers />
   </component>
@@ -249,7 +254,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java</url>
-          <line>204</line>
+          <line>203</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
       </breakpoints>

@@ -26,6 +26,7 @@ import org.apache.ibatis.session.SqlSession;
 import utils.*;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -194,36 +195,75 @@ public class TranslateTestService {
 
         // 方法迁移
         MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
-        Log.info("methodDeclarationTranslate: " + TestCodeContext.methodDeclarationCtxList.size());
 
         for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
             TranslateHint.init();
             TranslateCodeCollector.MethodTranslateCode.methodStartLine = parserRuleContext.getStart().getLine();
             TranslateCodeCollector.MethodTranslateCode.methodEndLine = parserRuleContext.getStop().getLine();
-            Log.info("当前方法开始行和结束行1：(" + TranslateCodeCollector.MethodTranslateCode.methodStartLine + ":" + TranslateCodeCollector.MethodTranslateCode.methodEndLine + ")");
 
             methodDeclarationTranslate.translateMethodDeclaration(parserRuleContext);
             // methodHeader信息
             // method blockStatement信息
             TranslateCodeCollector.MethodTranslateCode methodTranslateCode = new TranslateCodeCollector.MethodTranslateCode();
             methodTranslateCode.methodHeaderTranslateCode = TranslateCodeCollector.methodHeaderTranslateCode;
-            methodTranslateCode.blockStatementTranslateCodes = TranslateCodeCollector.blockStatementTranslateCodes;
+            // 过滤掉嵌套的blockStatement（可能重复收集了子blockStatement）
+            List<TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode> blockStatementTranslateCodes =
+                    filterRepeatSubBlockStatement(TranslateCodeCollector.blockStatementTranslateCodes);
+            methodTranslateCode.blockStatementTranslateCodes = blockStatementTranslateCodes;
             TranslateCodeCollector.methodDeclarationTranslateCodes.add(methodTranslateCode);
-            Log.info("当前方法开始行和结束行2：(" + TranslateCodeCollector.MethodTranslateCode.methodStartLine + ":" + TranslateCodeCollector.MethodTranslateCode.methodEndLine + ")");
 
             TranslateCodeCollector.MethodTranslateCode.clearMethod();
         }
 
         // 方法部分迁移
-//        PartMigrationProcessor partMigrationProcessor = new PartMigrationProcessor();
-//        TranslateCodeCollector.isFullTranslate = false; // 。。。
-//        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
-//            TranslateCodeCollector.PartMigrationMethodTranslateCode partMigrationMethodTranslateCode = new TranslateCodeCollector.PartMigrationMethodTranslateCode();
-//            partMigrationMethodTranslateCode.translateCode = partMigrationProcessor.doPartMigrationTranslate(parserRuleContext);
-//            TranslateCodeCollector.partMigrationMethodTranslateCodes.add(partMigrationMethodTranslateCode);
-//        }
+        TranslateCodeCollector.isFullTranslate = false; // 。。。
+        PartMigrationProcessor partMigrationProcessor = new PartMigrationProcessor();
+        for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
+            TranslateCodeCollector.PartMigrationMethodTranslateCode partMigrationMethodTranslateCode = new TranslateCodeCollector.PartMigrationMethodTranslateCode();
+            partMigrationMethodTranslateCode.translateCode = partMigrationProcessor.doPartMigrationTranslate(parserRuleContext);
+            TranslateCodeCollector.partMigrationMethodTranslateCodes.add(partMigrationMethodTranslateCode);
+        }
 
         Log.info("代码转换完成");
+    }
+
+    /**
+     * bs可能出现嵌套，内部的bs过滤掉
+     *
+     * @param blockStatementTranslateCodes
+     * @return
+     */
+    private List<TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode> filterRepeatSubBlockStatement(
+            List<TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode> blockStatementTranslateCodes) {
+
+        // 1. 按bs（blockStatement）的起始token序号大小自然排序
+        List<TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode> sortedBlockStatementTranslateCodes =
+                blockStatementTranslateCodes.stream()
+                        .sorted(Comparator.comparing(TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode::getTokenStartIndex))
+                        .collect(Collectors.toList());
+
+        Set<Integer> removedBlockStatementTokenStartIndexSet = Sets.newHashSet();
+        for (int i = 0; i < sortedBlockStatementTranslateCodes.size(); i++) {
+            TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode = sortedBlockStatementTranslateCodes.get(i);
+            if (removedBlockStatementTokenStartIndexSet.contains(blockStatementTranslateCode.getTokenStartIndex())) {
+                continue;
+            }
+            for (int j = i + 1; j < sortedBlockStatementTranslateCodes.size(); j++) {
+                TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode subBlockStatementTranslateCode = sortedBlockStatementTranslateCodes.get(j);
+                int bsStartIndex = blockStatementTranslateCode.getTokenStartIndex();
+                int bsEndIndex = blockStatementTranslateCode.getTokenStopIndex();
+                int subBsStartIndex = subBlockStatementTranslateCode.getTokenStartIndex();
+                int subBsEndIndex = subBlockStatementTranslateCode.getTokenStopIndex();
+
+                if (subBsStartIndex > bsStartIndex && subBsEndIndex < bsEndIndex) {
+                    removedBlockStatementTokenStartIndexSet.add(subBsStartIndex);
+                }
+            }
+        }
+
+        return blockStatementTranslateCodes.stream()
+                .filter(x -> !removedBlockStatementTokenStartIndexSet.contains(x.getTokenStartIndex()))
+                .collect(Collectors.toList());
     }
 
     private Map<String, List<Integer>> getTestMethodInvocationMap(String testFilepath, List<ApiBasic> fileApis) {
