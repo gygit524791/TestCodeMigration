@@ -9,6 +9,7 @@ import com.test.migration.entity.po.ApiBasic;
 import com.test.migration.entity.po.ApiMapping;
 import lombok.Builder;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import utils.*;
 
@@ -120,30 +121,38 @@ public class ApiMappingService {
         // get/set/tostring
         List<ApiBasic> nonApis = apiBasicService.selectByTaskId(taskParameter.getTaskId());
 
-        Map<String, ApiBasic> sourceNonApiMap = nonApis.stream()
+        Map<String, List<ApiBasic>> sourceNonApiMap = nonApis.stream()
                 .filter(x -> x.getType() == 3)
-                .collect(Collectors.toMap(ApiBasic::getClassName, Function.identity(), (x, y) -> x));
+                .collect(Collectors.groupingBy(ApiBasic::getClassName));
 
-        Map<String, ApiBasic> targetNonApiMap = nonApis.stream()
+        Map<String, List<ApiBasic>> targetNonApiMap = nonApis.stream()
                 .filter(x -> x.getType() == 4)
-                .collect(Collectors.toMap(ApiBasic::getClassName, Function.identity(), (x, y) -> x));
+                .collect(Collectors.groupingBy(ApiBasic::getClassName));
 
         MappingRuleWriter.writeApiMappingProperties("#", "getter / setter / toString ...");
 
         for (ClassApiMappingNum classApiMapping : finalClassApiMappingList) {
-            ApiBasic sourceNonApi = sourceNonApiMap.get(classApiMapping.getSourceClassName());
-            ApiBasic targetNonApi = targetNonApiMap.get(classApiMapping.getTargetClassName());
+            List<ApiBasic> sourceNonApis = sourceNonApiMap.get(classApiMapping.getSourceClassName());
+            List<ApiBasic> targetNonApis = targetNonApiMap.get(classApiMapping.getTargetClassName());
 
-            if(sourceNonApi == null || targetNonApi == null){
+            if (sourceNonApis == null || targetNonApis == null) {
                 continue;
             }
 
-            // source的api
-            String value = sourceNonApi.getClassName() + "->" + sourceNonApi.getApiName();
-            // target的api
-            String key = targetNonApi.getClassName() + "->" + targetNonApi.getApiName();
+            for (ApiBasic sourceNonApi : sourceNonApis) {
+                for (ApiBasic targetNonApi : targetNonApis) {
+                    String sourceNonApiName = sourceNonApi.getApiName().toLowerCase();
+                    String targetNonApiName = targetNonApi.getApiName().toLowerCase();
+                    if (StringUtils.equals(sourceNonApiName, targetNonApiName)) {
+                        // source的api
+                        String value = sourceNonApi.getClassName() + "->" + sourceNonApi.getApiName();
+                        // target的api
+                        String key = targetNonApi.getClassName() + "->" + targetNonApi.getApiName();
 
-            MappingRuleWriter.writeApiMappingProperties(key, value);
+                        MappingRuleWriter.writeApiMappingProperties(key, value);
+                    }
+                }
+            }
         }
     }
 
@@ -152,9 +161,9 @@ public class ApiMappingService {
             ApiBasic sourceApi = apiBasicMap.get(mapping.getSourceApiId());
             ApiBasic targetApi = apiBasicMap.get(mapping.getTargetApiId());
             // 安卓的api
-            String value = sourceApi.getClassName() + "->" + sourceApi.getApiName();
+            String key = sourceApi.getClassName() + "->" + sourceApi.getApiName();
             // 鸿蒙的api
-            String key = targetApi.getClassName() + "->" + targetApi.getApiName();
+            String value = targetApi.getClassName() + "->" + targetApi.getApiName();
 
             MappingRuleWriter.writeApiMappingProperties(key, value);
         });

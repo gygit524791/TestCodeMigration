@@ -54,11 +54,11 @@ def loadApiDataFromSQLLite(taskId: str, dbFilepath: str):
     # id, task_id, filepath, class_name, api_name,
     # type, method_word_sequence, token_sequence, token_vector
     cursor = conn.cursor()
-    sourceApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 1"
+    sourceApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 0"
     cursor.execute(sourceApiQuerySql)
     sourceApis = cursor.fetchall()
 
-    targetApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 0"
+    targetApiQuerySql = "select * from api_basic where task_id = " + taskId + " and type = 1"
     cursor.execute(targetApiQuerySql)
     targetApis = cursor.fetchall()
 
