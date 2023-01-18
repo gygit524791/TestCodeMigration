@@ -2,6 +2,7 @@ package com.test.migration.service.translate.bnf.common.array;
 
 import com.test.migration.antlr.java.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
+import utils.Log;
 
 public class ArrayAccessTranslate {
 
@@ -16,10 +17,9 @@ public class ArrayAccessTranslate {
      */
     public String translateArrayAccess(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_arrayAccess) {
-            System.out.println("RULE_arrayAccess 没找到，不科学");
+            Log.error("RULE_arrayAccess error");
             return null;
         }
-
 
         return ctx.getText();
     }

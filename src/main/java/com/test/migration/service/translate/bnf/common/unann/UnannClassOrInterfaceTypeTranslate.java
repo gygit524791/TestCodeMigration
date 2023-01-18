@@ -21,9 +21,7 @@ public class UnannClassOrInterfaceTypeTranslate {
      * |	unannInterfaceType_lf_unannClassOrInterfaceType
      * )*
      * ;
-     * <p>
-     * <p>
-     * 	TODO ReplaceRuleService.replaceClassOrInterfaceType(ctx.getText());
+
      */
     public String translateUnannClassOrInterfaceType(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_unannClassOrInterfaceType) {

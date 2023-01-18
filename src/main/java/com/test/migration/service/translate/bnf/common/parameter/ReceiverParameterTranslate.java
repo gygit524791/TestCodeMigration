@@ -20,7 +20,6 @@ public class ReceiverParameterTranslate {
      */
     public String translateReceiverParameter(ParserRuleContext ctx) {
         if (ctx == null || ctx.getRuleIndex() != Java8Parser.RULE_receiverParameter) {
-            System.out.println("RULE_receiverParameter 暂不支持");
             return ctx == null ? "" : ctx.getText();
         }
 
