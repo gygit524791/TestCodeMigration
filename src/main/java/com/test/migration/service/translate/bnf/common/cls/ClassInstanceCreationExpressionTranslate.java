@@ -3,8 +3,6 @@ package com.test.migration.service.translate.bnf.common.cls;
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.ReplaceRuleService;
-import com.test.migration.service.translate.TranslateCodeCollector;
 import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
 import com.test.migration.service.translate.bnf.common.ExpressionNameTranslate;
 import com.test.migration.service.translate.bnf.common.primary.PrimaryTranslate;

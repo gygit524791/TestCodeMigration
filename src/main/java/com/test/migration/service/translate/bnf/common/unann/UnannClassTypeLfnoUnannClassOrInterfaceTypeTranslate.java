@@ -3,7 +3,6 @@ package com.test.migration.service.translate.bnf.common.unann;
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.bnf.common.TypeArgumentsTranslate;
 import com.test.migration.service.translate.replace.UnannClassTypeLfnoUnannClassOrInterfaceTypeReplace;
 import org.antlr.v4.runtime.ParserRuleContext;

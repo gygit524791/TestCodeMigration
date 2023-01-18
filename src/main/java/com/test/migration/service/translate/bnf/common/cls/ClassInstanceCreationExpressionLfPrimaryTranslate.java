@@ -3,7 +3,6 @@ package com.test.migration.service.translate.bnf.common.cls;
 import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
-import com.test.migration.service.translate.ReplaceRuleService;
 import com.test.migration.service.translate.bnf.common.ArgumentListTranslate;
 import com.test.migration.service.translate.replace.ClassInstanceCreationExpressionLfPrimaryReplace;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -12,7 +11,6 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
 import utils.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClassInstanceCreationExpressionLfPrimaryTranslate {
