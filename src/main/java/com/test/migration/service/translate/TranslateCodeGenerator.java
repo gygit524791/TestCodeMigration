@@ -48,6 +48,22 @@ public class TranslateCodeGenerator {
         fileLines.add("using namespace testing::ext;");
         fileLines.add("class " + TranslateCodeCollector.className + " : public testing::Test {");
         fileLines.add("public:");
+
+        // 成员属性，内部类，测试方法
+        fillTranslateCodeToFileLines(fileLines);
+
+        // 测试类结尾
+        fileLines.add("}");
+
+        // 写入文件
+        try {
+            FileWriteUtil.writeDataToFile(fileLines, filepath);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void fillTranslateCodeToFileLines(List<String> fileLines) {
         // 写入类成员属性
         for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.fieldDeclarationTranslateCodes) {
             addHintIfNeed(translateCode.misMatchCodes, fileLines);
@@ -82,16 +98,6 @@ public class TranslateCodeGenerator {
         fileLines.add("// 部分迁移结果：");
         for (TranslateCodeCollector.PartMigrationMethodTranslateCode translateCode : TranslateCodeCollector.partMigrationMethodTranslateCodes) {
             fileLines.add(translateCode.translateCode);
-        }
-
-        // 测试类结尾
-        fileLines.add("}");
-
-        // 写入文件
-        try {
-            FileWriteUtil.writeDataToFile(fileLines, filepath);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
