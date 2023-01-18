@@ -3,6 +3,7 @@ package com.test.migration.service.extract;
 
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import com.test.migration.antlr.java.Java8BaseVisitor;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
@@ -23,7 +24,7 @@ public class APIExtractorService extends Java8BaseVisitor<RuleNode> {
 
     private String filePath;
     private Integer taskId;
-    private List<ApiBasic> apiBasics = new ArrayList<>();
+    private List<String> apiNames = Lists.newArrayList();
 
     public APIExtractorService(Integer taskId, String filePath) {
         this.taskId = taskId;
@@ -36,7 +37,7 @@ public class APIExtractorService extends Java8BaseVisitor<RuleNode> {
     @Override
     public RuleNode visitMethodDeclaration(Java8Parser.MethodDeclarationContext ctx) {
         String methodName = fetchPublicMethodName(ctx);
-        fillApiBasic(methodName);
+        apiNames.add(methodName);
         return visitChildren(ctx);
     }
 
@@ -107,30 +108,5 @@ public class APIExtractorService extends Java8BaseVisitor<RuleNode> {
             }
         }
         return existAnnotation;
-    }
-
-    private void fillApiBasic(String apiName) {
-        if (StringUtils.isBlank(apiName)) {
-            return;
-        }
-
-        String className = fetchClassNameWithFilePath(filePath);
-        ApiBasic apiBasic = ApiBasic.builder()
-                .taskId(taskId)
-                .filepath(filePath)
-                .className(className)
-                .apiName(apiName)
-                .type(1)
-                .methodWordSequence(Joiner.on(",").join(Preprocess.generateWordSequence(apiName)))
-                .tokenSequence(Joiner.on(",").join(Preprocess.preprocess(apiName)))
-                .classNameTokenSequence(className)
-                .build();
-        apiBasics.add(apiBasic);
-    }
-
-    private String fetchClassNameWithFilePath(String filePath) {
-        String[] split = filePath.split("/");
-        String classFileName = split[split.length - 1];
-        return classFileName.split("\\.")[0];
     }
 }

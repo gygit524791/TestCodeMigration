@@ -79,7 +79,7 @@
       <recent name="com.test.migration.service.translate.bnf.declaration" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TranslateMain">
+  <component name="RunManager" selected="Application.ApiMappingMain">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="TestMigrationV2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -145,10 +145,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ApiMappingMain" />
         <item itemvalue="Application.TranslateMain" />
         <item itemvalue="Application.ClassInstanceCreationExpressionLfnoPrimaryReplace" />
         <item itemvalue="Application.ApiNum" />
-        <item itemvalue="Application.ApiMappingMain" />
         <item itemvalue="Application.ApiMappingService" />
       </list>
     </recent_temporary>

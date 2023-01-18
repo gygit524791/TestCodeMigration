@@ -3,6 +3,7 @@ package com.test.migration.service;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import com.sun.org.apache.bcel.internal.generic.ARETURN;
 import com.test.migration.antlr.java.Java8Lexer;
 import com.test.migration.antlr.java.Java8Parser;
 import com.test.migration.dao.ApiBasicDao;
@@ -55,7 +56,7 @@ public class ApiBasicService {
                 .collect(Collectors.toList());
 
         // 过滤掉测试相关的类文件
-        batchSaveApiBasic(taskParameter, moduleApiFilepath, 3);
+        batchSaveApiBasic(taskParameter, moduleApiFilepath, true);
 
         Log.info("源API信息提取完成");
     }
@@ -75,16 +76,23 @@ public class ApiBasicService {
                 })
                 .distinct()
                 .collect(Collectors.toList());
-        batchSaveApiBasic(taskParameter, moduleApiFilepath, 4);
+        batchSaveApiBasic(taskParameter, moduleApiFilepath, false);
 
         Log.info("目标项目API信息提取完成");
     }
 
-    private void batchSaveApiBasic(TaskParameter taskParameter, List<String> moduleApiFilepath, Integer type) {
+    private void batchSaveApiBasic(TaskParameter taskParameter, List<String> moduleApiFilepath, boolean isSource) {
         moduleApiFilepath = filterTestFile(moduleApiFilepath);
-        List<ApiBasic> apiBasics = moduleApiFilepath.stream()
-                .flatMap(filepath -> parseSourceApiBasic(filepath, taskParameter).stream())
-                .collect(Collectors.toList());
+        List<ApiBasic> apiBasics;
+        if (isSource) {
+            apiBasics = moduleApiFilepath.stream()
+                    .flatMap(filepath -> parseSourceApiBasic(filepath, taskParameter).stream())
+                    .collect(Collectors.toList());
+        } else {
+            apiBasics = moduleApiFilepath.stream()
+                    .flatMap(filepath -> parseTargetApiBasic(filepath, taskParameter).stream())
+                    .collect(Collectors.toList());
+        }
 
         List<ApiBasic> sourceApis = apiBasics.stream()
                 .filter(this::filterNonApi)
@@ -96,7 +104,11 @@ public class ApiBasicService {
                 .collect(Collectors.toList());
 
         // TODO type改成枚举
-        nonApis.forEach(x -> x.setType(type));
+        if (isSource) {
+            nonApis.forEach(x -> x.setType(3));
+        } else {
+            nonApis.forEach(x -> x.setType(4));
+        }
         batchSave(nonApis);
     }
 
@@ -159,7 +171,8 @@ public class ApiBasicService {
         ParseTree parseTree = parser.compilationUnit();
         APIExtractorService apiExtractor = new APIExtractorService(taskParameter.getTaskId(), filePath);
         apiExtractor.visit(parseTree);
-        return apiExtractor.getApiBasics();
+
+        return buildSourceApiBasic(taskParameter.getTaskId(), filePath, apiExtractor.getApiNames());
     }
 
 
@@ -169,7 +182,22 @@ public class ApiBasicService {
         List<String> resultLines = CallUtil.call(args);
 
         return buildTargetApiBasic(taskParameter.getTaskId(), filepath, resultLines);
+    }
 
+    private List<ApiBasic> buildSourceApiBasic(Integer taskId, String filepath, List<String> apiNames) {
+        String className = fetchClassNameWithFilePath(filepath);
+        return apiNames.stream()
+                .map(apiName -> ApiBasic.builder()
+                        .taskId(taskId)
+                        .filepath(filepath)
+                        .className(className)
+                        .apiName(apiName)
+                        .type(0)
+                        .methodWordSequence(Joiner.on(",").join(Preprocess.generateWordSequence(apiName)))
+                        .tokenSequence(Joiner.on(",").join(Preprocess.preprocess(apiName)))
+                        .classNameTokenSequence(className)
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private List<ApiBasic> buildTargetApiBasic(Integer taskId, String filepath, List<String> resultLines) {
@@ -182,7 +210,7 @@ public class ApiBasicService {
                     .filepath(filepath)
                     .className(split[0])
                     .apiName(split[1])
-                    .type(0)
+                    .type(1)
                     .methodWordSequence(Joiner.on(",").join(Preprocess.generateWordSequence(split[1])))
                     .tokenSequence(Joiner.on(",").join(Preprocess.preprocess(split[1])))
                     .classNameTokenSequence(Joiner.on(",").join(Preprocess.preprocess(split[0])))
@@ -245,6 +273,13 @@ public class ApiBasicService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private String fetchClassNameWithFilePath(String filePath) {
+        String[] split = filePath.split("/");
+        String classFileName = split[split.length - 1];
+        return classFileName.split("\\.")[0];
     }
 
 
