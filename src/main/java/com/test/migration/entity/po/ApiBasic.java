@@ -22,7 +22,10 @@ public class ApiBasic {
     private String apiName;
 
     /**
-     * 0：鸿蒙 1：安卓
+     * 0：source api
+     * 1：target api
+     * 2：source get/set/tostring
+     * 3：target get/set/tostring
      */
     private Integer type;
 

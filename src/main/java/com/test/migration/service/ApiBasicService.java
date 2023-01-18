@@ -55,13 +55,7 @@ public class ApiBasicService {
                 .collect(Collectors.toList());
 
         // 过滤掉测试相关的类文件
-        moduleApiFilepath = filterTestFile(moduleApiFilepath);
-        List<ApiBasic> apiBasics = moduleApiFilepath.stream()
-                .flatMap(filepath -> parseSourceApiBasic(filepath, taskParameter).stream())
-                .filter(this::filterUselessApi)
-                .collect(Collectors.toList());
-
-        batchSave(apiBasics);
+        batchSaveApiBasic(taskParameter, moduleApiFilepath, 3);
 
         Log.info("源API信息提取完成");
     }
@@ -81,14 +75,29 @@ public class ApiBasicService {
                 })
                 .distinct()
                 .collect(Collectors.toList());
-        moduleApiFilepath = filterTestFile(moduleApiFilepath);
-        List<ApiBasic> apiBasics = moduleApiFilepath.stream()
-                .flatMap(filepath -> parseTargetApiBasic(filepath, taskParameter).stream())
-                .filter(this::filterUselessApi)
-                .collect(Collectors.toList());
-        batchSave(apiBasics);
+        batchSaveApiBasic(taskParameter, moduleApiFilepath, 4);
 
         Log.info("目标项目API信息提取完成");
+    }
+
+    private void batchSaveApiBasic(TaskParameter taskParameter, List<String> moduleApiFilepath, Integer type) {
+        moduleApiFilepath = filterTestFile(moduleApiFilepath);
+        List<ApiBasic> apiBasics = moduleApiFilepath.stream()
+                .flatMap(filepath -> parseSourceApiBasic(filepath, taskParameter).stream())
+                .collect(Collectors.toList());
+
+        List<ApiBasic> sourceApis = apiBasics.stream()
+                .filter(this::filterNonApi)
+                .collect(Collectors.toList());
+        batchSave(sourceApis);
+
+        List<ApiBasic> nonApis = apiBasics.stream()
+                .filter(x -> !filterNonApi(x))
+                .collect(Collectors.toList());
+
+        // TODO type改成枚举
+        nonApis.forEach(x -> x.setType(type));
+        batchSave(nonApis);
     }
 
     private List<String> filterTestFile(List<String> moduleApiFilepath) {
@@ -110,7 +119,7 @@ public class ApiBasicService {
      * @param apiBasic
      * @return false表示要过滤掉
      */
-    private boolean filterUselessApi(ApiBasic apiBasic) {
+    private boolean filterNonApi(ApiBasic apiBasic) {
         // 过滤掉构造函数
         String apiName = apiBasic.getApiName().toLowerCase();
         boolean isConstructApi = StringUtils.equals(apiName, apiBasic.getClassName().toLowerCase());

@@ -109,10 +109,42 @@ public class ApiMappingService {
         calculateApiMapping(apiMappingList, apiBasicMap);
 
         // 计算class mapping
-        calculateClassNameMapping(apiMappingList, apiBasicMap);
+        List<ClassApiMappingNum> finalClassApiMappingList = calculateClassNameMapping(apiMappingList, apiBasicMap);
 
         // 计算get/set(相当于是类属性mapping) mapping， 保存到api mapping配置文件
-//        calculatePropertyApiMapping();
+        calculatePropertyApiMapping(finalClassApiMappingList);
+    }
+
+    private void calculatePropertyApiMapping(List<ClassApiMappingNum> finalClassApiMappingList) {
+        TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
+        // get/set/tostring
+        List<ApiBasic> nonApis = apiBasicService.selectByTaskId(taskParameter.getTaskId());
+
+        Map<String, ApiBasic> sourceNonApiMap = nonApis.stream()
+                .filter(x -> x.getType() == 3)
+                .collect(Collectors.toMap(ApiBasic::getClassName, Function.identity(), (x, y) -> x));
+
+        Map<String, ApiBasic> targetNonApiMap = nonApis.stream()
+                .filter(x -> x.getType() == 4)
+                .collect(Collectors.toMap(ApiBasic::getClassName, Function.identity(), (x, y) -> x));
+
+        MappingRuleWriter.writeApiMappingProperties("#", "getter / setter / toString ...");
+
+        for (ClassApiMappingNum classApiMapping : finalClassApiMappingList) {
+            ApiBasic sourceNonApi = sourceNonApiMap.get(classApiMapping.getSourceClassName());
+            ApiBasic targetNonApi = targetNonApiMap.get(classApiMapping.getTargetClassName());
+
+            if(sourceNonApi == null || targetNonApi == null){
+                continue;
+            }
+
+            // source的api
+            String value = sourceNonApi.getClassName() + "->" + sourceNonApi.getApiName();
+            // target的api
+            String key = targetNonApi.getClassName() + "->" + targetNonApi.getApiName();
+
+            MappingRuleWriter.writeApiMappingProperties(key, value);
+        }
     }
 
     private static void calculateApiMapping(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
@@ -128,7 +160,7 @@ public class ApiMappingService {
         });
     }
 
-    private void calculateClassNameMapping(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
+    private List<ClassApiMappingNum> calculateClassNameMapping(List<ApiMapping> apiMappingList, Map<Integer, ApiBasic> apiBasicMap) {
         Map<String, Integer> classNameNumMapping = Maps.newHashMap();
 
         apiMappingList.forEach(mapping -> {
@@ -150,10 +182,11 @@ public class ApiMappingService {
                     .build());
         });
 
-        doCalculateClassNameMapping(classApiMappingNumList);
+        return doCalculateClassNameMapping(classApiMappingNumList);
     }
 
-    private void doCalculateClassNameMapping(List<ClassApiMappingNum> classApiMappingNumList) {
+    private List<ClassApiMappingNum> doCalculateClassNameMapping(List<ClassApiMappingNum> classApiMappingNumList) {
+        List<ClassApiMappingNum> finalClassApiMappingList = Lists.newArrayList();
         Map<String, List<ClassApiMappingNum>> classApiMappingMap = classApiMappingNumList.stream()
                 .collect(Collectors.groupingBy(ClassApiMappingNum::getSourceClassName));
 
@@ -168,11 +201,14 @@ public class ApiMappingService {
             }
 
             try {
+                finalClassApiMappingList.add(finalMapping);
                 MappingRuleWriter.writeClassNameMappingProperties(finalMapping.getSourceClassName(), finalMapping.getTargetClassName());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+
+        return finalClassApiMappingList;
     }
 
     private List<ApiMapping> buildApiMappings(List<String> apiMappings) {
