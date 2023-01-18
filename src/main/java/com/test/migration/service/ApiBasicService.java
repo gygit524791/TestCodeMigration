@@ -93,10 +93,10 @@ public class ApiBasicService {
                     .collect(Collectors.toList());
         }
 
-        List<ApiBasic> sourceApis = apiBasics.stream()
+        List<ApiBasic> apis = apiBasics.stream()
                 .filter(this::filterNonApi)
                 .collect(Collectors.toList());
-        batchSave(sourceApis);
+        batchSave(apis);
 
         List<ApiBasic> nonApis = apiBasics.stream()
                 .filter(x -> !filterNonApi(x))
