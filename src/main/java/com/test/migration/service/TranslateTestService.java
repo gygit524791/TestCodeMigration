@@ -117,9 +117,9 @@ public class TranslateTestService {
 
     private void doTranslate(TranslateTest translateTest) {
         // todo test
-//        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/case1/A.java";
+        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/case1/A.java";
 //        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/test/ValueAnimatorTests.java";
-//        translateTest.setTestFilepath(filep);
+        translateTest.setTestFilepath(filep);
 
         Log.info("开始处理[" + translateTest.getTestFilepath() + "]测试文件的测试迁移");
 
@@ -160,9 +160,9 @@ public class TranslateTestService {
         Map<String, List<Integer>> map = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
         List<String> migrateTestMethods = map == null ? Lists.newArrayList() : Lists.newArrayList(map.keySet());
         // 过滤掉不需要转换的test code
-        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
+//        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
         // todo test code
-//        TestCodeFilter.filterMethodDeclarationCtxList(null);
+        TestCodeFilter.filterMethodDeclarationCtxList(null);
     }
 
     private void translate() {

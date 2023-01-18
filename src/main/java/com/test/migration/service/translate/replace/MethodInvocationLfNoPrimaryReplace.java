@@ -2,6 +2,7 @@ package com.test.migration.service.translate.replace;
 
 import com.test.migration.service.translate.MappingRuleLoader;
 import com.test.migration.service.translate.TestCodeContext;
+import com.test.migration.service.translate.TranslateHint;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -54,6 +55,9 @@ public class MethodInvocationLfNoPrimaryReplace {
                 // replace method name
                 newMethodNameIdentifier = methodInvocationTypeNameRule.getTargetMethodName();
             }
+        } else {
+            // 映射失败，补充hint
+            TranslateHint.misMatchCodes.add(newMethodNameIdentifier);
         }
 
         return typeName + "->" + typeArguments + newMethodNameIdentifier + "(" + argumentList + ")";
