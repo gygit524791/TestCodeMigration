@@ -117,9 +117,9 @@ public class TranslateTestService {
 
     private void doTranslate(TranslateTest translateTest) {
         // todo test
-        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/case1/A.java";
+//        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/case1/A.java";
 //        String filep = "/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/example/android/test/ValueAnimatorTests.java";
-        translateTest.setTestFilepath(filep);
+//        translateTest.setTestFilepath(filep);
 
         Log.info("开始处理[" + translateTest.getTestFilepath() + "]测试文件的测试迁移");
 
@@ -160,9 +160,9 @@ public class TranslateTestService {
         Map<String, List<Integer>> map = JsonUtil.jsonToPojo(translateTest.getTestMethodApiInvocation(), Map.class);
         List<String> migrateTestMethods = map == null ? Lists.newArrayList() : Lists.newArrayList(map.keySet());
         // 过滤掉不需要转换的test code
-//        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
+        TestCodeFilter.filterMethodDeclarationCtxList(migrateTestMethods);
         // todo test code
-        TestCodeFilter.filterMethodDeclarationCtxList(null);
+//        TestCodeFilter.filterMethodDeclarationCtxList(null);
     }
 
     private void translate() {
@@ -193,9 +193,11 @@ public class TranslateTestService {
             TranslateCodeCollector.fieldDeclarationTranslateCodes.add(translateCode);
         }
 
+        // 清除上面收集的bs
+        TranslateCodeCollector.blockStatementTranslateCodes = Lists.newArrayList();
+
         // 方法迁移
         MethodDeclarationTranslate methodDeclarationTranslate = new MethodDeclarationTranslate();
-
         for (ParserRuleContext parserRuleContext : TestCodeContext.methodDeclarationCtxList) {
             TranslateHint.init();
             TranslateCodeCollector.MethodTranslateCode.methodStartLine = parserRuleContext.getStart().getLine();
@@ -207,9 +209,7 @@ public class TranslateTestService {
             TranslateCodeCollector.MethodTranslateCode methodTranslateCode = new TranslateCodeCollector.MethodTranslateCode();
             methodTranslateCode.methodHeaderTranslateCode = TranslateCodeCollector.methodHeaderTranslateCode;
             // 过滤掉嵌套的blockStatement（可能重复收集了子blockStatement）
-            List<TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode> blockStatementTranslateCodes =
-                    filterRepeatSubBlockStatement(TranslateCodeCollector.blockStatementTranslateCodes);
-            methodTranslateCode.blockStatementTranslateCodes = blockStatementTranslateCodes;
+            methodTranslateCode.blockStatementTranslateCodes = filterRepeatSubBlockStatement(TranslateCodeCollector.blockStatementTranslateCodes);
             TranslateCodeCollector.methodDeclarationTranslateCodes.add(methodTranslateCode);
 
             TranslateCodeCollector.MethodTranslateCode.clearMethod();

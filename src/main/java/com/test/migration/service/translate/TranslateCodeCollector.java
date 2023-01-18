@@ -50,6 +50,8 @@ public class TranslateCodeCollector {
         fieldDeclarationTranslateCodes = Lists.newArrayList();
         classDeclarationTranslateCodes = Lists.newArrayList();
         methodDeclarationTranslateCodes = Lists.newArrayList();
+
+        // TODO tmp 慎用(lowB设计)
         methodHeaderTranslateCode = new MethodTranslateCode.MethodHeaderTranslateCode();
         blockStatementTranslateCodes = Lists.newArrayList();
         partMigrationMethodTranslateCodes = Lists.newArrayList();

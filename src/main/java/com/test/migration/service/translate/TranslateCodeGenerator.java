@@ -49,16 +49,20 @@ public class TranslateCodeGenerator {
         fileLines.add("class " + TranslateCodeCollector.className + " : public testing::Test {");
         fileLines.add("public:");
         // 写入类成员属性
-//        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.fieldDeclarationTranslateCodes) {
-//            addHintIfNeed(translateCode.misMatchCodes, fileLines);
-//            fileLines.add(translateCode.translateCode);
-//        }
+        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.fieldDeclarationTranslateCodes) {
+            addHintIfNeed(translateCode.misMatchCodes, fileLines);
+            fileLines.add(translateCode.translateCode);
+            // 换行
+            fileLines.add("");
+        }
 
         // 写入内部类
-//        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.classDeclarationTranslateCodes) {
-//            addHintIfNeed(translateCode.misMatchCodes, fileLines);
-//            fileLines.add(translateCode.translateCode);
-//        }
+        for (TranslateCodeCollector.TranslateCode translateCode : TranslateCodeCollector.classDeclarationTranslateCodes) {
+            addHintIfNeed(translateCode.misMatchCodes, fileLines);
+            fileLines.add("class "+ translateCode.translateCode);
+            // 换行
+            fileLines.add("");
+        }
 
         // 写入方法
         for (TranslateCodeCollector.MethodTranslateCode methodTranslateCode : TranslateCodeCollector.methodDeclarationTranslateCodes) {
@@ -70,6 +74,8 @@ public class TranslateCodeGenerator {
                 fileLines.add(blockStatementTranslateCode.translateCode);
             }
             fileLines.add("}");
+            // 换行
+            fileLines.add("");
         }
 
         // 写入部分迁移方法
