@@ -117,6 +117,7 @@ public class ApiMappingService {
     }
 
     private void calculatePropertyApiMapping(List<ClassApiMappingNum> finalClassApiMappingList) {
+        Log.info("计算set/get api mapping...");
         TaskParameter taskParameter = TaskParameterReader.getTaskParameter();
         // get/set/tostring
         List<ApiBasic> nonApis = apiBasicService.selectByTaskId(taskParameter.getTaskId());
@@ -129,7 +130,7 @@ public class ApiMappingService {
                 .filter(x -> x.getType() == 4)
                 .collect(Collectors.groupingBy(ApiBasic::getClassName));
 
-        MappingRuleWriter.writeApiMappingProperties("#", "getter / setter / toString ...");
+//        MappingRuleWriter.writeApiMappingProperties("#", "getter / setter / toString ...");
 
         for (ClassApiMappingNum classApiMapping : finalClassApiMappingList) {
             List<ApiBasic> sourceNonApis = sourceNonApiMap.get(classApiMapping.getSourceClassName());
@@ -145,9 +146,9 @@ public class ApiMappingService {
                     String targetNonApiName = targetNonApi.getApiName().toLowerCase();
                     if (StringUtils.equals(sourceNonApiName, targetNonApiName)) {
                         // source的api
-                        String value = sourceNonApi.getClassName() + "->" + sourceNonApi.getApiName();
+                        String key = sourceNonApi.getClassName() + "->" + sourceNonApi.getApiName();
                         // target的api
-                        String key = targetNonApi.getClassName() + "->" + targetNonApi.getApiName();
+                        String value = targetNonApi.getClassName() + "->" + targetNonApi.getApiName();
 
                         MappingRuleWriter.writeApiMappingProperties(key, value);
                     }

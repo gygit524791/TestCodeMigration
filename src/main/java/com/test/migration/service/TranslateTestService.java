@@ -112,7 +112,9 @@ public class TranslateTestService {
 
         // 以每个test文件为单位进行代码转换
         Log.info("总计[" + translateTests.size() + "]个测试文件需要处理代码迁移");
-        translateTests.forEach(this::doTranslate);
+//        translateTests.forEach(this::doTranslate);
+        // todo test
+        doTranslate(translateTests.get(0));
     }
 
     private void doTranslate(TranslateTest translateTest) {

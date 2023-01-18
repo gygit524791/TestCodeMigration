@@ -5,15 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ae2f334-1c41-4e62-b366-8e07efd601e8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/doc/mappingbackup-01-18/apiMapping.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/doc/mappingbackup-01-18/classNameMapping.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/doc/mappingbackup-01-18/otherMapping.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/doc/mappingbackup-01-18/testToolApiMapping.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/python/CalcSimilarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/python/CalcSimilarity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/example/android/case1/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/example/android/case1/A.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/apiVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/apiVectorDict.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/classVectorDict.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/classVectorDict.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/corpus.txt" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/corpus.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/word2vec/word2vec.model" beforeDir="false" afterPath="$PROJECT_DIR$/model/word2vec/word2vec.model" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiBasicService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/ApiMappingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/TranslateCodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/apiMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/apiMapping.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappingRule/classNameMapping.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappingRule/classNameMapping.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,31 +50,31 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindowDatabase Changes.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gaoyi/IdeaProjects/TestMigrationV2/demo/android&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindowDatabase Changes.ShowToolbar": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/gaoyi/IdeaProjects/TestMigrationV2/src/test/doc/mappingbackup-01-18",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.test.migration.service.translate" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/doc/mappingbackup-01-18" />
       <recent name="$PROJECT_DIR$/demo/android" />
       <recent name="$PROJECT_DIR$/model/python" />
       <recent name="$PROJECT_DIR$/doc/python" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/demo/output/formattest" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/demo/example/android" />
@@ -84,7 +91,7 @@
       <recent name="com.test.migration.service.translate.bnf.declaration" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ApiMappingMain">
+  <component name="RunManager" selected="Application.TranslateMain">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="TestMigrationV2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -150,8 +157,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ApiMappingMain" />
         <item itemvalue="Application.TranslateMain" />
+        <item itemvalue="Application.ApiMappingMain" />
         <item itemvalue="Application.ClassInstanceCreationExpressionLfnoPrimaryReplace" />
         <item itemvalue="Application.ApiNum" />
         <item itemvalue="Application.ApiMappingService" />
@@ -197,7 +204,7 @@
       <workItem from="1673512862176" duration="25773000" />
       <workItem from="1673676707299" duration="1660000" />
       <workItem from="1673834396388" duration="25003000" />
-      <workItem from="1673920321276" duration="38618000" />
+      <workItem from="1673920321276" duration="39684000" />
     </task>
     <servers />
   </component>
@@ -253,8 +260,18 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/TranslateTestService.java</url>
-          <line>205</line>
+          <line>207</line>
           <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/replace/MethodInvocationReplace.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/test/migration/service/translate/replace/MethodInvocationLfNoPrimaryReplace.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="112" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

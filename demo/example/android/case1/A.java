@@ -1,10 +1,18 @@
 public class A{
 
+    private ValueAnimator a1;
+    private ValueAnimator a2;
 
     public void testListenerCallbacks() throws Throwable {
-        a1.addListener(l1);
-        a2.addListener(l2);
+//        a1.addListener(l1);
+//        a2.addListener(l2);
         a2.setStartDelay(400);
+        assertFalse(l1.startCalled);
+        assertFalse(l1.cancelCalled);
+        assertFalse(l1.endCalled);
+        assertFalse(l2.startCalled);
+        assertFalse(l2.cancelCalled);
+        assertFalse(l2.endCalled);
     }
 
 //    public void testListenerCallbacks() throws Throwable {
