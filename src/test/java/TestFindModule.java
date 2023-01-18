@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 public class TestFindModule {
 
     private static void testFindModule(String afilepath, String hfilepath, String type) throws IOException {
-        GetFoldFileNames getFoldFileNames = new GetFoldFileNames();
-        List<String> readfile = getFoldFileNames.readfile(afilepath);
+        List<String> readfile = GetFoldFileNames.readfile(afilepath);
 
         List<String> files = readfile.stream()
                 .map(f -> {
@@ -67,6 +66,24 @@ public class TestFindModule {
 
     }
 
+
+    /***
+     *  TODO 提供跑数两种方式
+     *
+     *  1. 分别指定两个系统的大模块目录（比如android 的 platform_frameworks_base 和 arkui_ace_engine-master/frameworks/core）
+     *  自行按子模块进行切分，然后每个子模块进行跑数
+     *
+     *  问题：数据量很大，跑的很慢，不利于快速出结果和分析
+     *
+     *  2. 分别指定两个系统子模块的目录（比如anmiation）
+     *  需要多次手工来完成每个模块的跑数
+     *
+     *  1和2同时存在优先选取2，中间抽出一层来处理这个逻辑
+     *
+     *  存在的问题：1是批量处理（apimapping，translate），2是单次处理，不太好统一。
+     *
+     *  testFiles：按目前的逻辑自动找，不需要人工指定
+     */
     public static void main(String[] args) {
         String afilepath = "/Users/gaoyi/IdeaProjects/staticCodeAnalysis/doc/android/source/platform_frameworks_base";
 

@@ -48,6 +48,13 @@ public class TaskParameterReader {
             throw new RuntimeException(e);
         }
 
+        // 获取文件路径
+        String sourceProjectFilepath = properties.getProperty("sourceProjectFilepath");
+        String targetProjectFilepath = properties.getProperty("targetProjectFilepath");
+        String sourceModuleFilepath = properties.getProperty("sourceModuleFilepath");
+        String targetModuleFilepath = properties.getProperty("targetModuleFilepath");
+//        String sourceFilepath
+
         return TaskParameter.builder()
                 .taskId(Integer.parseInt(properties.getProperty("taskId")))
                 .sourceFilepath(properties.getProperty("sourceFilepath"))

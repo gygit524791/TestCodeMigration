@@ -85,7 +85,8 @@ public class TranslateCodeGenerator {
             addHintIfNeed(methodTranslateCode.methodHeaderTranslateCode.misMatchCodes, fileLines);
             fileLines.add(methodTranslateCode.methodHeaderTranslateCode.translateCode);
             fileLines.add("{");
-            for (TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode : methodTranslateCode.blockStatementTranslateCodes) {
+            for (TranslateCodeCollector.MethodTranslateCode.BlockStatementTranslateCode blockStatementTranslateCode
+                    : methodTranslateCode.blockStatementTranslateCodes) {
                 addHintIfNeed(blockStatementTranslateCode.misMatchCodes, fileLines);
                 fileLines.add(blockStatementTranslateCode.translateCode);
             }
