@@ -103,11 +103,8 @@ public class ApiBasicService {
                 .collect(Collectors.toList());
 
         // TODO type改成枚举
-        if (isSource) {
-            nonApis.forEach(x -> x.setType(3));
-        } else {
-            nonApis.forEach(x -> x.setType(4));
-        }
+        int type = isSource ? 3 : 4;
+        nonApis.forEach(x -> x.setType(type));
         batchSave(nonApis);
     }
 
